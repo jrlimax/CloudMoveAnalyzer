@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cloud Move Analyzer — Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <title>Cloud Move Analyzer</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Top bar: language + theme -->
+    <div class="top-bar">
+      <div class="lang-picker" id="langPicker">
+        <button class="lang-current" id="langToggle" type="button" aria-label="Language">
+          <img id="langFlag" src="https://flagcdn.com/24x18/us.png" alt="" />
+          <span id="langLabel">English</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <ul class="lang-menu hidden" id="langMenu">
+          <li data-lang="en"><img src="https://flagcdn.com/24x18/us.png" alt="" /> English</li>
+          <li data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" /> Português</li>
+          <li data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" /> 中文</li>
+          <li data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" /> Español</li>
+          <li data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" /> Français</li>
+          <li data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" /> العربية</li>
+          <li data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" /> Русский</li>
+          <li data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" /> 日本語</li>
+        </ul>
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0112.003 21c-5.385 0-9.75-4.365-9.75-9.75 0-4.285 2.767-7.932 6.608-9.248a.75.75 0 01.964.964A7.5 7.5 0 0018.75 11.25a.75.75 0 01.964.964 9.684 9.684 0 012.038 2.788z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <img src="logo.png" alt="Cloud Move Analyzer" class="site-logo" />
+      <h1 data-i18n="title">Cloud Move Analyzer</h1>
+      <p data-i18n="subtitle">Upload a spreadsheet exported from Azure to check which resources can be migrated between subscriptions or resource groups.</p>
+    </header>
+
+    <!-- Upload -->
+    <div class="upload-area" id="uploadArea">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+      </svg>
+      <h3 data-i18n="uploadTitle">Drag your spreadsheet here or click to select</h3>
+      <span data-i18n="uploadHint">Accepts .csv, .xlsx, .xls — Azure Portal export</span>
+      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.tsv" />
+    </div>
+
+    <!-- Results (hidden until file is loaded) -->
+    <div id="resultsSection" class="hidden">
+
+      <!-- Stats (clickable filters) -->
+      <div class="stats-bar">
+        <div class="stat-card total active" data-filter="all" tabindex="0" role="button" aria-pressed="true">
+          <div class="number" id="statTotal">0</div>
+          <div class="label" data-i18n="statTotal">Total</div>
+        </div>
+        <div class="stat-card movable" data-filter="movable" tabindex="0" role="button" aria-pressed="false">
+          <div class="number" id="statMovable">0</div>
+          <div class="label" data-i18n="statMovable">Movable</div>
+          <div class="hint" data-i18n="statMovableHint">RG + Subscription</div>
+        </div>
+        <div class="stat-card partial" data-filter="partial" tabindex="0" role="button" aria-pressed="false">
+          <div class="number" id="statPartial">0</div>
+          <div class="label" data-i18n="statPartial">Partial</div>
+          <div class="hint" data-i18n="statPartialHint">Only RG, Subscription, or Region</div>
+        </div>
+        <div class="stat-card not-movable" data-filter="not-movable" tabindex="0" role="button" aria-pressed="false">
+          <div class="number" id="statNotMovable">0</div>
+          <div class="label" data-i18n="statNotMovable">Not Movable</div>
+        </div>
+        <div class="stat-card unknown hidden" data-filter="unknown" id="statUnknownCard" tabindex="0" role="button" aria-pressed="false">
+          <div class="number" id="statUnknown">0</div>
+          <div class="label" data-i18n="statUnknown">Not Found</div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search resource or type..." />
+        <span class="results-count" id="resultsCount"></span>
+        <button class="export-btn" id="exportBtn" data-i18n="exportBtn">Export CSV</button>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrapper">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th data-sort="name" data-i18n="thName">Resource Name ↕</th>
+                <th data-sort="type" data-i18n="thType">Type (Provider) ↕</th>
+                <th data-sort="resourceGroup" data-i18n="thRG">Resource Group ↕</th>
+                <th data-sort="location" data-i18n="thLocation">Location ↕</th>
+                <th data-sort="rg" data-i18n="thMoveRG">Move RG ↕</th>
+                <th data-sort="sub" data-i18n="thMoveSub">Move Subscription ↕</th>
+                <th data-sort="region" data-i18n="thMoveRegion">Move Region ↕</th>
+                <th data-sort="status" data-i18n="thStatus">Status ↕</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-info">
+      <span data-i18n="footerText">Data based on official Microsoft documentation:</span>
+      <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-support-resources"
+         target="_blank" rel="noopener" data-i18n="footerLink">
+        Azure resource types for move operations
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Scripts (order matters: XLSX lib → database → i18n → app) -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+  <script src="js/move-database.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
