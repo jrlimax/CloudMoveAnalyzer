@@ -99,6 +99,20 @@ function applyLanguage() {
 updateLangPicker();
 applyLanguage();
 
+// Set canonical URL and OG url dynamically
+(function setCanonicalUrl() {
+  const url = window.location.href.split('?')[0].split('#')[0];
+  const canonical = document.getElementById('canonicalLink');
+  if (canonical) canonical.href = url;
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.content = url;
+  const ogImage = document.querySelector('meta[property="og:image"]');
+  const twImage = document.querySelector('meta[name="twitter:image"]');
+  const absLogo = new URL('logo.png', url).href;
+  if (ogImage) ogImage.content = absLogo;
+  if (twImage) twImage.content = absLogo;
+})();
+
 // ── DOM refs ──────────────────────────────────────────────
 const uploadArea     = document.getElementById('uploadArea');
 const fileInput      = document.getElementById('fileInput');

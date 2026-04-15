@@ -1,20 +1,65 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cloud Move Analyzer — Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <meta name="description" content="Cloud Move Analyzer â€” Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <meta name="keywords" content="Azure, cloud migration, resource move, subscription, resource group, region, move support, Azure Resource Manager" />
+  <meta name="author" content="Cloud Move Analyzer" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#8B5CF6" />
+  <link rel="canonical" href="https://cloudmoveanalyzer.com/" id="canonicalLink" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="en" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="es" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="fr" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="ar" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="ru" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="ja" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="x-default" href="https://cloudmoveanalyzer.com/" />
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Cloud Move Analyzer" />
   <meta property="og:description" content="Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="logo.png" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://cloudmoveanalyzer.com/logo.png" />
+  <meta property="og:url" content="https://cloudmoveanalyzer.com/" />
+  <meta property="og:site_name" content="Cloud Move Analyzer" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cloud Move Analyzer" />
   <meta name="twitter:description" content="Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
-  <meta name="twitter:image" content="logo.png" />
+  <meta name="twitter:image" content="https://cloudmoveanalyzer.com/logo.png" />
+
   <title>Cloud Move Analyzer</title>
   <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Cloud Move Analyzer",
+    "description": "Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "url": "https://cloudmoveanalyzer.com/",
+    "image": "https://cloudmoveanalyzer.com/logo.png",
+    "inLanguage": ["en", "pt-BR", "zh-CN", "es", "fr", "ar", "ru", "ja"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
 </head>
 <body>
   <div class="container">
@@ -29,13 +74,13 @@
         </button>
         <ul class="lang-menu hidden" id="langMenu">
           <li data-lang="en"><img src="https://flagcdn.com/24x18/us.png" alt="" /> English</li>
-          <li data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" /> Português</li>
-          <li data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" /> 中文</li>
-          <li data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" /> Español</li>
-          <li data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" /> Français</li>
-          <li data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" /> العربية</li>
-          <li data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" /> Русский</li>
-          <li data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" /> 日本語</li>
+          <li data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" /> PortuguÃªs</li>
+          <li data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" /> ä¸­æ–‡</li>
+          <li data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" /> EspaÃ±ol</li>
+          <li data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" /> FranÃ§ais</li>
+          <li data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" /> Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</li>
+          <li data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" /> Ð ÑƒÑÑÐºÐ¸Ð¹</li>
+          <li data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" /> æ—¥æœ¬èªž</li>
         </ul>
       </div>
       <button class="theme-toggle" id="themeToggle" title="Toggle theme">
@@ -50,10 +95,12 @@
 
     <!-- Header -->
     <header>
-      <img src="logo.png" alt="Cloud Move Analyzer" class="site-logo" />
+      <img src="logo.png" alt="Cloud Move Analyzer logo" class="site-logo" width="300" height="300" />
       <h1 data-i18n="title">Cloud Move Analyzer</h1>
       <p data-i18n="subtitle">Upload a spreadsheet exported from Azure to check which resources can be migrated between subscriptions or resource groups.</p>
     </header>
+
+    <main>
 
     <!-- Upload -->
     <div class="upload-area" id="uploadArea" role="group" aria-label="Drag your spreadsheet here or click to select" data-i18n-aria="uploadTitle">
@@ -61,7 +108,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
       </svg>
       <h3 data-i18n="uploadTitle">Drag your spreadsheet here or click to select</h3>
-      <span data-i18n="uploadHint">Accepts .csv, .xlsx, .xls — Azure Portal export</span>
+      <span data-i18n="uploadHint">Accepts .csv, .xlsx, .xls â€” Azure Portal export</span>
       <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.tsv" />
     </div>
 
@@ -107,14 +154,14 @@
           <table>
             <thead>
               <tr>
-                <th data-sort="name" data-i18n="thName">Resource Name ↕</th>
-                <th data-sort="type" data-i18n="thType">Type (Provider) ↕</th>
-                <th data-sort="resourceGroup" data-i18n="thRG">Resource Group ↕</th>
-                <th data-sort="location" data-i18n="thLocation">Location ↕</th>
-                <th data-sort="rg" data-i18n="thMoveRG">Move RG ↕</th>
-                <th data-sort="sub" data-i18n="thMoveSub">Move Subscription ↕</th>
-                <th data-sort="region" data-i18n="thMoveRegion">Move Region ↕</th>
-                <th data-sort="status" data-i18n="thStatus">Status ↕</th>
+                <th data-sort="name" data-i18n="thName">Resource Name â†•</th>
+                <th data-sort="type" data-i18n="thType">Type (Provider) â†•</th>
+                <th data-sort="resourceGroup" data-i18n="thRG">Resource Group â†•</th>
+                <th data-sort="location" data-i18n="thLocation">Location â†•</th>
+                <th data-sort="rg" data-i18n="thMoveRG">Move RG â†•</th>
+                <th data-sort="sub" data-i18n="thMoveSub">Move Subscription â†•</th>
+                <th data-sort="region" data-i18n="thMoveRegion">Move Region â†•</th>
+                <th data-sort="status" data-i18n="thStatus">Status â†•</th>
               </tr>
             </thead>
             <tbody id="tableBody"></tbody>
@@ -124,18 +171,20 @@
 
     </div>
 
+    </main>
+
     <!-- Footer -->
-    <div class="footer-info">
+    <footer class="footer-info">
       <span data-i18n="footerText">Data based on official Microsoft documentation:</span>
       <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-support-resources"
          target="_blank" rel="noopener" data-i18n="footerLink">
         Azure resource types for move operations
       </a>
-    </div>
+    </footer>
 
   </div>
 
-  <!-- Scripts (order matters: XLSX lib → database → i18n → app) -->
+  <!-- Scripts (order matters: XLSX lib â†’ database â†’ i18n â†’ app) -->
   <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
   <script src="move-database.js"></script>
   <script src="i18n.js"></script>
