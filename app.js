@@ -49,7 +49,7 @@ function updateLangPicker() {
 }
 
 langToggle.addEventListener('click', () => {
-  const open = langMenu.classList.toggle('hidden');
+  langMenu.classList.toggle('hidden');
   langPicker.classList.toggle('open', !langMenu.classList.contains('hidden'));
 });
 
@@ -85,6 +85,10 @@ function applyLanguage() {
   // Update placeholders
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+  // Update aria-labels
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    el.setAttribute('aria-label', t(el.dataset.i18nAria));
   });
 
   // Re-render table if data loaded
@@ -132,20 +136,34 @@ function showFileName(name) {
 
 function processFile(file) {
   showFileName(file.name);
+
+  // Show loading indicator
+  const loadingEl = document.createElement('div');
+  loadingEl.id = 'loadingOverlay';
+  loadingEl.className = 'loading';
+  loadingEl.innerHTML = `<div class="spinner"></div><p>${t('loadingText')}</p>`;
+  resultsSection.classList.add('hidden');
+  uploadArea.parentNode.insertBefore(loadingEl, resultsSection);
+
   const reader = new FileReader();
   const isCsv  = /\.(csv|tsv)$/i.test(file.name);
 
   reader.onload = function (e) {
-    try {
-      const wb = isCsv
-        ? XLSX.read(e.target.result, { type: 'string' })
-        : XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+    // Defer to allow loading spinner to render
+    setTimeout(() => {
+      try {
+        const wb = isCsv
+          ? XLSX.read(e.target.result, { type: 'string' })
+          : XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
 
-      const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: '' });
-      analyzeResources(data);
-    } catch (err) {
-      alert(t('alertError') + err.message);
-    }
+        const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: '' });
+        analyzeResources(data);
+      } catch (err) {
+        alert(t('alertError') + err.message);
+      } finally {
+        loadingEl.remove();
+      }
+    }, 50);
   };
 
   isCsv ? reader.readAsText(file, 'UTF-8') : reader.readAsArrayBuffer(file);
@@ -273,15 +291,26 @@ function analyzeResources(data) {
 // Stats
 // ==========================================================
 function updateStats() {
-  const count = s => allResults.filter(r => r.status === s).length;
-  document.getElementById('statTotal').textContent      = allResults.length;
-  document.getElementById('statMovable').textContent    = count('movable');
-  document.getElementById('statPartial').textContent    = count('partial');
-  document.getElementById('statNotMovable').textContent = count('not-movable');
+  const total = allResults.length;
+  const movable = allResults.filter(r => r.status === 'movable').length;
+  const partial = allResults.filter(r => r.status === 'partial').length;
+  const notMovable = allResults.filter(r => r.status === 'not-movable').length;
+  const unknownCount = allResults.filter(r => r.status === 'unknown').length;
 
-  const unknownCount = count('unknown');
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statMovable').textContent = movable;
+  document.getElementById('statPartial').textContent = partial;
+  document.getElementById('statNotMovable').textContent = notMovable;
   document.getElementById('statUnknown').textContent = unknownCount;
+
+  // Descriptive aria-labels for stat cards
+  document.querySelector('.stat-card.total').setAttribute('aria-label', `${t('statTotal')}: ${total}`);
+  document.querySelector('.stat-card.movable').setAttribute('aria-label', `${t('statMovable')}: ${movable}`);
+  document.querySelector('.stat-card.partial').setAttribute('aria-label', `${t('statPartial')}: ${partial}`);
+  document.querySelector('.stat-card.not-movable').setAttribute('aria-label', `${t('statNotMovable')}: ${notMovable}`);
+
   const unknownCard = document.getElementById('statUnknownCard');
+  unknownCard.setAttribute('aria-label', `${t('statUnknown')}: ${unknownCount}`);
   if (unknownCount > 0) {
     unknownCard.classList.remove('hidden');
   } else {
@@ -476,6 +505,9 @@ document.querySelectorAll('th[data-sort]').forEach(th => {
 exportBtn.addEventListener('click', () => {
   if (!allResults.length) return;
 
+  const filtered = getFiltered();
+  if (!filtered.length) return;
+
   const statusLabel = {
     'movable': t('csvMovable'), 'partial': t('csvPartial'),
     'not-movable': t('csvNotMovable'), 'unknown': t('csvNotFound')
@@ -484,7 +516,7 @@ exportBtn.addEventListener('click', () => {
   const csvEscape = s => '"' + String(s).replace(/"/g, '""') + '"';
 
   let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus')].join(',') + '\n';
-  for (const r of allResults) {
+  for (const r of filtered) {
     csv += `${csvEscape(r.name)},${csvEscape(r.type)},${csvEscape(r.resourceGroup || '')},${csvEscape(r.location || '')},${csvEscape(yesNo(r.moveRG))},${csvEscape(yesNo(r.moveSub))},${csvEscape(yesNo(r.moveRegion))},${csvEscape(statusLabel[r.status])}\n`;
   }
 

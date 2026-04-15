@@ -64,7 +64,8 @@ const I18N = {
     csvMovable: 'Movable',
     csvPartial: 'Partial',
     csvNotMovable: 'Not Movable',
-    csvNotFound: 'Not Found'
+    csvNotFound: 'Not Found',
+    loadingText: 'Processing...'
   },
 
   'pt-BR': {
@@ -127,7 +128,8 @@ const I18N = {
     csvMovable: 'Migrável',
     csvPartial: 'Parcial',
     csvNotMovable: 'Não Migrável',
-    csvNotFound: 'Não Encontrado'
+    csvNotFound: 'Não Encontrado',
+    loadingText: 'Processando...'
   },
 
   'zh-CN': {
@@ -190,7 +192,8 @@ const I18N = {
     csvMovable: '可迁移',
     csvPartial: '部分',
     csvNotMovable: '不可迁移',
-    csvNotFound: '未找到'
+    csvNotFound: '未找到',
+    loadingText: '处理中...'
   },
 
   es: {
@@ -253,7 +256,8 @@ const I18N = {
     csvMovable: 'Migrable',
     csvPartial: 'Parcial',
     csvNotMovable: 'No Migrable',
-    csvNotFound: 'No Encontrado'
+    csvNotFound: 'No Encontrado',
+    loadingText: 'Procesando...'
   },
 
   fr: {
@@ -316,7 +320,8 @@ const I18N = {
     csvMovable: 'Migrable',
     csvPartial: 'Partiel',
     csvNotMovable: 'Non Migrable',
-    csvNotFound: 'Non Trouvé'
+    csvNotFound: 'Non Trouvé',
+    loadingText: 'Traitement en cours...'
   },
 
   ar: {
@@ -379,7 +384,8 @@ const I18N = {
     csvMovable: 'قابل للنقل',
     csvPartial: 'جزئي',
     csvNotMovable: 'غير قابل للنقل',
-    csvNotFound: 'غير موجود'
+    csvNotFound: 'غير موجود',
+    loadingText: 'جارٍ المعالجة...'
   },
 
   ru: {
@@ -442,7 +448,8 @@ const I18N = {
     csvMovable: 'Перемещаемый',
     csvPartial: 'Частично',
     csvNotMovable: 'Не перемещаемый',
-    csvNotFound: 'Не найдено'
+    csvNotFound: 'Не найдено',
+    loadingText: 'Обработка...'
   },
 
   ja: {
@@ -505,7 +512,8 @@ const I18N = {
     csvMovable: '移行可能',
     csvPartial: '一部',
     csvNotMovable: '移行不可',
-    csvNotFound: '未検出'
+    csvNotFound: '未検出',
+    loadingText: '処理中...'
   }
 };
 

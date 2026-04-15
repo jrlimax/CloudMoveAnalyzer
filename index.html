@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Cloud Move Analyzer — Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <meta property="og:title" content="Cloud Move Analyzer" />
+  <meta property="og:description" content="Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Cloud Move Analyzer" />
+  <meta name="twitter:description" content="Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <meta name="twitter:image" content="logo.png" />
   <title>Cloud Move Analyzer</title>
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="stylesheet" href="style.css" />
@@ -48,7 +56,7 @@
     </header>
 
     <!-- Upload -->
-    <div class="upload-area" id="uploadArea">
+    <div class="upload-area" id="uploadArea" role="group" aria-label="Drag your spreadsheet here or click to select" data-i18n-aria="uploadTitle">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
       </svg>
