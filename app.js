@@ -324,11 +324,12 @@ function statusBadge(status, r) {
   } else {
     tooltip = t('tooltipUnknown');
   }
+  const safeTooltip = tooltip.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const map = {
-    'movable':     `<span class="badge yes" title="${tooltip}">${t('statusMovable')}</span>`,
-    'partial':     `<span class="badge partial" title="${tooltip}">${t('statusPartial')}</span>`,
-    'not-movable': `<span class="badge no" title="${tooltip}">${t('statusNotMovable')}</span>`,
-    'unknown':     `<span class="badge unknown" title="${tooltip}">${t('statusUnknown')}</span>`
+    'movable':     `<span class="badge yes" title="${safeTooltip}">${t('statusMovable')}</span>`,
+    'partial':     `<span class="badge partial" title="${safeTooltip}">${t('statusPartial')}</span>`,
+    'not-movable': `<span class="badge no" title="${safeTooltip}">${t('statusNotMovable')}</span>`,
+    'unknown':     `<span class="badge unknown" title="${safeTooltip}">${t('statusUnknown')}</span>`
   };
   return map[status] || '';
 }

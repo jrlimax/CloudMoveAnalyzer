@@ -537,15 +537,151 @@ table tbody tr:hover {
 }
 
 /* ── Responsive ────────────────────────────────────────── */
-@media (max-width: 600px) {
-  header h1 { font-size: 1.6rem; }
-  .upload-area { padding: 2rem 1rem; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.75rem;
+  }
+
+  .site-logo {
+    width: 140px;
+    height: 140px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  header p {
+    font-size: 0.88rem;
+    padding: 0 0.5rem;
+  }
+
+  .upload-area {
+    padding: 2rem 1rem;
+    border-radius: 12px;
+  }
+
+  .upload-area svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .upload-area h3 {
+    font-size: 1rem;
+  }
+
+  .upload-area span {
+    font-size: 0.8rem;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .stat-card {
+    padding: 0.85rem 0.5rem;
+    border-radius: 10px;
+  }
+
+  .stat-card .number {
+    font-size: 1.5rem;
+  }
+
+  .stat-card .label {
+    font-size: 0.75rem;
+  }
+
+  .stat-card .hint {
+    font-size: 0.62rem;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .search-input {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .export-btn {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .results-count {
+    text-align: center;
+    width: 100%;
+  }
+
+  .table-wrapper {
+    border-radius: 10px;
+  }
+
+  .table-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    font-size: 0.82rem;
+  }
+
+  table th {
+    padding: 0.65rem 0.7rem;
+    font-size: 0.78rem;
+  }
+
+  table td {
+    padding: 0.55rem 0.7rem;
+  }
+
+  .top-bar {
+    padding-top: 0.5rem;
+  }
+
   .theme-toggle {
     width: 36px;
     height: 36px;
   }
-  .top-bar { padding-top: 0.5rem; }
+
+  .lang-current {
+    padding: 0.3rem 0.5rem;
+    height: 36px;
+    font-size: 0.78rem;
+    border-radius: 10px;
+  }
+
+  /* Hide language label text on small screens, keep flag */
+  .lang-current #langLabel {
+    display: none;
+  }
+
+  .footer-info {
+    font-size: 0.72rem;
+    padding: 1.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-logo {
+    width: 110px;
+    height: 110px;
+  }
+
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  .stats-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card .number {
+    font-size: 1.3rem;
+  }
 }
 
 /* ── RTL support (Arabic) ────────────────────────────── */
