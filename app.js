@@ -90,6 +90,10 @@ function applyLanguage() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     el.textContent = t(el.dataset.i18n);
   });
+  // Update data-i18n-html elements (allow safe HTML like links)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
   // Update placeholders
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     el.placeholder = t(el.dataset.i18nPlaceholder);
@@ -107,19 +111,50 @@ function applyLanguage() {
 updateLangPicker();
 applyLanguage();
 
-// Set canonical URL and OG url dynamically
+// Set canonical URL and OG url (always use the custom domain)
 (function setCanonicalUrl() {
-  const url = window.location.href.split('?')[0].split('#')[0];
+  const SITE_URL = 'https://cloudmoveanalyzer.com/';
   const canonical = document.getElementById('canonicalLink');
-  if (canonical) canonical.href = url;
+  if (canonical) canonical.href = SITE_URL;
   const ogUrl = document.querySelector('meta[property="og:url"]');
-  if (ogUrl) ogUrl.content = url;
+  if (ogUrl) ogUrl.content = SITE_URL;
   const ogImage = document.querySelector('meta[property="og:image"]');
   const twImage = document.querySelector('meta[name="twitter:image"]');
-  const absLogo = new URL('logo.png', url).href;
+  const absLogo = SITE_URL + 'logo.png';
   if (ogImage) ogImage.content = absLogo;
   if (twImage) twImage.content = absLogo;
 })();
+
+// ── PIX copy button ───────────────────────────────────────
+document.getElementById('pixCopyBtn').addEventListener('click', () => {
+  const key = document.getElementById('pixKey').textContent;
+  navigator.clipboard.writeText(key).then(() => {
+    const btn = document.getElementById('pixCopyBtn');
+    btn.textContent = '✅ ' + (t('pixCopied') || 'Copied!');
+    setTimeout(() => { btn.textContent = t('pixCopyBtn'); }, 2000);
+  }).catch(() => {
+    // Fallback: select the text for manual copy
+    const range = document.createRange();
+    range.selectNodeContents(document.getElementById('pixKey'));
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  });
+});
+
+// ── Donation tabs ─────────────────────────────────────────
+{
+  const dtabs   = document.querySelectorAll('.donation-tab');
+  const panels = document.querySelectorAll('.donation-panel');
+  dtabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      dtabs.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.target).classList.add('active');
+    });
+  });
+}
 
 // ── DOM refs ──────────────────────────────────────────────
 const uploadArea     = document.getElementById('uploadArea');
@@ -128,6 +163,7 @@ const resultsSection = document.getElementById('resultsSection');
 const tableBody      = document.getElementById('tableBody');
 const searchInput    = document.getElementById('searchInput');
 const exportBtn      = document.getElementById('exportBtn');
+const mainEl         = document.querySelector('main');
 
 // ==========================================================
 // File Upload
@@ -172,7 +208,7 @@ function processFile(file) {
   loadingEl.className = 'loading';
   loadingEl.innerHTML = `<div class="spinner"></div><p>${t('loadingText')}</p>`;
   resultsSection.classList.add('hidden');
-  document.querySelector('main').classList.remove('has-results');
+  mainEl.classList.remove('has-results');
   uploadArea.parentNode.insertBefore(loadingEl, resultsSection);
 
   const reader = new FileReader();
@@ -334,7 +370,7 @@ function analyzeResources(data) {
   updateStats();
   renderTable();
   resultsSection.classList.remove('hidden');
-  document.querySelector('main').classList.add('has-results');
+  mainEl.classList.add('has-results');
   resultsSection.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -375,10 +411,10 @@ function updateStats() {
 // ==========================================================
 // Rendering helpers
 // ==========================================================
+const _escDiv = document.createElement('div');
 function escapeHtml(str) {
-  const el = document.createElement('div');
-  el.textContent = str;
-  return el.innerHTML;
+  _escDiv.textContent = str;
+  return _escDiv.innerHTML;
 }
 
 function badgeFor(value) {

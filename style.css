@@ -414,6 +414,220 @@ table tbody tr:hover {
   opacity: 0.4;
 }
 
+/* ── SEO Content Section ────────────────────────────────── */
+.seo-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.seo-section h2 {
+  color: var(--text);
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.seo-section h3 {
+  color: var(--text);
+  font-size: 1.05rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.seo-section p {
+  margin-bottom: 0.8rem;
+}
+
+.seo-section a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.seo-section a:hover {
+  text-decoration: underline;
+}
+
+.seo-section details {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.seo-section summary {
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--hover-bg);
+  transition: background 0.2s;
+}
+
+.seo-section summary:hover {
+  background: var(--thead-bg);
+}
+
+.seo-section details[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.seo-section details p {
+  padding: 0.8rem 1rem;
+  margin: 0;
+}
+
+/* ── PIX Donation ──────────────────────────────────────── */
+.pix-donation {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  background: var(--hover-bg);
+  text-align: center;
+}
+
+.pix-donation h3 {
+  color: var(--text);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.pix-donation p {
+  margin-bottom: 1.2rem;
+  color: var(--text-muted);
+}
+
+.donation-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.donation-tab {
+  background: var(--card-bg);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tab-flag {
+  vertical-align: middle;
+  width: 18px;
+  height: 14px;
+}
+
+.donation-tab:hover {
+  background: var(--hover-bg);
+  color: var(--text);
+}
+
+.donation-tab.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.donation-panel {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card-bg);
+  animation: fadeIn 0.25s ease;
+}
+
+.donation-panel.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.kofi-btn {
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.kofi-btn img {
+  border-radius: 8px;
+}
+
+.kofi-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.pix-qr-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.pix-qr-img {
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px;
+}
+
+.pix-key-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pix-key-copy .pix-label {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.pix-key-copy code {
+  background: var(--code-bg);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  user-select: all;
+  word-break: break-all;
+}
+
+.pix-copy-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: background 0.2s;
+}
+
+.pix-copy-btn:hover {
+  background: var(--secondary);
+}
+
 /* ── Footer ────────────────────────────────────────────── */
 .footer-info {
   text-align: center;

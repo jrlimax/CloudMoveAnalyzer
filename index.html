@@ -3,11 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cloud Move Analyzer - Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
-  <meta name="keywords" content="Azure, cloud migration, resource move, subscription, resource group, region, move support, Azure Resource Manager" />
+  <meta name="description" content="Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions. Upload your Azure export spreadsheet and get instant results." />
+  <meta name="description" lang="pt-BR" content="Ferramenta gratuita para verificar suporte à migração de recursos do Azure — confira quais recursos podem ser movidos entre assinaturas, grupos de recursos e regiões. Faça upload da planilha exportada do Azure e obtenha resultados instantâneos." />
+  <meta name="keywords" content="Azure resource move, Azure migration, move resources between subscriptions, move Azure resource group, Azure region migration, Azure Resource Manager, cloud migration tool, Azure move support, move Azure VM, move Azure subscription" />
+  <meta name="keywords" lang="pt-BR" content="migração Azure, mover recursos Azure, mover assinatura Azure, mover grupo de recursos Azure, migração região Azure, Azure Resource Manager, ferramenta migração cloud, mover VM Azure, mover recursos entre assinaturas" />
   <meta name="author" content="Cloud Move Analyzer" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#8B5CF6" />
+
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://flagcdn.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.sheetjs.com" crossorigin />
+  <link rel="preconnect" href="https://storage.ko-fi.com" crossorigin />
+  <link rel="dns-prefetch" href="https://flagcdn.com" />
+  <link rel="dns-prefetch" href="https://cdn.sheetjs.com" />
+
   <link rel="canonical" href="https://cloudmoveanalyzer.com/" id="canonicalLink" />
 
   <!-- Hreflang -->
@@ -23,20 +33,27 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="Cloud Move Analyzer" />
-  <meta property="og:description" content="Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <meta property="og:description" content="Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://cloudmoveanalyzer.com/logo.png" />
   <meta property="og:url" content="https://cloudmoveanalyzer.com/" />
   <meta property="og:site_name" content="Cloud Move Analyzer" />
   <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:locale:alternate" content="zh_CN" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="ar_SA" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta property="og:locale:alternate" content="ja_JP" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cloud Move Analyzer" />
-  <meta name="twitter:description" content="Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <meta name="twitter:description" content="Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions." />
   <meta name="twitter:image" content="https://cloudmoveanalyzer.com/logo.png" />
 
-  <title>Cloud Move Analyzer</title>
+  <title>Cloud Move Analyzer — Check Azure Resource Move Support Between Subscriptions, Resource Groups & Regions</title>
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="apple-touch-icon" href="logo.png" />
   <link rel="stylesheet" href="style.css" />
@@ -58,6 +75,127 @@
       "price": "0",
       "priceCurrency": "USD"
     }
+  }
+  </script>
+
+  <!-- FAQ Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": "en",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I know if my Azure resources can be migrated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Export your resources from the Azure Portal as a spreadsheet and upload it to Cloud Move Analyzer. The tool automatically checks every resource type against Microsoft's official move support documentation and shows you a clear report — which resources can be moved between subscriptions, resource groups, and regions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I move Azure resources to another subscription?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "See the official Microsoft documentation for a step-by-step guide on moving resources between subscriptions. Not all resource types support cross-subscription moves — for example, some networking and classic deployment resources cannot be moved. Upload your spreadsheet to Cloud Move Analyzer to instantly check which of your resources support this operation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Azure resources can be moved between resource groups?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most Azure resources support resource group moves, including Virtual Machines, Storage Accounts, App Services, SQL Databases, Key Vaults, and many others. However, some resources have restrictions — for example, Azure Active Directory Domain Services, Azure Backup vaults, and resources with classic deployment models."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I move Azure resources to a different region?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on the resource type. Some resources like Virtual Machines and SQL Databases can be moved using Azure Resource Mover. Others may need to be recreated in the target region. Cloud Move Analyzer checks region move support for all your resources based on official Microsoft documentation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a free tool to check Azure migration compatibility?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Cloud Move Analyzer is a free, open-source Azure migration compatibility tool. No registration required — just upload your Azure Portal export spreadsheet and get a complete report showing which resources can be moved between subscriptions, resource groups, and regions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Cloud Move Analyzer cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cloud Move Analyzer is 100% free and always will be. There are no hidden fees, no premium tier, and no account required. All processing happens in your browser — your data never leaves your computer."
+        }
+      }
+    ]
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- FAQ Structured Data (pt-BR) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": "pt-BR",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Como saber se meus recursos do Azure podem ser migrados?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Exporte seus recursos do Portal do Azure como planilha (.csv, .xlsx ou .xls) e faça upload no Cloud Move Analyzer. A ferramenta verifica automaticamente cada tipo de recurso com base na documentação oficial da Microsoft e mostra um relatório claro — quais recursos podem ser movidos entre assinaturas, grupos de recursos e regiões."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como mover recursos do Azure para outra assinatura?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Consulte a documentação oficial da Microsoft para um guia passo a passo sobre como mover recursos entre assinaturas. Nem todos os tipos de recursos suportam essa operação — por exemplo, alguns recursos de rede e de implantação clássica não podem ser movidos. Faça upload da sua planilha no Cloud Move Analyzer para verificar instantaneamente quais recursos suportam essa operação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quais recursos do Azure podem ser movidos entre grupos de recursos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A maioria dos recursos do Azure suporta movimentação entre grupos de recursos, incluindo Máquinas Virtuais, Contas de Armazenamento, App Services, SQL Databases, Key Vaults e muitos outros. No entanto, alguns recursos têm restrições — por exemplo, Azure Active Directory Domain Services, cofres de Backup e recursos com modelo de implantação clássico."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso mover recursos do Azure para outra região?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende do tipo de recurso. Alguns recursos como Máquinas Virtuais e SQL Databases podem ser movidos usando o Azure Resource Mover. Outros, como Azure Functions ou Logic Apps, precisam ser recriados na região de destino. O Cloud Move Analyzer verifica o suporte à migração de região para todos os seus recursos com base na documentação oficial da Microsoft."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Existe uma ferramenta gratuita para verificar compatibilidade de migração do Azure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. O Cloud Move Analyzer é uma ferramenta gratuita e de código aberto para verificar compatibilidade de migração do Azure. Sem cadastro, sem login — basta fazer upload da planilha exportada do Portal do Azure e obter um relatório completo mostrando quais recursos podem ser movidos entre assinaturas, grupos de recursos e regiões."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanto custa o Cloud Move Analyzer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O Cloud Move Analyzer é 100% gratuito e sempre será. Não há taxas ocultas, plano premium ou necessidade de cadastro. Todo o processamento acontece no seu navegador — seus dados nunca saem do seu computador."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -174,6 +312,68 @@
 
     </main>
 
+    <!-- SEO Content Section -->
+    <section class="seo-section">
+      <h2 data-i18n="seoTitle">Azure Resource Move Support — Check Before You Migrate</h2>
+      <p data-i18n="seoIntro">Moving Azure resources between subscriptions, resource groups, or regions is a common task for cloud architects and DevOps engineers. However, not all Azure resource types support every type of move operation. Cloud Move Analyzer helps you verify move support for all your Azure resources instantly.</p>
+
+      <h3 data-i18n="seoHowTitle">How It Works</h3>
+      <p data-i18n="seoHowText">Export your resources from the Azure Portal as a spreadsheet (.csv, .xlsx, or .xls), upload it here, and get a clear overview of which resources can be moved between subscriptions, resource groups, and regions — all based on official Microsoft documentation.</p>
+
+      <h3 data-i18n="seoFaqTitle">Frequently Asked Questions</h3>
+      <details>
+        <summary data-i18n="faqQ5">How do I know if my Azure resources can be migrated?</summary>
+        <p data-i18n="faqA5">Export your resources from the Azure Portal as a spreadsheet (.csv, .xlsx, or .xls) and upload it to Cloud Move Analyzer. The tool automatically checks every resource type against Microsoft's official move support documentation and shows you a clear report — which resources can be moved between subscriptions, resource groups, and regions.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ1">How do I move Azure resources to another subscription?</summary>
+        <p data-i18n-html="faqA1">See the <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli" target="_blank" rel="noopener">official Microsoft documentation</a> for a step-by-step guide on moving resources between subscriptions. Not all resource types support cross-subscription moves — for example, some networking and classic deployment resources cannot be moved. Upload your spreadsheet to Cloud Move Analyzer to instantly check which of your resources support this operation.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ2">Which Azure resources can be moved between resource groups?</summary>
+        <p data-i18n="faqA2">Most Azure resources support resource group moves, including Virtual Machines, Storage Accounts, App Services, SQL Databases, Key Vaults, and many others. However, some resources have restrictions — for example, Azure Active Directory Domain Services, Azure Backup vaults, and resources with classic deployment models. Upload your resource list to Cloud Move Analyzer to check all your resources at once.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ3">Can I move Azure resources to a different region?</summary>
+        <p data-i18n="faqA3">It depends on the resource type. Some resources like Virtual Machines and SQL Databases can be moved using Azure Resource Mover. Others, like Azure Functions or Logic Apps, may need to be recreated in the target region. Cloud Move Analyzer checks region move support for all your resources based on official Microsoft documentation, so you know exactly what can and cannot be moved.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ6">Is there a free tool to check Azure migration compatibility?</summary>
+        <p data-i18n="faqA6">Yes. Cloud Move Analyzer is a free, open-source Azure migration compatibility tool. No registration, no login required — just upload your Azure Portal export spreadsheet and get a complete report showing which resources can be moved between subscriptions, resource groups, and regions.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ4">How much does Cloud Move Analyzer cost?</summary>
+        <p data-i18n="faqA4">Cloud Move Analyzer is 100% free and always will be. There are no hidden fees, no premium tier, and no account required. All processing happens in your browser — your data never leaves your computer.</p>
+      </details>
+
+      <!-- Donation / PIX + Ko-fi -->
+      <div class="pix-donation">
+        <h3 data-i18n="pixTitle">☕ Enjoyed it? Buy me a coffee!</h3>
+        <p data-i18n="pixText">Cloud Move Analyzer is free and always will be. If it saved you time, consider buying me a coffee — any amount is appreciated!</p>
+
+        <div class="donation-tabs">
+          <button class="donation-tab active" data-target="kofi" data-i18n="kofiLabel">🌍 International</button>
+          <button class="donation-tab" data-target="pix"><img src="https://flagcdn.com/24x18/br.png" alt="Brazil" class="tab-flag" loading="lazy" /> PIX</button>
+        </div>
+
+        <div class="donation-panel active" id="panel-kofi">
+          <a href="https://ko-fi.com/villat" target="_blank" rel="noopener" class="kofi-btn">
+            <img src="https://storage.ko-fi.com/cdn/kofi5.png?v=6" alt="Buy Me a Coffee at ko-fi.com" height="40" />
+          </a>
+        </div>
+
+        <div class="donation-panel" id="panel-pix">
+          <div class="pix-qr-wrapper">
+            <img src="pix-qr.png" alt="PIX QR Code" class="pix-qr-img" width="180" height="180" />
+          </div>
+          <div class="pix-key-copy">
+            <code id="pixKey">9f7802e4-3dcb-47fa-8e70-7119cb5b4761</code>
+            <button class="pix-copy-btn" id="pixCopyBtn" data-i18n="pixCopyBtn" title="Copy">📋 Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer-info">
       <span data-i18n="footerText">Data based on official Microsoft documentation:</span>
@@ -186,9 +386,9 @@
   </div>
 
   <!-- Scripts (order matters: XLSX lib &#8594; database &#8594; i18n &#8594; app) -->
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
-  <script src="move-database.js"></script>
-  <script src="i18n.js"></script>
-  <script src="app.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js" defer></script>
+  <script src="move-database.js" defer></script>
+  <script src="i18n.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
