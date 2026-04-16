@@ -760,10 +760,13 @@ function parseMoveCSV(csv) {
   csv.split('\n').forEach(line => {
     const parts = line.split(',');
     if (parts.length >= 4 && parts[0].trim().includes('/')) {
+      const rg  = parseInt(parts[1], 10);
+      const sub = parseInt(parts[2], 10);
+      const reg = parseInt(parts[3], 10);
       db[parts[0].trim().toLowerCase()] = {
-        moveRG:     parseInt(parts[1]),
-        moveSub:    parseInt(parts[2]),
-        moveRegion: parseInt(parts[3])
+        moveRG:     isNaN(rg)  ? 0 : rg,
+        moveSub:    isNaN(sub) ? 0 : sub,
+        moveRegion: isNaN(reg) ? 0 : reg
       };
     }
   });
@@ -791,6 +794,20 @@ let moveDbSource = 'local'; // 'local' | 'live'
     if (Object.keys(live).length > 100) {
       MOVE_DB = live;
       moveDbSource = 'live';
+      // Re-analyze with fresh data if a file was already processed
+      if (typeof allResults !== 'undefined' && allResults.length) {
+        allResults.forEach(r => {
+          const info = lookupResourceType(r.type);
+          if (info) {
+            r.moveRG     = info.moveRG;
+            r.moveSub    = info.moveSub;
+            r.moveRegion = info.moveRegion;
+            r.status     = getStatus(info);
+          }
+        });
+        updateStats();
+        renderTable();
+      }
     }
   } catch {
     // Silently fall back to embedded data

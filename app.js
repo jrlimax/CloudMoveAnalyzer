@@ -342,11 +342,14 @@ function analyzeResources(data) {
 // Stats
 // ==========================================================
 function updateStats() {
+  let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
+  for (const r of allResults) {
+    if (r.status === 'movable') movable++;
+    else if (r.status === 'partial') partial++;
+    else if (r.status === 'not-movable') notMovable++;
+    else unknownCount++;
+  }
   const total = allResults.length;
-  const movable = allResults.filter(r => r.status === 'movable').length;
-  const partial = allResults.filter(r => r.status === 'partial').length;
-  const notMovable = allResults.filter(r => r.status === 'not-movable').length;
-  const unknownCount = allResults.filter(r => r.status === 'unknown').length;
 
   document.getElementById('statTotal').textContent = total;
   document.getElementById('statMovable').textContent = movable;
@@ -476,21 +479,23 @@ function renderTable() {
     return;
   }
 
-  let html = '';
+  const fragment = document.createDocumentFragment();
   for (const r of filtered) {
-    html += `<tr>
-      <td>${escapeHtml(r.name)}</td>
-      <td><code class="type-tag">${escapeHtml(r.type)}</code></td>
-      <td class="cell-muted">${escapeHtml(r.resourceGroup || '—')}</td>
-      <td class="cell-muted">${escapeHtml(r.location || '—')}</td>
-      <td>${badgeFor(r.moveRG)}</td>
-      <td>${badgeFor(r.moveSub)}</td>
-      <td>${badgeFor(r.moveRegion)}</td>
-      <td>${statusBadge(r.status, r)}</td>
-      <td class="cell-notes">${r.noteKey ? escapeHtml(t(r.noteKey)) : '—'}</td>
-    </tr>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      `<td>${escapeHtml(r.name)}</td>` +
+      `<td><code class="type-tag">${escapeHtml(r.type)}</code></td>` +
+      `<td class="cell-muted">${escapeHtml(r.resourceGroup || '—')}</td>` +
+      `<td class="cell-muted">${escapeHtml(r.location || '—')}</td>` +
+      `<td>${badgeFor(r.moveRG)}</td>` +
+      `<td>${badgeFor(r.moveSub)}</td>` +
+      `<td>${badgeFor(r.moveRegion)}</td>` +
+      `<td>${statusBadge(r.status, r)}</td>` +
+      `<td class="cell-notes">${r.noteKey ? escapeHtml(t(r.noteKey)) : '—'}</td>`;
+    fragment.appendChild(tr);
   }
-  tableBody.innerHTML = html;
+  tableBody.innerHTML = '';
+  tableBody.appendChild(fragment);
 }
 
 // ==========================================================
@@ -522,11 +527,15 @@ document.querySelectorAll('.stat-card[data-filter]').forEach(card => {
 });
 
 // ==========================================================
-// Search
+// Search (debounced)
 // ==========================================================
+let searchTimer = null;
 searchInput.addEventListener('input', e => {
-  currentSearch = e.target.value;
-  renderTable();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    currentSearch = e.target.value;
+    renderTable();
+  }, 200);
 });
 
 // ==========================================================
