@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cloud Move Analyzer â€” Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
+  <meta name="description" content="Cloud Move Analyzer - Upload Azure spreadsheets to check which resources support migration between subscriptions, resource groups, and regions." />
   <meta name="keywords" content="Azure, cloud migration, resource move, subscription, resource group, region, move support, Azure Resource Manager" />
   <meta name="author" content="Cloud Move Analyzer" />
   <meta name="robots" content="index, follow" />
@@ -74,13 +74,13 @@
         </button>
         <ul class="lang-menu hidden" id="langMenu">
           <li data-lang="en"><img src="https://flagcdn.com/24x18/us.png" alt="" /> English</li>
-          <li data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" /> PortuguÃªs</li>
-          <li data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" /> ä¸­æ–‡</li>
-          <li data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" /> EspaÃ±ol</li>
-          <li data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" /> FranÃ§ais</li>
-          <li data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" /> Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</li>
-          <li data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" /> Ð ÑƒÑÑÐºÐ¸Ð¹</li>
-          <li data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" /> æ—¥æœ¬èªž</li>
+          <li data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" /> Portugu&#234;s</li>
+          <li data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" /> &#20013;&#25991;</li>
+          <li data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" /> Espa&#241;ol</li>
+          <li data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" /> Fran&#231;ais</li>
+          <li data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" /> &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</li>
+          <li data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" /> &#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</li>
+          <li data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" /> &#26085;&#26412;&#35486;</li>
         </ul>
       </div>
       <button class="theme-toggle" id="themeToggle" title="Toggle theme">
@@ -108,7 +108,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
       </svg>
       <h3 data-i18n="uploadTitle">Drag your spreadsheet here or click to select</h3>
-      <span data-i18n="uploadHint">Accepts .csv, .xlsx, .xls â€” Azure Portal export</span>
+      <span data-i18n="uploadHint">Accepts .csv, .xlsx, .xls - Azure Portal export</span>
       <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.tsv" />
     </div>
 
@@ -154,14 +154,15 @@
           <table>
             <thead>
               <tr>
-                <th data-sort="name" data-i18n="thName">Resource Name â†•</th>
-                <th data-sort="type" data-i18n="thType">Type (Provider) â†•</th>
-                <th data-sort="resourceGroup" data-i18n="thRG">Resource Group â†•</th>
-                <th data-sort="location" data-i18n="thLocation">Location â†•</th>
-                <th data-sort="rg" data-i18n="thMoveRG">Move RG â†•</th>
-                <th data-sort="sub" data-i18n="thMoveSub">Move Subscription â†•</th>
-                <th data-sort="region" data-i18n="thMoveRegion">Move Region â†•</th>
-                <th data-sort="status" data-i18n="thStatus">Status â†•</th>
+                <th data-sort="name" data-i18n="thName">Resource Name &#8597;</th>
+                <th data-sort="type" data-i18n="thType">Type (Provider) &#8597;</th>
+                <th data-sort="resourceGroup" data-i18n="thRG">Resource Group &#8597;</th>
+                <th data-sort="location" data-i18n="thLocation">Location &#8597;</th>
+                <th data-sort="rg" data-i18n="thMoveRG">Move RG &#8597;</th>
+                <th data-sort="sub" data-i18n="thMoveSub">Move Subscription &#8597;</th>
+                <th data-sort="region" data-i18n="thMoveRegion">Move Region ↕</th>
+                <th data-sort="status" data-i18n="thStatus">Status ↕</th>
+                <th data-sort="notes" data-i18n="thNotes">Notes ↕</th>
               </tr>
             </thead>
             <tbody id="tableBody"></tbody>

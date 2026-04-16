@@ -66,7 +66,9 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;  position: relative;}
+  padding: 2rem 1.5rem;
+  position: relative;
+}
 
 /* ── Header ────────────────────────────────────────────── */
 header {
@@ -351,6 +353,16 @@ table tbody tr:hover {
 .cell-muted {
   color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+/* ── Notes cell ────────────────────────────────────────── */
+.cell-notes {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  white-space: normal;
+  min-width: 200px;
+  max-width: 350px;
+  line-height: 1.4;
 }
 
 /* ── Empty State ───────────────────────────────────────── */

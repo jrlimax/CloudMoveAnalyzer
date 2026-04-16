@@ -799,3 +799,67 @@ let moveDbSource = 'local'; // 'local' | 'live'
   // Update UI indicator
   if (typeof updateDbSourceBadge === 'function') updateDbSourceBadge();
 })();
+
+// ==========================================================
+// Move Notes / Dependency Database
+// Maps resource types (lowercase) to i18n keys describing
+// migration dependencies, constraints, and guidance.
+// Source: Microsoft official documentation
+// ==========================================================
+const MOVE_NOTES = {
+  // SQL
+  'microsoft.sql/servers':                          'noteSqlServer',
+  'microsoft.sql/servers/databases':                'noteSqlDb',
+  'microsoft.sql/servers/elasticpools':             'noteSqlElasticPool',
+  'microsoft.sql/servers/jobaccounts':              'noteSqlChild',
+  'microsoft.sql/servers/jobagents':                'noteSqlChild',
+  'microsoft.sql/servers/databases/backuplongtermretentionpolicies': 'noteSqlChild',
+  'microsoft.sql/managedinstances':                 'noteSqlManagedInst',
+  'microsoft.sql/managedinstances/databases':       'noteSqlChild',
+  // Compute / VMs
+  'microsoft.compute/virtualmachines':              'noteVm',
+  'microsoft.compute/disks':                        'noteDisk',
+  'microsoft.compute/virtualmachines/extensions':   'noteVmExt',
+  'microsoft.compute/availabilitysets':             'noteAvailSet',
+  'microsoft.compute/snapshots':                    'noteSnapshot',
+  'microsoft.compute/virtualmachinescalesets':      'noteVmss',
+  // Network
+  'microsoft.network/networkinterfaces':            'noteNic',
+  'microsoft.network/publicipaddresses':            'notePublicIp',
+  'microsoft.network/loadbalancers':                'noteLoadBalancer',
+  'microsoft.network/networksecuritygroups':        'noteNsg',
+  'microsoft.network/virtualnetworks':              'noteVnet',
+  'microsoft.network/applicationgateways':          'noteAppGw',
+  // App Service
+  'microsoft.web/sites':                            'noteAppService',
+  'microsoft.web/serverfarms':                      'noteAppPlan',
+  'microsoft.web/certificates':                     'noteCert',
+  'microsoft.certificateregistration/certificateorders': 'noteAppService',
+  'microsoft.domainregistration/domains':           'noteAppService',
+  // Data
+  'microsoft.documentdb/databaseaccounts':          'noteCosmosDb',
+  'microsoft.dbformysql/servers':                   'noteDbReplica',
+  'microsoft.dbforpostgresql/servers':              'noteDbReplica',
+  'microsoft.dbformariadb/servers':                 'noteDbReplica',
+  // Containers
+  'microsoft.containerregistry/registries':         'noteContainerReg',
+  // HDInsight
+  'microsoft.hdinsight/clusters':                   'noteHdInsight',
+  // Monitoring / Automation
+  'microsoft.operationalinsights/workspaces':       'noteLogAnalytics',
+  'microsoft.automation/automationaccounts':        'noteAutomation',
+  'microsoft.automation/automationaccounts/runbooks':       'noteAutomationRunbook',
+  'microsoft.automation/automationaccounts/configurations': 'noteAutomationChild',
+  'microsoft.insights/components':                  'noteAppInsights',
+  // Cache / KeyVault
+  'microsoft.cache/redis':                          'noteRedis',
+  'microsoft.keyvault/vaults':                      'noteKeyVault',
+  // Event Grid
+  'microsoft.eventgrid/eventsubscriptions':         'noteEventGridSub',
+  // API Management
+  'microsoft.apimanagement/service':                'noteApiMgmt',
+  // Recovery Services
+  'microsoft.recoveryservices/vaults':              'noteRecovery',
+  // Stream Analytics
+  'microsoft.streamanalytics/streamingjobs':        'noteStreamAnalytics',
+};

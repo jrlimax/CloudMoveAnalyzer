@@ -140,7 +140,10 @@ uploadArea.addEventListener('drop', e => {
 });
 
 fileInput.addEventListener('change', e => {
-  if (e.target.files.length) processFile(e.target.files[0]);
+  if (e.target.files.length) {
+    processFile(e.target.files[0]);
+    fileInput.value = '';  // reset so same file can be re-uploaded
+  }
 });
 
 function showFileName(name) {
@@ -150,6 +153,10 @@ function showFileName(name) {
 
 function processFile(file) {
   showFileName(file.name);
+
+  // Remove any existing loading overlay
+  const existing = document.getElementById('loadingOverlay');
+  if (existing) existing.remove();
 
   // Show loading indicator
   const loadingEl = document.createElement('div');
@@ -178,6 +185,11 @@ function processFile(file) {
         loadingEl.remove();
       }
     }, 50);
+  };
+
+  reader.onerror = function () {
+    loadingEl.remove();
+    alert(t('alertError') + reader.error);
   };
 
   isCsv ? reader.readAsText(file, 'UTF-8') : reader.readAsArrayBuffer(file);
@@ -244,6 +256,20 @@ function lookupResourceType(rawType) {
   return null;
 }
 
+/** Look up migration notes/dependencies i18n key for a resource type */
+function getNoteKeyForType(rawType) {
+  if (!rawType) return '';
+  const clean = rawType.toLowerCase().trim();
+  if (MOVE_NOTES[clean]) return MOVE_NOTES[clean];
+  // Try progressively shorter paths (for child resources)
+  const parts = clean.split('/');
+  for (let len = parts.length; len >= 2; len--) {
+    const attempt = parts.slice(0, len).join('/');
+    if (MOVE_NOTES[attempt]) return MOVE_NOTES[attempt];
+  }
+  return '';
+}
+
 function getStatus(info) {
   if (!info) return 'unknown';
   if (info.moveRG === 1 && info.moveSub === 1) return 'movable';
@@ -291,7 +317,8 @@ function analyzeResources(data) {
       moveRG:        info ? info.moveRG     : -1,
       moveSub:       info ? info.moveSub    : -1,
       moveRegion:    info ? info.moveRegion : -1,
-      status:        getStatus(info)
+      status:        getStatus(info),
+      noteKey:       getNoteKeyForType(finalType)
     };
   }).filter(r => r.type !== '—');
 
@@ -393,7 +420,8 @@ function getFiltered() {
       r.name.toLowerCase().includes(q) ||
       r.type.toLowerCase().includes(q) ||
       (r.displayType   && r.displayType.toLowerCase().includes(q)) ||
-      (r.resourceGroup && r.resourceGroup.toLowerCase().includes(q))
+      (r.resourceGroup && r.resourceGroup.toLowerCase().includes(q)) ||
+      (r.noteKey       && t(r.noteKey).toLowerCase().includes(q))
     );
   }
 
@@ -425,7 +453,7 @@ function renderTable() {
 
   if (!filtered.length) {
     tableBody.innerHTML = `
-      <tr><td colspan="8">
+      <tr><td colspan="9">
         <div class="empty-state">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                stroke="currentColor" stroke-width="1.5">
@@ -449,6 +477,7 @@ function renderTable() {
       <td>${badgeFor(r.moveSub)}</td>
       <td>${badgeFor(r.moveRegion)}</td>
       <td>${statusBadge(r.status, r)}</td>
+      <td class="cell-notes">${r.noteKey ? escapeHtml(t(r.noteKey)) : '—'}</td>
     </tr>`;
   }
   tableBody.innerHTML = html;
@@ -501,7 +530,8 @@ const sortMap = {
   rg:            'moveRG',
   sub:           'moveSub',
   region:        'moveRegion',
-  status:        'status'
+  status:        'status',
+  notes:         'noteKey'
 };
 
 document.querySelectorAll('th[data-sort]').forEach(th => {
@@ -529,9 +559,9 @@ exportBtn.addEventListener('click', () => {
   const yesNo = v => v === 1 ? t('csvYes') : v === 0 ? t('csvNo') : 'N/A';
   const csvEscape = s => '"' + String(s).replace(/"/g, '""') + '"';
 
-  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus')].join(',') + '\n';
+  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus'),t('csvNotes')].join(',') + '\n';
   for (const r of filtered) {
-    csv += `${csvEscape(r.name)},${csvEscape(r.type)},${csvEscape(r.resourceGroup || '')},${csvEscape(r.location || '')},${csvEscape(yesNo(r.moveRG))},${csvEscape(yesNo(r.moveSub))},${csvEscape(yesNo(r.moveRegion))},${csvEscape(statusLabel[r.status])}\n`;
+    csv += `${csvEscape(r.name)},${csvEscape(r.type)},${csvEscape(r.resourceGroup || '')},${csvEscape(r.location || '')},${csvEscape(yesNo(r.moveRG))},${csvEscape(yesNo(r.moveSub))},${csvEscape(yesNo(r.moveRegion))},${csvEscape(statusLabel[r.status])},${csvEscape(r.noteKey ? t(r.noteKey) : '')}\n`;
   }
 
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
