@@ -53,11 +53,19 @@ langToggle.addEventListener('click', () => {
   langPicker.classList.toggle('open', !langMenu.classList.contains('hidden'));
 });
 
-// Close menu on outside click
+// Close menu on outside click or Escape
 document.addEventListener('click', e => {
   if (!langPicker.contains(e.target)) {
     langMenu.classList.add('hidden');
     langPicker.classList.remove('open');
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !langMenu.classList.contains('hidden')) {
+    langMenu.classList.add('hidden');
+    langPicker.classList.remove('open');
+    langToggle.focus();
   }
 });
 
@@ -164,6 +172,7 @@ function processFile(file) {
   loadingEl.className = 'loading';
   loadingEl.innerHTML = `<div class="spinner"></div><p>${t('loadingText')}</p>`;
   resultsSection.classList.add('hidden');
+  document.querySelector('main').classList.remove('has-results');
   uploadArea.parentNode.insertBefore(loadingEl, resultsSection);
 
   const reader = new FileReader();
@@ -325,6 +334,7 @@ function analyzeResources(data) {
   updateStats();
   renderTable();
   resultsSection.classList.remove('hidden');
+  document.querySelector('main').classList.add('has-results');
   resultsSection.scrollIntoView({ behavior: 'smooth' });
 }
 
