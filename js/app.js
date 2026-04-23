@@ -614,7 +614,7 @@ exportBtn.addEventListener('click', () => {
   const yesNo = v => v === 1 ? t('csvYes') : v === 0 ? t('csvNo') : 'N/A';
   const csvEscape = s => '"' + String(s).replace(/"/g, '""') + '"';
 
-  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus'),t('csvNotes')].join(',') + '\n';
+  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus'),t('csvNotes')].map(csvEscape).join(',') + '\n';
   for (const r of filtered) {
     csv += `${csvEscape(r.name)},${csvEscape(r.type)},${csvEscape(r.resourceGroup || '')},${csvEscape(r.location || '')},${csvEscape(yesNo(r.moveRG))},${csvEscape(yesNo(r.moveSub))},${csvEscape(yesNo(r.moveRegion))},${csvEscape(statusLabel[r.status])},${csvEscape(r.noteKey ? t(r.noteKey) : '')}\n`;
   }
