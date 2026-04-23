@@ -62,7 +62,3 @@ Move support data is sourced from Microsoft's official [resource-capabilities](h
 ├── robots.txt
 └── sitemap.xml
 ```
-
-## License
-
-Open source — free to use.
