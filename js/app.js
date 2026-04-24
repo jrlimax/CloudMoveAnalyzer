@@ -431,13 +431,16 @@ function analyzeResources(data) {
   }).filter(r => r.type !== '—');
 
   // Deduplicate (Cost Management exports list same resource for each meter)
-  const seen = new Set();
-  allResults = allResults.filter(r => {
-    const key = (r.type + '|' + r.name + '|' + r.resourceGroup).toLowerCase();
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+  // Only dedup when name and resourceGroup are real values (not missing)
+  if (nameCol && rgCol) {
+    const seen = new Set();
+    allResults = allResults.filter(r => {
+      const key = (r.type + '|' + r.name + '|' + r.resourceGroup).toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
 
   updateStats();
   renderTable();
