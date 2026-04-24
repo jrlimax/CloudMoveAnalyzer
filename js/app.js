@@ -12,7 +12,11 @@ let sortAsc       = true;
 // ── Theme toggle ──────────────────────────────────────────
 (function initTheme() {
   const saved = localStorage.getItem('azure-move-theme');
-  if (saved === 'light') document.documentElement.classList.add('light');
+  if (saved === 'dark') {
+    document.documentElement.classList.remove('light');
+  } else {
+    document.documentElement.classList.add('light');
+  }
 })();
 
 document.getElementById('themeToggle').addEventListener('click', () => {
@@ -315,6 +319,16 @@ function getNoteKeyForType(rawType) {
   return '';
 }
 
+/** Build documentation URL from resource type provider namespace */
+function getDocUrlForType(rawType) {
+  if (!rawType) return '';
+  const clean = rawType.toLowerCase().trim().replace(/^\//, '');
+  const provider = clean.split('/')[0];
+  if (!provider || !provider.startsWith('microsoft.')) return '';
+  const anchor = provider.replace('.', '').toLowerCase();
+  return `https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-support-resources#${anchor}`;
+}
+
 function getStatus(info) {
   if (!info) return 'unknown';
   if (info.moveRG === 1 && info.moveSub === 1) return 'movable';
@@ -363,7 +377,8 @@ function analyzeResources(data) {
       moveSub:       info ? info.moveSub    : -1,
       moveRegion:    info ? info.moveRegion : -1,
       status:        getStatus(info),
-      noteKey:       getNoteKeyForType(finalType)
+      noteKey:       getNoteKeyForType(finalType),
+      docUrl:        getDocUrlForType(finalType)
     };
   }).filter(r => r.type !== '—');
 
@@ -487,6 +502,18 @@ function getFiltered() {
 }
 
 // ==========================================================
+// Note cell renderer (text + optional doc link)
+// ==========================================================
+function renderNoteCell(r) {
+  if (!r.noteKey) return '—';
+  const noteText = escapeHtml(t(r.noteKey));
+  const docLink  = r.docUrl
+    ? `<br><a href="${escapeHtml(r.docUrl)}" target="_blank" rel="noopener noreferrer" class="doc-link" title="${escapeHtml(t('docLinkTitle'))}">${escapeHtml(t('docLinkText'))}</a>`
+    : '';
+  return noteText + docLink;
+}
+
+// ==========================================================
 // Table rendering
 // ==========================================================
 function renderTable() {
@@ -527,7 +554,7 @@ function renderTable() {
       `<td>${badgeFor(r.moveSub)}</td>` +
       `<td>${badgeFor(r.moveRegion)}</td>` +
       `<td>${statusBadge(r.status, r)}</td>` +
-      `<td class="cell-notes">${r.noteKey ? escapeHtml(t(r.noteKey)) : '—'}</td>`;
+      `<td class="cell-notes">${renderNoteCell(r)}</td>`;
     fragment.appendChild(tr);
   }
   tableBody.innerHTML = '';
@@ -614,9 +641,9 @@ exportBtn.addEventListener('click', () => {
   const yesNo = v => v === 1 ? t('csvYes') : v === 0 ? t('csvNo') : 'N/A';
   const csvEscape = s => '"' + String(s).replace(/"/g, '""') + '"';
 
-  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus'),t('csvNotes')].map(csvEscape).join(',') + '\n';
+  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus'),t('csvNotes'),'Doc URL'].map(csvEscape).join(',') + '\n';
   for (const r of filtered) {
-    csv += `${csvEscape(r.name)},${csvEscape(r.type)},${csvEscape(r.resourceGroup || '')},${csvEscape(r.location || '')},${csvEscape(yesNo(r.moveRG))},${csvEscape(yesNo(r.moveSub))},${csvEscape(yesNo(r.moveRegion))},${csvEscape(statusLabel[r.status])},${csvEscape(r.noteKey ? t(r.noteKey) : '')}\n`;
+    csv += `${csvEscape(r.name)},${csvEscape(r.type)},${csvEscape(r.resourceGroup || '')},${csvEscape(r.location || '')},${csvEscape(yesNo(r.moveRG))},${csvEscape(yesNo(r.moveSub))},${csvEscape(yesNo(r.moveRegion))},${csvEscape(statusLabel[r.status])},${csvEscape(r.noteKey ? t(r.noteKey) : '')},${csvEscape(r.docUrl || '')}\n`;
   }
 
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });

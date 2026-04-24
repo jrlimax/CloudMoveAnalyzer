@@ -400,6 +400,17 @@ table tbody tr:hover {
   line-height: 1.4;
 }
 
+.doc-link {
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-decoration: underline;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+.doc-link:hover {
+  opacity: 1;
+}
+
 /* ── Export hint ───────────────────────────────────────── */
 .export-hint {
   font-size: 0.75rem;
