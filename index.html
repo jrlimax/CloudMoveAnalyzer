@@ -134,6 +134,30 @@
       },
       {
         "@type": "Question",
+        "name": "How do I export all my Azure resources to a .csv file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Go to the Azure Portal → All Resources and click the Export to CSV button in the toolbar at the top of the page. This downloads a .csv file with all your resources including Name, Type, Resource Group, Location and Resource ID. You can also use Azure CLI (az resource list --output csv) or Azure Resource Graph Explorer for more advanced queries. Once exported, just upload the file to Cloud Move Analyzer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the minimum information needed to analyze my spreadsheet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You don't need to organize anything before uploading! Cloud Move Analyzer accepts the .csv or .xlsx file exactly as exported from Azure. The only requirement is that your spreadsheet contains at least a Type or Resource ID column. That's it — the tool handles everything else. For richer results, columns like Name, Resource Group, and Location are also recognized automatically, but they are optional."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I organize the exported results in Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After analyzing your resources, click Export CSV to download the results file. To work with it in Excel: 1) Double-click the downloaded .csv — Excel opens it automatically with all columns separated correctly (Name, Type, Resource Group, Location, Move RG, Move Subscription, Move Region, Status, Notes, Doc URL). 2) Apply filters: select all columns (Ctrl+A), then go to Data → Filter. Click the dropdown arrow on the Status column and uncheck everything except Movable to see only movable resources. 3) Sort by Status column (A to Z) to group movable, partial, and not-movable resources together. 4) Optional: add conditional formatting (Home → Conditional Formatting → Text That Contains) — set Movable to green, Not Movable to red, and Partial to yellow. 5) Save as .xlsx (File → Save As → Excel Workbook) to preserve filters and formatting."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Como saber se meus recursos do Azure podem ser migrados?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -178,6 +202,30 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "O Cloud Move Analyzer é 100% gratuito e sempre será. Não há taxas ocultas, plano premium ou necessidade de cadastro. Todo o processamento acontece no seu navegador — seus dados nunca saem do seu computador."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como exportar todos os meus recursos do Azure para um arquivo .csv?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Acesse o Portal do Azure → Todos os Recursos e clique no botão Exportar para CSV na barra de ferramentas no topo da página. Isso baixa um arquivo .csv com todos os seus recursos, incluindo Nome, Tipo, Grupo de Recursos, Localização e ID do Recurso. Você também pode usar Azure CLI (az resource list --output csv) ou o Azure Resource Graph Explorer para consultas mais avançadas. Após exportar, basta fazer upload do arquivo no Cloud Move Analyzer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual é o mínimo de informações necessárias para analisar minha planilha?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Você não precisa organizar nada antes de fazer upload! O Cloud Move Analyzer aceita o arquivo .csv ou .xlsx exatamente como exportado do Azure. O único requisito é que sua planilha contenha pelo menos uma coluna Tipo ou ID do Recurso. Só isso — a ferramenta cuida do resto. Para resultados mais completos, colunas como Nome, Grupo de Recursos e Localização também são reconhecidas automaticamente, mas são opcionais."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como organizar os resultados exportados no Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Após analisar seus recursos, clique em Exportar CSV para baixar o arquivo de resultados. Para trabalhar com ele no Excel: 1) Dê duplo clique no .csv baixado — o Excel abre automaticamente com todas as colunas separadas corretamente (Nome, Tipo, Grupo de Recursos, Localização, Mover RG, Mover Assinatura, Mover Região, Status, Observações, URL da Documentação). 2) Aplique filtros: selecione todas as colunas (Ctrl+A), depois vá em Dados → Filtro. Clique na setinha da coluna Status e desmarque tudo exceto Movível para ver apenas recursos movíveis. 3) Ordene pela coluna Status (A a Z) para agrupar recursos movíveis, parciais e não movíveis juntos. 4) Opcional: adicione formatação condicional (Página Inicial → Formatação Condicional → Texto que Contém) — configure Movível para verde, Não Movível para vermelho e Parcial para amarelo. 5) Salve como .xlsx (Arquivo → Salvar Como → Pasta de Trabalho do Excel) para preservar filtros e formatação."
         }
       }
     ]
@@ -349,6 +397,18 @@
       <details>
         <summary data-i18n="faqQ4">How much does Cloud Move Analyzer cost?</summary>
         <p data-i18n="faqA4">Cloud Move Analyzer is 100% free and always will be. There are no hidden fees, no premium tier, and no account required. All processing happens in your browser — your data never leaves your computer.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ7">How do I export all my Azure resources to a .csv file?</summary>
+        <p data-i18n-html="faqA7">Go to the Azure Portal → All Resources, click Manage view → Export to CSV at the top of the page. This downloads a .csv file with all your resources including Name, Type, Resource Group, Location and Resource ID. You can also use Azure CLI or Azure Resource Graph Explorer for more advanced queries. Once exported, just upload the file to Cloud Move Analyzer.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ8">What is the minimum information needed to analyze my spreadsheet?</summary>
+        <p data-i18n-html="faqA8">You don't need to organize anything before uploading! Cloud Move Analyzer accepts the .csv or .xlsx file exactly as exported from Azure. The only requirement is that your spreadsheet contains at least a Type or Resource ID column. That's it — the tool handles everything else. For richer results, columns like Name, Resource Group, and Location are also recognized automatically, but they are optional.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ9">How do I organize the exported results in Excel?</summary>
+        <p data-i18n-html="faqA9">After analyzing your resources, click Export CSV to download the results. To organize it in Excel: open the file (it opens automatically with proper columns). You can sort by Status to group movable, partial, and not-movable resources together. Use Excel's Filter feature (Data → Filter) to show only specific statuses or resource types. You can also add conditional formatting to highlight rows by status for a clearer visual overview.</p>
       </details>
 
       <!-- Donation / PIX + Ko-fi -->
