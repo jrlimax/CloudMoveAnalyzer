@@ -375,7 +375,7 @@
 
       <h3 data-i18n="seoFaqTitle">Frequently Asked Questions</h3>
       <details>
-        <summary data-i18n="faqQ5">How do I know if my Azure resources can be migrated?</summary>
+        <summary data-i18n="faqQ5">How to check if my Azure resources can be moved or migrated?</summary>
         <p data-i18n="faqA5">Export your resources from the Azure Portal as a spreadsheet (.csv, .xlsx, or .xls) and upload it to Cloud Move Analyzer. The tool automatically checks every resource type against Microsoft's official move support documentation and shows you a clear report — which resources can be moved between subscriptions, resource groups, and regions.</p>
       </details>
       <details>
@@ -391,23 +391,23 @@
         <p data-i18n="faqA3">It depends on the resource type. Some resources like Virtual Machines and SQL Databases can be moved using Azure Resource Mover. Others, like Azure Functions or Logic Apps, may need to be recreated in the target region. Cloud Move Analyzer checks region move support for all your resources based on official Microsoft documentation, so you know exactly what can and cannot be moved.</p>
       </details>
       <details>
-        <summary data-i18n="faqQ6">Is there a free tool to check Azure migration compatibility?</summary>
-        <p data-i18n="faqA6">Yes. Cloud Move Analyzer is a free, open-source Azure migration compatibility tool. No registration, no login required — just upload your Azure Portal export spreadsheet and get a complete report showing which resources can be moved between subscriptions, resource groups, and regions.</p>
-      </details>
-      <details>
-        <summary data-i18n="faqQ4">How much does Cloud Move Analyzer cost?</summary>
-        <p data-i18n="faqA4">Cloud Move Analyzer is 100% free and always will be. There are no hidden fees, no premium tier, and no account required. All processing happens in your browser — your data never leaves your computer.</p>
-      </details>
-      <details>
-        <summary data-i18n="faqQ7">How do I export all my Azure resources to a .csv file?</summary>
+        <summary data-i18n="faqQ7">How to export all Azure resources as CSV from the Azure Portal?</summary>
         <p data-i18n-html="faqA7">Go to the Azure Portal → All Resources, click Manage view → Export to CSV at the top of the page. This downloads a .csv file with all your resources including Name, Type, Resource Group, Location and Resource ID. You can also use Azure CLI or Azure Resource Graph Explorer for more advanced queries. Once exported, just upload the file to Cloud Move Analyzer.</p>
       </details>
       <details>
-        <summary data-i18n="faqQ8">What is the minimum information needed to analyze my spreadsheet?</summary>
+        <summary data-i18n="faqQ6">Is there a free tool to check Azure resource move compatibility?</summary>
+        <p data-i18n="faqA6">Yes. Cloud Move Analyzer is a free, open-source Azure migration compatibility tool. No registration, no login required — just upload your Azure Portal export spreadsheet and get a complete report showing which resources can be moved between subscriptions, resource groups, and regions.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ4">Is Cloud Move Analyzer free?</summary>
+        <p data-i18n="faqA4">Cloud Move Analyzer is 100% free and always will be. There are no hidden fees, no premium tier, and no account required. All processing happens in your browser — your data never leaves your computer.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ8">What file formats and columns does Cloud Move Analyzer support?</summary>
         <p data-i18n-html="faqA8">You don't need to organize anything before uploading! Cloud Move Analyzer accepts the .csv or .xlsx file exactly as exported from Azure. The only requirement is that your spreadsheet contains at least a Type or Resource ID column. That's it — the tool handles everything else. For richer results, columns like Name, Resource Group, and Location are also recognized automatically, but they are optional.</p>
       </details>
       <details>
-        <summary data-i18n="faqQ9">How do I organize the exported results in Excel?</summary>
+        <summary data-i18n="faqQ9">How to open and organize an Azure CSV export file in Excel?</summary>
         <p data-i18n-html="faqA9">After analyzing your resources, click Export CSV to download the results. To organize it in Excel: open the file (it opens automatically with proper columns). You can sort by Status to group movable, partial, and not-movable resources together. Use Excel's Filter feature (Data → Filter) to show only specific statuses or resource types. You can also add conditional formatting to highlight rows by status for a clearer visual overview.</p>
       </details>
 
