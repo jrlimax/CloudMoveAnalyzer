@@ -86,7 +86,7 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How do I know if my Azure resources can be migrated?",
+        "name": "How to check if my Azure resources can be moved or migrated?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Export your resources from the Azure Portal as a spreadsheet and upload it to Cloud Move Analyzer. The tool automatically checks every resource type against Microsoft's official move support documentation and shows you a clear report — which resources can be moved between subscriptions, resource groups, and regions."
@@ -105,7 +105,7 @@
         "name": "Which Azure resources can be moved between resource groups?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most Azure resources support resource group moves, including Virtual Machines, Storage Accounts, App Services, SQL Databases, Key Vaults, and many others. However, some resources have restrictions — for example, Azure Active Directory Domain Services, Azure Backup vaults, and resources with classic deployment models."
+          "text": "Most Azure resources support resource group moves, including Virtual Machines, Storage Accounts, App Services, SQL Databases, Key Vaults, and many others. However, some resources have restrictions — for example, Azure Active Directory Domain Services, Azure Backup vaults, and resources with classic deployment models. Upload your resource list to Cloud Move Analyzer to check all your resources at once."
         }
       },
       {
@@ -113,20 +113,20 @@
         "name": "Can I move Azure resources to a different region?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It depends on the resource type. Some resources like Virtual Machines and SQL Databases can be moved using Azure Resource Mover. Others may need to be recreated in the target region. Cloud Move Analyzer checks region move support for all your resources based on official Microsoft documentation."
+          "text": "It depends on the resource type. Some resources like Virtual Machines and SQL Databases can be moved using Azure Resource Mover. Others, like Azure Functions or Logic Apps, may need to be recreated in the target region. Cloud Move Analyzer checks region move support for all your resources based on official Microsoft documentation, so you know exactly what can and cannot be moved."
         }
       },
       {
         "@type": "Question",
-        "name": "Is there a free tool to check Azure migration compatibility?",
+        "name": "Is there a free tool to check Azure resource move compatibility?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Cloud Move Analyzer is a free, open-source Azure migration compatibility tool. No registration required — just upload your Azure Portal export spreadsheet and get a complete report showing which resources can be moved between subscriptions, resource groups, and regions."
+          "text": "Yes. Cloud Move Analyzer is a free, open-source Azure migration compatibility tool. No registration, no login required — just upload your Azure Portal export spreadsheet and get a complete report showing which resources can be moved between subscriptions, resource groups, and regions."
         }
       },
       {
         "@type": "Question",
-        "name": "How much does Cloud Move Analyzer cost?",
+        "name": "Is Cloud Move Analyzer free?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Cloud Move Analyzer is 100% free and always will be. There are no hidden fees, no premium tier, and no account required. All processing happens in your browser — your data never leaves your computer."
@@ -134,7 +134,7 @@
       },
       {
         "@type": "Question",
-        "name": "How do I export all my Azure resources to a .csv file?",
+        "name": "How to export all Azure resources as CSV from the Azure Portal?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Go to the Azure Portal → All Resources and click the Export to CSV button in the toolbar at the top of the page. This downloads a .csv file with all your resources including Name, Type, Resource Group, Location and Resource ID. You can also use Azure CLI (az resource list --output csv) or Azure Resource Graph Explorer for more advanced queries. Once exported, just upload the file to Cloud Move Analyzer."
@@ -142,23 +142,23 @@
       },
       {
         "@type": "Question",
-        "name": "What is the minimum information needed to analyze my spreadsheet?",
+        "name": "What file formats and columns does Cloud Move Analyzer support?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You don't need to organize anything before uploading! Cloud Move Analyzer accepts the .csv or .xlsx file exactly as exported from Azure. The only requirement is that your spreadsheet contains at least a Type or Resource ID column. That's it — the tool handles everything else. For richer results, columns like Name, Resource Group, and Location are also recognized automatically, but they are optional."
+          "text": "You don't need to organize anything before uploading! Cloud Move Analyzer accepts the .csv or .xlsx file exactly as exported from Azure. The only requirement is that your spreadsheet contains at least one of these columns: Type (Resource Type) or Resource ID. That's it — the tool handles everything else. For richer results, columns like Name, Resource Group, and Location are also recognized automatically, but they are optional."
         }
       },
       {
         "@type": "Question",
-        "name": "How do I organize the exported results in Excel?",
+        "name": "How to open and organize an Azure CSV export file in Excel?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "After analyzing your resources, click Export CSV to download the results file. To work with it in Excel: 1) Double-click the downloaded .csv — Excel opens it automatically with all columns separated correctly (Name, Type, Resource Group, Location, Move RG, Move Subscription, Move Region, Status, Notes, Doc URL). 2) Apply filters: select all columns (Ctrl+A), then go to Data → Filter. Click the dropdown arrow on the Status column and uncheck everything except Movable to see only movable resources. 3) Sort by Status column (A to Z) to group movable, partial, and not-movable resources together. 4) Optional: add conditional formatting (Home → Conditional Formatting → Text That Contains) — set Movable to green, Not Movable to red, and Partial to yellow. 5) Save as .xlsx (File → Save As → Excel Workbook) to preserve filters and formatting."
+          "text": "After analyzing your resources, click Export CSV to download the results file. The downloaded .csv is a raw file — when you open it in Excel, all data appears in a single column separated by commas. Follow these steps to organize it: 1. Open the file: Double-click the downloaded .csv — Excel will open it, but everything will be in column A. 2. Split into columns: Select column A, then go to Data → Text to Columns. Choose Delimited, click Next, check Comma as the separator, then click Finish. Now each field (Name, Type, Resource Group, Location, Move RG, Move Subscription, Move Region, Status, Notes, Doc URL) will be in its own column. 3. Apply filters: Click on any cell in the data, then go to Data → Filter. Click the dropdown arrow on any column header to filter — for example, click Status and select only Movable to see resources that can be moved. 4. Sort by status: Click the Status column header → Sort A to Z. This groups movable resources together, then partial, then not-movable. 5. Conditional formatting (optional): Select the data range, go to Home → Conditional Formatting → Highlight Cells Rules → Text That Contains. Set Movable to green, Not Movable to red, and Partial to yellow for a color-coded overview. 6. Save as .xlsx: Go to File → Save As and choose Excel Workbook (.xlsx) to preserve your filters and formatting."
         }
       },
       {
         "@type": "Question",
-        "name": "Como saber se meus recursos do Azure podem ser migrados?",
+        "name": "Como verificar se meus recursos do Azure podem ser movidos ou migrados?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Exporte seus recursos do Portal do Azure como planilha (.csv, .xlsx ou .xls) e faça upload no Cloud Move Analyzer. A ferramenta verifica automaticamente cada tipo de recurso com base na documentação oficial da Microsoft e mostra um relatório claro — quais recursos podem ser movidos entre assinaturas, grupos de recursos e regiões."
@@ -177,7 +177,7 @@
         "name": "Quais recursos do Azure podem ser movidos entre grupos de recursos?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A maioria dos recursos do Azure suporta movimentação entre grupos de recursos, incluindo Máquinas Virtuais, Contas de Armazenamento, App Services, SQL Databases, Key Vaults e muitos outros. No entanto, alguns recursos têm restrições — por exemplo, Azure Active Directory Domain Services, cofres de Backup e recursos com modelo de implantação clássico."
+          "text": "A maioria dos recursos do Azure suporta movimentação entre grupos de recursos, incluindo Máquinas Virtuais, Contas de Armazenamento, App Services, SQL Databases, Key Vaults e muitos outros. No entanto, alguns recursos têm restrições — por exemplo, Azure Active Directory Domain Services, cofres de Backup e recursos com modelo de implantação clássico. Faça upload da sua lista de recursos no Cloud Move Analyzer para verificar todos de uma vez."
         }
       },
       {
@@ -190,7 +190,7 @@
       },
       {
         "@type": "Question",
-        "name": "Existe uma ferramenta gratuita para verificar compatibilidade de migração do Azure?",
+        "name": "Existe uma ferramenta gratuita para verificar compatibilidade de movimentação do Azure?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Sim. O Cloud Move Analyzer é uma ferramenta gratuita e de código aberto para verificar compatibilidade de migração do Azure. Sem cadastro, sem login — basta fazer upload da planilha exportada do Portal do Azure e obter um relatório completo mostrando quais recursos podem ser movidos entre assinaturas, grupos de recursos e regiões."
@@ -198,7 +198,7 @@
       },
       {
         "@type": "Question",
-        "name": "Quanto custa o Cloud Move Analyzer?",
+        "name": "O Cloud Move Analyzer é gratuito?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "O Cloud Move Analyzer é 100% gratuito e sempre será. Não há taxas ocultas, plano premium ou necessidade de cadastro. Todo o processamento acontece no seu navegador — seus dados nunca saem do seu computador."
@@ -206,7 +206,7 @@
       },
       {
         "@type": "Question",
-        "name": "Como exportar todos os meus recursos do Azure para um arquivo .csv?",
+        "name": "Como exportar todos os recursos do Azure como CSV pelo Portal do Azure?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Acesse o Portal do Azure → Todos os Recursos e clique no botão Exportar para CSV na barra de ferramentas no topo da página. Isso baixa um arquivo .csv com todos os seus recursos, incluindo Nome, Tipo, Grupo de Recursos, Localização e ID do Recurso. Você também pode usar Azure CLI (az resource list --output csv) ou o Azure Resource Graph Explorer para consultas mais avançadas. Após exportar, basta fazer upload do arquivo no Cloud Move Analyzer."
@@ -214,18 +214,18 @@
       },
       {
         "@type": "Question",
-        "name": "Qual é o mínimo de informações necessárias para analisar minha planilha?",
+        "name": "Quais formatos de arquivo e colunas o Cloud Move Analyzer aceita?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Você não precisa organizar nada antes de fazer upload! O Cloud Move Analyzer aceita o arquivo .csv ou .xlsx exatamente como exportado do Azure. O único requisito é que sua planilha contenha pelo menos uma coluna Tipo ou ID do Recurso. Só isso — a ferramenta cuida do resto. Para resultados mais completos, colunas como Nome, Grupo de Recursos e Localização também são reconhecidas automaticamente, mas são opcionais."
+          "text": "Você não precisa organizar nada antes de fazer upload! O Cloud Move Analyzer aceita o arquivo .csv ou .xlsx exatamente como exportado do Azure. O único requisito é que sua planilha contenha pelo menos uma destas colunas: Tipo (Tipo de Recurso) ou ID do Recurso. Só isso — a ferramenta cuida do resto. Para resultados mais completos, colunas como Nome, Grupo de Recursos e Localização também são reconhecidas automaticamente, mas são opcionais."
         }
       },
       {
         "@type": "Question",
-        "name": "Como organizar os resultados exportados no Excel?",
+        "name": "Como abrir e organizar um arquivo CSV do Azure no Excel?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Após analisar seus recursos, clique em Exportar CSV para baixar o arquivo de resultados. Para trabalhar com ele no Excel: 1) Dê duplo clique no .csv baixado — o Excel abre automaticamente com todas as colunas separadas corretamente (Nome, Tipo, Grupo de Recursos, Localização, Mover RG, Mover Assinatura, Mover Região, Status, Observações, URL da Documentação). 2) Aplique filtros: selecione todas as colunas (Ctrl+A), depois vá em Dados → Filtro. Clique na setinha da coluna Status e desmarque tudo exceto Movível para ver apenas recursos movíveis. 3) Ordene pela coluna Status (A a Z) para agrupar recursos movíveis, parciais e não movíveis juntos. 4) Opcional: adicione formatação condicional (Página Inicial → Formatação Condicional → Texto que Contém) — configure Movível para verde, Não Movível para vermelho e Parcial para amarelo. 5) Salve como .xlsx (Arquivo → Salvar Como → Pasta de Trabalho do Excel) para preservar filtros e formatação."
+          "text": "Após analisar seus recursos, clique em Exportar CSV para baixar o arquivo de resultados. O .csv baixado é um arquivo cru — quando você abre no Excel, todos os dados aparecem numa coluna só, separados por vírgulas. Siga estes passos para organizar: 1. Abra o arquivo: Dê duplo clique no .csv baixado — o Excel vai abrir, mas tudo estará na coluna A. 2. Separe em colunas: Selecione a coluna A, depois vá em Dados → Texto para Colunas. Escolha Delimitado, clique em Avançar, marque Vírgula como separador, depois clique em Concluir. Agora cada campo (Nome, Tipo, Grupo de Recursos, Localização, Mover RG, Mover Assinatura, Mover Região, Status, Observações, URL da Documentação) ficará em sua própria coluna. 3. Aplique filtros: Clique em qualquer célula dos dados e vá em Dados → Filtro. Clique na setinha no cabeçalho de qualquer coluna para filtrar — por exemplo, clique em Status e selecione apenas Migrável para ver os recursos que podem ser movidos. 4. Ordene por status: Clique no cabeçalho da coluna Status → Classificar de A a Z. Isso agrupa os recursos migráveis juntos, depois parciais, depois não migráveis. 5. Formatação condicional (opcional): Selecione o intervalo de dados, vá em Página Inicial → Formatação Condicional → Regras de Realce de Células → Texto que Contém. Configure Migrável para verde, Não Migrável para vermelho e Parcial para amarelo para uma visão colorida. 6. Salve como .xlsx: Vá em Arquivo → Salvar Como e escolha Pasta de Trabalho do Excel (.xlsx) para preservar seus filtros e formatação."
         }
       }
     ]
@@ -451,7 +451,7 @@
   </div>
 
   <!-- Scripts (order matters: XLSX lib &#8594; database &#8594; i18n &#8594; app) -->
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js" defer></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js" integrity="sha384-7hwyYzxURfZMLwHgvEKrYEmM5tX+1DVWK5iDR4R69bOQeY90Q8B8n9Cobuyqybhw" crossorigin="anonymous" defer></script>
   <script src="js/move-database.js" defer></script>
   <script src="js/i18n.js" defer></script>
   <script src="js/app.js" defer></script>

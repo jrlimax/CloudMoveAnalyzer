@@ -124,18 +124,19 @@ applyLanguage();
   if (ogUrl) ogUrl.content = SITE_URL;
   const ogImage = document.querySelector('meta[property="og:image"]');
   const twImage = document.querySelector('meta[name="twitter:image"]');
-  const absLogo = SITE_URL + 'logo.png';
+  const absLogo = SITE_URL + 'assets/logo.png';
   if (ogImage) ogImage.content = absLogo;
   if (twImage) twImage.content = absLogo;
 })();
 
 // ── PIX copy button ───────────────────────────────────────
-document.getElementById('pixCopyBtn').addEventListener('click', () => {
-  const key = document.getElementById('pixKey').textContent;
+const pixCopyBtn = document.getElementById('pixCopyBtn');
+const pixKeyEl   = document.getElementById('pixKey');
+pixCopyBtn.addEventListener('click', () => {
+  const key = pixKeyEl.textContent;
   navigator.clipboard.writeText(key).then(() => {
-    const btn = document.getElementById('pixCopyBtn');
-    btn.textContent = '✅ ' + (t('pixCopied') || 'Copied!');
-    setTimeout(() => { btn.textContent = t('pixCopyBtn'); }, 2000);
+    pixCopyBtn.textContent = '✅ ' + (t('pixCopied') || 'Copied!');
+    setTimeout(() => { pixCopyBtn.textContent = t('pixCopyBtn'); }, 2000);
   }).catch(() => {
     // Fallback: select the text for manual copy
     const range = document.createRange();
@@ -249,10 +250,10 @@ function processFile(file) {
 // ==========================================================
 function findColumn(headers, exact, partial, exclude) {
   for (const h of headers) {
-    if (exact.includes(h.toLowerCase().trim())) return h;
+    if (exact.includes(String(h ?? '').toLowerCase().trim())) return h;
   }
   for (const h of headers) {
-    const low = h.toLowerCase();
+    const low = String(h ?? '').toLowerCase();
     if (exclude && exclude.some(e => low.includes(e))) continue;
     if (partial.some(p => low.includes(p))) return h;
   }
@@ -486,10 +487,9 @@ function updateStats() {
 // ==========================================================
 // Rendering helpers
 // ==========================================================
-const _escDiv = document.createElement('div');
+const ESC_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 function escapeHtml(str) {
-  _escDiv.textContent = str;
-  return _escDiv.innerHTML;
+  return String(str ?? '').replace(/[&<>"']/g, c => ESC_MAP[c]);
 }
 
 function badgeFor(value) {
@@ -550,11 +550,20 @@ function getFiltered() {
   }
 
   if (sortCol) {
+    const dir = sortAsc ? 1 : -1;
+    const collator = new Intl.Collator(currentLang || 'en', { sensitivity: 'base', numeric: true });
+    // For the "notes" column, sort by the translated text (not the i18n key)
+    const getVal = sortCol === 'noteKey'
+      ? r => (r.noteKey ? t(r.noteKey) : '')
+      : r => r[sortCol];
     results = [...results].sort((a, b) => {
-      let va = a[sortCol], vb = b[sortCol];
-      if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
-      if (va < vb) return sortAsc ? -1 : 1;
-      if (va > vb) return sortAsc ?  1 : -1;
+      const va = getVal(a);
+      const vb = getVal(b);
+      if (typeof va === 'string' || typeof vb === 'string') {
+        return collator.compare(String(va ?? ''), String(vb ?? '')) * dir;
+      }
+      if (va < vb) return -1 * dir;
+      if (va > vb) return  1 * dir;
       return 0;
     });
   }
@@ -578,6 +587,7 @@ function renderNoteCell(r) {
 // ==========================================================
 function renderTable() {
   const filtered = getFiltered();
+  updateSortIndicators();
 
   // Update results count
   const countEl = document.getElementById('resultsCount');
@@ -617,8 +627,22 @@ function renderTable() {
       `<td class="cell-notes">${renderNoteCell(r)}</td>`;
     fragment.appendChild(tr);
   }
-  tableBody.innerHTML = '';
-  tableBody.appendChild(fragment);
+  tableBody.replaceChildren(fragment);
+}
+
+// ==========================================================
+// Sort indicators (↕ / ↑ / ↓)
+// ==========================================================
+function updateSortIndicators() {
+  document.querySelectorAll('th[data-sort]').forEach(th => {
+    const col = sortMap[th.dataset.sort];
+    const key = th.dataset.i18n;
+    const label = key ? t(key).replace(/\s*[↕↑↓]\s*$/, '') : th.textContent.replace(/\s*[↕↑↓]\s*$/, '');
+    const arrow = (col === sortCol) ? (sortAsc ? '↑' : '↓') : '↕';
+    th.textContent = `${label} ${arrow}`;
+    th.setAttribute('aria-sort',
+      col === sortCol ? (sortAsc ? 'ascending' : 'descending') : 'none');
+  });
 }
 
 // ==========================================================
@@ -685,6 +709,9 @@ document.querySelectorAll('th[data-sort]').forEach(th => {
   });
 });
 
+// Keep sort arrows in sync when language changes (applyLanguage re-renders table)
+// updateSortIndicators() runs at the end of renderTable()
+
 // ==========================================================
 // CSV export
 // ==========================================================
@@ -711,6 +738,9 @@ exportBtn.addEventListener('click', () => {
   const a    = document.createElement('a');
   a.href     = url;
   a.download = 'cloud-move-analyzer-export.csv';
+  document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(url);
+  document.body.removeChild(a);
+  // Delay revoke so Firefox/Safari can complete the download
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
