@@ -229,7 +229,7 @@ function processFile(file) {
         const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: '' });
         analyzeResources(data);
       } catch (err) {
-        alert(t('alertError') + err.message);
+        showTemplateHint(t('alertError') + err.message);
       } finally {
         loadingEl.remove();
       }
@@ -238,7 +238,7 @@ function processFile(file) {
 
   reader.onerror = function () {
     loadingEl.remove();
-    alert(t('alertError') + reader.error);
+    showTemplateHint(t('alertError') + reader.error);
   };
 
   isCsv ? reader.readAsText(file, 'UTF-8') : reader.readAsArrayBuffer(file);
@@ -247,12 +247,13 @@ function processFile(file) {
 // ==========================================================
 // Column detection helpers
 // ==========================================================
-function findColumn(headers, exact, partial) {
+function findColumn(headers, exact, partial, exclude) {
   for (const h of headers) {
     if (exact.includes(h.toLowerCase().trim())) return h;
   }
   for (const h of headers) {
     const low = h.toLowerCase();
+    if (exclude && exclude.some(e => low.includes(e))) continue;
     if (partial.some(p => low.includes(p))) return h;
   }
   return null;
@@ -264,15 +265,16 @@ const findTypeCol  = h => findColumn(h,
 
 const findNameCol  = h => findColumn(h,
   ['name','nome','resource name','nome do recurso','resourcename','resource_name'],
-  ['name','nome']);
+  ['name','nome'],
+  ['resourcegroupname','resource group','grupo de recursos','resourcegroup','servicename','service name','meter']);
 
 const findLinkCol  = h => findColumn(h,
   ['link de recursos','resource link','link','url','resource id','resourceid','resource_id','id do recurso'],
   ['link','url','resource id']);
 
 const findRGCol    = h => findColumn(h,
-  ['resource group','grupo de recursos','resourcegroup','resource_group','grupo recursos','rg'],
-  ['resource group','grupo de recursos','grupo recursos']);
+  ['resource group','grupo de recursos','resourcegroup','resource_group','grupo recursos','rg','resourcegroupname'],
+  ['resource group','grupo de recursos','grupo recursos','resourcegroup']);
 
 const findLocCol   = h => findColumn(h,
   ['location','localização','localizacao','região','regiao','region'],
@@ -325,7 +327,7 @@ function getDocUrlForType(rawType) {
   const clean = rawType.toLowerCase().trim().replace(/^\//, '');
   const provider = clean.split('/')[0];
   if (!provider || !provider.startsWith('microsoft.')) return '';
-  const anchor = provider.replace('.', '').toLowerCase();
+  const anchor = provider.replace(/\./g, '').toLowerCase();
   return `https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-support-resources#${anchor}`;
 }
 
@@ -337,10 +339,47 @@ function getStatus(info) {
 }
 
 // ==========================================================
+// Template download
+// ==========================================================
+const templateHint = document.getElementById('templateHint');
+const templateMsg  = document.getElementById('templateMsg');
+const templateBtn  = document.getElementById('templateDownloadBtn');
+
+function downloadTemplate() {
+  const headers = [t('csvName'), t('csvType'), t('csvRG'), t('csvLocation'), 'Resource ID'];
+  const csvEscape = s => '"' + String(s).replace(/"/g, '""') + '"';
+  const csv = headers.map(csvEscape).join(',') + '\n';
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'cloud-move-analyzer-template.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function showTemplateHint(reason) {
+  templateMsg.textContent = reason;
+  templateBtn.textContent = t('templateBtn');
+  templateHint.classList.remove('hidden');
+}
+
+function hideTemplateHint() {
+  templateHint.classList.add('hidden');
+}
+
+templateBtn.addEventListener('click', downloadTemplate);
+
+// ==========================================================
 // Analysis
 // ==========================================================
 function analyzeResources(data) {
-  if (!data.length) { alert(t('alertEmpty')); return; }
+  hideTemplateHint();
+
+  if (!data.length) {
+    showTemplateHint(t('alertEmpty'));
+    return;
+  }
 
   const headers = Object.keys(data[0]);
   const typeCol = findTypeCol(headers);
@@ -350,8 +389,17 @@ function analyzeResources(data) {
   const locCol  = findLocCol(headers);
 
   if (!typeCol && !linkCol) {
-    alert(t('alertNoCols') + headers.join(', '));
+    showTemplateHint(t('alertNoCols') + headers.join(', '));
     return;
+  }
+
+  // Warn about missing optional columns
+  const missing = [];
+  if (!nameCol) missing.push(t('csvName'));
+  if (!rgCol)   missing.push(t('csvRG'));
+  if (!locCol)  missing.push(t('csvLocation'));
+  if (missing.length) {
+    showTemplateHint(t('templateMissing') + missing.join(', '));
   }
 
   allResults = data.map(row => {
@@ -381,6 +429,15 @@ function analyzeResources(data) {
       docUrl:        getDocUrlForType(finalType)
     };
   }).filter(r => r.type !== '—');
+
+  // Deduplicate (Cost Management exports list same resource for each meter)
+  const seen = new Set();
+  allResults = allResults.filter(r => {
+    const key = (r.type + '|' + r.name + '|' + r.resourceGroup).toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 
   updateStats();
   renderTable();
@@ -641,7 +698,7 @@ exportBtn.addEventListener('click', () => {
   const yesNo = v => v === 1 ? t('csvYes') : v === 0 ? t('csvNo') : 'N/A';
   const csvEscape = s => '"' + String(s).replace(/"/g, '""') + '"';
 
-  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus'),t('csvNotes'),'Doc URL'].map(csvEscape).join(',') + '\n';
+  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus'),t('csvNotes'),t('csvDocUrl')].map(csvEscape).join(',') + '\n';
   for (const r of filtered) {
     csv += `${csvEscape(r.name)},${csvEscape(r.type)},${csvEscape(r.resourceGroup || '')},${csvEscape(r.location || '')},${csvEscape(yesNo(r.moveRG))},${csvEscape(yesNo(r.moveSub))},${csvEscape(yesNo(r.moveRegion))},${csvEscape(statusLabel[r.status])},${csvEscape(r.noteKey ? t(r.noteKey) : '')},${csvEscape(r.docUrl || '')}\n`;
   }

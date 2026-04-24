@@ -181,6 +181,50 @@ main.has-results .upload-area span {
   cursor: pointer;
 }
 
+/* ── Template hint ─────────────────────────────────────── */
+.template-hint {
+  background: var(--card-bg);
+  border: 1px solid rgba(200, 160, 60, 0.2);
+  border-left: 3px solid rgba(200, 160, 60, 0.5);
+  border-radius: 8px;
+  padding: 1rem 1.3rem;
+  margin: 1.2rem 0 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  text-align: left;
+}
+.template-hint-icon {
+  flex-shrink: 0;
+  color: rgba(200, 160, 60, 0.6);
+}
+.template-hint-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.template-hint p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin: 0 0 0.6rem;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.template-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.template-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* ── Stats Bar ─────────────────────────────────────────── */
 .stats-bar {
   display: grid;
