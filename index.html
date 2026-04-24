@@ -4,12 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions. Upload your Azure export spreadsheet and get instant results." />
-  <meta name="description" lang="pt-BR" content="Ferramenta gratuita para verificar suporte à migração de recursos do Azure — confira quais recursos podem ser movidos entre assinaturas, grupos de recursos e regiões. Faça upload da planilha exportada do Azure e obtenha resultados instantâneos." />
-  <meta name="keywords" content="Azure resource move, Azure migration, move resources between subscriptions, move Azure resource group, Azure region migration, Azure Resource Manager, cloud migration tool, Azure move support, move Azure VM, move Azure subscription" />
-  <meta name="keywords" lang="pt-BR" content="migração Azure, mover recursos Azure, mover assinatura Azure, mover grupo de recursos Azure, migração região Azure, Azure Resource Manager, ferramenta migração cloud, mover VM Azure, mover recursos entre assinaturas" />
   <meta name="author" content="Cloud Move Analyzer" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#8B5CF6" />
+
+  <!-- Set <html lang> before crawlers read body (from localStorage or browser language) -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('azure-move-lang');
+        var nav = (navigator.language || 'en');
+        var supported = ['en','pt-BR','zh-CN','es','fr','ar','ru','ja'];
+        var lang = saved || (supported.indexOf(nav) !== -1 ? nav : (nav.startsWith('pt') ? 'pt-BR' : nav.split('-')[0]));
+        if (supported.indexOf(lang) === -1) lang = 'en';
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Performance hints -->
   <link rel="preconnect" href="https://flagcdn.com" crossorigin />
@@ -36,6 +48,9 @@
   <meta property="og:description" content="Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://cloudmoveanalyzer.com/assets/logo.png" />
+  <meta property="og:image:width" content="420" />
+  <meta property="og:image:height" content="420" />
+  <meta property="og:image:alt" content="Cloud Move Analyzer logo" />
   <meta property="og:url" content="https://cloudmoveanalyzer.com/" />
   <meta property="og:site_name" content="Cloud Move Analyzer" />
   <meta property="og:locale" content="en_US" />
@@ -227,6 +242,73 @@
           "@type": "Answer",
           "text": "Após analisar seus recursos, clique em Exportar CSV para baixar o arquivo de resultados. O .csv baixado é um arquivo cru — quando você abre no Excel, todos os dados aparecem numa coluna só, separados por vírgulas. Siga estes passos para organizar: 1. Abra o arquivo: Dê duplo clique no .csv baixado — o Excel vai abrir, mas tudo estará na coluna A. 2. Separe em colunas: Selecione a coluna A, depois vá em Dados → Texto para Colunas. Escolha Delimitado, clique em Avançar, marque Vírgula como separador, depois clique em Concluir. Agora cada campo (Nome, Tipo, Grupo de Recursos, Localização, Mover RG, Mover Assinatura, Mover Região, Status, Observações, URL da Documentação) ficará em sua própria coluna. 3. Aplique filtros: Clique em qualquer célula dos dados e vá em Dados → Filtro. Clique na setinha no cabeçalho de qualquer coluna para filtrar — por exemplo, clique em Status e selecione apenas Migrável para ver os recursos que podem ser movidos. 4. Ordene por status: Clique no cabeçalho da coluna Status → Classificar de A a Z. Isso agrupa os recursos migráveis juntos, depois parciais, depois não migráveis. 5. Formatação condicional (opcional): Selecione o intervalo de dados, vá em Página Inicial → Formatação Condicional → Regras de Realce de Células → Texto que Contém. Configure Migrável para verde, Não Migrável para vermelho e Parcial para amarelo para uma visão colorida. 6. Salve como .xlsx: Vá em Arquivo → Salvar Como e escolha Pasta de Trabalho do Excel (.xlsx) para preservar seus filtros e formatação."
         }
+      }
+    ]
+  }
+  </script>
+
+  <!-- HowTo Structured Data — "How to check Azure resource move support" -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to check if Azure resources can be moved between subscriptions, resource groups, or regions",
+    "description": "Step-by-step guide to verify Azure resource move support using Cloud Move Analyzer, a free browser-based tool based on Microsoft's official documentation.",
+    "image": "https://cloudmoveanalyzer.com/assets/logo.png",
+    "totalTime": "PT2M",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "USD",
+      "value": "0"
+    },
+    "supply": [
+      {
+        "@type": "HowToSupply",
+        "name": "Azure Portal access"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "A modern web browser"
+      }
+    ],
+    "tool": [
+      {
+        "@type": "HowToTool",
+        "name": "Cloud Move Analyzer"
+      }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Export Azure resources as CSV",
+        "text": "Go to the Azure Portal → All Resources, then click the Export to CSV button in the toolbar to download a spreadsheet containing all your resources (Name, Type, Resource Group, Location, Resource ID).",
+        "url": "https://portal.azure.com/#browse/all"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Open Cloud Move Analyzer",
+        "text": "Navigate to cloudmoveanalyzer.com — no signup or login required. The tool runs entirely in your browser.",
+        "url": "https://cloudmoveanalyzer.com/"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Upload the spreadsheet",
+        "text": "Drag and drop the exported .csv (or .xlsx) file onto the upload area, or click it to select the file from your computer."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Review the move support report",
+        "text": "The tool instantly analyzes each resource type against Microsoft's official move support documentation and shows which resources can be moved between Resource Groups, Subscriptions, and Regions."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Filter, search, and export results",
+        "text": "Use the status filters (Movable, Partial, Not Movable), search box, and sortable columns to analyze your inventory. Export the filtered results as CSV for documentation or migration planning."
       }
     ]
   }
