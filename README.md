@@ -93,3 +93,11 @@ If Cloud Move Analyzer saved you time, consider buying me a coffee ☕
 <p align="center">
   <a href="https://ko-fi.com/jrlimax"><strong>☕ Buy me a coffee on Ko-fi</strong></a>
 </p>
+
+### 🇧🇷 PIX (Brasil)
+
+<p align="center">
+  <img src="assets/pix-qr.png" alt="PIX QR Code" width="180" />
+  <br>
+  <code>9f7802e4-3dcb-47fa-8e70-7119cb5b4761</code>
+</p>
