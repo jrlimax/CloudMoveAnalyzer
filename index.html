@@ -5,23 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions. Upload your Azure export spreadsheet and get instant results." />
   <meta name="author" content="Cloud Move Analyzer" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#8B5CF6" />
 
-  <!-- Set <html lang> before crawlers read body (from localStorage or browser language) -->
-  <script>
-    (function() {
-      try {
-        var saved = localStorage.getItem('azure-move-lang');
-        var nav = (navigator.language || 'en');
-        var supported = ['en','pt-BR','zh-CN','es','fr','ar','ru','ja'];
-        var lang = saved || (supported.indexOf(nav) !== -1 ? nav : (nav.startsWith('pt') ? 'pt-BR' : nav.split('-')[0]));
-        if (supported.indexOf(lang) === -1) lang = 'en';
-        document.documentElement.lang = lang;
-        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-      } catch (e) {}
-    })();
-  </script>
+  <!-- Set <html lang> early (external script to satisfy strict CSP) -->
+  <script src="js/set-lang.js"></script>
 
   <!-- Performance hints -->
   <link rel="preconnect" href="https://flagcdn.com" crossorigin />
@@ -32,15 +20,8 @@
 
   <link rel="canonical" href="https://cloudmoveanalyzer.com/" id="canonicalLink" />
 
-  <!-- Hreflang -->
-  <link rel="alternate" hreflang="en" href="https://cloudmoveanalyzer.com/" />
-  <link rel="alternate" hreflang="pt-BR" href="https://cloudmoveanalyzer.com/" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://cloudmoveanalyzer.com/" />
-  <link rel="alternate" hreflang="es" href="https://cloudmoveanalyzer.com/" />
-  <link rel="alternate" hreflang="fr" href="https://cloudmoveanalyzer.com/" />
-  <link rel="alternate" hreflang="ar" href="https://cloudmoveanalyzer.com/" />
-  <link rel="alternate" hreflang="ru" href="https://cloudmoveanalyzer.com/" />
-  <link rel="alternate" hreflang="ja" href="https://cloudmoveanalyzer.com/" />
+  <!-- Hreflang: single URL serves all languages (language switch is client-side),
+       so we only declare x-default to avoid Google flagging duplicate hreflang entries. -->
   <link rel="alternate" hreflang="x-default" href="https://cloudmoveanalyzer.com/" />
 
   <!-- Open Graph -->

@@ -10,8 +10,18 @@ let sortCol       = '';
 let sortAsc       = true;
 
 // ── Theme toggle ──────────────────────────────────────────
+// Safe localStorage wrapper (private-mode Safari throws on setItem)
+const storage = {
+  get(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  },
+  set(key, value) {
+    try { localStorage.setItem(key, value); } catch (e) { /* ignore */ }
+  }
+};
+
 (function initTheme() {
-  const saved = localStorage.getItem('azure-move-theme');
+  const saved = storage.get('azure-move-theme');
   if (saved === 'dark') {
     document.documentElement.classList.remove('light');
   } else {
@@ -22,7 +32,7 @@ let sortAsc       = true;
 document.getElementById('themeToggle').addEventListener('click', () => {
   document.documentElement.classList.toggle('light');
   const isLight = document.documentElement.classList.contains('light');
-  localStorage.setItem('azure-move-theme', isLight ? 'light' : 'dark');
+  storage.set('azure-move-theme', isLight ? 'light' : 'dark');
 });
 
 // ── Language switching ────────────────────────────────────
@@ -76,7 +86,7 @@ document.addEventListener('keydown', e => {
 langMenu.querySelectorAll('li[data-lang]').forEach(li => {
   li.addEventListener('click', () => {
     currentLang = li.dataset.lang;
-    localStorage.setItem('azure-move-lang', currentLang);
+    storage.set('azure-move-lang', currentLang);
     updateLangPicker();
     langMenu.classList.add('hidden');
     langPicker.classList.remove('open');
@@ -107,8 +117,13 @@ function applyLanguage() {
     el.setAttribute('aria-label', t(el.dataset.i18nAria));
   });
 
-  // Re-render table if data loaded
-  if (allResults.length) renderTable();
+  // Re-render table if data loaded; otherwise just keep sort arrows in sync
+  if (allResults.length) {
+    renderTable();
+  } else {
+    // sortMap is a const declared later; guard against temporal dead zone on first call
+    try { updateSortIndicators(); } catch (e) { /* initial load: sortMap not ready yet */ }
+  }
 }
 
 // Apply on load
@@ -201,6 +216,15 @@ function showFileName(name) {
 }
 
 function processFile(file) {
+  // Size guard: warn for huge files (>100 MB) before attempting to parse
+  const MAX_SIZE = 100 * 1024 * 1024;
+  if (file.size > MAX_SIZE) {
+    showTemplateHint(
+      (t('alertError') || 'Error: ') +
+      `file too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Maximum is ${MAX_SIZE / 1024 / 1024} MB.`
+    );
+    return;
+  }
   showFileName(file.name);
 
   // Remove any existing loading overlay
