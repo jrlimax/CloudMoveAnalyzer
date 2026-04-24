@@ -20,11 +20,15 @@ Moving Azure resources isn't always straightforward. Not every resource type sup
 |---------|-------------|
 | **Instant analysis** | Upload `.csv`, `.xlsx`, or `.xls` and get results in seconds |
 | **3 move checks** | Resource Group, Subscription, and Region move support |
-| **Smart notes** | Migration dependencies and constraints for each resource |
+| **Smart column detection** | Automatically detects Type, Name, Resource Group, Location, and Resource ID columns |
+| **Smart notes** | Migration dependencies, constraints, and direct links to official docs |
 | **Search & filter** | Find specific resources or filter by move status |
-| **CSV export** | Download filtered results for documentation or planning |
+| **CSV export** | Download results with translated headers for documentation or planning |
+| **Template download** | Download a pre-formatted spreadsheet template to get started |
+| **Deduplication** | Automatically removes duplicate resources from your spreadsheet |
+| **9 FAQs** | SEO-optimized FAQ section with step-by-step guides |
 | **8 languages** | 🇺🇸 🇧🇷 🇨🇳 🇪🇸 🇫🇷 🇸🇦 🇷🇺 🇯🇵 |
-| **Dark & Light mode** | Easy on the eyes, any time of day |
+| **Dark & Light mode** | Light theme by default, with dark mode toggle |
 | **100% private** | All processing happens in your browser — zero data leaves your machine |
 
 ---
@@ -32,9 +36,9 @@ Moving Azure resources isn't always straightforward. Not every resource type sup
 ## How It Works
 
 1. Go to [**cloudmoveanalyzer.com**](https://cloudmoveanalyzer.com/)
-2. Export your resources from the [Azure Portal](https://portal.azure.com/) as a spreadsheet
+2. Export your resources from the [Azure Portal → All Resources → Export to CSV](https://portal.azure.com/#browse/all)
 3. Upload the file — the tool checks each resource type against [Microsoft's official documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-support-resources)
-4. Review the report: filter, search, and export as needed
+4. Review the report: filter, search, sort by clicking column headers, and export as CSV
 
 > **No signup. No login. No data sent anywhere.**
 
@@ -46,19 +50,46 @@ Move support data is sourced from Microsoft's official [resource-capabilities](h
 
 ---
 
+## Tech Stack
+
+- **Frontend:** Pure HTML, CSS, JavaScript (no frameworks)
+- **Spreadsheet parsing:** [SheetJS (XLSX)](https://sheetjs.com/) via CDN
+- **Hosting:** [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static)
+- **CI/CD:** GitHub Actions → Azure Static Web Apps deploy on push to `main`
+
+---
+
 ## Project Structure
 
 ```
-├── index.html            # Entry point
+├── index.html            # Entry point (SEO meta, structured data, FAQ)
 ├── css/
 │   └── style.css         # Styles (dark/light themes, responsive)
 ├── js/
-│   ├── app.js            # Application logic
-│   ├── i18n.js           # Internationalization (8 languages)
+│   ├── app.js            # Application logic (upload, analysis, export)
+│   ├── i18n.js           # Internationalization (8 languages, 9 FAQs)
 │   └── move-database.js  # Azure move support database
 ├── assets/
-│   ├── logo.png
-│   └── pix-qr.png
+│   ├── logo.png          # Site logo
+│   └── pix-qr.png        # Donation QR code
+├── .github/
+│   └── workflows/        # Azure Static Web Apps CI/CD
 ├── robots.txt
 └── sitemap.xml
 ```
+
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+---
+
+## Support
+
+If Cloud Move Analyzer saved you time, consider buying me a coffee ☕
+
+<p align="center">
+  <a href="https://ko-fi.com/jrlimax"><strong>☕ Buy me a coffee on Ko-fi</strong></a>
+</p>
