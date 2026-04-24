@@ -190,7 +190,7 @@ main.has-results .upload-area span {
   padding: 1rem 1.3rem;
   margin: 1.2rem 0 1.5rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.8rem;
   text-align: left;
 }
@@ -202,10 +202,14 @@ main.has-results .upload-area span {
   width: 22px;
   height: 22px;
 }
+.template-hint-content {
+  flex: 1;
+  min-width: 0;
+}
 .template-hint p {
   color: var(--text-muted);
   font-size: 0.8rem;
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.5rem;
   line-height: 1.5;
   opacity: 0.85;
 }
