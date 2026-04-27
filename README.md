@@ -14,7 +14,9 @@
 - 🔍 Instant analysis against Microsoft's official move support documentation
 - 🌍 8 languages: English, Português, Español, Français, 中文, العربية, Русский, 日本語
 - 🔒 100% client-side — your data never leaves your browser
-- 📊 Filter, search, sort and export results to CSV
+- 📊 Filter, search, sort and export results to **CSV**, **Markdown** or **PDF**
+- 🧩 Column picker — show/hide any table column (exports respect selection)
+- 📝 Contextual migration notes with links to Microsoft docs per resource type
 - 🔄 Database auto-updated weekly from [Microsoft official docs](https://github.com/MicrosoftDocs/azure-docs)
 - 💯 Free, open-source, no signup required
 

@@ -1,6 +1,6 @@
 {
   "name": "cloud-move-analyzer",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "description": "Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions.",
   "private": true,
   "type": "module",
