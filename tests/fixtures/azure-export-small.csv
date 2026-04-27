@@ -1,0 +1,6 @@
+Name,Type,Resource Group,Location,Resource ID
+vm-prod-001,Microsoft.Compute/virtualMachines,rg-prod,eastus,/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/vm-prod-001
+stprod001,Microsoft.Storage/storageAccounts,rg-prod,eastus,/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-prod/providers/Microsoft.Storage/storageAccounts/stprod001
+vnet-prod,Microsoft.Network/virtualNetworks,rg-network,eastus,/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/vnet-prod
+kv-prod,Microsoft.KeyVault/vaults,rg-prod,eastus,/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-prod/providers/Microsoft.KeyVault/vaults/kv-prod
+sql-prod-001,Microsoft.Sql/servers,rg-data,eastus,/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-data/providers/Microsoft.Sql/servers/sql-prod-001

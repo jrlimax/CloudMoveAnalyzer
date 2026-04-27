@@ -1,0 +1,3 @@
+Resource ID
+/subscriptions/abc/resourceGroups/rg-1/providers/Microsoft.Compute/virtualMachines/only-id-vm
+/subscriptions/abc/resourceGroups/rg-1/providers/Microsoft.Storage/storageAccounts/onlyidstor

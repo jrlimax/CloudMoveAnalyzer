@@ -9,6 +9,14 @@ desktop.ini
 *.swo
 *~
 
-# Node (if added later)
+# Node
 node_modules/
 package-lock.json
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Build outputs (regeneraveis com npm run minify)
+# *.min.css
+# *.min.js

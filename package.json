@@ -1,0 +1,36 @@
+{
+  "name": "cloud-move-analyzer",
+  "version": "1.0.0",
+  "description": "Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions.",
+  "private": true,
+  "type": "module",
+  "homepage": "https://cloudmoveanalyzer.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrlimax/CloudMoveAnalyzer.git"
+  },
+  "license": "MIT",
+  "author": "Jose Roberto Alves Lima",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:db": "powershell -ExecutionPolicy Bypass -File ./scripts/test-database.ps1",
+    "minify": "powershell -ExecutionPolicy Bypass -File ./scripts/minify.ps1",
+    "serve": "npx --yes serve@latest .",
+    "lint:html": "npx --yes htmlhint index.html",
+    "validate:config": "node ./scripts/validate-config.mjs"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.0",
+    "happy-dom": "^15.0.0",
+    "vitest": "^2.1.0"
+  },
+  "keywords": [
+    "azure",
+    "migration",
+    "move-support",
+    "static-web-app",
+    "cloud-migration"
+  ]
+}
