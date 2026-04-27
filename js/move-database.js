@@ -758,19 +758,27 @@ microsoft.workloadmonitor/monitors,0,0,0`;
 // Parse a CSV string (same format) into a lookup map
 function parseMoveCSV(csv) {
   const db = {};
-  csv.split('\n').forEach(line => {
-    const parts = line.split(',');
-    if (parts.length >= 4 && parts[0].trim().includes('/')) {
+  let invalid = 0;
+  csv.split('\n').forEach((line, idx) => {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('//')) return;
+    const parts = trimmed.split(',');
+    if (parts.length >= 4 && parts[0].includes('/')) {
       const rg  = parseInt(parts[1], 10);
       const sub = parseInt(parts[2], 10);
       const reg = parseInt(parts[3], 10);
-      db[parts[0].trim().toLowerCase()] = {
+      db[parts[0].toLowerCase()] = {
         moveRG:     isNaN(rg)  ? 0 : rg,
         moveSub:    isNaN(sub) ? 0 : sub,
         moveRegion: isNaN(reg) ? 0 : reg
       };
+    } else {
+      invalid++;
     }
   });
+  if (invalid > 0 && typeof console !== 'undefined') {
+    console.warn(`[move-database] ${invalid} malformed line(s) skipped during CSV parse`);
+  }
   return db;
 }
 
@@ -839,4 +847,99 @@ const MOVE_NOTES = {
   'microsoft.recoveryservices/vaults':              'noteRecovery',
   // Stream Analytics
   'microsoft.streamanalytics/streamingjobs':        'noteStreamAnalytics',
+};
+
+// ==========================================================
+// Friendly Names Map
+// Maps common Azure resource type prefixes to human-readable
+// names for non-technical users (tooltips / PDF reports).
+// ==========================================================
+const FRIENDLY_NAMES = {
+  'microsoft.compute/virtualmachines':              'Virtual Machine (VM)',
+  'microsoft.compute/virtualmachines/extensions':   'VM Extension',
+  'microsoft.compute/disks':                        'Managed Disk',
+  'microsoft.compute/snapshots':                    'Disk Snapshot',
+  'microsoft.compute/availabilitysets':             'Availability Set',
+  'microsoft.compute/virtualmachinescalesets':      'VM Scale Set (VMSS)',
+  'microsoft.compute/images':                       'VM Image',
+  'microsoft.compute/galleries':                    'Compute Gallery',
+  'microsoft.compute/proximityplacementgroups':     'Proximity Placement Group',
+  'microsoft.network/virtualnetworks':              'Virtual Network (VNet)',
+  'microsoft.network/networksecuritygroups':        'Network Security Group (NSG)',
+  'microsoft.network/networkinterfaces':            'Network Interface (NIC)',
+  'microsoft.network/publicipaddresses':            'Public IP Address',
+  'microsoft.network/loadbalancers':                'Load Balancer',
+  'microsoft.network/applicationgateways':          'Application Gateway',
+  'microsoft.network/privatednszones':              'Private DNS Zone',
+  'microsoft.network/dnszones':                     'DNS Zone',
+  'microsoft.network/frontdoors':                   'Front Door',
+  'microsoft.network/routetables':                  'Route Table',
+  'microsoft.network/bastionhosts':                 'Azure Bastion',
+  'microsoft.network/natgateways':                  'NAT Gateway',
+  'microsoft.network/firewallpolicies':             'Firewall Policy',
+  'microsoft.network/azurefirewalls':               'Azure Firewall',
+  'microsoft.network/vpngateways':                  'VPN Gateway',
+  'microsoft.network/expressroutecircuits':         'ExpressRoute Circuit',
+  'microsoft.network/privateendpoints':             'Private Endpoint',
+  'microsoft.network/privatelinkservices':          'Private Link Service',
+  'microsoft.network/trafficmanagerprofiles':       'Traffic Manager Profile',
+  'microsoft.storage/storageaccounts':              'Storage Account',
+  'microsoft.sql/servers':                          'SQL Server',
+  'microsoft.sql/servers/databases':                'SQL Database',
+  'microsoft.sql/servers/elasticpools':             'SQL Elastic Pool',
+  'microsoft.sql/managedinstances':                 'SQL Managed Instance',
+  'microsoft.web/sites':                            'App Service / Web App',
+  'microsoft.web/serverfarms':                      'App Service Plan',
+  'microsoft.web/certificates':                     'App Service Certificate',
+  'microsoft.web/staticsites':                      'Static Web App',
+  'microsoft.containerservice/managedclusters':     'AKS Cluster',
+  'microsoft.containerregistry/registries':         'Container Registry (ACR)',
+  'microsoft.containerinstance/containergroups':    'Container Instance',
+  'microsoft.keyvault/vaults':                      'Key Vault',
+  'microsoft.documentdb/databaseaccounts':          'Cosmos DB Account',
+  'microsoft.cache/redis':                          'Azure Cache for Redis',
+  'microsoft.insights/components':                  'Application Insights',
+  'microsoft.operationalinsights/workspaces':       'Log Analytics Workspace',
+  'microsoft.automation/automationaccounts':        'Automation Account',
+  'microsoft.automation/automationaccounts/runbooks': 'Automation Runbook',
+  'microsoft.logic/workflows':                      'Logic App',
+  'microsoft.apimanagement/service':                'API Management',
+  'microsoft.eventgrid/topics':                     'Event Grid Topic',
+  'microsoft.eventgrid/eventsubscriptions':         'Event Grid Subscription',
+  'microsoft.eventhub/namespaces':                  'Event Hub Namespace',
+  'microsoft.servicebus/namespaces':                'Service Bus Namespace',
+  'microsoft.devices/iothubs':                      'IoT Hub',
+  'microsoft.cognitiveservices/accounts':           'Cognitive Services',
+  'microsoft.machinelearningservices/workspaces':   'Machine Learning Workspace',
+  'microsoft.recoveryservices/vaults':              'Recovery Services Vault',
+  'microsoft.databricks/workspaces':                'Databricks Workspace',
+  'microsoft.datafactory/factories':                'Data Factory',
+  'microsoft.synapse/workspaces':                   'Synapse Workspace',
+  'microsoft.dbformysql/servers':                   'Azure Database for MySQL',
+  'microsoft.dbforpostgresql/servers':              'Azure Database for PostgreSQL',
+  'microsoft.dbformariadb/servers':                 'Azure Database for MariaDB',
+  'microsoft.dbformysql/flexibleservers':           'MySQL Flexible Server',
+  'microsoft.dbforpostgresql/flexibleservers':      'PostgreSQL Flexible Server',
+  'microsoft.hdinsight/clusters':                   'HDInsight Cluster',
+  'microsoft.streamanalytics/streamingjobs':        'Stream Analytics Job',
+  'microsoft.search/searchservices':                'Azure AI Search',
+  'microsoft.signalrservice/signalr':               'Azure SignalR Service',
+  'microsoft.maps/accounts':                        'Azure Maps Account',
+  'microsoft.notificationhubs/namespaces':          'Notification Hub Namespace',
+  'microsoft.cdn/profiles':                         'CDN Profile',
+  'microsoft.media/mediaservices':                  'Media Services',
+  'microsoft.batch/batchaccounts':                  'Batch Account',
+  'microsoft.managedidentity/userassignedidentities': 'Managed Identity',
+  'microsoft.portal/dashboards':                    'Azure Dashboard',
+  'microsoft.app/containerapps':                    'Container App',
+  'microsoft.app/managedenvironments':              'Container Apps Environment',
+  'microsoft.resources/resourcegroups':             'Resource Group',
+  'microsoft.authorization/roleassignments':        'Role Assignment',
+  'microsoft.authorization/roledefinitions':        'Role Definition',
+  'microsoft.monitor/accounts':                     'Azure Monitor Account',
+  'microsoft.alertsmanagement/smartdetectoralertrules': 'Smart Detection Rule',
+  'microsoft.aad/domainservices':                   'Azure AD Domain Services',
+  'microsoft.network/applicationsecuritygroups':    'Application Security Group',
+  'microsoft.certificateregistration/certificateorders': 'Certificate Order',
+  'microsoft.domainregistration/domains':           'App Service Domain',
 };
