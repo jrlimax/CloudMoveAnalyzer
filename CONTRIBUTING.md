@@ -67,12 +67,15 @@ npm run test:db
 
 ## Updating the Move Support Database
 
-The database in `js/move-database.js` is fetched live from
-[tfitzmac/resource-capabilities](https://github.com/tfitzmac/resource-capabilities)
-on each page load. The embedded copy is a **fallback only**.
+The database in `js/move-database.js` is auto-updated weekly from the
+[official Microsoft docs](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/azure-resource-manager/management/move-support-resources.md)
+via the GitHub Actions workflow at `.github/workflows/update-database.yml`.
 
-If you need to refresh the embedded fallback, copy the latest CSV from
-that repository into the `MOVE_DB_RAW` constant.
+To update manually, run:
+
+```powershell
+.\scripts\update-database.ps1
+```
 
 ## Questions?
 

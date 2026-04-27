@@ -1,0 +1,16 @@
+﻿feat(db): self-hosted weekly database update from Microsoft official docs
+
+- Add scripts/update-database.ps1: parses move-support-resources.md from
+  MicrosoftDocs/azure-docs and refreshes MOVE_DB_RAW (747 entries)
+- Add .github/workflows/update-database.yml: weekly cron (Mon 06:00 UTC)
+  opens auto-PR when MS docs change
+- Remove live fetch IIFE from js/move-database.js (no more runtime
+  dependency on third-party tfitzmac/resource-capabilities)
+- Update tests/helpers/load-source.js (no longer needs to strip IIFE)
+- Update README, CONTRIBUTING, CHANGELOG
+
+Benefits:
+- Zero external fetches at runtime (stricter CSP, faster load)
+- Source of truth is now Microsoft official docs
+- Database updates reviewed via PR before deploy
+- Works fully offline

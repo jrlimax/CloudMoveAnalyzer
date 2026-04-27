@@ -14,23 +14,9 @@ const ROOT = resolve(__dirname, '..', '..');
 
 /**
  * Loads the move-database.js file and returns its exposed internals.
- * Strips the IIFE that fetches the live DB to keep tests offline.
  */
 export function loadMoveDatabase() {
-  let source = readFileSync(resolve(ROOT, 'js', 'move-database.js'), 'utf8');
-
-  // Remove the live fetch IIFE — we want the embedded data only in tests
-  source = source.replace(
-    /\(async function refreshMoveDB\(\)[\s\S]*?\}\)\(\);/,
-    '/* fetch IIFE removed in tests */'
-  );
-
-  // Remove references to globals from the main app (allResults, etc.)
-  source = source.replace(/if \(typeof allResults[\s\S]*?renderTable\(\);[\s\S]*?\}/g, '');
-  source = source.replace(
-    /if \(typeof updateDbSourceBadge[\s\S]*?\)\;/g,
-    ''
-  );
+  const source = readFileSync(resolve(ROOT, 'js', 'move-database.js'), 'utf8');
 
   // Wrap in function and return the internals
   const wrapped = `
@@ -39,8 +25,7 @@ export function loadMoveDatabase() {
       MOVE_DB_RAW,
       MOVE_DB,
       MOVE_NOTES,
-      parseMoveCSV,
-      moveDbSource
+      parseMoveCSV
     };
   `;
 

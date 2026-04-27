@@ -15,7 +15,7 @@
 - 🌍 8 languages: English, Português, Español, Français, 中文, العربية, Русский, 日本語
 - 🔒 100% client-side — your data never leaves your browser
 - 📊 Filter, search, sort and export results to CSV
-- 🔄 Live database refresh from [tfitzmac/resource-capabilities](https://github.com/tfitzmac/resource-capabilities)
+- 🔄 Database auto-updated weekly from [Microsoft official docs](https://github.com/MicrosoftDocs/azure-docs)
 - 💯 Free, open-source, no signup required
 
 ## 📁 Project Structure
@@ -33,7 +33,8 @@ cloudmoveanalyzer/
 │
 ├── scripts/                      # Automation utilities
 │   ├── minify.ps1                # CSS/JS minification (PowerShell)
-│   └── test-database.ps1         # Database integrity validator
+│   ├── test-database.ps1         # Database integrity validator
+│   └── update-database.ps1       # Refresh DB from Microsoft official docs
 │
 ├── tests/                        # Test suite
 │   ├── unit/                     # Vitest unit tests
@@ -42,6 +43,7 @@ cloudmoveanalyzer/
 │
 ├── .github/workflows/            # CI/CD pipelines
 │   ├── ci.yml                    # Tests + lint
+│   ├── update-database.yml       # Weekly DB refresh from MS docs (auto-PR)
 │   └── azure-static-web-apps-*.yml  # Auto-deploy
 │
 ├── package.json                  # npm scripts and dev dependencies
@@ -114,24 +116,9 @@ CI runs automatically on every push and pull request via [GitHub Actions](.githu
 - All processing happens in-browser (no server-side data handling)
 - See [staticwebapp.config.json](staticwebapp.config.json) for full security headers
 
-## 🤝 Contributing
-
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
-
-- How to report bugs
-- How to suggest features
-- How to submit pull requests
-- Coding standards
-
 ## 📜 License
 
 [MIT](LICENSE) © Jose Roberto Alves Lima
-
-## 🙏 Credits
-
-- Move support data: [tfitzmac/resource-capabilities](https://github.com/tfitzmac/resource-capabilities)
-- Country flags: [flagcdn.com](https://flagcdn.com)
-- Donation widget: [Ko-fi](https://ko-fi.com)
 
 ## 📈 Changelog
 
