@@ -430,25 +430,58 @@
       <div class="toolbar">
         <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search resource or type..." />
         <span class="results-count" id="resultsCount"></span>
-        <button class="export-btn" id="exportBtn" data-i18n="exportBtn">Export CSV</button>
       </div>
-      <p class="export-hint" data-i18n="exportHint">The CSV export contains only the currently filtered results.</p>
+      <div class="toolbar toolbar--actions">
+        <div class="col-picker" id="colPicker">
+          <button class="action-btn action-btn--cols" id="colPickerToggle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18"/><path d="M3 9h18M3 15h18"/></svg>
+            <span data-i18n="colPickerBtn">Columns</span>
+          </button>
+          <div class="col-picker-menu hidden" id="colPickerMenu">
+            <label><input type="checkbox" data-col="name" checked /> <span data-i18n="thName">Resource Name</span></label>
+            <label><input type="checkbox" data-col="type" checked /> <span data-i18n="thType">Type (Provider)</span></label>
+            <label><input type="checkbox" data-col="resourceGroup" checked /> <span data-i18n="thRG">Resource Group</span></label>
+            <label><input type="checkbox" data-col="location" checked /> <span data-i18n="thLocation">Location</span></label>
+            <label><input type="checkbox" data-col="moveRG" checked /> <span data-i18n="thMoveRG">Move RG</span></label>
+            <label><input type="checkbox" data-col="moveSub" checked /> <span data-i18n="thMoveSub">Move Sub</span></label>
+            <label><input type="checkbox" data-col="moveRegion" checked /> <span data-i18n="thMoveRegion">Move Region</span></label>
+            <label><input type="checkbox" data-col="status" checked /> <span data-i18n="thStatus">Status</span></label>
+            <label><input type="checkbox" data-col="notes" checked /> <span data-i18n="thNotes">Notes</span></label>
+          </div>
+        </div>
+        <div class="export-group">
+          <span class="export-label" data-i18n="exportLabel">Export:</span>
+          <button class="export-pill export-pill--csv" id="exportBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            CSV
+          </button>
+          <button class="export-pill export-pill--pdf" id="exportPdfBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            PDF
+          </button>
+          <button class="export-pill export-pill--md" id="exportMdBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
+            MD
+          </button>
+        </div>
+      </div>
+      <p class="export-hint" data-i18n="exportHint">Exports contain only the currently filtered results.</p>
 
       <!-- Table -->
       <div class="table-wrapper">
         <div class="table-scroll">
-          <table>
+          <table id="resultsTable">
             <thead>
               <tr>
-                <th data-sort="name" data-i18n="thName">Resource Name &#8597;</th>
-                <th data-sort="type" data-i18n="thType">Type (Provider) &#8597;</th>
-                <th data-sort="resourceGroup" data-i18n="thRG">Resource Group &#8597;</th>
-                <th data-sort="location" data-i18n="thLocation">Location &#8597;</th>
-                <th data-sort="rg" data-i18n="thMoveRG">Move RG &#8597;</th>
-                <th data-sort="sub" data-i18n="thMoveSub">Move Subscription &#8597;</th>
-                <th data-sort="region" data-i18n="thMoveRegion">Move Region ↕</th>
-                <th data-sort="status" data-i18n="thStatus">Status ↕</th>
-                <th data-sort="notes" data-i18n="thNotes">Notes ↕</th>
+                <th data-sort="name" data-i18n="thName">Resource Name</th>
+                <th data-sort="type" data-i18n="thType">Type (Provider)</th>
+                <th data-sort="resourceGroup" data-i18n="thRG">Resource Group</th>
+                <th data-sort="location" data-i18n="thLocation">Location</th>
+                <th data-sort="rg" data-i18n="thMoveRG">Move RG</th>
+                <th data-sort="sub" data-i18n="thMoveSub">Move Subscription</th>
+                <th data-sort="region" data-i18n="thMoveRegion">Move Region</th>
+                <th data-sort="status" data-i18n="thStatus">Status</th>
+                <th data-sort="notes" data-i18n="thNotes">Notes</th>
               </tr>
             </thead>
             <tbody id="tableBody"></tbody>

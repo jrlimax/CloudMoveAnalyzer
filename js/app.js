@@ -185,6 +185,46 @@ const searchInput    = document.getElementById('searchInput');
 const exportBtn      = document.getElementById('exportBtn');
 const mainEl         = document.querySelector('main');
 
+// ── Column picker for exports ─────────────────────────────
+const colPickerToggle = document.getElementById('colPickerToggle');
+const colPickerMenu   = document.getElementById('colPickerMenu');
+const colPicker       = document.getElementById('colPicker');
+
+function getExportCols() {
+  const cols = {};
+  colPickerMenu.querySelectorAll('input[data-col]').forEach(cb => {
+    cols[cb.dataset.col] = cb.checked;
+  });
+  return cols;
+}
+
+colPickerToggle.addEventListener('click', () => {
+  colPickerMenu.classList.toggle('hidden');
+  colPicker.classList.toggle('open', !colPickerMenu.classList.contains('hidden'));
+});
+
+document.addEventListener('click', e => {
+  if (!colPicker.contains(e.target)) {
+    colPickerMenu.classList.add('hidden');
+    colPicker.classList.remove('open');
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !colPickerMenu.classList.contains('hidden')) {
+    colPickerMenu.classList.add('hidden');
+    colPicker.classList.remove('open');
+  }
+});
+
+// Toggle column visibility on the table in real time
+const resultsTable = document.getElementById('resultsTable');
+colPickerMenu.querySelectorAll('input[data-col]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    resultsTable.classList.toggle('hide-col-' + cb.dataset.col, !cb.checked);
+  });
+});
+
 // ==========================================================
 // File Upload
 // ==========================================================
@@ -401,6 +441,15 @@ templateBtn.addEventListener('click', downloadTemplate);
 function analyzeResources(data) {
   hideTemplateHint();
 
+  // Reset filters so the new file is shown unfiltered
+  currentFilter = 'all';
+  currentSearch = '';
+  searchInput.value = '';
+  document.querySelectorAll('.stat-card[data-filter]').forEach(c => {
+    c.classList.toggle('active', c.dataset.filter === 'all');
+    c.setAttribute('aria-pressed', c.dataset.filter === 'all');
+  });
+
   if (!data.length) {
     showTemplateHint(t('alertEmpty'));
     return;
@@ -598,12 +647,12 @@ function getFiltered() {
 // Note cell renderer (text + optional doc link)
 // ==========================================================
 function renderNoteCell(r) {
-  if (!r.noteKey) return '—';
-  const noteText = escapeHtml(t(r.noteKey));
-  const docLink  = r.docUrl
-    ? `<br><a href="${escapeHtml(r.docUrl)}" target="_blank" rel="noopener noreferrer" class="doc-link" title="${escapeHtml(t('docLinkTitle'))}">${escapeHtml(t('docLinkText'))}</a>`
+  const docLink = r.docUrl
+    ? `<a href="${escapeHtml(r.docUrl)}" target="_blank" rel="noopener noreferrer" class="doc-link" title="${escapeHtml(t('docLinkTitle'))}">${escapeHtml(t('docLinkText'))}</a>`
     : '';
-  return noteText + docLink;
+  if (!r.noteKey) return docLink || '—';
+  const noteText = escapeHtml(t(r.noteKey));
+  return docLink ? noteText + '<br>' + docLink : noteText;
 }
 
 // ==========================================================
@@ -655,15 +704,15 @@ function renderTable() {
 }
 
 // ==========================================================
-// Sort indicators (↕ / ↑ / ↓)
+// Sort indicators (↑ / ↓ — only shown on active sort column)
 // ==========================================================
 function updateSortIndicators() {
   document.querySelectorAll('th[data-sort]').forEach(th => {
     const col = sortMap[th.dataset.sort];
     const key = th.dataset.i18n;
     const label = key ? t(key).replace(/\s*[↕↑↓]\s*$/, '') : th.textContent.replace(/\s*[↕↑↓]\s*$/, '');
-    const arrow = (col === sortCol) ? (sortAsc ? '↑' : '↓') : '↕';
-    th.textContent = `${label} ${arrow}`;
+    const arrow = (col === sortCol) ? (sortAsc ? ' ↑' : ' ↓') : '';
+    th.textContent = label + arrow;
     th.setAttribute('aria-sort',
       col === sortCol ? (sortAsc ? 'ascending' : 'descending') : 'none');
   });
@@ -744,6 +793,7 @@ exportBtn.addEventListener('click', () => {
 
   const filtered = getFiltered();
   if (!filtered.length) return;
+  const cols = getExportCols();
 
   const statusLabel = {
     'movable': t('csvMovable'), 'partial': t('csvPartial'),
@@ -752,9 +802,23 @@ exportBtn.addEventListener('click', () => {
   const yesNo = v => v === 1 ? t('csvYes') : v === 0 ? t('csvNo') : 'N/A';
   const csvEscape = s => '"' + String(s).replace(/"/g, '""') + '"';
 
-  let csv = [t('csvName'),t('csvType'),t('csvRG'),t('csvLocation'),t('csvMoveRG'),t('csvMoveSub'),t('csvMoveRegion'),t('csvStatus'),t('csvNotes'),t('csvDocUrl')].map(csvEscape).join(',') + '\n';
+  // Column definitions: [key, headerLabel, valueFn]
+  const colDefs = [
+    ['name',          t('csvName'),       r => r.name],
+    ['type',          t('csvType'),       r => r.type],
+    ['resourceGroup', t('csvRG'),         r => r.resourceGroup || ''],
+    ['location',      t('csvLocation'),   r => r.location || ''],
+    ['moveRG',        t('csvMoveRG'),     r => yesNo(r.moveRG)],
+    ['moveSub',       t('csvMoveSub'),    r => yesNo(r.moveSub)],
+    ['moveRegion',    t('csvMoveRegion'), r => yesNo(r.moveRegion)],
+    ['status',        t('csvStatus'),     r => statusLabel[r.status]],
+    ['notes',         t('csvNotes'),      r => r.noteKey ? t(r.noteKey) : ''],
+    ['notes',         t('csvDocUrl'),     r => r.docUrl || '']
+  ].filter(d => cols[d[0]]);
+
+  let csv = colDefs.map(d => csvEscape(d[1])).join(',') + '\n';
   for (const r of filtered) {
-    csv += `${csvEscape(r.name)},${csvEscape(r.type)},${csvEscape(r.resourceGroup || '')},${csvEscape(r.location || '')},${csvEscape(yesNo(r.moveRG))},${csvEscape(yesNo(r.moveSub))},${csvEscape(yesNo(r.moveRegion))},${csvEscape(statusLabel[r.status])},${csvEscape(r.noteKey ? t(r.noteKey) : '')},${csvEscape(r.docUrl || '')}\n`;
+    csv += colDefs.map(d => csvEscape(d[2](r))).join(',') + '\n';
   }
 
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
@@ -767,4 +831,220 @@ exportBtn.addEventListener('click', () => {
   document.body.removeChild(a);
   // Delay revoke so Firefox/Safari can complete the download
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
+// ==========================================================
+// Markdown export
+// ==========================================================
+const exportMdBtn = document.getElementById('exportMdBtn');
+exportMdBtn.addEventListener('click', () => {
+  if (!allResults.length) return;
+
+  const filtered = getFiltered();
+  if (!filtered.length) return;
+  const cols = getExportCols();
+
+  const statusLabel = {
+    'movable': t('csvMovable'), 'partial': t('csvPartial'),
+    'not-movable': t('csvNotMovable'), 'unknown': t('csvNotFound')
+  };
+  const yesNo = v => v === 1 ? '✅' : v === 0 ? '❌' : '—';
+  const statusEmoji = s => s === 'movable' ? '🟢' : s === 'partial' ? '🟡' : s === 'not-movable' ? '🔴' : '⚫';
+
+  // Summary counts
+  let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
+  for (const r of filtered) {
+    if (r.status === 'movable') movable++;
+    else if (r.status === 'partial') partial++;
+    else if (r.status === 'not-movable') notMovable++;
+    else unknownCount++;
+  }
+
+  const date = new Date().toLocaleDateString(currentLang || 'en', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  let md = `<img src="https://cloudmoveanalyzer.com/assets/logo.png" alt="Cloud Move Analyzer" width="96" align="right" />\n\n`;
+  md += `# Cloud Move Analyzer — ${t('title') || 'Report'}\n\n`;
+  md += `> ${t('exportHint')}\n\n`;
+  md += `**${date}** | ${t('statTotal')}: **${filtered.length}**`;
+  md += ` | 🟢 ${t('statMovable')}: **${movable}**`;
+  md += ` | 🟡 ${t('statPartial')}: **${partial}**`;
+  md += ` | 🔴 ${t('statNotMovable')}: **${notMovable}**`;
+  if (unknownCount) md += ` | ⚫ ${t('statUnknown')}: **${unknownCount}**`;
+  md += '\n\n';
+
+  // Column definitions for MD: [key, header, align, valueFn]
+  const mdCols = [
+    ['name',          t('csvName'),       '---',    r => r.name],
+    ['type',          t('csvType'),       '---',    r => '`' + r.type + '`'],
+    ['resourceGroup', t('csvRG'),         '---',    r => r.resourceGroup || '—'],
+    ['location',      t('csvLocation'),   '---',    r => r.location || '—'],
+    ['moveRG',        t('csvMoveRG'),     ':---:',  r => yesNo(r.moveRG)],
+    ['moveSub',       t('csvMoveSub'),    ':---:',  r => yesNo(r.moveSub)],
+    ['moveRegion',    t('csvMoveRegion'), ':---:',  r => yesNo(r.moveRegion)],
+    ['status',        t('csvStatus'),     '---',    r => statusEmoji(r.status) + ' ' + statusLabel[r.status]],
+    ['notes',         t('csvNotes'),      '---',    r => {
+      const note = r.noteKey ? t(r.noteKey).replace(/\|/g, '\\|').replace(/\n/g, ' ') : '—';
+      const docLink = r.docUrl ? ` [📄](${r.docUrl})` : '';
+      return note + docLink;
+    }]
+  ].filter(d => cols[d[0]]);
+
+  // Table header
+  md += '| ' + mdCols.map(d => d[1]).join(' | ') + ' |\n';
+  md += '|' + mdCols.map(d => d[2]).join('|') + '|\n';
+
+  for (const r of filtered) {
+    md += '| ' + mdCols.map(d => d[3](r)).join(' | ') + ' |\n';
+  }
+
+  md += `\n---\n*Generated by [Cloud Move Analyzer](https://cloudmoveanalyzer.com/)*\n`;
+
+  const blob = new Blob([md], { type: 'text/markdown;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'cloud-move-analyzer-export.md';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
+// ==========================================================
+// PDF export (browser print)
+// ==========================================================
+const exportPdfBtn = document.getElementById('exportPdfBtn');
+exportPdfBtn.addEventListener('click', () => {
+  if (!allResults.length) return;
+
+  const filtered = getFiltered();
+  if (!filtered.length) return;
+  const cols = getExportCols();
+
+  const statusLabel = {
+    'movable': t('csvMovable'), 'partial': t('csvPartial'),
+    'not-movable': t('csvNotMovable'), 'unknown': t('csvNotFound')
+  };
+  const yesNo = v => v === 1 ? '✅ ' + t('csvYes') : v === 0 ? '❌ ' + t('csvNo') : '—';
+  const statusColor = s => s === 'movable' ? '#22c55e' : s === 'partial' ? '#eab308' : s === 'not-movable' ? '#ef4444' : '#6b7280';
+
+  // Summary counts
+  let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
+  for (const r of filtered) {
+    if (r.status === 'movable') movable++;
+    else if (r.status === 'partial') partial++;
+    else if (r.status === 'not-movable') notMovable++;
+    else unknownCount++;
+  }
+
+  const date = new Date().toLocaleDateString(currentLang || 'en', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  // Column definitions for PDF: [key, header, cellFn]
+  const pdfCols = [
+    ['name',          t('csvName'),       r => `<td>${escapeHtml(r.name)}</td>`],
+    ['type',          t('csvType'),       r => `<td><code>${escapeHtml(r.type)}</code></td>`],
+    ['resourceGroup', t('csvRG'),         r => `<td>${escapeHtml(r.resourceGroup || '—')}</td>`],
+    ['location',      t('csvLocation'),   r => `<td>${escapeHtml(r.location || '—')}</td>`],
+    ['moveRG',        t('csvMoveRG'),     r => `<td style="text-align:center">${yesNo(r.moveRG)}</td>`],
+    ['moveSub',       t('csvMoveSub'),    r => `<td style="text-align:center">${yesNo(r.moveSub)}</td>`],
+    ['moveRegion',    t('csvMoveRegion'), r => `<td style="text-align:center">${yesNo(r.moveRegion)}</td>`],
+    ['status',        t('csvStatus'),     r => `<td><span style="color:${statusColor(r.status)};font-weight:600">${escapeHtml(statusLabel[r.status])}</span></td>`],
+    ['notes',         t('csvNotes'),      r => `<td style="font-size:11px">${r.noteKey ? escapeHtml(t(r.noteKey)) : '—'}</td>`]
+  ].filter(d => cols[d[0]]);
+
+  // Build rows
+  let rows = '';
+  for (const r of filtered) {
+    rows += '<tr>' + pdfCols.map(d => d[2](r)).join('') + '</tr>';
+  }
+
+  const thHtml = pdfCols.map(d => `<th>${escapeHtml(d[1])}</th>`).join('\n  ');
+
+  const html = `<!DOCTYPE html>
+<html lang="${currentLang || 'en'}">
+<head>
+<meta charset="UTF-8"/>
+<title>Cloud Move Analyzer — Report</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:20px;color:#1e293b;font-size:12px}
+  .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+  .header img{width:96px;height:96px}
+  h1{font-size:18px}
+  .meta{color:#64748b;margin-bottom:12px;font-size:12px}
+  .summary{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+  .summary span{padding:4px 10px;border-radius:6px;font-weight:600;font-size:12px}
+  .s-total{background:#e2e8f0}
+  .s-mov{background:#dcfce7;color:#166534}
+  .s-par{background:#fef9c3;color:#854d0e}
+  .s-not{background:#fee2e2;color:#991b1b}
+  .s-unk{background:#f1f5f9;color:#475569}
+  table{width:100%;border-collapse:collapse;margin-bottom:12px}
+  th,td{border:1px solid #cbd5e1;padding:4px 6px;text-align:left;font-size:11px}
+  th{background:#f1f5f9;font-weight:600;font-size:11px}
+  tr:nth-child(even){background:#f8fafc}
+  code{background:#f1f5f9;padding:1px 4px;border-radius:3px;font-size:10px}
+  .footer{text-align:center;color:#94a3b8;font-size:10px;margin-top:12px}
+  @media print{body{padding:10px}@page{size:landscape;margin:10mm}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Cloud Move Analyzer</h1>
+  <img src="https://cloudmoveanalyzer.com/assets/logo.png" alt="Cloud Move Analyzer" />
+</div>
+<p class="meta">${date}</p>
+<div class="summary">
+  <span class="s-total">${t('statTotal')}: ${filtered.length}</span>
+  <span class="s-mov">🟢 ${t('statMovable')}: ${movable}</span>
+  <span class="s-par">🟡 ${t('statPartial')}: ${partial}</span>
+  <span class="s-not">🔴 ${t('statNotMovable')}: ${notMovable}</span>
+  ${unknownCount ? `<span class="s-unk">⚫ ${t('statUnknown')}: ${unknownCount}</span>` : ''}
+</div>
+<table>
+<thead><tr>
+  ${thHtml}
+</tr></thead>
+<tbody>${rows}</tbody>
+</table>
+<p class="footer">Generated by Cloud Move Analyzer — cloudmoveanalyzer.com</p>
+</body>
+</html>`;
+
+  // Use a hidden iframe to print without opening a new tab
+  const oldFrame = document.getElementById('pdfPrintFrame');
+  if (oldFrame) oldFrame.remove();
+
+  const iframe = document.createElement('iframe');
+  iframe.id = 'pdfPrintFrame';
+  iframe.style.cssText = 'position:fixed;top:-10000px;left:-10000px;width:0;height:0;border:none;';
+  document.body.appendChild(iframe);
+
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  doc.open();
+  doc.write(html);
+  doc.close();
+
+  // Wait for content (including logo) to load before printing
+  iframe.contentWindow.addEventListener('afterprint', () => {
+    setTimeout(() => iframe.remove(), 500);
+  });
+
+  const img = doc.querySelector('.header img');
+  const triggerPrint = () => {
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+  };
+
+  if (img && !img.complete) {
+    img.addEventListener('load', triggerPrint);
+    img.addEventListener('error', triggerPrint); // print even if logo fails
+  } else {
+    // Small delay to ensure rendering is complete
+    setTimeout(triggerPrint, 100);
+  }
 });

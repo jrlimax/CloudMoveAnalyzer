@@ -323,20 +323,162 @@ main.has-results .upload-area span {
   white-space: nowrap;
 }
 
-.export-btn {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  border: none;
-  background: var(--secondary);
-  color: #fff;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.2s;
+/* ── Actions toolbar (second row) ──────────────────────── */
+.toolbar--actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0;
+  margin-top: -0.3rem;
+}
+
+.export-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-left: auto;
 }
 
-.export-btn:hover {
-  background: var(--primary);
+.export-label {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Column toggle button */
+.action-btn--cols {
+  padding: 0.42rem 0.9rem;
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.action-btn--cols:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(139, 92, 246, 0.06);
+}
+
+.action-btn--cols svg {
+  width: 15px;
+  height: 15px;
+  opacity: 0.7;
+}
+
+.action-btn--cols:hover svg {
+  opacity: 1;
+}
+
+/* Export pill buttons */
+.export-pill {
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #fff;
+}
+
+.export-pill svg {
+  width: 13px;
+  height: 13px;
+  opacity: 0.85;
+}
+
+.export-pill--csv {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+.export-pill--csv:hover {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.35);
+  transform: translateY(-1px);
+}
+
+.export-pill--pdf {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+.export-pill--pdf:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
+  transform: translateY(-1px);
+}
+
+.export-pill--md {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+.export-pill--md:hover {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+  transform: translateY(-1px);
+}
+
+/* ── Column picker ─────────────────────────────────────── */
+.col-picker {
+  position: relative;
+}
+
+.col-picker-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  z-index: 100;
+  min-width: 200px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+/* Column visibility toggles */
+.hide-col-name          th:nth-child(1), .hide-col-name          td:nth-child(1) { display: none; }
+.hide-col-type          th:nth-child(2), .hide-col-type          td:nth-child(2) { display: none; }
+.hide-col-resourceGroup th:nth-child(3), .hide-col-resourceGroup td:nth-child(3) { display: none; }
+.hide-col-location      th:nth-child(4), .hide-col-location      td:nth-child(4) { display: none; }
+.hide-col-moveRG        th:nth-child(5), .hide-col-moveRG        td:nth-child(5) { display: none; }
+.hide-col-moveSub       th:nth-child(6), .hide-col-moveSub       td:nth-child(6) { display: none; }
+.hide-col-moveRegion    th:nth-child(7), .hide-col-moveRegion    td:nth-child(7) { display: none; }
+.hide-col-status        th:nth-child(8), .hide-col-status        td:nth-child(8) { display: none; }
+.hide-col-notes         th:nth-child(9), .hide-col-notes         td:nth-child(9) { display: none; }
+
+.col-picker-menu label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text);
+  padding: 0.25rem 0.3rem;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.col-picker-menu label:hover {
+  background: var(--hover-bg, rgba(139,92,246,0.08));
+}
+
+.col-picker-menu input[type="checkbox"] {
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
 }
 
 /* ── Table ─────────────────────────────────────────────── */
@@ -938,8 +1080,37 @@ table tbody tr:hover {
 
   .export-btn {
     width: 100%;
-    margin-left: 0;
     text-align: center;
+  }
+
+  .toolbar--actions {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .export-group {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .export-pill {
+    flex: 1;
+    justify-content: center;
+    min-width: 70px;
+  }
+
+  .col-picker {
+    width: 100%;
+  }
+
+  .action-btn--cols {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .col-picker-menu {
+    min-width: 200px;
   }
 
   .results-count {
@@ -1016,7 +1187,7 @@ table tbody tr:hover {
 
 /* ── RTL support (Arabic) ────────────────────────────── */
 [dir="rtl"] .toolbar { flex-direction: row-reverse; }
-[dir="rtl"] .export-btn { margin-left: 0; margin-right: auto; }
+[dir="rtl"] .export-group { margin-left: 0; margin-right: auto; }
 [dir="rtl"] table th { text-align: right; }
 [dir="rtl"] table td { text-align: right; }
 [dir="rtl"] .top-bar { flex-direction: row-reverse; }
