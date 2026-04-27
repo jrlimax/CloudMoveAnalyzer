@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `SECURITY.md`: vulnerability disclosure policy
+- `.gitattributes`: consistent EOL handling across platforms
 - `scripts/update-database.ps1`: parses official Microsoft markdown docs and refreshes `MOVE_DB_RAW`
 - `.github/workflows/update-database.yml`: weekly auto-update (cron) opening a PR when data changes
 - Project structure: `LICENSE` (MIT), `.editorconfig`, `package.json`, `CONTRIBUTING.md`, `CHANGELOG.md`
@@ -17,10 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Database integrity validator (PowerShell, no Node required)
 
 ### Changed
+- `scripts/minify.ps1`: now writes to `dist/` (gitignored) instead of next to source files
 - Database source switched from third-party `tfitzmac/resource-capabilities` to **official `MicrosoftDocs/azure-docs`**
 - Database refresh strategy: was live `fetch()` on page load, now offline auto-update via GitHub Actions
 
 ### Removed
+- Tracked `*.min.css` / `*.min.js` files (now gitignored, regenerated on demand)
 - Live `fetch()` IIFE in `js/move-database.js` (`MOVE_DB_LIVE_URL`, `moveDbSource`, `refreshMoveDB`)
 - Third-party dependency on `tfitzmac/resource-capabilities`
 

@@ -2,14 +2,20 @@
 # ======================================================================
 # Script de Minificacao - Cloud Move Analyzer
 # Uso: .\minify.ps1
-# Gera versoes .min.css e .min.js dos arquivos do site
+# Gera versoes .min.css e .min.js em dist/ (gitignored)
 # ======================================================================
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
+$distRoot = Join-Path $root "dist"
+
+# Garante estrutura dist/
+New-Item -ItemType Directory -Force -Path $distRoot | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $distRoot "css") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $distRoot "js") | Out-Null
 
 Write-Host ""
-Write-Host "Iniciando minificacao..." -ForegroundColor Cyan
+Write-Host "Iniciando minificacao -> dist/" -ForegroundColor Cyan
 
 # --- Funcao: Minificar CSS ---
 function Convert-Css {
@@ -111,7 +117,7 @@ function Invoke-MinifyFile {
 # --- Processar CSS ---
 Write-Host ""
 Write-Host "CSS:" -ForegroundColor Magenta
-Invoke-MinifyFile "$root\css\style.css" "$root\css\style.min.css" 'css'
+Invoke-MinifyFile "$root\css\style.css" "$distRoot\css\style.min.css" 'css'
 
 # --- Processar JS ---
 Write-Host ""
@@ -119,17 +125,13 @@ Write-Host "JavaScript:" -ForegroundColor Magenta
 $jsFiles = @('app.js', 'i18n.js', 'move-database.js', 'set-lang.js')
 foreach ($js in $jsFiles) {
     $inputPath = "$root\js\$js"
-    $outputPath = "$root\js\$($js -replace '\.js$', '.min.js')"
+    $outputPath = "$distRoot\js\$($js -replace '\.js$', '.min.js')"
     Invoke-MinifyFile $inputPath $outputPath 'js'
 }
 
 Write-Host ""
-Write-Host "Minificacao concluida!" -ForegroundColor Green
+Write-Host "Minificacao concluida em dist/" -ForegroundColor Green
 Write-Host ""
-Write-Host "Para usar os arquivos minificados, atualize o index.html:" -ForegroundColor Cyan
-Write-Host '   <link rel="stylesheet" href="css/style.min.css">' -ForegroundColor Gray
-Write-Host '   <script src="js/app.min.js"></script>' -ForegroundColor Gray
-Write-Host ""
-Write-Host "Recomendacao: teste o site apos trocar para os arquivos .min" -ForegroundColor Yellow
-Write-Host "Mantenha os arquivos originais para edicao." -ForegroundColor Yellow
+Write-Host "Os arquivos minificados estao em dist/ (gitignored)." -ForegroundColor Gray
+Write-Host "Para servir minificados em producao, ajuste o build/deploy." -ForegroundColor Gray
 Write-Host ""

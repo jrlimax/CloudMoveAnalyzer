@@ -22,73 +22,40 @@
 
 ```
 cloudmoveanalyzer/
-├── index.html                    # Main page
-├── staticwebapp.config.json      # Azure Static Web Apps config
-├── robots.txt                    # SEO
-├── sitemap.xml                   # SEO
+├── index.html                     # Main page
+├── staticwebapp.config.json       # Azure Static Web Apps config (CSP, headers, cache)
+├── robots.txt                     # SEO
+├── sitemap.xml                    # SEO
 │
-├── css/                          # Stylesheets (source + minified)
-├── js/                           # JavaScript modules (source + minified)
-├── assets/                       # Static assets (logo, QR code)
+├── css/                           # Stylesheets (source)
+├── js/                            # JavaScript (source)
+├── assets/                        # Static assets (logo, images)
 │
-├── scripts/                      # Automation utilities
-│   ├── minify.ps1                # CSS/JS minification (PowerShell)
-│   ├── test-database.ps1         # Database integrity validator
-│   └── update-database.ps1       # Refresh DB from Microsoft official docs
+├── scripts/                       # Automation utilities (PowerShell)
+│   ├── minify.ps1                 # Generates dist/*.min.{css,js}
+│   ├── test-database.ps1          # Database integrity validator
+│   └── update-database.ps1        # Refresh DB from Microsoft official docs
 │
-├── tests/                        # Test suite
-│   ├── unit/                     # Vitest unit tests
-│   ├── fixtures/                 # Sample CSV files for testing
-│   └── helpers/                  # Test utilities
+├── tests/                         # Test suite
+│   ├── unit/                      # Vitest unit tests
+│   ├── fixtures/                  # Sample CSV files
+│   └── helpers/                   # Test utilities
 │
-├── .github/workflows/            # CI/CD pipelines
-│   ├── ci.yml                    # Tests + lint
-│   ├── update-database.yml       # Weekly DB refresh from MS docs (auto-PR)
+├── .github/workflows/             # CI/CD pipelines
+│   ├── ci.yml                     # Tests + lint
+│   ├── update-database.yml        # Weekly DB refresh from MS docs (auto-PR)
 │   └── azure-static-web-apps-*.yml  # Auto-deploy
 │
-├── package.json                  # npm scripts and dev dependencies
-├── vitest.config.js              # Test runner config
-├── .editorconfig                 # Editor consistency
-├── LICENSE                       # MIT
-├── CHANGELOG.md                  # Version history
-└── CONTRIBUTING.md               # Contribution guide
-```
-
-## 🚀 Quick Start
-
-### Run Locally
-
-```bash
-# Any static server works — pick one:
-npx serve .
-# or
-python -m http.server 8000
-# or use VS Code "Live Server" extension
-```
-
-Open http://localhost:3000 (or 8000) in your browser.
-
-### Run Tests
-
-```powershell
-# Database integrity check (PowerShell - no Node.js required)
-.\scripts\test-database.ps1
-# or via npm:
-npm run test:db
-
-# Full unit test suite (requires Node.js)
-npm install
-npm test
-npm run test:coverage
-```
-
-### Build (Minify Assets)
-
-```powershell
-# Generates *.min.css and *.min.js files
-.\scripts\minify.ps1
-# or via npm:
-npm run minify
+├── dist/                          # Build output (gitignored)
+│
+├── package.json                   # npm scripts and dev dependencies
+├── vitest.config.js               # Test runner config
+├── .editorconfig                  # Editor consistency
+├── .gitattributes                 # Git EOL/binary rules
+├── LICENSE                        # MIT
+├── SECURITY.md                    # Security policy
+├── CHANGELOG.md                   # Version history
+└── CONTRIBUTING.md                # Contribution guide
 ```
 
 ## 🧪 Testing

@@ -17,6 +17,16 @@ package-lock.json
 coverage/
 .nyc_output/
 
-# Build outputs (regeneraveis com npm run minify)
-# *.min.css
-# *.min.js
+# Build outputs
+dist/
+*.min.css
+*.min.js
+
+# Backups e temporarios
+*.bak
+*.tmp
+.commit-msg.tmp
+
+# Logs
+*.log
+npm-debug.log*
