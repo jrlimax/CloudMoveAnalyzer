@@ -294,6 +294,28 @@
     ]
   }
   </script>
+
+  <!-- Breadcrumb Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://cloudmoveanalyzer.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Azure Move Analyzer",
+        "item": "https://cloudmoveanalyzer.com/#analyzer"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <noscript>
@@ -308,19 +330,19 @@
     <div class="top-bar">
       <div class="lang-picker" id="langPicker">
         <button class="lang-current" id="langToggle" type="button" aria-label="Language">
-          <img id="langFlag" src="https://flagcdn.com/24x18/us.png" alt="" />
+          <img id="langFlag" src="https://flagcdn.com/24x18/us.png" alt="" width="24" height="18" decoding="async" />
           <span id="langLabel">English</span>
           <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg>
         </button>
         <ul class="lang-menu hidden" id="langMenu">
-          <li data-lang="en"><img src="https://flagcdn.com/24x18/us.png" alt="" /> English</li>
-          <li data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" /> Portugu&#234;s</li>
-          <li data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" /> &#20013;&#25991;</li>
-          <li data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" /> Espa&#241;ol</li>
-          <li data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" /> Fran&#231;ais</li>
-          <li data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" /> &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</li>
-          <li data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" /> &#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</li>
-          <li data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" /> &#26085;&#26412;&#35486;</li>
+          <li data-lang="en"><img src="https://flagcdn.com/24x18/us.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> English</li>
+          <li data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Portugu&#234;s</li>
+          <li data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#20013;&#25991;</li>
+          <li data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Espa&#241;ol</li>
+          <li data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Fran&#231;ais</li>
+          <li data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</li>
+          <li data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</li>
+          <li data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#26085;&#26412;&#35486;</li>
         </ul>
       </div>
       <button class="theme-toggle" id="themeToggle" title="Toggle theme">
@@ -335,7 +357,7 @@
 
     <!-- Header -->
     <header>
-      <img src="assets/logo.png" alt="Cloud Move Analyzer logo" class="site-logo" width="420" height="420" />
+      <img src="assets/logo.png" alt="Cloud Move Analyzer logo" class="site-logo" width="420" height="420" fetchpriority="high" decoding="async" />
       <h1 data-i18n="title">Cloud Move Analyzer</h1>
       <p data-i18n="subtitle">Upload a spreadsheet exported from Azure to check which resources can be migrated between subscriptions or resource groups.</p>
     </header>
@@ -486,13 +508,13 @@
 
         <div class="donation-panel active" id="panel-kofi">
           <a href="https://ko-fi.com/villat" target="_blank" rel="noopener" class="kofi-btn">
-            <img src="https://storage.ko-fi.com/cdn/kofi5.png?v=6" alt="Buy Me a Coffee at ko-fi.com" height="40" />
+            <img src="https://storage.ko-fi.com/cdn/kofi5.png?v=6" alt="Buy Me a Coffee at ko-fi.com" height="40" loading="lazy" decoding="async" />
           </a>
         </div>
 
         <div class="donation-panel" id="panel-pix">
           <div class="pix-qr-wrapper">
-            <img src="assets/pix-qr.png" alt="PIX QR Code" class="pix-qr-img" width="180" height="180" />
+            <img src="assets/pix-qr.png" alt="PIX QR Code" class="pix-qr-img" width="180" height="180" loading="lazy" decoding="async" />
           </div>
           <div class="pix-key-copy">
             <code id="pixKey">9f7802e4-3dcb-47fa-8e70-7119cb5b4761</code>

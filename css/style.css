@@ -1020,3 +1020,20 @@ table tbody tr:hover {
 [dir="rtl"] table th { text-align: right; }
 [dir="rtl"] table td { text-align: right; }
 [dir="rtl"] .top-bar { flex-direction: row-reverse; }
+
+/* ── Acessibilidade: Reduzir animações para usuários sensíveis ───────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Suporte a tema escuro do sistema ──────────────────────────────── */
+@media (prefers-color-scheme: light) {
+  /* Site já é dark por padrão; preservar consistência visual */
+}
