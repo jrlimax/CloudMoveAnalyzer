@@ -158,14 +158,31 @@ if (-not (Test-Path $dbPath)) {
 
 $jsContent = Get-Content $dbPath -Raw
 
-# Substitui o conteudo entre as crases do template literal MOVE_DB_RAW
-$pattern = '(?s)(const\s+MOVE_DB_RAW\s*=\s*`)(.+?)(`;)'
-$replacement = '${1}' + $newCsv + '${3}'
-$updated = [regex]::Replace($jsContent, $pattern, $replacement)
+# Localiza o template literal MOVE_DB_RAW por busca textual (mais robusto que regex)
+$marker = "const MOVE_DB_RAW = ``"
+$startIdx = $jsContent.IndexOf($marker)
+if ($startIdx -lt 0) {
+    # Tenta tambem com 'let'
+    $marker = "let MOVE_DB_RAW = ``"
+    $startIdx = $jsContent.IndexOf($marker)
+}
+if ($startIdx -lt 0) {
+    Write-Host "ERRO: nao foi possivel localizar 'const MOVE_DB_RAW = ' no arquivo" -ForegroundColor Red
+    exit 1
+}
+
+$contentStart = $startIdx + $marker.Length
+$endIdx = $jsContent.IndexOf("``;", $contentStart)
+if ($endIdx -lt 0) {
+    Write-Host "ERRO: nao foi possivel localizar fim do template literal (``;)" -ForegroundColor Red
+    exit 1
+}
+
+$updated = $jsContent.Substring(0, $contentStart) + $newCsv + $jsContent.Substring($endIdx)
 
 if ($updated -eq $jsContent) {
-    Write-Host "ERRO: nao foi possivel atualizar (padrao nao encontrado)" -ForegroundColor Red
-    exit 1
+    Write-Host "AVISO: conteudo identico ao atual (nada a atualizar)" -ForegroundColor Yellow
+    exit 0
 }
 
 # Backup do antigo
@@ -176,8 +193,8 @@ Copy-Item $dbPath $backupPath -Force
 Set-Content -Path $dbPath -Value $updated -Encoding UTF8 -NoNewline
 
 # Conta entradas antigas para diff
-$oldRawMatch = [regex]::Match($jsContent, $pattern)
-$oldCount = ($oldRawMatch.Groups[2].Value -split "`n" | Where-Object { $_.Trim() -ne '' }).Count
+$oldRaw = $jsContent.Substring($contentStart, $endIdx - $contentStart)
+$oldCount = ($oldRaw -split "`n" | Where-Object { $_.Trim() -ne '' }).Count
 
 Write-Host ("  OK - js/move-database.js atualizado") -ForegroundColor Green
 Write-Host ("  Antes: " + $oldCount + " entradas | Agora: " + $csvLines.Count + " entradas") -ForegroundColor Gray

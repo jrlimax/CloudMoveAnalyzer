@@ -18,8 +18,7 @@
     "test:db": "powershell -ExecutionPolicy Bypass -File ./scripts/test-database.ps1",
     "minify": "powershell -ExecutionPolicy Bypass -File ./scripts/minify.ps1",
     "serve": "npx --yes serve@latest .",
-    "lint:html": "npx --yes htmlhint index.html",
-    "validate:config": "node ./scripts/validate-config.mjs"
+    "lint:html": "npx --yes htmlhint index.html"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^2.1.0",
