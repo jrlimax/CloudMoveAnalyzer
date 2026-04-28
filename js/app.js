@@ -612,18 +612,20 @@ function getFriendlyName(rawType) {
 
 /** Build documentation URL from resource type provider namespace.
  *  Uses current language locale; falls back to en-us when unsupported. */
-const DOC_LOCALE_MAP = {
-  'en': 'en-us', 'pt-BR': 'pt-br', 'zh-CN': 'zh-cn',
-  'es': 'es-es', 'fr': 'fr-fr', 'ar': 'en-us', // ar not on Learn
-  'ru': 'ru-ru', 'ja': 'ja-jp'
-};
 function getDocUrlForType(rawType) {
   if (!rawType) return '';
   const clean = rawType.toLowerCase().trim().replace(/^\//, '');
   const provider = clean.split('/')[0];
   if (!provider || !provider.startsWith('microsoft.')) return '';
   const anchor = provider.replace(/\./g, '').toLowerCase();
-  const locale = DOC_LOCALE_MAP[currentLang] || 'en-us';
+  // Locale map kept inside the function so it can be loaded standalone (tests)
+  const DOC_LOCALE_MAP = {
+    'en': 'en-us', 'pt-BR': 'pt-br', 'zh-CN': 'zh-cn',
+    'es': 'es-es', 'fr': 'fr-fr', 'ar': 'en-us', // ar not on Learn
+    'ru': 'ru-ru', 'ja': 'ja-jp'
+  };
+  const lang = (typeof currentLang !== 'undefined') ? currentLang : 'en';
+  const locale = DOC_LOCALE_MAP[lang] || 'en-us';
   return `https://learn.microsoft.com/${locale}/azure/azure-resource-manager/management/move-support-resources#${anchor}`;
 }
 
