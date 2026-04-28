@@ -40,11 +40,16 @@ const PREFERS_REDUCED_MOTION =
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ── State ─────────────────────────────────────────────────
-let allResults    = [];
-let currentFilter = 'all';
-let currentSearch = '';
-let sortCol       = '';
-let sortAsc       = true;
+// Estado mutável central. Toda escrita passa por `state.X = ...` em pontos
+// explícitos. Funções puras (apply*, getViewData, getExportData) recebem o
+// estado por parâmetro — nunca leem `state` diretamente.
+const state = {
+  allResults:    [],
+  currentFilter: 'all',
+  currentSearch: '',
+  sortCol:       '',
+  sortAsc:       true
+};
 
 // ── Theme toggle ──────────────────────────────────────────
 // Safe localStorage wrapper (private-mode Safari throws on setItem)
@@ -193,7 +198,7 @@ function applyLanguage() {
   });
 
   // Re-render table if data loaded; otherwise just keep sort arrows in sync
-  if (allResults.length) {
+  if (state.allResults.length) {
     renderTable();
   } else {
     updateSortIndicators();
@@ -714,8 +719,8 @@ function analyzeResources(data) {
   hideTemplateHint();
 
   // Reset filters so the new file is shown unfiltered
-  currentFilter = 'all';
-  currentSearch = '';
+  state.currentFilter = 'all';
+  state.currentSearch = '';
   searchInput.value = '';
   document.querySelectorAll('.stat-card[data-filter]').forEach(c => {
     c.classList.toggle('active', c.dataset.filter === 'all');
@@ -748,7 +753,7 @@ function analyzeResources(data) {
     showTemplateHint(t('templateMissing') + missing.join(', '));
   }
 
-  allResults = data.map(row => {
+  state.allResults = data.map(row => {
     const displayType = typeCol ? String(row[typeCol] || '').trim() : '';
     const name        = nameCol ? String(row[nameCol] || '').trim() : '';
     const link        = linkCol ? String(row[linkCol] || '').trim() : '';
@@ -780,7 +785,7 @@ function analyzeResources(data) {
   // Only dedup when name and resourceGroup are real values (not missing)
   if (nameCol && rgCol) {
     const seen = new Set();
-    allResults = allResults.filter(r => {
+    state.allResults = state.allResults.filter(r => {
       const key = (r.type + '|' + r.name + '|' + r.resourceGroup).toLowerCase();
       if (seen.has(key)) return false;
       seen.add(key);
@@ -790,7 +795,7 @@ function analyzeResources(data) {
 
   // Incompatible spreadsheet: had data and a type column, but no row resolved
   // to a known Azure resource type (e.g., user uploaded an unrelated file).
-  if (!allResults.length) {
+  if (!state.allResults.length) {
     resultsSection.classList.add('hidden');
     mainEl.classList.remove('has-results');
     showTemplateHint(t('alertIncompatible'));
@@ -799,7 +804,7 @@ function analyzeResources(data) {
 
   // If every resolved type is "unknown" (not in MOVE_DB), the spreadsheet
   // technically parsed but contains no recognizable Azure resources.
-  const anyKnown = allResults.some(r => r.status !== 'unknown');
+  const anyKnown = state.allResults.some(r => r.status !== 'unknown');
   if (!anyKnown) {
     resultsSection.classList.add('hidden');
     mainEl.classList.remove('has-results');
@@ -822,13 +827,13 @@ function analyzeResources(data) {
 // ==========================================================
 function updateStats() {
   let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
-  for (const r of allResults) {
+  for (const r of state.allResults) {
     if (r.status === 'movable') movable++;
     else if (r.status === 'partial') partial++;
     else if (r.status === 'not-movable') notMovable++;
     else unknownCount++;
   }
-  const total = allResults.length;
+  const total = state.allResults.length;
 
   document.getElementById('statTotal').textContent = total;
   document.getElementById('statMovable').textContent = movable;
@@ -898,87 +903,89 @@ function statusBadge(status, r) {
 // ==========================================================
 // Filtering & sorting
 // ==========================================================
+//
+// Pipeline puro: cada `apply*` faz UMA coisa só, recebe argumentos
+// explícitos e não lê variáveis globais. Isso torna o conjunto testável
+// e impede bugs por confusão de nomes (ex.: usar `getFiltered` no export
+// e levar junto o filtro de status — bug histórico).
+//
+//   applyStatusFilter(rows, filter)   → filtra por status
+//   applySearch(rows, query)          → filtra por texto livre
+//   applySort(rows, col, asc)         → ordena (mantém estabilidade)
+//
+// Compositores expõem o contrato pra cada caller:
+//   getViewData()   → tabela: status + busca + sort
+//   getExportData() → exports: busca + sort (sem filtro de status)
 
-// Data used by exports (CSV/MD/PDF): always returns the full analyzed set,
-// applying only the search query — never the status filter (clicking a stat
-// card should not reduce exports). Sort is applied for consistent output.
-function getExportData() {
-  let results = allResults.slice();
-
-  if (currentSearch) {
-    const q = currentSearch.toLowerCase();
-    results = results.filter(r =>
-      r.name.toLowerCase().includes(q) ||
-      r.type.toLowerCase().includes(q) ||
-      (r.displayType   && r.displayType.toLowerCase().includes(q)) ||
-      (r.resourceGroup && r.resourceGroup.toLowerCase().includes(q)) ||
-      (r.location      && r.location.toLowerCase().includes(q)) ||
-      (r.type          && getFriendlyName(r.type).toLowerCase().includes(q)) ||
-      (r.noteKey       && t(r.noteKey).toLowerCase().includes(q))
-    );
-  }
-
-  if (sortCol) {
-    const dir = sortAsc ? 1 : -1;
-    const getVal = sortCol === 'noteKey'
-      ? r => (r.noteKey ? t(r.noteKey) : '')
-      : sortCol === 'friendlyName'
-        ? r => getFriendlyName(r.type)
-        : r => r[sortCol];
-    results.sort((a, b) => {
-      const va = getVal(a);
-      const vb = getVal(b);
-      if (typeof va === 'string' || typeof vb === 'string') {
-        return _collator.compare(String(va ?? ''), String(vb ?? '')) * dir;
-      }
-      if (va < vb) return -1 * dir;
-      if (va > vb) return  1 * dir;
-      return 0;
-    });
-  }
-  return results;
+/** Filtra por status. `filter === 'all'` retorna a lista original. */
+function applyStatusFilter(rows, filter) {
+  if (!filter || filter === 'all') return rows;
+  return rows.filter(r => r.status === filter);
 }
 
-function getFiltered() {
-  let results = allResults;
+/** Filtra por busca textual em campos relevantes. Vazio retorna a lista. */
+function applySearch(rows, query) {
+  if (!query) return rows;
+  const q = String(query).toLowerCase();
+  return rows.filter(r =>
+    r.name.toLowerCase().includes(q) ||
+    r.type.toLowerCase().includes(q) ||
+    (r.displayType   && r.displayType.toLowerCase().includes(q)) ||
+    (r.resourceGroup && r.resourceGroup.toLowerCase().includes(q)) ||
+    (r.location      && r.location.toLowerCase().includes(q)) ||
+    (r.type          && getFriendlyName(r.type).toLowerCase().includes(q)) ||
+    (r.noteKey       && t(r.noteKey).toLowerCase().includes(q))
+  );
+}
 
-  if (currentFilter !== 'all') {
-    results = results.filter(r => r.status === currentFilter);
-  }
+/** Ordena por coluna. Sem coluna definida, retorna a lista original. */
+function applySort(rows, col, asc) {
+  if (!col) return rows;
+  const dir = asc ? 1 : -1;
+  // For the "notes" column, sort by the translated text (not the i18n key)
+  // For "friendlyName", sort by the computed friendly name
+  const getVal = col === 'noteKey'
+    ? r => (r.noteKey ? t(r.noteKey) : '')
+    : col === 'friendlyName'
+      ? r => getFriendlyName(r.type)
+      : r => r[col];
+  return [...rows].sort((a, b) => {
+    const va = getVal(a);
+    const vb = getVal(b);
+    if (typeof va === 'string' || typeof vb === 'string') {
+      return _collator.compare(String(va ?? ''), String(vb ?? '')) * dir;
+    }
+    if (va < vb) return -1 * dir;
+    if (va > vb) return  1 * dir;
+    return 0;
+  });
+}
 
-  if (currentSearch) {
-    const q = currentSearch.toLowerCase();
-    results = results.filter(r =>
-      r.name.toLowerCase().includes(q) ||
-      r.type.toLowerCase().includes(q) ||
-      (r.displayType   && r.displayType.toLowerCase().includes(q)) ||
-      (r.resourceGroup && r.resourceGroup.toLowerCase().includes(q)) ||
-      (r.location      && r.location.toLowerCase().includes(q)) ||
-      (r.type          && getFriendlyName(r.type).toLowerCase().includes(q)) ||
-      (r.noteKey       && t(r.noteKey).toLowerCase().includes(q))
-    );
-  }
-  if (sortCol) {
-    const dir = sortAsc ? 1 : -1;
-    // For the "notes" column, sort by the translated text (not the i18n key)
-    // For "friendlyName", sort by the computed friendly name
-    const getVal = sortCol === 'noteKey'
-      ? r => (r.noteKey ? t(r.noteKey) : '')
-      : sortCol === 'friendlyName'
-        ? r => getFriendlyName(r.type)
-        : r => r[sortCol];
-    results = [...results].sort((a, b) => {
-      const va = getVal(a);
-      const vb = getVal(b);
-      if (typeof va === 'string' || typeof vb === 'string') {
-        return _collator.compare(String(va ?? ''), String(vb ?? '')) * dir;
-      }
-      if (va < vb) return -1 * dir;
-      if (va > vb) return  1 * dir;
-      return 0;
-    });
-  }
-  return results;
+/**
+ * Dados que a TABELA renderiza: aplica filtro de status (stat cards),
+ * busca textual e ordenação. Lê o estado atual do app.
+ */
+function getViewData() {
+  return applySort(
+    applySearch(
+      applyStatusFilter(state.allResults, state.currentFilter),
+      state.currentSearch
+    ),
+    state.sortCol,
+    state.sortAsc
+  );
+}
+
+/**
+ * Dados que os EXPORTS (CSV/MD/PDF) levam: NUNCA aplica filtro de status,
+ * só busca e ordenação. Clicar num stat card não deve reduzir o export.
+ */
+function getExportData() {
+  return applySort(
+    applySearch(state.allResults, state.currentSearch),
+    state.sortCol,
+    state.sortAsc
+  );
 }
 
 // ==========================================================
@@ -997,13 +1004,13 @@ function renderNoteCell(r) {
 // Table rendering
 // ==========================================================
 function renderTable() {
-  const filtered = getFiltered();
+  const filtered = getViewData();
   updateSortIndicators();
 
   // Update results count
   const countEl = document.getElementById('resultsCount');
-  if (currentFilter !== 'all' || currentSearch) {
-    countEl.textContent = t('resultsCount').replace('{filtered}', filtered.length).replace('{total}', allResults.length);
+  if (state.currentFilter !== 'all' || state.currentSearch) {
+    countEl.textContent = t('resultsCount').replace('{filtered}', filtered.length).replace('{total}', state.allResults.length);
   } else {
     countEl.textContent = '';
   }
@@ -1073,10 +1080,10 @@ function updateSortIndicators() {
     const col = sortMap[th.dataset.sort];
     const key = th.dataset.i18n;
     const label = key ? t(key).replace(/\s*[↕↑↓]\s*$/, '') : th.textContent.replace(/\s*[↕↑↓]\s*$/, '');
-    const arrow = (col === sortCol) ? (sortAsc ? ' ↑' : ' ↓') : '';
+    const arrow = (col === state.sortCol) ? (state.sortAsc ? ' ↑' : ' ↓') : '';
     th.textContent = label + arrow;
     th.setAttribute('aria-sort',
-      col === sortCol ? (sortAsc ? 'ascending' : 'descending') : 'none');
+      col === state.sortCol ? (state.sortAsc ? 'ascending' : 'descending') : 'none');
   });
 }
 
@@ -1086,13 +1093,13 @@ function updateSortIndicators() {
 document.querySelectorAll('.stat-card[data-filter]').forEach(card => {
   const handleClick = () => {
     const filter = card.dataset.filter;
-    if (currentFilter === filter) {
-      currentFilter = 'all';
+    if (state.currentFilter === filter) {
+      state.currentFilter = 'all';
     } else {
-      currentFilter = filter;
+      state.currentFilter = filter;
     }
     document.querySelectorAll('.stat-card[data-filter]').forEach(c => {
-      const isActive = c.dataset.filter === currentFilter;
+      const isActive = c.dataset.filter === state.currentFilter;
       c.classList.toggle('active', isActive);
       c.setAttribute('aria-pressed', isActive);
     });
@@ -1115,7 +1122,7 @@ let searchTimer = null;
 searchInput.addEventListener('input', e => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => {
-    currentSearch = e.target.value;
+    state.currentSearch = e.target.value;
     renderTable();
   }, SEARCH_DEBOUNCE_MS);
 });
@@ -1130,8 +1137,8 @@ document.querySelectorAll('th[data-sort]').forEach(th => {
 
   const triggerSort = () => {
     const col = sortMap[th.dataset.sort];
-    if (sortCol === col) { sortAsc = !sortAsc; }
-    else { sortCol = col; sortAsc = true; }
+    if (state.sortCol === col) { state.sortAsc = !state.sortAsc; }
+    else { state.sortCol = col; state.sortAsc = true; }
     renderTable();
   };
 
@@ -1151,7 +1158,7 @@ document.querySelectorAll('th[data-sort]').forEach(th => {
 // CSV export
 // ==========================================================
 exportBtn.addEventListener('click', () => {
-  if (!allResults.length) return;
+  if (!state.allResults.length) return;
 
   const filtered = getExportData();
   if (!filtered.length) return;
@@ -1205,7 +1212,7 @@ exportBtn.addEventListener('click', () => {
 // ==========================================================
 const exportMdBtn = document.getElementById('exportMdBtn');
 exportMdBtn.addEventListener('click', () => {
-  if (!allResults.length) return;
+  if (!state.allResults.length) return;
 
   const filtered = getExportData();
   if (!filtered.length) return;
@@ -1288,7 +1295,7 @@ exportMdBtn.addEventListener('click', () => {
 // ==========================================================
 const exportPdfBtn = document.getElementById('exportPdfBtn');
 exportPdfBtn.addEventListener('click', () => {
-  if (!allResults.length) return;
+  if (!state.allResults.length) return;
 
   const filtered = getExportData();
   if (!filtered.length) return;

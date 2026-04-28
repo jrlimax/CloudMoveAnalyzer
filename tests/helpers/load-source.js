@@ -75,3 +75,48 @@ export function loadAppFunctions() {
   // eslint-disable-next-line no-new-func
   return new Function(sandbox)();
 }
+
+/**
+ * Loads the data pipeline functions (applyStatusFilter, applySearch, applySort)
+ * from app.js. These are pure functions that take rows + args and return rows.
+ *
+ * Dependencies injected as identity/no-op mocks:
+ *   - t(key)            → returns key as-is
+ *   - getFriendlyName() → returns type as-is
+ *   - _collator         → real Intl.Collator (works without DOM)
+ */
+export function loadPipelineFunctions() {
+  const source = readFileSync(resolve(ROOT, 'js', 'app.js'), 'utf8');
+
+  const functionsToExtract = [
+    'applyStatusFilter',
+    'applySearch',
+    'applySort',
+  ];
+
+  const extracted = {};
+  for (const name of functionsToExtract) {
+    const pattern = new RegExp(
+      `function\\s+${name}\\s*\\([^)]*\\)\\s*\\{[\\s\\S]*?\\n\\}`,
+      'm'
+    );
+    const match = source.match(pattern);
+    if (!match) {
+      throw new Error(`Function ${name} not found in app.js`);
+    }
+    extracted[name] = match[0];
+  }
+
+  const sandbox = `
+    const _collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+    const t = (key) => key;
+    const getFriendlyName = (type) => type || '';
+    ${Object.values(extracted).join('\n\n')}
+    return {
+      ${functionsToExtract.join(', ')}
+    };
+  `;
+
+  // eslint-disable-next-line no-new-func
+  return new Function(sandbox)();
+}
