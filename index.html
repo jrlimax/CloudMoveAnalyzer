@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#8B5CF6" />
 
   <!-- Set <html lang> early (external script to satisfy strict CSP) -->
-  <script src="js/set-lang.js?v=6"></script>
+  <script src="js/set-lang.js?v=9"></script>
 
   <!-- Performance hints -->
   <link rel="preconnect" href="https://flagcdn.com" crossorigin />
@@ -52,7 +52,7 @@
   <title>Cloud Move Analyzer — Azure Resource Move Support</title>
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -340,20 +340,20 @@
     <!-- Top bar: language + theme -->
     <div class="top-bar">
       <div class="lang-picker" id="langPicker">
-        <button class="lang-current" id="langToggle" type="button" aria-label="Language">
+        <button class="lang-current" id="langToggle" type="button" aria-label="Language" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenu">
           <img id="langFlag" src="https://flagcdn.com/24x18/us.png" alt="" width="24" height="18" decoding="async" />
           <span id="langLabel">English</span>
           <svg aria-hidden="true" width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg>
         </button>
-        <ul class="lang-menu hidden" id="langMenu">
-          <li data-lang="en"><img src="https://flagcdn.com/24x18/us.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> English</li>
-          <li data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Portugu&#234;s</li>
-          <li data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#20013;&#25991;</li>
-          <li data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Espa&#241;ol</li>
-          <li data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Fran&#231;ais</li>
-          <li data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</li>
-          <li data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</li>
-          <li data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#26085;&#26412;&#35486;</li>
+        <ul class="lang-menu hidden" id="langMenu" role="menu" aria-label="Select language">
+          <li role="menuitem" tabindex="-1" data-lang="en"><img src="https://flagcdn.com/24x18/us.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> English</li>
+          <li role="menuitem" tabindex="-1" data-lang="pt-BR"><img src="https://flagcdn.com/24x18/br.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Portugu&#234;s</li>
+          <li role="menuitem" tabindex="-1" data-lang="zh-CN"><img src="https://flagcdn.com/24x18/cn.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#20013;&#25991;</li>
+          <li role="menuitem" tabindex="-1" data-lang="es"><img src="https://flagcdn.com/24x18/es.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Espa&#241;ol</li>
+          <li role="menuitem" tabindex="-1" data-lang="fr"><img src="https://flagcdn.com/24x18/fr.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> Fran&#231;ais</li>
+          <li role="menuitem" tabindex="-1" data-lang="ar"><img src="https://flagcdn.com/24x18/sa.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</li>
+          <li role="menuitem" tabindex="-1" data-lang="ru"><img src="https://flagcdn.com/24x18/ru.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</li>
+          <li role="menuitem" tabindex="-1" data-lang="ja"><img src="https://flagcdn.com/24x18/jp.png" alt="" loading="lazy" decoding="async" width="24" height="18" /> &#26085;&#26412;&#35486;</li>
         </ul>
       </div>
       <button class="theme-toggle" id="themeToggle" title="Toggle theme">
@@ -429,7 +429,7 @@
 
       <!-- Toolbar -->
       <div class="toolbar">
-        <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search resource or type..." />
+        <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" data-i18n-aria="searchPlaceholder" aria-label="Search resources" placeholder="Search resource or type..." />
         <span class="results-count" id="resultsCount"></span>
       </div>
       <div class="toolbar toolbar--actions">
@@ -472,7 +472,7 @@
       <!-- Table -->
       <div class="table-wrapper">
         <div class="table-scroll">
-          <table id="resultsTable">
+          <table id="resultsTable" aria-label="Azure resource move support results">
             <thead>
               <tr>
                 <th data-col-id="name" data-sort="name" data-i18n="thName">Resource Name</th>
@@ -583,8 +583,8 @@
 
   <!-- Scripts (order matters: XLSX lib &#8594; database &#8594; i18n &#8594; app) -->
   <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js" integrity="sha384-7hwyYzxURfZMLwHgvEKrYEmM5tX+1DVWK5iDR4R69bOQeY90Q8B8n9Cobuyqybhw" crossorigin="anonymous" defer></script>
-  <script src="js/move-database.js?v=6" defer></script>
-  <script src="js/i18n.js?v=6" defer></script>
-  <script src="js/app.js?v=6" defer></script>
+  <script src="js/move-database.js?v=9" defer></script>
+  <script src="js/i18n.js?v=9" defer></script>
+  <script src="js/app.js?v=9" defer></script>
 </body>
 </html>

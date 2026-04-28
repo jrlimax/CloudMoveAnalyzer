@@ -983,6 +983,12 @@ table tbody tr:hover {
   background: var(--hover-bg);
 }
 
+.lang-menu li:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+  background: var(--hover-bg);
+}
+
 .lang-menu li.active {
   color: var(--primary);
   font-weight: 600;

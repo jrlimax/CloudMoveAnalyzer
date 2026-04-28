@@ -26,6 +26,13 @@ const sortMap = {
   notes:         'noteKey'
 };
 
+// Reusable Intl.Collator (rebuilt only when language changes)
+let _collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+function refreshCollator() {
+  try { _collator = new Intl.Collator(currentLang || 'en', { sensitivity: 'base', numeric: true }); }
+  catch (e) { _collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true }); }
+}
+
 // Respect prefers-reduced-motion for programmatic scrolling
 const PREFERS_REDUCED_MOTION =
   typeof window !== 'undefined' &&
@@ -96,14 +103,21 @@ function updateLangPicker() {
   const info = LANG_FLAGS[currentLang] || LANG_FLAGS.en;
   langFlag.src = info.flag;
   langLabel.textContent = info.label;
-  langMenu.querySelectorAll('li').forEach(li => {
+  langMenu.querySelectorAll('li[data-lang]').forEach(li => {
     li.classList.toggle('active', li.dataset.lang === currentLang);
   });
 }
 
 langToggle.addEventListener('click', () => {
+  const willOpen = langMenu.classList.contains('hidden');
   langMenu.classList.toggle('hidden');
   langPicker.classList.toggle('open', !langMenu.classList.contains('hidden'));
+  langToggle.setAttribute('aria-expanded', String(willOpen));
+  if (willOpen) {
+    // Move focus to the active item (or first) for keyboard users
+    const active = langMenu.querySelector('li.active') || langMenu.querySelector('li[data-lang]');
+    if (active) active.focus();
+  }
 });
 
 // Close menu on outside click or Escape
@@ -111,6 +125,7 @@ document.addEventListener('click', e => {
   if (!langPicker.contains(e.target)) {
     langMenu.classList.add('hidden');
     langPicker.classList.remove('open');
+    langToggle.setAttribute('aria-expanded', 'false');
   }
 });
 
@@ -118,17 +133,38 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !langMenu.classList.contains('hidden')) {
     langMenu.classList.add('hidden');
     langPicker.classList.remove('open');
+    langToggle.setAttribute('aria-expanded', 'false');
     langToggle.focus();
   }
+});
+
+// Arrow-key + Home/End navigation inside the language menu
+langMenu.addEventListener('keydown', e => {
+  const items = Array.from(langMenu.querySelectorAll('li[data-lang]'));
+  if (!items.length) return;
+  const idx = items.indexOf(document.activeElement);
+  let target = -1;
+  if (e.key === 'ArrowDown') target = idx < items.length - 1 ? idx + 1 : 0;
+  else if (e.key === 'ArrowUp') target = idx > 0 ? idx - 1 : items.length - 1;
+  else if (e.key === 'Home') target = 0;
+  else if (e.key === 'End') target = items.length - 1;
+  else if (e.key === 'Enter' || e.key === ' ') {
+    if (idx >= 0) { e.preventDefault(); items[idx].click(); return; }
+  } else return;
+  e.preventDefault();
+  items[target].focus();
 });
 
 langMenu.querySelectorAll('li[data-lang]').forEach(li => {
   li.addEventListener('click', () => {
     currentLang = li.dataset.lang;
     storage.set(STORAGE_KEYS.lang, currentLang);
+    refreshCollator();
     updateLangPicker();
     langMenu.classList.add('hidden');
     langPicker.classList.remove('open');
+    langToggle.setAttribute('aria-expanded', 'false');
+    langToggle.focus();
     applyLanguage();
   });
 });
@@ -165,6 +201,7 @@ function applyLanguage() {
 }
 
 // Apply on load
+refreshCollator();
 updateLangPicker();
 applyLanguage();
 
@@ -410,6 +447,8 @@ colPickerMenu.addEventListener('keydown', e => {
 function reorderTableColumns() {
   applyColumnVisibility();
   saveColumnPrefs();
+  // Force <th> re-sync on next renderTable
+  if (resultsTable && resultsTable.dataset) delete resultsTable.dataset.lastOrder;
   renderTable();
 }
 
@@ -749,11 +788,33 @@ function analyzeResources(data) {
     });
   }
 
+  // Incompatible spreadsheet: had data and a type column, but no row resolved
+  // to a known Azure resource type (e.g., user uploaded an unrelated file).
+  if (!allResults.length) {
+    resultsSection.classList.add('hidden');
+    mainEl.classList.remove('has-results');
+    showTemplateHint(t('alertIncompatible'));
+    return;
+  }
+
+  // If every resolved type is "unknown" (not in MOVE_DB), the spreadsheet
+  // technically parsed but contains no recognizable Azure resources.
+  const anyKnown = allResults.some(r => r.status !== 'unknown');
+  if (!anyKnown) {
+    resultsSection.classList.add('hidden');
+    mainEl.classList.remove('has-results');
+    showTemplateHint(t('alertIncompatible'));
+    return;
+  }
+
   updateStats();
   renderTable();
+  const wasVisible = !resultsSection.classList.contains('hidden');
   resultsSection.classList.remove('hidden');
   mainEl.classList.add('has-results');
-  resultsSection.scrollIntoView({ behavior: PREFERS_REDUCED_MOTION ? 'auto' : 'smooth' });
+  if (!wasVisible) {
+    resultsSection.scrollIntoView({ behavior: PREFERS_REDUCED_MOTION ? 'auto' : 'smooth' });
+  }
 }
 
 // ==========================================================
@@ -837,6 +898,47 @@ function statusBadge(status, r) {
 // ==========================================================
 // Filtering & sorting
 // ==========================================================
+
+// Data used by exports (CSV/MD/PDF): always returns the full analyzed set,
+// applying only the search query — never the status filter (clicking a stat
+// card should not reduce exports). Sort is applied for consistent output.
+function getExportData() {
+  let results = allResults.slice();
+
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    results = results.filter(r =>
+      r.name.toLowerCase().includes(q) ||
+      r.type.toLowerCase().includes(q) ||
+      (r.displayType   && r.displayType.toLowerCase().includes(q)) ||
+      (r.resourceGroup && r.resourceGroup.toLowerCase().includes(q)) ||
+      (r.location      && r.location.toLowerCase().includes(q)) ||
+      (r.type          && getFriendlyName(r.type).toLowerCase().includes(q)) ||
+      (r.noteKey       && t(r.noteKey).toLowerCase().includes(q))
+    );
+  }
+
+  if (sortCol) {
+    const dir = sortAsc ? 1 : -1;
+    const getVal = sortCol === 'noteKey'
+      ? r => (r.noteKey ? t(r.noteKey) : '')
+      : sortCol === 'friendlyName'
+        ? r => getFriendlyName(r.type)
+        : r => r[sortCol];
+    results.sort((a, b) => {
+      const va = getVal(a);
+      const vb = getVal(b);
+      if (typeof va === 'string' || typeof vb === 'string') {
+        return _collator.compare(String(va ?? ''), String(vb ?? '')) * dir;
+      }
+      if (va < vb) return -1 * dir;
+      if (va > vb) return  1 * dir;
+      return 0;
+    });
+  }
+  return results;
+}
+
 function getFiltered() {
   let results = allResults;
 
@@ -856,10 +958,8 @@ function getFiltered() {
       (r.noteKey       && t(r.noteKey).toLowerCase().includes(q))
     );
   }
-
   if (sortCol) {
     const dir = sortAsc ? 1 : -1;
-    const collator = new Intl.Collator(currentLang || 'en', { sensitivity: 'base', numeric: true });
     // For the "notes" column, sort by the translated text (not the i18n key)
     // For "friendlyName", sort by the computed friendly name
     const getVal = sortCol === 'noteKey'
@@ -871,7 +971,7 @@ function getFiltered() {
       const va = getVal(a);
       const vb = getVal(b);
       if (typeof va === 'string' || typeof vb === 'string') {
-        return collator.compare(String(va ?? ''), String(vb ?? '')) * dir;
+        return _collator.compare(String(va ?? ''), String(vb ?? '')) * dir;
       }
       if (va < vb) return -1 * dir;
       if (va > vb) return  1 * dir;
@@ -1026,7 +1126,7 @@ searchInput.addEventListener('input', e => {
 document.querySelectorAll('th[data-sort]').forEach(th => {
   // Make sortable headers reachable & operable by keyboard
   if (!th.hasAttribute('tabindex')) th.setAttribute('tabindex', '0');
-  if (!th.hasAttribute('role')) th.setAttribute('role', 'columnheader button');
+  // Note: <th> already has implicit role=columnheader; do NOT override.
 
   const triggerSort = () => {
     const col = sortMap[th.dataset.sort];
@@ -1053,7 +1153,7 @@ document.querySelectorAll('th[data-sort]').forEach(th => {
 exportBtn.addEventListener('click', () => {
   if (!allResults.length) return;
 
-  const filtered = getFiltered();
+  const filtered = getExportData();
   if (!filtered.length) return;
   const cols = getExportCols();
 
@@ -1107,7 +1207,7 @@ const exportMdBtn = document.getElementById('exportMdBtn');
 exportMdBtn.addEventListener('click', () => {
   if (!allResults.length) return;
 
-  const filtered = getFiltered();
+  const filtered = getExportData();
   if (!filtered.length) return;
   const cols = getExportCols();
 
@@ -1190,7 +1290,7 @@ const exportPdfBtn = document.getElementById('exportPdfBtn');
 exportPdfBtn.addEventListener('click', () => {
   if (!allResults.length) return;
 
-  const filtered = getFiltered();
+  const filtered = getExportData();
   if (!filtered.length) return;
   const cols = getExportCols();
 
