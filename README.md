@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/jrlimax/CloudMoveAnalyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/jrlimax/CloudMoveAnalyzer/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Azure Static Web Apps](https://img.shields.io/badge/Azure-Static%20Web%20Apps-0078D4?logo=microsoftazure)](https://cloudmoveanalyzer.com)
+[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?logo=cloudflare)](https://cloudmoveanalyzer.com)
 
 > Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions.
 
@@ -25,7 +25,6 @@
 ```
 cloudmoveanalyzer/
 ├── index.html                     # Main page
-├── staticwebapp.config.json       # Azure Static Web Apps config (CSP, headers, cache)
 ├── robots.txt                     # SEO
 ├── sitemap.xml                    # SEO
 │
@@ -45,8 +44,7 @@ cloudmoveanalyzer/
 │
 ├── .github/workflows/             # CI/CD pipelines
 │   ├── ci.yml                     # Tests + lint
-│   ├── update-database.yml        # Weekly DB refresh from MS docs (auto-PR)
-│   └── azure-static-web-apps-*.yml  # Auto-deploy
+│   └── update-database.yml        # Weekly DB refresh from MS docs (auto-PR)
 │
 ├── dist/                          # Build output (gitignored)
 │
@@ -74,7 +72,7 @@ CI runs automatically on every push and pull request via [GitHub Actions](.githu
 
 - **Frontend:** Vanilla JavaScript, CSS3 (no framework)
 - **CSV/XLSX Parsing:** [SheetJS](https://sheetjs.com)
-- **Hosting:** [Azure Static Web Apps](https://azure.microsoft.com/products/app-service/static)
+- **Hosting:** [Cloudflare Pages](https://pages.cloudflare.com)
 - **Testing:** [Vitest](https://vitest.dev) + PowerShell
 - **CI/CD:** GitHub Actions
 
@@ -83,7 +81,7 @@ CI runs automatically on every push and pull request via [GitHub Actions](.githu
 - Strict Content-Security-Policy headers
 - HSTS with preload
 - All processing happens in-browser (no server-side data handling)
-- See [staticwebapp.config.json](staticwebapp.config.json) for full security headers
+- Security headers configured in Cloudflare Pages build settings
 
 ## 📜 License
 
