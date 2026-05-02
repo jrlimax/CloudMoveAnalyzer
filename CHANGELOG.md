@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `index.html` favicon references updated to use `favicon.png` with explicit `sizes="128x128"` and `sizes="32x32"` attributes
 - CSV export now prepends a metadata block (date, summary stats, recommendation, critical resources table) before the data rows
 
+### Fixed
+- `execRecMedium` translation incomplete in FR, AR, RU, and JA — added missing sentence instructing users to review the Notes column before proceeding
+
 ## [1.3.0] - 2026-04-27
 
 ### Added
