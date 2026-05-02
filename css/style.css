@@ -416,126 +416,7 @@ main.has-results .upload-area span {
   opacity: 1;
 }
 
-/* ── MS Learn-style expand table toggle ────────────────── */
-.table-expand-row {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0.3rem;
-}
-
-.table-expand-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.28rem 0.6rem 0.28rem 0.45rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
-}
-
-.table-expand-toggle:hover {
-  color: var(--primary);
-  border-color: var(--primary);
-  background: rgba(139, 92, 246, 0.05);
-}
-
-.table-expand-toggle[aria-expanded="true"] {
-  color: var(--primary);
-  border-color: var(--primary);
-}
-
-/* Show only the relevant icon */
-.table-expand-toggle .icon-collapse { display: none; }
-.table-expand-toggle[aria-expanded="true"] .icon-expand  { display: none; }
-.table-expand-toggle[aria-expanded="true"] .icon-collapse { display: inline; }
-
-/* ── Table expand — modal ─────────────────────────────── */
-.table-modal-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 9998;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-}
-
-.table-modal-backdrop.active {
-  display: block;
-}
-
-.table-wrapper.expanded {
-  position: fixed;
-  inset: 1.5rem;
-  z-index: 9999;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.table-wrapper.expanded .table-scroll {
-  flex: 1;
-  overflow: auto;
-}
-
-/* Modal header bar (title + close button) — hidden by default */
-.table-modal-header {
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 1rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--thead-bg);
-  flex-shrink: 0;
-}
-
-.table-wrapper.expanded .table-modal-header {
-  display: flex;
-}
-
-.table-modal-title {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--primary);
-  letter-spacing: 0.02em;
-}
-
-/* Close button inside modal header */
-.table-modal-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-  flex-shrink: 0;
-}
-
-.table-modal-close:hover {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: #ef4444;
-  color: #ef4444;
-}
-
-/* Remove old collapse-bar rules */
-.table-collapse-btn { display: none; }
-
-
-
-
+/* Export pill buttons */
 .export-pill {
   padding: 0.4rem 0.9rem;
   border-radius: 20px;
@@ -650,7 +531,6 @@ main.has-results .upload-area span {
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  position: relative;
   transition: background 0.3s, border-color 0.3s;
 }
 
