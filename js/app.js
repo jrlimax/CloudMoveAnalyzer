@@ -1190,7 +1190,65 @@ exportBtn.addEventListener('click', () => {
   // Append Doc URL if notes is visible
   if (cols['notes']) colDefs.push(['notes', t('csvDocUrl'), r => r.docUrl || '']);
 
-  let csv = colDefs.map(d => csvEscape(d[1])).join(',') + '\n';
+  // Summary counts and percentages
+  let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
+  for (const r of filtered) {
+    if (r.status === 'movable') movable++;
+    else if (r.status === 'partial') partial++;
+    else if (r.status === 'not-movable') notMovable++;
+    else unknownCount++;
+  }
+  const movablePct = Math.round((movable / filtered.length) * 100);
+  const partialPct = Math.round((partial / filtered.length) * 100);
+  const notMovPct  = Math.round((notMovable / filtered.length) * 100);
+  const date = new Date().toLocaleDateString(currentLang || 'en', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  // Build metadata header block (executive summary)
+  let csvMeta = '';
+  csvMeta += csvEscape('Cloud Move Analyzer') + '\n';
+  csvMeta += csvEscape(date) + '\n';
+  csvMeta += '\n';
+  csvMeta += csvEscape(t('execSummaryTitle')) + '\n';
+  csvMeta += csvEscape(t('execSummaryIntro')
+    .replace('{total}', filtered.length)
+    .replace('{movable}', movable)
+    .replace('{movablePct}', movablePct)
+    .replace('{partial}', partial)
+    .replace('{notMovable}', notMovable)) + '\n';
+  csvMeta += '\n';
+  csvMeta += [csvEscape(t('statTotal')), csvEscape(String(filtered.length))].join(',') + '\n';
+  csvMeta += [csvEscape('🟢 ' + t('statMovable')), csvEscape(String(movable)), csvEscape(movablePct + '%')].join(',') + '\n';
+  csvMeta += [csvEscape('🟡 ' + t('statPartial')), csvEscape(String(partial)), csvEscape(partialPct + '%')].join(',') + '\n';
+  csvMeta += [csvEscape('🔴 ' + t('statNotMovable')), csvEscape(String(notMovable)), csvEscape(notMovPct + '%')].join(',') + '\n';
+  if (unknownCount) csvMeta += [csvEscape('⚫ ' + t('statUnknown')), csvEscape(String(unknownCount))].join(',') + '\n';
+  csvMeta += '\n';
+  const csvRec = movablePct >= 70
+    ? t('execRecHigh').replace('{pct}', movablePct)
+    : movablePct >= 40
+      ? t('execRecMedium').replace('{pct}', movablePct).replace('{partialPct}', partialPct)
+      : t('execRecLow').replace('{pct}', notMovPct);
+  csvMeta += csvEscape(csvRec) + '\n';
+  csvMeta += '\n';
+  const csvCritical = filtered.filter(r => r.noteKey);
+  if (csvCritical.length) {
+    const seenTypes = new Set();
+    const uniqueCritical = [];
+    for (const r of csvCritical) {
+      const key = r.type.toLowerCase();
+      if (!seenTypes.has(key)) { seenTypes.add(key); uniqueCritical.push(r); }
+    }
+    csvMeta += csvEscape('⚠️ ' + t('execCriticalTitle')) + '\n';
+    csvMeta += csvEscape(t('execCriticalIntro')) + '\n';
+    csvMeta += [t('csvType'), t('thFriendlyName'), t('csvNotes')].map(csvEscape).join(',') + '\n';
+    for (const r of uniqueCritical) {
+      csvMeta += [r.type, getFriendlyName(r.type), r.noteKey ? t(r.noteKey) : ''].map(csvEscape).join(',') + '\n';
+    }
+    csvMeta += '\n';
+  }
+
+  let csv = csvMeta + colDefs.map(d => csvEscape(d[1])).join(',') + '\n';
   for (const r of filtered) {
     csv += colDefs.map(d => csvEscape(d[2](r))).join(',') + '\n';
   }
@@ -1247,6 +1305,49 @@ exportMdBtn.addEventListener('click', () => {
   md += ` | 🔴 ${t('statNotMovable')}: **${notMovable}**`;
   if (unknownCount) md += ` | ⚫ ${t('statUnknown')}: **${unknownCount}**`;
   md += '\n\n';
+
+  // Executive summary
+  const movablePct = Math.round((movable / filtered.length) * 100);
+  const partialPct = Math.round((partial / filtered.length) * 100);
+  const notMovPct  = Math.round((notMovable / filtered.length) * 100);
+  md += `## ${t('execSummaryTitle')}\n\n`;
+  md += t('execSummaryIntro')
+    .replace('{total}', filtered.length)
+    .replace('{movable}', movable)
+    .replace('{movablePct}', movablePct)
+    .replace('{partial}', partial)
+    .replace('{notMovable}', notMovable) + '\n\n';
+  if (movable)      md += `- 🟢 **${t('csvMovable')}**: ${t('execGlossaryMovable')}\n`;
+  if (partial)      md += `- 🟡 **${t('csvPartial')}**: ${t('execGlossaryPartial')}\n`;
+  if (notMovable)   md += `- 🔴 **${t('csvNotMovable')}**: ${t('execGlossaryNotMovable')}\n`;
+  if (unknownCount) md += `- ⚫ **${t('csvNotFound')}**: ${t('execGlossaryUnknown')}\n`;
+  md += '\n';
+  const mdRec = movablePct >= 70
+    ? t('execRecHigh').replace('{pct}', movablePct)
+    : movablePct >= 40
+      ? t('execRecMedium').replace('{pct}', movablePct).replace('{partialPct}', partialPct)
+      : t('execRecLow').replace('{pct}', notMovPct);
+  md += `> ${mdRec}\n\n`;
+
+  // Critical resources section
+  const mdCritical = filtered.filter(r => r.noteKey);
+  if (mdCritical.length) {
+    const seenMd = new Set();
+    const uniqueMd = [];
+    for (const r of mdCritical) {
+      const key = r.type.toLowerCase();
+      if (!seenMd.has(key)) { seenMd.add(key); uniqueMd.push(r); }
+    }
+    md += `## ⚠️ ${t('execCriticalTitle')}\n\n`;
+    md += t('execCriticalIntro') + '\n\n';
+    md += `| ${t('csvType')} | ${t('thFriendlyName')} | ${t('csvNotes')} |\n`;
+    md += '|---|---|---|\n';
+    for (const r of uniqueMd) {
+      const note = r.noteKey ? t(r.noteKey).replace(/\|/g, '\\|').replace(/\n/g, ' ') : '—';
+      md += `| \`${r.type.replace(/\|/g, '\\|')}\` | ${getFriendlyName(r.type).replace(/\|/g, '\\|')} | ${note} |\n`;
+    }
+    md += '\n---\n\n';
+  }
 
   // Column definitions for MD: [key, header, align, valueFn]
   const allMdCols = {
