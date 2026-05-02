@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-05-02
+
+### Added
+- **Expand table modal** — toolbar button opens the results table as a fullscreen modal with backdrop blur; closes via button, backdrop click, or `Escape` key
+- `expandTable` / `collapseTable` i18n keys in all 8 languages
+- `scripts/build.js` — cross-platform Node.js build script that minifies CSS/JS and assembles `.cf-dist/` for deploy (replaces PowerShell-only workflow)
+- `npm run build` and `npm run deploy` scripts in `package.json`
+
+### Changed
+- **"Friendly Name" → "Display Name"** (`thFriendlyName`) renamed in all 8 languages to match Azure Portal terminology
+- **Executive Summary (PDF)** redesigned: cleaner card layout with blue left-border accent, improved typography, glossary removed to eliminate repetition, recommendation box more readable
+- `wrangler.toml` name corrected: `cloud-move-analyzer` → `cloudmoveanalyzer`
+- `scripts/minify.ps1` updated to build directly into `.cf-dist/` using original filenames (no `.min` suffix), replacing the previous manual copy step
+
+### Removed
+- **Markdown export** button and handler (~125 lines) — feature removed to simplify the export surface
+- `exportMdBtn` i18n keys from all 8 languages (orphaned after MD export removal)
+- `execGlossaryMovable`, `execGlossaryPartial`, `execGlossaryNotMovable`, `execGlossaryUnknown` i18n keys from all 8 languages (orphaned after PDF glossary section removed)
 ## [1.4.0] - 2026-05-01
 
 ### Added

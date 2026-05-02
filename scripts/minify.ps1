@@ -1,21 +1,30 @@
 #Requires -Version 5.1
 # ======================================================================
-# Script de Minificacao - Cloud Move Analyzer
-# Uso: .\minify.ps1
-# Gera versoes .min.css e .min.js em dist/ (gitignored)
+# Script de Build + Minificacao - Cloud Move Analyzer
+# Uso: .\scripts\minify.ps1
+# Constroi .cf-dist/ com arquivos minificados prontos para deploy.
+# Substitui o passo manual de copiar arquivos para .cf-dist/.
+# Deploy: .\scripts\minify.ps1 ; npx wrangler deploy
 # ======================================================================
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$distRoot = Join-Path $root "dist"
+$distRoot = Join-Path $root ".cf-dist"
 
-# Garante estrutura dist/
+# Reconstroi .cf-dist/ do zero
+if (Test-Path $distRoot) { Remove-Item $distRoot -Recurse -Force }
 New-Item -ItemType Directory -Force -Path $distRoot | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $distRoot "css") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $distRoot "js") | Out-Null
 
+# Copia assets estaticos (index.html, assets/, robots.txt, sitemap.xml)
+Copy-Item "$root\index.html"   "$distRoot\index.html"
+Copy-Item "$root\robots.txt"   "$distRoot\robots.txt"
+Copy-Item "$root\sitemap.xml"  "$distRoot\sitemap.xml"
+Copy-Item "$root\assets"       "$distRoot\assets" -Recurse
+
 Write-Host ""
-Write-Host "Iniciando minificacao -> dist/" -ForegroundColor Cyan
+Write-Host "Iniciando minificacao -> .cf-dist/" -ForegroundColor Cyan
 
 # --- Funcao: Minificar CSS ---
 function Convert-Css {
@@ -117,21 +126,18 @@ function Invoke-MinifyFile {
 # --- Processar CSS ---
 Write-Host ""
 Write-Host "CSS:" -ForegroundColor Magenta
-Invoke-MinifyFile "$root\css\style.css" "$distRoot\css\style.min.css" 'css'
+Invoke-MinifyFile "$root\css\style.css" "$distRoot\css\style.css" 'css'
 
 # --- Processar JS ---
 Write-Host ""
 Write-Host "JavaScript:" -ForegroundColor Magenta
 $jsFiles = @('app.js', 'i18n.js', 'move-database.js', 'set-lang.js')
 foreach ($js in $jsFiles) {
-    $inputPath = "$root\js\$js"
-    $outputPath = "$distRoot\js\$($js -replace '\.js$', '.min.js')"
-    Invoke-MinifyFile $inputPath $outputPath 'js'
+    Invoke-MinifyFile "$root\js\$js" "$distRoot\js\$js" 'js'
 }
 
 Write-Host ""
-Write-Host "Minificacao concluida em dist/" -ForegroundColor Green
+Write-Host "Build concluido em .cf-dist/" -ForegroundColor Green
 Write-Host ""
-Write-Host "Os arquivos minificados estao em dist/ (gitignored)." -ForegroundColor Gray
-Write-Host "Para servir minificados em producao, ajuste o build/deploy." -ForegroundColor Gray
+Write-Host "Proximo passo: npx wrangler deploy" -ForegroundColor Cyan
 Write-Host ""

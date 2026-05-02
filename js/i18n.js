@@ -22,7 +22,6 @@ const I18N = {
     statUnknown: 'Not Found',
     searchPlaceholder: 'Search name, type, RG, location or notes...',
     exportBtn: 'Export CSV',
-    exportMdBtn: 'Export MD',
     exportPdfBtn: 'Export PDF',
     colPickerBtn: 'Columns',
     exportLabel: 'Export:',
@@ -77,7 +76,7 @@ const I18N = {
     csvNotFound: 'Not Found',
     loadingText: 'Processing...',
     thNotes: 'Notes',
-    thFriendlyName: 'Friendly Name',
+    thFriendlyName: 'Display Name',
     csvNotes: 'Notes',
     csvDocUrl: 'Doc URL',
     noteSqlServer: 'Server and all its databases must be moved together to the same resource group.',
@@ -117,10 +116,6 @@ const I18N = {
     noteStreamAnalytics: 'Cannot be moved while in running state.',
     execSummaryTitle: 'Executive Summary',
     execSummaryIntro: '{total} resources were analyzed. {movable} ({movablePct}%) can be moved with low risk. {partial} require additional analysis due to dependencies or constraints. {notMovable} cannot be directly moved and will need to be redeployed or recreated.',
-    execGlossaryMovable: 'Low risk — direct move supported',
-    execGlossaryPartial: 'Requires analysis — has dependencies or constraints',
-    execGlossaryNotMovable: 'Requires redeployment or recreation',
-    execGlossaryUnknown: 'Not found in database — manual verification needed',
     execRecHigh: '✅ {pct}% of resources can be moved directly. This environment has a high migration readiness level.',
     execRecMedium: '⚠️ {pct}% of resources can be moved directly, but {partialPct}% require additional analysis. Review the notes column for each resource before proceeding.',
     execRecLow: '🚨 {pct}% of resources cannot be moved directly. A detailed migration plan with redeployment steps is strongly recommended.',
@@ -158,7 +153,9 @@ const I18N = {
     pixCopied: 'Copied!',
     kofiLabel: '🌍 International',
     pixLabel: '🇧🇷 PIX',
-    kofiBtn: '☕ Support me on Ko-fi'
+    kofiBtn: '☕ Support me on Ko-fi',
+    expandTable: 'Expand',
+    collapseTable: 'Collapse'
   },
 
   'pt-BR': {
@@ -179,7 +176,6 @@ const I18N = {
     statUnknown: 'Não Encontrado',
     searchPlaceholder: 'Buscar nome, tipo, RG, localização ou notas...',
     exportBtn: 'Exportar CSV',
-    exportMdBtn: 'Exportar MD',
     exportPdfBtn: 'Exportar PDF',
     colPickerBtn: 'Colunas',
     exportLabel: 'Exportar:',
@@ -234,7 +230,7 @@ const I18N = {
     csvNotFound: 'Não Encontrado',
     loadingText: 'Processando...',
     thNotes: 'Observações',
-    thFriendlyName: 'Nome Amigável',
+    thFriendlyName: 'Nome de Exibição',
     csvNotes: 'Observações',
     csvDocUrl: 'URL da Documentação',
     noteSqlServer: 'Servidor e todos os seus bancos de dados devem ser movidos juntos para o mesmo grupo de recursos.',
@@ -274,10 +270,6 @@ const I18N = {
     noteStreamAnalytics: 'Não pode ser movido enquanto estiver em execução.',
     execSummaryTitle: 'Resumo Executivo',
     execSummaryIntro: '{total} recursos foram analisados. {movable} ({movablePct}%) podem ser movidos com baixo risco. {partial} requerem análise adicional devido a dependências ou restrições. {notMovable} não podem ser movidos diretamente e precisarão ser reimplantados ou recriados.',
-    execGlossaryMovable: 'Baixo risco — movimentação direta suportada',
-    execGlossaryPartial: 'Requer análise — possui dependências ou restrições',
-    execGlossaryNotMovable: 'Requer reimplantação ou recriação',
-    execGlossaryUnknown: 'Não encontrado na base de dados — verificação manual necessária',
     execRecHigh: '✅ {pct}% dos recursos podem ser movidos diretamente. Este ambiente possui alto nível de prontidão para migração.',
     execRecMedium: '⚠️ {pct}% dos recursos podem ser movidos diretamente, mas {partialPct}% requerem análise adicional. Revise a coluna de observações de cada recurso antes de prosseguir.',
     execRecLow: '🚨 {pct}% dos recursos não podem ser movidos diretamente. Um plano de migração detalhado com etapas de reimplantação é fortemente recomendado.',
@@ -315,7 +307,9 @@ const I18N = {
     pixCopied: 'Copiado!',
     kofiLabel: '🌍 Internacional',
     pixLabel: '🇧🇷 PIX',
-    kofiBtn: '☕ Me apoie no Ko-fi'
+    kofiBtn: '☕ Me apoie no Ko-fi',
+    expandTable: 'Expandir',
+    collapseTable: 'Recolher'
   },
 
   'zh-CN': {
@@ -336,7 +330,6 @@ const I18N = {
     statUnknown: '未找到',
     searchPlaceholder: '搜索名称、类型、资源组、位置或注释...',
     exportBtn: '导出 CSV',
-    exportMdBtn: '导出 MD',
     exportPdfBtn: '导出 PDF',
     colPickerBtn: '列',
     exportLabel: '导出:',
@@ -391,7 +384,7 @@ const I18N = {
     csvNotFound: '未找到',
     loadingText: '处理中...',
     thNotes: '备注',
-    thFriendlyName: '友好名称',
+    thFriendlyName: '显示名称',
     csvNotes: '备注',
     csvDocUrl: '文档链接',
     noteSqlServer: '服务器及其所有数据库必须一起移动到同一资源组。',
@@ -431,10 +424,6 @@ const I18N = {
     noteStreamAnalytics: '运行状态下无法移动。',
     execSummaryTitle: '执行摘要',
     execSummaryIntro: '共分析了 {total} 个资源。{movable} 个（{movablePct}%）可以低风险移动。{partial} 个需要额外分析。{notMovable} 个无法直接移动，需要重新部署。',
-    execGlossaryMovable: '低风险 — 支持直接移动',
-    execGlossaryPartial: '需要分析 — 存在依赖关系或限制',
-    execGlossaryNotMovable: '需要重新部署或重建',
-    execGlossaryUnknown: '数据库中未找到 — 需要手动验证',
     execRecHigh: '✅ {pct}% 的资源可以直接移动。此环境的迁移准备度较高。',
     execRecMedium: '⚠️ {pct}% 的资源可以直接移动，但 {partialPct}% 需要额外分析。请在操作前查看每个资源的备注。',
     execRecLow: '🚨 {pct}% 的资源无法直接移动。强烈建议制定详细的迁移计划。',
@@ -472,7 +461,9 @@ const I18N = {
     pixCopied: '已复制！',
     kofiLabel: '🌍 国际',
     pixLabel: '🇧🇷 PIX',
-    kofiBtn: '☕ 在 Ko-fi 上支持我'
+    kofiBtn: '☕ 在 Ko-fi 上支持我',
+    expandTable: '展开',
+    collapseTable: '收起'
   },
 
   es: {
@@ -493,7 +484,6 @@ const I18N = {
     statUnknown: 'No Encontrado',
     searchPlaceholder: 'Buscar nombre, tipo, RG, ubicación o notas...',
     exportBtn: 'Exportar CSV',
-    exportMdBtn: 'Exportar MD',
     exportPdfBtn: 'Exportar PDF',
     colPickerBtn: 'Columnas',
     exportLabel: 'Exportar:',
@@ -548,7 +538,7 @@ const I18N = {
     csvNotFound: 'No Encontrado',
     loadingText: 'Procesando...',
     thNotes: 'Observaciones',
-    thFriendlyName: 'Nombre Amigable',
+    thFriendlyName: 'Nombre para mostrar',
     csvNotes: 'Observaciones',
     csvDocUrl: 'URL de Documentación',
     noteSqlServer: 'El servidor y todas sus bases de datos deben moverse juntos al mismo grupo de recursos.',
@@ -588,10 +578,6 @@ const I18N = {
     noteStreamAnalytics: 'No puede moverse mientras está en ejecución.',
     execSummaryTitle: 'Resumen Ejecutivo',
     execSummaryIntro: 'Se analizaron {total} recursos. {movable} ({movablePct}%) pueden moverse con bajo riesgo. {partial} requieren análisis adicional. {notMovable} no pueden moverse directamente y necesitarán ser reimplantados.',
-    execGlossaryMovable: 'Bajo riesgo — movimiento directo soportado',
-    execGlossaryPartial: 'Requiere análisis — tiene dependencias o restricciones',
-    execGlossaryNotMovable: 'Requiere reimplantación o recreación',
-    execGlossaryUnknown: 'No encontrado en la base de datos — verificación manual necesaria',
     execRecHigh: '✅ {pct}% de los recursos pueden moverse directamente. Este entorno tiene un alto nivel de preparación para la migración.',
     execRecMedium: '⚠️ {pct}% de los recursos pueden moverse directamente, pero {partialPct}% requieren análisis adicional. Revise la columna de notas antes de proceder.',
     execRecLow: '🚨 {pct}% de los recursos no pueden moverse directamente. Se recomienda un plan de migración detallado.',
@@ -629,7 +615,9 @@ const I18N = {
     pixCopied: '¡Copiado!',
     kofiLabel: '🌍 Internacional',
     pixLabel: '🇧🇷 PIX',
-    kofiBtn: '☕ Apóyame en Ko-fi'
+    kofiBtn: '☕ Apóyame en Ko-fi',
+    expandTable: 'Expandir',
+    collapseTable: 'Contraer'
   },
 
   fr: {
@@ -650,7 +638,6 @@ const I18N = {
     statUnknown: 'Non Trouvé',
     searchPlaceholder: 'Rechercher nom, type, RG, emplacement ou notes...',
     exportBtn: 'Exporter CSV',
-    exportMdBtn: 'Exporter MD',
     exportPdfBtn: 'Exporter PDF',
     colPickerBtn: 'Colonnes',
     exportLabel: 'Exporter :',
@@ -705,7 +692,7 @@ const I18N = {
     csvNotFound: 'Non Trouvé',
     loadingText: 'Traitement en cours...',
     thNotes: 'Notes',
-    thFriendlyName: 'Nom Convivial',
+    thFriendlyName: 'Nom affiché',
     csvNotes: 'Notes',
     csvDocUrl: 'URL de Documentation',
     noteSqlServer: 'Le serveur et toutes ses bases de données doivent être déplacés ensemble dans le même groupe de ressources.',
@@ -745,10 +732,6 @@ const I18N = {
     noteStreamAnalytics: 'Ne peut pas être déplacé en état d\'exécution.',
     execSummaryTitle: 'Résumé Exécutif',
     execSummaryIntro: '{total} ressources ont été analysées. {movable} ({movablePct}%) peuvent être déplacées avec un risque faible. {partial} nécessitent une analyse supplémentaire. {notMovable} ne peuvent pas être déplacées directement.',
-    execGlossaryMovable: 'Risque faible — déplacement direct supporté',
-    execGlossaryPartial: 'Analyse requise — dépendances ou contraintes',
-    execGlossaryNotMovable: 'Redéploiement ou recréation nécessaire',
-    execGlossaryUnknown: 'Non trouvé dans la base de données — vérification manuelle nécessaire',
     execRecHigh: '✅ {pct}% des ressources peuvent être déplacées directement. Cet environnement a un niveau élevé de préparation à la migration.',
     execRecMedium: '⚠️ {pct}% des ressources peuvent être déplacées directement, mais {partialPct}% nécessitent une analyse supplémentaire. Consultez la colonne Notes pour chaque ressource avant de procéder.',
     execRecLow: '🚨 {pct}% des ressources ne peuvent pas être déplacées directement. Un plan de migration détaillé est fortement recommandé.',
@@ -786,7 +769,9 @@ const I18N = {
     pixCopied: 'Copié !',
     kofiLabel: '🌍 International',
     pixLabel: '🇧🇷 PIX',
-    kofiBtn: '☕ Soutenez-moi sur Ko-fi'
+    kofiBtn: '☕ Soutenez-moi sur Ko-fi',
+    expandTable: 'Agrandir',
+    collapseTable: 'Réduire'
   },
 
   ar: {
@@ -807,7 +792,6 @@ const I18N = {
     statUnknown: 'غير موجود',
     searchPlaceholder: 'البحث بالاسم، النوع، RG، الموقع أو الملاحظات...',
     exportBtn: 'تصدير CSV',
-    exportMdBtn: 'تصدير MD',
     exportPdfBtn: 'تصدير PDF',
     colPickerBtn: 'الأعمدة',
     exportLabel: 'تصدير:',
@@ -862,7 +846,7 @@ const I18N = {
     csvNotFound: 'غير موجود',
     loadingText: 'جارٍ المعالجة...',
     thNotes: 'ملاحظات',
-    thFriendlyName: 'اسم مألوف',
+    thFriendlyName: 'الاسم المعروض',
     csvNotes: 'ملاحظات',
     csvDocUrl: 'رابط التوثيق',
     noteSqlServer: 'يجب نقل الخادم وجميع قواعد بياناته معًا إلى نفس مجموعة الموارد.',
@@ -902,10 +886,6 @@ const I18N = {
     noteStreamAnalytics: 'لا يمكن نقله أثناء التشغيل.',
     execSummaryTitle: 'الملخص التنفيذي',
     execSummaryIntro: 'تم تحليل {total} موارد. {movable} ({movablePct}%) يمكن نقلها بمخاطر منخفضة. {partial} تتطلب تحليلاً إضافياً. {notMovable} لا يمكن نقلها مباشرة.',
-    execGlossaryMovable: 'مخاطر منخفضة — النقل المباشر مدعوم',
-    execGlossaryPartial: 'يتطلب تحليلاً — توجد تبعيات أو قيود',
-    execGlossaryNotMovable: 'يتطلب إعادة النشر أو إعادة الإنشاء',
-    execGlossaryUnknown: 'غير موجود في قاعدة البيانات — يحتاج تحقق يدوي',
     execRecHigh: '✅ {pct}% من الموارد يمكن نقلها مباشرة. هذه البيئة لديها مستوى عالٍ من الجاهزية للترحيل.',
     execRecMedium: '⚠️ {pct}% من الموارد يمكن نقلها مباشرة، لكن {partialPct}% تتطلب تحليلاً إضافياً. راجع عمود الملاحظات لكل مورد قبل المتابعة.',
     execRecLow: '🚨 {pct}% من الموارد لا يمكن نقلها مباشرة. يُنصح بشدة بوضع خطة ترحيل مفصلة.',
@@ -943,7 +923,9 @@ const I18N = {
     pixCopied: 'تم النسخ!',
     kofiLabel: '🌍 دولي',
     pixLabel: '🇧🇷 PIX',
-    kofiBtn: '☕ ادعمني على Ko-fi'
+    kofiBtn: '☕ ادعمني على Ko-fi',
+    expandTable: 'توسيع',
+    collapseTable: 'طي'
   },
 
   ru: {
@@ -964,7 +946,6 @@ const I18N = {
     statUnknown: 'Не найдено',
     searchPlaceholder: 'Поиск по имени, типу, RG, региону или примечаниям...',
     exportBtn: 'Экспорт CSV',
-    exportMdBtn: 'Экспорт MD',
     exportPdfBtn: 'Экспорт PDF',
     colPickerBtn: 'Столбцы',
     exportLabel: 'Экспорт:',
@@ -1019,7 +1000,7 @@ const I18N = {
     csvNotFound: 'Не найдено',
     loadingText: 'Обработка...',
     thNotes: 'Примечания',
-    thFriendlyName: 'Понятное имя',
+    thFriendlyName: 'Отображаемое имя',
     csvNotes: 'Примечания',
     csvDocUrl: 'Ссылка на документацию',
     noteSqlServer: 'Сервер и все его базы данных должны перемещаться вместе в одну группу ресурсов.',
@@ -1059,10 +1040,6 @@ const I18N = {
     noteStreamAnalytics: 'Нельзя перемещать в состоянии выполнения.',
     execSummaryTitle: 'Краткое резюме',
     execSummaryIntro: 'Проанализировано {total} ресурсов. {movable} ({movablePct}%) можно переместить с низким риском. {partial} требуют дополнительного анализа. {notMovable} невозможно переместить напрямую.',
-    execGlossaryMovable: 'Низкий риск — прямое перемещение поддерживается',
-    execGlossaryPartial: 'Требуется анализ — есть зависимости или ограничения',
-    execGlossaryNotMovable: 'Требуется повторное развертывание или пересоздание',
-    execGlossaryUnknown: 'Не найдено в базе данных — требуется ручная проверка',
     execRecHigh: '✅ {pct}% ресурсов можно переместить напрямую. Эта среда имеет высокий уровень готовности к миграции.',
     execRecMedium: '⚠️ {pct}% ресурсов можно переместить напрямую, но {partialPct}% требуют дополнительного анализа. Проверьте столбец примечаний для каждого ресурса перед продолжением.',
     execRecLow: '🚨 {pct}% ресурсов невозможно переместить напрямую. Настоятельно рекомендуется детальный план миграции.',
@@ -1100,7 +1077,9 @@ const I18N = {
     pixCopied: 'Скопировано!',
     kofiLabel: '🌍 Международный',
     pixLabel: '🇧🇷 PIX',
-    kofiBtn: '☕ Поддержите на Ko-fi'
+    kofiBtn: '☕ Поддержите на Ko-fi',
+    expandTable: 'Развернуть',
+    collapseTable: 'Свернуть'
   },
 
   ja: {
@@ -1121,7 +1100,6 @@ const I18N = {
     statUnknown: '未検出',
     searchPlaceholder: '名前、種類、RG、場所、メモを検索...',
     exportBtn: 'CSV エクスポート',
-    exportMdBtn: 'MD エクスポート',
     exportPdfBtn: 'PDF エクスポート',
     colPickerBtn: '列',
     exportLabel: 'エクスポート:',
@@ -1176,7 +1154,7 @@ const I18N = {
     csvNotFound: '未検出',
     loadingText: '処理中...',
     thNotes: '備考',
-    thFriendlyName: 'フレンドリ名',
+    thFriendlyName: '表示名',
     csvNotes: '備考',
     csvDocUrl: 'ドキュメントURL',
     noteSqlServer: 'サーバーとすべてのデータベースは同じリソースグループに一緒に移動する必要があります。',
@@ -1216,10 +1194,6 @@ const I18N = {
     noteStreamAnalytics: '実行中は移動できません。',
     execSummaryTitle: 'エグゼクティブサマリー',
     execSummaryIntro: '{total} リソースを分析しました。{movable} ({movablePct}%) は低リスクで移動可能です。{partial} は追加分析が必要です。{notMovable} は直接移動できず、再デプロイが必要です。',
-    execGlossaryMovable: '低リスク — 直接移動をサポート',
-    execGlossaryPartial: '分析が必要 — 依存関係や制約あり',
-    execGlossaryNotMovable: '再デプロイまたは再作成が必要',
-    execGlossaryUnknown: 'データベースに見つかりません — 手動確認が必要',
     execRecHigh: '✅ {pct}% のリソースを直接移動できます。この環境は移行準備レベルが高いです。',
     execRecMedium: '⚠️ {pct}% のリソースを直接移動できますが、{partialPct}% は追加分析が必要です。続行前に各リソースのメモ列を確認してください。',
     execRecLow: '🚨 {pct}% のリソースは直接移動できません。詳細な移行計画を強くお勧めします。',
@@ -1257,7 +1231,9 @@ const I18N = {
     pixCopied: 'コピーしました！',
     kofiLabel: '🌍 国際',
     pixLabel: '🇧🇷 PIX',
-    kofiBtn: '☕ Ko-fi でサポート'
+    kofiBtn: '☕ Ko-fi でサポート',
+    expandTable: '拡大',
+    collapseTable: '縮小'
   }
 };
 

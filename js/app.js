@@ -1268,129 +1268,6 @@ exportBtn.addEventListener('click', () => {
 // ==========================================================
 // Markdown export
 // ==========================================================
-const exportMdBtn = document.getElementById('exportMdBtn');
-exportMdBtn.addEventListener('click', () => {
-  if (!state.allResults.length) return;
-
-  const filtered = getExportData();
-  if (!filtered.length) return;
-  const cols = getExportCols();
-
-  const statusLabel = {
-    'movable': t('csvMovable'), 'partial': t('csvPartial'),
-    'not-movable': t('csvNotMovable'), 'unknown': t('csvNotFound')
-  };
-  const yesNo = v => v === 1 ? '✅' : v === 0 ? '❌' : '—';
-  const statusEmoji = s => s === 'movable' ? '🟢' : s === 'partial' ? '🟡' : s === 'not-movable' ? '🔴' : '⚫';
-
-  // Summary counts
-  let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
-  for (const r of filtered) {
-    if (r.status === 'movable') movable++;
-    else if (r.status === 'partial') partial++;
-    else if (r.status === 'not-movable') notMovable++;
-    else unknownCount++;
-  }
-
-  const date = new Date().toLocaleDateString(currentLang || 'en', {
-    year: 'numeric', month: 'long', day: 'numeric'
-  });
-
-  let md = `<img src="https://cloudmoveanalyzer.com/assets/logo.png" alt="Cloud Move Analyzer" width="96" align="right" />\n\n`;
-  md += `# Cloud Move Analyzer — ${t('title') || 'Report'}\n\n`;
-  md += `> ${t('exportHint')}\n\n`;
-  md += `**${date}** | ${t('statTotal')}: **${filtered.length}**`;
-  md += ` | 🟢 ${t('statMovable')}: **${movable}**`;
-  md += ` | 🟡 ${t('statPartial')}: **${partial}**`;
-  md += ` | 🔴 ${t('statNotMovable')}: **${notMovable}**`;
-  if (unknownCount) md += ` | ⚫ ${t('statUnknown')}: **${unknownCount}**`;
-  md += '\n\n';
-
-  // Executive summary
-  const movablePct = Math.round((movable / filtered.length) * 100);
-  const partialPct = Math.round((partial / filtered.length) * 100);
-  const notMovPct  = Math.round((notMovable / filtered.length) * 100);
-  md += `## ${t('execSummaryTitle')}\n\n`;
-  md += t('execSummaryIntro')
-    .replace('{total}', filtered.length)
-    .replace('{movable}', movable)
-    .replace('{movablePct}', movablePct)
-    .replace('{partial}', partial)
-    .replace('{notMovable}', notMovable) + '\n\n';
-  if (movable)      md += `- 🟢 **${t('csvMovable')}**: ${t('execGlossaryMovable')}\n`;
-  if (partial)      md += `- 🟡 **${t('csvPartial')}**: ${t('execGlossaryPartial')}\n`;
-  if (notMovable)   md += `- 🔴 **${t('csvNotMovable')}**: ${t('execGlossaryNotMovable')}\n`;
-  if (unknownCount) md += `- ⚫ **${t('csvNotFound')}**: ${t('execGlossaryUnknown')}\n`;
-  md += '\n';
-  const mdRec = movablePct >= 70
-    ? t('execRecHigh').replace('{pct}', movablePct)
-    : movablePct >= 40
-      ? t('execRecMedium').replace('{pct}', movablePct).replace('{partialPct}', partialPct)
-      : t('execRecLow').replace('{pct}', notMovPct);
-  md += `> ${mdRec}\n\n`;
-
-  // Critical resources section
-  const mdCritical = filtered.filter(r => r.noteKey);
-  if (mdCritical.length) {
-    const seenMd = new Set();
-    const uniqueMd = [];
-    for (const r of mdCritical) {
-      const key = r.type.toLowerCase();
-      if (!seenMd.has(key)) { seenMd.add(key); uniqueMd.push(r); }
-    }
-    md += `## ⚠️ ${t('execCriticalTitle')}\n\n`;
-    md += t('execCriticalIntro') + '\n\n';
-    md += `| ${t('csvType')} | ${t('thFriendlyName')} | ${t('csvNotes')} |\n`;
-    md += '|---|---|---|\n';
-    for (const r of uniqueMd) {
-      const note = r.noteKey ? t(r.noteKey).replace(/\|/g, '\\|').replace(/\n/g, ' ') : '—';
-      md += `| \`${r.type.replace(/\|/g, '\\|')}\` | ${getFriendlyName(r.type).replace(/\|/g, '\\|')} | ${note} |\n`;
-    }
-    md += '\n---\n\n';
-  }
-
-  // Column definitions for MD: [key, header, align, valueFn]
-  const allMdCols = {
-    name:          [t('csvName'),        '---',   r => r.name],
-    type:          [t('csvType'),        '---',   r => '`' + r.type + '`'],
-    friendlyName:  [t('thFriendlyName'), '---',   r => getFriendlyName(r.type)],
-    resourceGroup: [t('csvRG'),          '---',   r => r.resourceGroup || '—'],
-    location:      [t('csvLocation'),    '---',   r => r.location || '—'],
-    moveRG:        [t('csvMoveRG'),      ':---:',  r => yesNo(r.moveRG)],
-    moveSub:       [t('csvMoveSub'),     ':---:',  r => yesNo(r.moveSub)],
-    moveRegion:    [t('csvMoveRegion'),  ':---:',  r => yesNo(r.moveRegion)],
-    status:        [t('csvStatus'),      '---',   r => statusEmoji(r.status) + ' ' + statusLabel[r.status]],
-    notes:         [t('csvNotes'),       '---',   r => {
-      const note = r.noteKey ? t(r.noteKey).replace(/\|/g, '\\|').replace(/\n/g, ' ') : '—';
-      const docLink = r.docUrl ? ` [📄](${r.docUrl})` : '';
-      return note + docLink;
-    }]
-  };
-  const mdCols = getColumnOrder()
-    .filter(k => cols[k])
-    .map(k => [k, allMdCols[k][0], allMdCols[k][1], allMdCols[k][2]]);
-
-  // Table header
-  md += '| ' + mdCols.map(d => d[1]).join(' | ') + ' |\n';
-  md += '|' + mdCols.map(d => d[2]).join('|') + '|\n';
-
-  for (const r of filtered) {
-    md += '| ' + mdCols.map(d => d[3](r)).join(' | ') + ' |\n';
-  }
-
-  md += `\n---\n*Generated by [Cloud Move Analyzer](https://cloudmoveanalyzer.com/) — cloudmoveanalyzer.com*\n`;
-
-  const blob = new Blob([md], { type: 'text/markdown;charset=utf-8;' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = 'cloud-move-analyzer-export.md';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-});
-
 // ==========================================================
 // PDF export (browser print)
 // ==========================================================
@@ -1471,12 +1348,12 @@ exportPdfBtn.addEventListener('click', () => {
   .s-par{background:#fef9c3;color:#854d0e}
   .s-not{background:#fee2e2;color:#991b1b}
   .s-unk{background:#f1f5f9;color:#475569}
-  .exec-summary{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 18px;margin-bottom:16px}
-  .exec-summary h2{font-size:14px;margin-bottom:8px;color:#0f172a}
-  .exec-summary p{font-size:12px;line-height:1.6;color:#334155;margin-bottom:6px}
-  .exec-summary .glossary{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;margin-bottom:8px}
-  .exec-summary .glossary span{font-size:11px;font-weight:500}
-  .exec-summary .recommendation{background:#eff6ff;border-left:3px solid #3b82f6;padding:6px 10px;border-radius:0 4px 4px 0;font-size:11px;color:#1e40af;margin-top:8px}
+  .exec-summary{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #2563eb;border-radius:0 6px 6px 0;padding:14px 18px;margin-bottom:16px}
+  .exec-summary h2{font-size:13px;font-weight:700;color:#1e40af;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e2e8f0}
+  .exec-summary p{font-size:12px;line-height:1.7;color:#334155;margin-bottom:10px}
+  .exec-summary .glossary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .exec-summary .glossary span{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid #e2e8f0;background:#f8fafc;color:#334155}
+  .exec-summary .recommendation{background:#f0f9ff;border:1px solid #bae6fd;padding:8px 12px;border-radius:4px;font-size:11.5px;color:#0369a1;line-height:1.6}
   table{width:100%;border-collapse:collapse;margin-bottom:12px}
   th,td{border:1px solid #cbd5e1;padding:4px 6px;text-align:left;font-size:11px}
   th{background:#f1f5f9;font-weight:600;font-size:11px}
@@ -1511,14 +1388,8 @@ exportPdfBtn.addEventListener('click', () => {
   ${unknownCount ? `<span class="s-unk">⚫ ${t('statUnknown')}: ${unknownCount}</span>` : ''}
 </div>
 <div class="exec-summary">
-  <h2>${t('execSummaryTitle')}</h2>
+  <h2>📋 ${t('execSummaryTitle')}</h2>
   <p>${t('execSummaryIntro').replace('{total}', filtered.length).replace('{movable}', movable).replace('{movablePct}', movablePct).replace('{partial}', partial).replace('{notMovable}', notMovable)}</p>
-  <div class="glossary">
-    ${movable   ? `<span>🟢 <b>${t('csvMovable')}</b>: ${t('execGlossaryMovable')}</span>` : ''}
-    ${partial   ? `<span>🟡 <b>${t('csvPartial')}</b>: ${t('execGlossaryPartial')}</span>` : ''}
-    ${notMovable? `<span>🔴 <b>${t('csvNotMovable')}</b>: ${t('execGlossaryNotMovable')}</span>` : ''}
-    ${unknownCount ? `<span>⚫ <b>${t('csvNotFound')}</b>: ${t('execGlossaryUnknown')}</span>` : ''}
-  </div>
   <div class="recommendation">${movablePct >= 70
     ? t('execRecHigh').replace('{pct}', movablePct)
     : movablePct >= 40
@@ -1538,7 +1409,7 @@ ${(() => {
   }
   let html = '<div class="exec-summary" style="margin-top:12px">';
   html += '<h2>⚠️ ' + t('execCriticalTitle') + '</h2>';
-  html += '<p style="margin-bottom:8px">' + t('execCriticalIntro') + '</p>';
+  html += '<p>' + t('execCriticalIntro') + '</p>';
   html += '<table class="data-table" style="margin:0"><thead><tr><th>' + t('csvType') + '</th><th>' + t('thFriendlyName') + '</th><th>' + t('csvNotes') + '</th></tr></thead><tbody>';
   for (const r of unique) {
     html += '<tr><td><code>' + escapeHtml(r.type) + '</code></td>';
@@ -1609,5 +1480,49 @@ ${(() => {
     doc.write(html);
     doc.close();
     onReady();
+  }
+});
+
+// ==========================================================
+// Table expand / collapse — modal
+// ==========================================================
+const tableExpandBtn   = document.getElementById('tableExpandBtn');
+const tableCollapseBtn = document.getElementById('tableCollapseBtn');
+const tableWrapper     = document.querySelector('.table-wrapper');
+
+const tableBackdrop = document.createElement('div');
+tableBackdrop.className = 'table-modal-backdrop';
+document.body.appendChild(tableBackdrop);
+
+function expandTable() {
+  tableWrapper.classList.add('expanded');
+  tableBackdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  const span = tableExpandBtn.querySelector('span');
+  if (span) span.textContent = t('collapseTable') || 'Collapse table';
+  tableExpandBtn.setAttribute('aria-expanded', 'true');
+  tableCollapseBtn.focus();
+}
+
+function collapseTable() {
+  tableWrapper.classList.remove('expanded');
+  tableBackdrop.classList.remove('active');
+  document.body.style.overflow = '';
+  const span = tableExpandBtn.querySelector('span');
+  if (span) span.textContent = t('expandTable') || 'Expand table';
+  tableExpandBtn.setAttribute('aria-expanded', 'false');
+  tableExpandBtn.focus();
+}
+
+tableExpandBtn.addEventListener('click', () => {
+  tableWrapper.classList.contains('expanded') ? collapseTable() : expandTable();
+});
+
+tableCollapseBtn.addEventListener('click', collapseTable);
+tableBackdrop.addEventListener('click', collapseTable);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && tableWrapper.classList.contains('expanded')) {
+    collapseTable();
   }
 });

@@ -452,6 +452,11 @@
             <label draggable="true" data-col-label="notes"><span class="drag-handle">⠿</span><input type="checkbox" data-col="notes" checked /> <span data-i18n="thNotes">Notes</span></label>
           </div>
         </div>
+        <button class="table-expand-toggle" id="tableExpandBtn" aria-expanded="false">
+          <svg class="icon-expand" aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h5v1.5H2.5V7H1V1zm9.5 0H15v6h-1.5V2.5H10V1zM1 9h1.5v4.5H7V15H1V9zm13.5 0V15H9v-1.5h4.5V9H14.5z"/></svg>
+          <svg class="icon-collapse" aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 1H1v5h1.5V2.5H5.5V1zm5 0v1.5h2.999V6H15V1h-4.5zM1 10v5h4.5v-1.5H2.5V10H1zm12 3.5V10h-1.5v3.499H8.5V15H15v-1.5h-2z"/></svg>
+          <span data-i18n="expandTable">Expandir</span>
+        </button>
         <div class="export-group">
           <span class="export-label" data-i18n="exportLabel">Export:</span>
           <button class="export-pill export-pill--csv" id="exportBtn">
@@ -462,16 +467,18 @@
             <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             PDF
           </button>
-          <button class="export-pill export-pill--md" id="exportMdBtn">
-            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
-            MD
-          </button>
         </div>
       </div>
       <p class="export-hint" data-i18n="exportHint">Exports contain only the currently filtered results.</p>
 
       <!-- Table -->
       <div class="table-wrapper">
+        <div class="table-modal-header">
+          <span class="table-modal-title" data-i18n="expandTable">Expandir</span>
+          <button class="table-modal-close" id="tableCollapseBtn" aria-label="Fechar">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
         <div class="table-scroll">
           <table id="resultsTable" aria-label="Azure resource move support results">
             <thead>
