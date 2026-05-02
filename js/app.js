@@ -1471,12 +1471,10 @@ exportPdfBtn.addEventListener('click', () => {
   .s-par{background:#fef9c3;color:#854d0e}
   .s-not{background:#fee2e2;color:#991b1b}
   .s-unk{background:#f1f5f9;color:#475569}
-  .exec-summary{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 18px;margin-bottom:16px}
-  .exec-summary h2{font-size:14px;margin-bottom:8px;color:#0f172a}
-  .exec-summary p{font-size:12px;line-height:1.6;color:#334155;margin-bottom:6px}
-  .exec-summary .glossary{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;margin-bottom:8px}
-  .exec-summary .glossary span{font-size:11px;font-weight:500}
-  .exec-summary .recommendation{background:#eff6ff;border-left:3px solid #3b82f6;padding:6px 10px;border-radius:0 4px 4px 0;font-size:11px;color:#1e40af;margin-top:8px}
+  .exec-summary{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #2563eb;border-radius:0 6px 6px 0;padding:14px 18px;margin-bottom:16px}
+  .exec-summary h2{font-size:13px;font-weight:700;color:#1e40af;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e2e8f0}
+  .exec-summary p{font-size:12px;line-height:1.7;color:#334155;margin-bottom:10px}
+  .exec-summary .recommendation{background:#f0f9ff;border:1px solid #bae6fd;padding:8px 12px;border-radius:4px;font-size:11.5px;color:#0369a1;line-height:1.6}
   table{width:100%;border-collapse:collapse;margin-bottom:12px}
   th,td{border:1px solid #cbd5e1;padding:4px 6px;text-align:left;font-size:11px}
   th{background:#f1f5f9;font-weight:600;font-size:11px}
@@ -1511,14 +1509,8 @@ exportPdfBtn.addEventListener('click', () => {
   ${unknownCount ? `<span class="s-unk">⚫ ${t('statUnknown')}: ${unknownCount}</span>` : ''}
 </div>
 <div class="exec-summary">
-  <h2>${t('execSummaryTitle')}</h2>
+  <h2>📋 ${t('execSummaryTitle')}</h2>
   <p>${t('execSummaryIntro').replace('{total}', filtered.length).replace('{movable}', movable).replace('{movablePct}', movablePct).replace('{partial}', partial).replace('{notMovable}', notMovable)}</p>
-  <div class="glossary">
-    ${movable   ? `<span>🟢 <b>${t('csvMovable')}</b>: ${t('execGlossaryMovable')}</span>` : ''}
-    ${partial   ? `<span>🟡 <b>${t('csvPartial')}</b>: ${t('execGlossaryPartial')}</span>` : ''}
-    ${notMovable? `<span>🔴 <b>${t('csvNotMovable')}</b>: ${t('execGlossaryNotMovable')}</span>` : ''}
-    ${unknownCount ? `<span>⚫ <b>${t('csvNotFound')}</b>: ${t('execGlossaryUnknown')}</span>` : ''}
-  </div>
   <div class="recommendation">${movablePct >= 70
     ? t('execRecHigh').replace('{pct}', movablePct)
     : movablePct >= 40
@@ -1610,4 +1602,43 @@ ${(() => {
     doc.close();
     onReady();
   }
+});
+
+// ==========================================================
+// Table expand / collapse (modal mode)
+// ==========================================================
+const tableExpandBtn   = document.getElementById('tableExpandBtn');
+const tableCollapseBtn = document.getElementById('tableCollapseBtn');
+const tableWrapper     = document.querySelector('.table-wrapper');
+const tableBackdrop    = document.createElement('div');
+tableBackdrop.className = 'table-modal-backdrop';
+document.body.appendChild(tableBackdrop);
+
+function expandTable() {
+  tableWrapper.classList.add('expanded');
+  tableBackdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  const span = tableExpandBtn.querySelector('span');
+  if (span) span.textContent = t('collapseTable') || 'Collapse table';
+  tableExpandBtn.setAttribute('aria-expanded', 'true');
+  tableCollapseBtn.focus();
+}
+
+function collapseTable() {
+  tableWrapper.classList.remove('expanded');
+  tableBackdrop.classList.remove('active');
+  document.body.style.overflow = '';
+  const span = tableExpandBtn.querySelector('span');
+  if (span) span.textContent = t('expandTable') || 'Expand table';
+  tableExpandBtn.setAttribute('aria-expanded', 'false');
+  tableExpandBtn.focus();
+}
+
+tableExpandBtn.addEventListener('click', () => {
+  tableWrapper.classList.contains('expanded') ? collapseTable() : expandTable();
+});
+tableCollapseBtn.addEventListener('click', collapseTable);
+tableBackdrop.addEventListener('click', collapseTable);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && tableWrapper.classList.contains('expanded')) collapseTable();
 });

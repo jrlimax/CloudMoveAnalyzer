@@ -465,6 +465,90 @@ main.has-results .upload-area span {
   transform: translateY(-1px);
 }
 
+/* ── Expand table toggle ───────────────────────────────── */
+.table-expand-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.table-expand-toggle:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(139,92,246,0.06);
+}
+.table-expand-toggle .icon-collapse { display: none; }
+.table-expand-toggle[aria-expanded="true"] .icon-expand { display: none; }
+.table-expand-toggle[aria-expanded="true"] .icon-collapse { display: inline; }
+
+/* ── Table modal backdrop ───────────────────────────────── */
+.table-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9998;
+  backdrop-filter: blur(3px);
+}
+.table-modal-backdrop.active { display: block; }
+
+/* ── Table modal ────────────────────────────────────────── */
+.table-wrapper.expanded {
+  position: fixed;
+  inset: 1.5rem;
+  z-index: 9999;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.table-wrapper.expanded .table-scroll { flex: 1; overflow: auto; }
+
+/* ── Table modal header bar ─────────────────────────────── */
+.table-modal-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--thead-bg);
+  flex-shrink: 0;
+}
+.table-wrapper.expanded .table-modal-header { display: flex; }
+.table-modal-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.table-modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.table-modal-close:hover {
+  background: rgba(239,68,68,0.1);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
 /* ── Column picker ─────────────────────────────────────── */
 .col-picker {
   position: relative;
@@ -527,6 +611,7 @@ main.has-results .upload-area span {
 
 /* ── Table ─────────────────────────────────────────────── */
 .table-wrapper {
+  position: relative;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 12px;

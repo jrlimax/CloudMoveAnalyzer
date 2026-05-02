@@ -19,6 +19,7 @@ coverage/
 
 # Build outputs
 dist/
+.cf-dist/
 *.min.css
 *.min.js
 

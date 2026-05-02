@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-05-11
+
+### Added
+- **Expand table** button in toolbar — opens the results table in a full-screen modal overlay with backdrop and Escape key support (8 languages: `expandTable` / `collapseTable`)
+- Modal header bar with title and close (×) button, visible only when table is expanded
+- `scripts/build.js` — simple Node.js file copy to `.cf-dist/` (no minification) for Cloudflare deployment
+- `npm run build` and `npm run deploy` scripts in `package.json`
+- `.cf-dist/` added to `.gitignore`
+
+### Changed
+- **"Friendly Name"** column renamed to **"Display Name"** across all 8 languages (`thFriendlyName`)
+- Executive Summary in PDF redesigned: clean card with left blue border, improved typography, glossary section removed
+- Cloudflare deployment now uses `npm run build` as the build command
+
+### Removed
+- **Markdown export** button and handler (MD export removed from UI and `app.js`)
+- `execGlossaryMovable/Partial/NotMovable/Unknown` i18n keys (no longer used)
+
 ## [1.4.0] - 2026-05-01
 
 ### Added
