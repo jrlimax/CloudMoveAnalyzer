@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-05-01
+
+### Added
+- **Executive Summary** section in CSV and Markdown exports — matches the PDF report: total counts, percentages, recommendation text, and glossary
+- **Critical Resources** section in CSV and Markdown exports — lists unique resource types with migration constraints (previously PDF-only)
+- `assets/favicon.png` — tight-cropped 128×128 favicon derived from the logo, removing excess whitespace so the icon renders larger and clearer in browser tabs
+
+### Changed
+- `index.html` favicon references updated to use `favicon.png` with explicit `sizes="128x128"` and `sizes="32x32"` attributes
+- CSV export now prepends a metadata block (date, summary stats, recommendation, critical resources table) before the data rows
+
 ## [1.3.0] - 2026-04-27
 
 ### Added
