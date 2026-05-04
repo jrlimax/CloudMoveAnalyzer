@@ -1297,9 +1297,10 @@ exportPdfBtn.addEventListener('click', () => {
   });
 
   // Column definitions for PDF: [key, header, cellFn]
+  // Note: Type cell shows ONLY the type code; friendly name has its own column.
   const allPdfCols = {
     name:          [t('csvName'),        r => `<td>${escapeHtml(r.name)}</td>`],
-    type:          [t('csvType'),        r => `<td><code>${escapeHtml(r.type)}</code><br><em style="font-size:10px;color:#64748b">${escapeHtml(getFriendlyName(r.type))}</em></td>`],
+    type:          [t('csvType'),        r => `<td><code>${escapeHtml(r.type)}</code></td>`],
     friendlyName:  [t('thFriendlyName'), r => `<td>${escapeHtml(getFriendlyName(r.type))}</td>`],
     resourceGroup: [t('csvRG'),          r => `<td>${escapeHtml(r.resourceGroup || '—')}</td>`],
     location:      [t('csvLocation'),    r => `<td>${escapeHtml(r.location || '—')}</td>`],
@@ -1309,17 +1310,43 @@ exportPdfBtn.addEventListener('click', () => {
     status:        [t('csvStatus'),      r => `<td><span style="color:${statusColor(r.status)};font-weight:600">${escapeHtml(statusLabel[r.status])}</span></td>`],
     notes:         [t('csvNotes'),       r => `<td style="font-size:11px">${r.noteKey ? escapeHtml(t(r.noteKey)) : '—'}</td>`]
   };
+  // Relative weights for proportional column widths (normalized below).
+  const PDF_COL_WEIGHTS = {
+    name: 13, type: 14, friendlyName: 10, resourceGroup: 10, location: 7,
+    moveRG: 5, moveSub: 6, moveRegion: 6, status: 7, notes: 22
+  };
   const pdfCols = getColumnOrder()
     .filter(k => cols[k])
     .map(k => [k, allPdfCols[k][0], allPdfCols[k][1]]);
 
-  // Build rows
-  let rows = '';
-  for (const r of filtered) {
-    rows += '<tr>' + pdfCols.map(d => d[2](r)).join('') + '</tr>';
-  }
+  // Build <colgroup> with normalized widths so the table doesn't blow out
+  // on long resource IDs (common in Azure exports).
+  const totalWeight = pdfCols.reduce((s, d) => s + (PDF_COL_WEIGHTS[d[0]] || 10), 0) || 1;
+  const colgroupHtml = pdfCols
+    .map(d => `<col style="width:${((PDF_COL_WEIGHTS[d[0]] || 10) / totalWeight * 100).toFixed(2)}%"/>`)
+    .join('');
 
   const thHtml = pdfCols.map(d => `<th>${escapeHtml(d[1])}</th>`).join('\n  ');
+
+  // Chunk rows into pages of N to guarantee predictable page breaks
+  // (avoids long notes splitting awkwardly across pages).
+  const PDF_ROWS_PER_PAGE = 13;
+  const buildRow = r => '<tr>' + pdfCols.map(d => d[2](r)).join('') + '</tr>';
+  const chunks = [];
+  for (let i = 0; i < filtered.length; i += PDF_ROWS_PER_PAGE) {
+    chunks.push(filtered.slice(i, i + PDF_ROWS_PER_PAGE));
+  }
+  const tablesHtml = chunks.map((chunk, idx) => {
+    const body = chunk.map(buildRow).join('');
+    const breakClass = idx < chunks.length - 1 ? ' table-page' : '';
+    return `<table class="data-table${breakClass}">
+<colgroup>${colgroupHtml}</colgroup>
+<thead><tr>
+  ${thHtml}
+</tr></thead>
+<tbody>${body}</tbody>
+</table>`;
+  }).join('\n');
 
   const movablePct = Math.round((movable / filtered.length) * 100);
   const partialPct = Math.round((partial / filtered.length) * 100);
@@ -1349,22 +1376,26 @@ exportPdfBtn.addEventListener('click', () => {
   .exec-summary h2{font-size:13px;font-weight:700;color:#1e40af;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e2e8f0}
   .exec-summary p{font-size:12px;line-height:1.7;color:#334155;margin-bottom:10px}
   .exec-summary .recommendation{background:#f0f9ff;border:1px solid #bae6fd;padding:8px 12px;border-radius:4px;font-size:11.5px;color:#0369a1;line-height:1.6}
-  table{width:100%;border-collapse:collapse;margin-bottom:12px}
-  th,td{border:1px solid #cbd5e1;padding:4px 6px;text-align:left;font-size:11px}
-  th{background:#f1f5f9;font-weight:600;font-size:11px}
+  table{width:100%;border-collapse:collapse;margin-bottom:12px;table-layout:fixed}
+  th,td{border:1px solid #cbd5e1;padding:3px 5px;text-align:left;font-size:10px;line-height:1.35;vertical-align:top;word-break:break-word;overflow-wrap:anywhere;hyphens:auto}
+  th{background:#f1f5f9;font-weight:600;font-size:10px;word-break:normal;overflow-wrap:break-word}
   tr:nth-child(even){background:#f8fafc}
   thead{display:table-header-group} /* repeat header on each printed page */
-  tr{page-break-inside:avoid;break-inside:avoid}
-  code{background:#f1f5f9;padding:1px 4px;border-radius:3px;font-size:10px}
+  /* Each chunked table represents one page worth of rows; force a break after */
+  .table-page{page-break-after:always;break-after:page}
+  /* Rows can break naturally if a single note is huge; chunks keep this rare */
+  tr{page-break-inside:auto;break-inside:auto}
+  code{background:#f1f5f9;padding:1px 3px;border-radius:3px;font-size:9px;font-family:Consolas,'Courier New',monospace;word-break:break-all;overflow-wrap:anywhere;line-height:1.3}
   .page-break{page-break-after:always;break-after:page}
-  .data-table{width:100%;border-collapse:collapse;margin-bottom:12px}
-  .data-table th,.data-table td{border:1px solid #cbd5e1;padding:4px 6px;text-align:left;font-size:11px}
-  .data-table th{background:#f1f5f9;font-weight:600;font-size:11px}
+  .data-table{width:100%;border-collapse:collapse;margin-bottom:12px;table-layout:fixed}
+  .data-table th,.data-table td{border:1px solid #cbd5e1;padding:3px 5px;text-align:left;font-size:10px;line-height:1.35;vertical-align:top;word-break:break-word;overflow-wrap:anywhere;hyphens:auto}
+  .data-table th{background:#f1f5f9;font-weight:600;font-size:10px;word-break:normal;overflow-wrap:break-word}
   .data-table tr:nth-child(even){background:#f8fafc}
+  .data-table tr{page-break-inside:auto;break-inside:auto}
   .print-footer{position:fixed;bottom:0;left:0;right:0;text-align:center;color:#94a3b8;font-size:9px;font-family:inherit;background:#fff;padding:4px 0 6px;border-top:1px solid #e2e8f0;z-index:9999}
   @media print{
-    body{padding:10px 10px 30mm}
-    @page{size:landscape;margin:10mm 10mm 22mm 10mm}
+    body{padding:8px 8px 28mm}
+    @page{size:landscape;margin:7mm 7mm 20mm 7mm}
     .print-footer{padding:3mm 0 4mm}
   }
 </style>
@@ -1402,7 +1433,7 @@ ${(() => {
     const key = r.type.toLowerCase();
     if (!seen.has(key)) { seen.add(key); unique.push(r); }
   }
-  let html = '<div class="exec-summary" style="margin-top:12px">';
+  let html = '<div class="page-break"></div><div class="exec-summary" style="margin-top:12px">';
   html += '<h2>⚠️ ' + t('execCriticalTitle') + '</h2>';
   html += '<p style="margin-bottom:8px">' + t('execCriticalIntro') + '</p>';
   html += '<table class="data-table" style="margin:0"><thead><tr><th>' + t('csvType') + '</th><th>' + t('thFriendlyName') + '</th><th>' + t('csvNotes') + '</th></tr></thead><tbody>';
@@ -1415,12 +1446,7 @@ ${(() => {
   return html;
 })()}
 <div class="page-break"></div>
-<table class="data-table">
-<thead><tr>
-  ${thHtml}
-</tr></thead>
-<tbody>${rows}</tbody>
-</table>
+${tablesHtml}
 <div class="print-footer">Generated by Cloud Move Analyzer — cloudmoveanalyzer.com</div>
 </body>
 </html>`;

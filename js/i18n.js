@@ -213,7 +213,7 @@ const I18N = {
     footerText: 'Dados baseados na documentação oficial da Microsoft:',
     footerLink: 'Tipos de recursos do Azure para operações de movimentação',
     alertEmpty: 'A planilha está vazia.',
-    alertNoCols: 'Não foi possível encontrar a coluna "Tipo" ou "Link de Recursos".\n\nColunas encontradas: ',
+    alertNoCols: 'Não foi possível encontrar a coluna "Tipo" ou "ID do Recurso" (link do recurso).\n\nColunas encontradas: ',
     alertIncompatible: 'Esta planilha não parece conter recursos do Azure. Nenhum tipo de recurso reconhecível foi encontrado.\n\nUse um CSV/XLSX exportado do Portal do Azure ou baixe o modelo abaixo.',
     alertError: 'Erro ao processar o arquivo. Verifique se é um CSV/XLSX válido exportado do Azure.\n\n',
     templateBtn: '⬇️ Baixar modelo de planilha',
