@@ -180,7 +180,7 @@ main.has-results .upload-area span {
   padding: 1.5rem 2rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   background: var(--card-bg);
   margin-bottom: 0;
   position: relative;

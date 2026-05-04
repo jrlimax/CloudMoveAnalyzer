@@ -515,8 +515,8 @@ function processFile(file) {
   const isCsv  = /\.(csv|tsv)$/i.test(file.name);
 
   reader.onload = function (e) {
-    // Defer parsing two frames so the spinner paints first
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+    // Defer parsing one frame so the spinner paints first
+    requestAnimationFrame(() => {
       try {
         let result = e.target.result;
         // CSV BOM detection — strip UTF-8 BOM if present
@@ -534,7 +534,7 @@ function processFile(file) {
       } finally {
         loadingEl.remove();
       }
-    }));
+    });
   };
 
   reader.onerror = function () {
@@ -818,7 +818,7 @@ function analyzeResources(data) {
   resultsSection.classList.remove('hidden');
   mainEl.classList.add('has-results');
   if (!wasVisible) {
-    resultsSection.scrollIntoView({ behavior: PREFERS_REDUCED_MOTION ? 'auto' : 'smooth' });
+    resultsSection.scrollIntoView({ behavior: 'auto', block: 'start' });
   }
 }
 
@@ -1201,16 +1201,15 @@ exportBtn.addEventListener('click', () => {
   const movablePct = Math.round((movable / filtered.length) * 100);
   const partialPct = Math.round((partial / filtered.length) * 100);
   const notMovPct  = Math.round((notMovable / filtered.length) * 100);
-  const date = new Date().toLocaleDateString(currentLang || 'en', {
-    year: 'numeric', month: 'long', day: 'numeric'
-  });
+  // ISO date format (YYYY-MM-DD) for better CSV compatibility
+  const date = new Date().toISOString().split('T')[0];
 
   // Build metadata header block (executive summary)
   let csvMeta = '';
-  csvMeta += csvEscape('Cloud Move Analyzer') + '\n';
-  csvMeta += csvEscape(date) + '\n';
+  csvMeta += csvEscape('CLOUD MOVE ANALYZER') + '\n';
+  csvMeta += csvEscape('Report Date: ' + date) + '\n';
   csvMeta += '\n';
-  csvMeta += csvEscape(t('execSummaryTitle')) + '\n';
+  csvMeta += csvEscape(t('execSummaryTitle').toUpperCase()) + '\n';
   csvMeta += csvEscape(t('execSummaryIntro')
     .replace('{total}', filtered.length)
     .replace('{movable}', movable)
@@ -1218,18 +1217,18 @@ exportBtn.addEventListener('click', () => {
     .replace('{partial}', partial)
     .replace('{notMovable}', notMovable)) + '\n';
   csvMeta += '\n';
-  csvMeta += [csvEscape(t('statTotal')), csvEscape(String(filtered.length))].join(',') + '\n';
-  csvMeta += [csvEscape('🟢 ' + t('statMovable')), csvEscape(String(movable)), csvEscape(movablePct + '%')].join(',') + '\n';
-  csvMeta += [csvEscape('🟡 ' + t('statPartial')), csvEscape(String(partial)), csvEscape(partialPct + '%')].join(',') + '\n';
-  csvMeta += [csvEscape('🔴 ' + t('statNotMovable')), csvEscape(String(notMovable)), csvEscape(notMovPct + '%')].join(',') + '\n';
-  if (unknownCount) csvMeta += [csvEscape('⚫ ' + t('statUnknown')), csvEscape(String(unknownCount))].join(',') + '\n';
+  csvMeta += [csvEscape(t('statTotal')), csvEscape(String(filtered.length)), ''].join(',') + '\n';
+  csvMeta += [csvEscape(t('statMovable')), csvEscape(String(movable)), csvEscape(String(movablePct))].join(',') + '\n';
+  csvMeta += [csvEscape(t('statPartial')), csvEscape(String(partial)), csvEscape(String(partialPct))].join(',') + '\n';
+  csvMeta += [csvEscape(t('statNotMovable')), csvEscape(String(notMovable)), csvEscape(String(notMovPct))].join(',') + '\n';
+  if (unknownCount) csvMeta += [csvEscape(t('statUnknown')), csvEscape(String(unknownCount)), ''].join(',') + '\n';
   csvMeta += '\n';
   const csvRec = movablePct >= 70
     ? t('execRecHigh').replace('{pct}', movablePct)
     : movablePct >= 40
       ? t('execRecMedium').replace('{pct}', movablePct).replace('{partialPct}', partialPct)
       : t('execRecLow').replace('{pct}', notMovPct);
-  csvMeta += csvEscape(csvRec) + '\n';
+  csvMeta += csvEscape('Recommendation: ' + csvRec) + '\n';
   csvMeta += '\n';
   const csvCritical = filtered.filter(r => r.noteKey);
   if (csvCritical.length) {
@@ -1239,8 +1238,8 @@ exportBtn.addEventListener('click', () => {
       const key = r.type.toLowerCase();
       if (!seenTypes.has(key)) { seenTypes.add(key); uniqueCritical.push(r); }
     }
-    csvMeta += csvEscape('⚠️ ' + t('execCriticalTitle')) + '\n';
-    csvMeta += csvEscape(t('execCriticalIntro')) + '\n';
+    csvMeta += csvEscape(t('execCriticalTitle').toUpperCase()) + '\n';
+    csvMeta += '\n';
     csvMeta += [t('csvType'), t('thFriendlyName'), t('csvNotes')].map(csvEscape).join(',') + '\n';
     for (const r of uniqueCritical) {
       csvMeta += [r.type, getFriendlyName(r.type), r.noteKey ? t(r.noteKey) : ''].map(csvEscape).join(',') + '\n';
@@ -1248,6 +1247,8 @@ exportBtn.addEventListener('click', () => {
     csvMeta += '\n';
   }
 
+  csvMeta += csvEscape((t('resultsTitle') || 'ANALYSIS RESULTS').toUpperCase()) + '\n';
+  csvMeta += '\n';
   let csv = csvMeta + colDefs.map(d => csvEscape(d[1])).join(',') + '\n';
   for (const r of filtered) {
     csv += colDefs.map(d => csvEscape(d[2](r))).join(',') + '\n';
