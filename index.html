@@ -53,7 +53,7 @@
   <link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png" />
   <link rel="apple-touch-icon" sizes="128x128" href="assets/favicon.png" />
-  <link rel="stylesheet" href="css/style.css?v=14" />
+  <link rel="stylesheet" href="css/style.css?v=17" />
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -428,49 +428,6 @@
         </div>
       </div>
 
-      <!-- Toolbar -->
-      <div class="toolbar">
-        <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" data-i18n-aria="searchPlaceholder" aria-label="Search resources" placeholder="Search resource or type..." />
-        <span class="results-count" id="resultsCount"></span>
-      </div>
-      <div class="toolbar toolbar--actions">
-        <div class="col-picker" id="colPicker">
-          <button class="action-btn action-btn--cols" id="colPickerToggle">
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18"/><path d="M3 9h18M3 15h18"/></svg>
-            <span data-i18n="colPickerBtn">Columns</span>
-          </button>
-          <div class="col-picker-menu hidden" id="colPickerMenu">
-            <label draggable="true" data-col-label="name"><span class="drag-handle">⠿</span><input type="checkbox" data-col="name" checked /> <span data-i18n="thName">Resource Name</span></label>
-            <label draggable="true" data-col-label="type"><span class="drag-handle">⠿</span><input type="checkbox" data-col="type" checked /> <span data-i18n="thType">Type (Provider)</span></label>
-            <label draggable="true" data-col-label="friendlyName"><span class="drag-handle">⠿</span><input type="checkbox" data-col="friendlyName" /> <span data-i18n="thFriendlyName">Friendly Name</span></label>
-            <label draggable="true" data-col-label="resourceGroup"><span class="drag-handle">⠿</span><input type="checkbox" data-col="resourceGroup" checked /> <span data-i18n="thRG">Resource Group</span></label>
-            <label draggable="true" data-col-label="location"><span class="drag-handle">⠿</span><input type="checkbox" data-col="location" checked /> <span data-i18n="thLocation">Location</span></label>
-            <label draggable="true" data-col-label="moveRG"><span class="drag-handle">⠿</span><input type="checkbox" data-col="moveRG" checked /> <span data-i18n="thMoveRG">Move RG</span></label>
-            <label draggable="true" data-col-label="moveSub"><span class="drag-handle">⠿</span><input type="checkbox" data-col="moveSub" checked /> <span data-i18n="thMoveSub">Move Sub</span></label>
-            <label draggable="true" data-col-label="moveRegion"><span class="drag-handle">⠿</span><input type="checkbox" data-col="moveRegion" checked /> <span data-i18n="thMoveRegion">Move Region</span></label>
-            <label draggable="true" data-col-label="status"><span class="drag-handle">⠿</span><input type="checkbox" data-col="status" checked /> <span data-i18n="thStatus">Status</span></label>
-            <label draggable="true" data-col-label="notes"><span class="drag-handle">⠿</span><input type="checkbox" data-col="notes" checked /> <span data-i18n="thNotes">Notes</span></label>
-          </div>
-        </div>
-        <button class="table-expand-toggle" id="tableExpandBtn" aria-expanded="false">
-          <svg class="icon-expand" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-          <svg class="icon-collapse" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
-          <span data-i18n="expandTable">Expand table</span>
-        </button>
-        <div class="export-group">
-          <span class="export-label" data-i18n="exportLabel">Export:</span>
-          <button class="export-pill export-pill--csv" id="exportBtn">
-            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            CSV
-          </button>
-          <button class="export-pill export-pill--pdf" id="exportPdfBtn">
-            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            PDF
-          </button>
-        </div>
-      </div>
-      <p class="export-hint" data-i18n="exportHint">Exports contain only the currently filtered results.</p>
-
       <!-- Table -->
       <div class="table-wrapper">
         <div class="table-modal-header">
@@ -478,6 +435,51 @@
             <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
+
+        <div class="table-toolbars">
+          <div class="toolbar">
+            <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" data-i18n-aria="searchPlaceholder" aria-label="Search resources" placeholder="Search resource or type..." />
+            <span class="results-count" id="resultsCount"></span>
+          </div>
+          <div class="toolbar toolbar--actions">
+            <div class="col-picker" id="colPicker">
+              <button class="action-btn action-btn--cols" id="colPickerToggle">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18"/><path d="M3 9h18M3 15h18"/></svg>
+                <span data-i18n="colPickerBtn">Columns</span>
+              </button>
+              <div class="col-picker-menu hidden" id="colPickerMenu">
+                <label draggable="true" data-col-label="name"><span class="drag-handle">⠿</span><input type="checkbox" data-col="name" checked /> <span data-i18n="thName">Resource Name</span></label>
+                <label draggable="true" data-col-label="type"><span class="drag-handle">⠿</span><input type="checkbox" data-col="type" checked /> <span data-i18n="thType">Type (Provider)</span></label>
+                <label draggable="true" data-col-label="friendlyName"><span class="drag-handle">⠿</span><input type="checkbox" data-col="friendlyName" /> <span data-i18n="thFriendlyName">Friendly Name</span></label>
+                <label draggable="true" data-col-label="resourceGroup"><span class="drag-handle">⠿</span><input type="checkbox" data-col="resourceGroup" checked /> <span data-i18n="thRG">Resource Group</span></label>
+                <label draggable="true" data-col-label="location"><span class="drag-handle">⠿</span><input type="checkbox" data-col="location" checked /> <span data-i18n="thLocation">Location</span></label>
+                <label draggable="true" data-col-label="moveRG"><span class="drag-handle">⠿</span><input type="checkbox" data-col="moveRG" checked /> <span data-i18n="thMoveRG">Move RG</span></label>
+                <label draggable="true" data-col-label="moveSub"><span class="drag-handle">⠿</span><input type="checkbox" data-col="moveSub" checked /> <span data-i18n="thMoveSub">Move Sub</span></label>
+                <label draggable="true" data-col-label="moveRegion"><span class="drag-handle">⠿</span><input type="checkbox" data-col="moveRegion" checked /> <span data-i18n="thMoveRegion">Move Region</span></label>
+                <label draggable="true" data-col-label="status"><span class="drag-handle">⠿</span><input type="checkbox" data-col="status" checked /> <span data-i18n="thStatus">Status</span></label>
+                <label draggable="true" data-col-label="notes"><span class="drag-handle">⠿</span><input type="checkbox" data-col="notes" checked /> <span data-i18n="thNotes">Notes</span></label>
+              </div>
+            </div>
+            <button class="table-expand-toggle" id="tableExpandBtn" aria-expanded="false">
+              <svg class="icon-expand" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              <svg class="icon-collapse" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
+              <span data-i18n="expandTable">Expand table</span>
+            </button>
+            <div class="export-group">
+              <span class="export-label" data-i18n="exportLabel">Export:</span>
+              <button class="export-pill export-pill--csv" id="exportBtn">
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                CSV
+              </button>
+              <button class="export-pill export-pill--pdf" id="exportPdfBtn">
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                PDF
+              </button>
+            </div>
+          </div>
+          <p class="export-hint" data-i18n="exportHint">Exports contain only the currently filtered results.</p>
+        </div>
+
         <div class="table-scroll">
           <table id="resultsTable" aria-label="Azure resource move support results">
             <thead>
