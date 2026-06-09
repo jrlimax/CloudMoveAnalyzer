@@ -21,42 +21,42 @@ const LANGS = [
   {
     code: 'en', slug: 'en', dir: 'ltr', ogLocale: 'en_US',
     title: 'Cloud Move Analyzer — Azure Resource Move Support',
-    description: 'Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions. Upload your Azure export spreadsheet and get instant results.',
+    description: 'Free tool to check Azure resource move support. See which resources can move between subscriptions, RGs, and regions.',
   },
   {
     code: 'pt-BR', slug: 'pt-br', dir: 'ltr', ogLocale: 'pt_BR',
     title: 'Cloud Move Analyzer — Verificador de Mover Recursos do Azure',
-    description: 'Ferramenta gratuita para verificar suporte de movimentação de recursos Azure — descubra quais recursos podem ser migrados entre assinaturas, grupos de recursos e regiões. Faça upload da planilha exportada do Azure e obtenha resultados instantâneos.',
+    description: 'Ferramenta grátis para checar movimentação de recursos Azure entre assinaturas, grupos de recursos e regiões.',
   },
   {
     code: 'es', slug: 'es', dir: 'ltr', ogLocale: 'es_ES',
     title: 'Cloud Move Analyzer — Verificador de Migración de Recursos Azure',
-    description: 'Herramienta gratuita para verificar el soporte de movimiento de recursos Azure — descubre qué recursos pueden migrarse entre suscripciones, grupos de recursos y regiones. Sube la planilla exportada del Portal Azure y obtén resultados al instante.',
+    description: 'Herramienta gratuita para verificar el movimiento de recursos Azure entre suscripciones, grupos de recursos y regiones.',
   },
   {
     code: 'fr', slug: 'fr', dir: 'ltr', ogLocale: 'fr_FR',
     title: 'Cloud Move Analyzer — Vérificateur de Déplacement de Ressources Azure',
-    description: 'Outil gratuit pour vérifier la prise en charge du déplacement des ressources Azure — découvrez quelles ressources peuvent être migrées entre abonnements, groupes de ressources et régions. Téléchargez votre export Azure et obtenez des résultats instantanés.',
+    description: 'Outil gratuit pour vérifier le déplacement des ressources Azure entre abonnements, groupes de ressources et régions.',
   },
   {
     code: 'zh-CN', slug: 'zh-cn', dir: 'ltr', ogLocale: 'zh_CN',
     title: 'Cloud Move Analyzer — Azure 资源移动支持检查工具',
-    description: '免费工具，用于检查 Azure 资源移动支持 — 验证哪些资源可以在订阅、资源组和区域之间迁移。上传从 Azure 门户导出的电子表格，立即获取结果。',
+    description: '免费工具，用于检查 Azure 资源在订阅、资源组和区域之间的移动支持情况。',
   },
   {
     code: 'ar', slug: 'ar', dir: 'rtl', ogLocale: 'ar_SA',
     title: 'Cloud Move Analyzer — أداة فحص نقل موارد Azure',
-    description: 'أداة مجانية للتحقق من دعم نقل موارد Azure — تعرف على الموارد التي يمكن نقلها بين الاشتراكات ومجموعات الموارد والمناطق. قم بتحميل جدول البيانات المُصدَّر من Azure واحصل على نتائج فورية.',
+    description: 'أداة مجانية للتحقق من نقل موارد Azure بين الاشتراكات ومجموعات الموارد والمناطق.',
   },
   {
     code: 'ru', slug: 'ru', dir: 'ltr', ogLocale: 'ru_RU',
     title: 'Cloud Move Analyzer — проверка поддержки переноса ресурсов Azure',
-    description: 'Бесплатный инструмент для проверки поддержки перемещения ресурсов Azure — узнайте, какие ресурсы можно перенести между подписками, группами ресурсов и регионами. Загрузите экспорт из портала Azure и получите мгновенные результаты.',
+    description: 'Бесплатный инструмент для проверки переноса ресурсов Azure между подписками, группами ресурсов и регионами.',
   },
   {
     code: 'ja', slug: 'ja', dir: 'ltr', ogLocale: 'ja_JP',
     title: 'Cloud Move Analyzer — Azure リソース移動サポートチェッカー',
-    description: 'Azure リソースの移動サポートを確認する無料ツール — サブスクリプション、リソースグループ、リージョン間で移動できるリソースを確認します。Azure ポータルからエクスポートしたスプレッドシートをアップロードして、すぐに結果を取得できます。',
+    description: 'Azure リソースをサブスクリプション、リソースグループ、リージョン間で移動できるか確認する無料ツール。',
   },
 ];
 
