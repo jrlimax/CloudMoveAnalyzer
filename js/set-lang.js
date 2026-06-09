@@ -25,9 +25,12 @@
   }
 
   try {
+    // Pre-rendered per-language pages set window.__CMA_LANG__ before this script.
+    // It takes precedence over localStorage so crawlers and first paint match the URL locale.
+    var forced = (typeof window !== 'undefined' && window.__CMA_LANG__) ? window.__CMA_LANG__ : null;
     var saved = localStorage.getItem('azure-move-lang');
     var nav = (navigator.language || 'en');
-    var lang = resolveLang(saved || nav);
+    var lang = resolveLang(forced || saved || nav);
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
   } catch (e) { /* localStorage unavailable (private mode) */ }

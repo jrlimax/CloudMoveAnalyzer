@@ -1,0 +1,35 @@
+# Cloudflare Pages headers — applied at the edge for every response.
+# Docs: https://developers.cloudflare.com/pages/configuration/headers/
+
+# --- Security & SEO headers (all routes) ---
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  X-Frame-Options: SAMEORIGIN
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+# --- HTML: short cache, must revalidate so updates roll out fast ---
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+/*/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# --- Static assets: immutable for 1 year (cache-busted by ?v= query) ---
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- Sitemap & robots: short cache for crawler freshness ---
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+  Content-Type: application/xml; charset=utf-8
+/robots.txt
+  Cache-Control: public, max-age=3600

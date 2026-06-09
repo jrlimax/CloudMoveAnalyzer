@@ -20,18 +20,25 @@
 
   <link rel="canonical" href="https://cloudmoveanalyzer.com/" id="canonicalLink" />
 
-  <!-- Hreflang: single URL serves all languages (language switch is client-side),
-       so we only declare x-default to avoid Google flagging duplicate hreflang entries. -->
+  <!-- Hreflang: root URL serves auto-detected language; per-locale pages live at /<lang>/ for SEO. -->
   <link rel="alternate" hreflang="x-default" href="https://cloudmoveanalyzer.com/" />
+  <link rel="alternate" hreflang="en"    href="https://cloudmoveanalyzer.com/en/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://cloudmoveanalyzer.com/pt-br/" />
+  <link rel="alternate" hreflang="es"    href="https://cloudmoveanalyzer.com/es/" />
+  <link rel="alternate" hreflang="fr"    href="https://cloudmoveanalyzer.com/fr/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://cloudmoveanalyzer.com/zh-cn/" />
+  <link rel="alternate" hreflang="ar"    href="https://cloudmoveanalyzer.com/ar/" />
+  <link rel="alternate" hreflang="ru"    href="https://cloudmoveanalyzer.com/ru/" />
+  <link rel="alternate" hreflang="ja"    href="https://cloudmoveanalyzer.com/ja/" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Cloud Move Analyzer" />
   <meta property="og:description" content="Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://cloudmoveanalyzer.com/assets/logo.png" />
-  <meta property="og:image:width" content="420" />
-  <meta property="og:image:height" content="420" />
-  <meta property="og:image:alt" content="Cloud Move Analyzer logo" />
+  <meta property="og:image" content="https://cloudmoveanalyzer.com/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Cloud Move Analyzer — Azure Resource Move Checker" />
   <meta property="og:url" content="https://cloudmoveanalyzer.com/" />
   <meta property="og:site_name" content="Cloud Move Analyzer" />
   <meta property="og:locale" content="en_US" />
@@ -47,7 +54,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cloud Move Analyzer" />
   <meta name="twitter:description" content="Free tool to check Azure resource move support — verify which resources can be migrated between subscriptions, resource groups, and regions." />
-  <meta name="twitter:image" content="https://cloudmoveanalyzer.com/assets/logo.png" />
+  <meta name="twitter:image" content="https://cloudmoveanalyzer.com/assets/og-image.png" />
+  <meta name="twitter:image:alt" content="Cloud Move Analyzer — Azure Resource Move Checker" />
 
   <title>Cloud Move Analyzer — Azure Resource Move Support</title>
   <link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png" />
@@ -514,39 +522,39 @@
       <p data-i18n="seoHowText">Export your resources from the Azure Portal as a spreadsheet (.csv, .xlsx, or .xls), upload it here, and get a clear overview of which resources can be moved between subscriptions, resource groups, and regions — all based on official Microsoft documentation.</p>
 
       <h3 data-i18n="seoFaqTitle">Frequently Asked Questions</h3>
-      <details>
+      <details id="faq-how-to-check-azure-resources">
         <summary data-i18n="faqQ5">How to check if my Azure resources can be moved or migrated?</summary>
         <p data-i18n="faqA5">Export your resources from the Azure Portal as a spreadsheet (.csv, .xlsx, or .xls) and upload it to Cloud Move Analyzer. The tool automatically checks every resource type against Microsoft's official move support documentation and shows you a clear report — which resources can be moved between subscriptions, resource groups, and regions.</p>
       </details>
-      <details>
+      <details id="faq-move-between-subscriptions">
         <summary data-i18n="faqQ1">How do I move Azure resources to another subscription?</summary>
         <p data-i18n-html="faqA1">See the <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli" target="_blank" rel="noopener">official Microsoft documentation</a> for a step-by-step guide on moving resources between subscriptions. Not all resource types support cross-subscription moves — for example, some networking and classic deployment resources cannot be moved. Upload your spreadsheet to Cloud Move Analyzer to instantly check which of your resources support this operation.</p>
       </details>
-      <details>
+      <details id="faq-move-between-resource-groups">
         <summary data-i18n="faqQ2">Which Azure resources can be moved between resource groups?</summary>
         <p data-i18n="faqA2">Most Azure resources support resource group moves, including Virtual Machines, Storage Accounts, App Services, SQL Databases, Key Vaults, and many others. However, some resources have restrictions — for example, Azure Active Directory Domain Services, Azure Backup vaults, and resources with classic deployment models. Upload your resource list to Cloud Move Analyzer to check all your resources at once.</p>
       </details>
-      <details>
+      <details id="faq-move-between-regions">
         <summary data-i18n="faqQ3">Can I move Azure resources to a different region?</summary>
         <p data-i18n="faqA3">It depends on the resource type. Some resources like Virtual Machines and SQL Databases can be moved using Azure Resource Mover. Others, like Azure Functions or Logic Apps, may need to be recreated in the target region. Cloud Move Analyzer checks region move support for all your resources based on official Microsoft documentation, so you know exactly what can and cannot be moved.</p>
       </details>
-      <details>
+      <details id="faq-export-azure-csv">
         <summary data-i18n="faqQ7">How to export all Azure resources as CSV from the Azure Portal?</summary>
         <p data-i18n-html="faqA7">Go to the Azure Portal → All Resources, click Manage view → Export to CSV at the top of the page. This downloads a .csv file with all your resources including Name, Type, Resource Group, Location and Resource ID. You can also use Azure CLI or Azure Resource Graph Explorer for more advanced queries. Once exported, just upload the file to Cloud Move Analyzer.</p>
       </details>
-      <details>
+      <details id="faq-free-tool">
         <summary data-i18n="faqQ6">Is there a free tool to check Azure resource move compatibility?</summary>
         <p data-i18n="faqA6">Yes. Cloud Move Analyzer is a free, open-source Azure migration compatibility tool. No registration, no login required — just upload your Azure Portal export spreadsheet and get a complete report showing which resources can be moved between subscriptions, resource groups, and regions.</p>
       </details>
-      <details>
+      <details id="faq-is-free">
         <summary data-i18n="faqQ4">Is Cloud Move Analyzer free?</summary>
         <p data-i18n="faqA4">Cloud Move Analyzer is 100% free and always will be. There are no hidden fees, no premium tier, and no account required. All processing happens in your browser — your data never leaves your computer.</p>
       </details>
-      <details>
+      <details id="faq-supported-formats">
         <summary data-i18n="faqQ8">What file formats and columns does Cloud Move Analyzer support?</summary>
         <p data-i18n-html="faqA8">You don't need to organize anything before uploading! Cloud Move Analyzer accepts the .csv or .xlsx file exactly as exported from Azure. The only requirement is that your spreadsheet contains at least a Type or Resource ID column. That's it — the tool handles everything else. For richer results, columns like Name, Resource Group, and Location are also recognized automatically, but they are optional.</p>
       </details>
-      <details>
+      <details id="faq-organize-csv-excel">
         <summary data-i18n="faqQ9">How to open and organize an Azure CSV export file in Excel?</summary>
         <p data-i18n-html="faqA9">After analyzing your resources, click Export CSV to download the results. To organize it in Excel: open the file (it opens automatically with proper columns). You can sort by Status to group movable, partial, and not-movable resources together. Use Excel's Filter feature (Data → Filter) to show only specific statuses or resource types. You can also add conditional formatting to highlight rows by status for a clearer visual overview.</p>
       </details>

@@ -1,9 +1,9 @@
 /* ==========================================================
-   Cloud Move Analyzer — Estilos
+   Cloud Move Analyzer â€” Estilos
    Paleta:
-     Púrpura Nebulosa  #8B5CF6  Primária
+     PÃºrpura Nebulosa  #8B5CF6  PrimÃ¡ria
      Verde Acento      #22D68F  Destaque
-     Índigo Profundo   #5B2D8E  Secundária
+     Ãndigo Profundo   #5B2D8E  SecundÃ¡ria
      Noite Digital     #0D0B1E  Fundo
      Bruma             #F3EEFF  Textos claros
    ========================================================== */
@@ -27,7 +27,7 @@
   --scrollbar-thumb-hover: rgba(139, 92, 246, 0.85);
 }
 
-/* ── Light theme ───────────────────────────────────────── */
+/* â”€â”€ Light theme â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root.light {
   --primary: #7C3AED;
   --accent: #16A06A;
@@ -47,7 +47,7 @@
   --scrollbar-thumb-hover: rgba(124, 58, 237, 0.75);
 }
 
-/* ── Reset ─────────────────────────────────────────────── */
+/* â”€â”€ Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 * {
   margin: 0;
   padding: 0;
@@ -86,7 +86,7 @@ body::before {
   display: none !important;
 }
 
-/* ── Accessibility helpers ─────────────────────────────── */
+/* â”€â”€ Accessibility helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .sr-only {
   position: absolute !important;
   width: 1px;
@@ -124,7 +124,7 @@ th[data-sort]:focus-visible {
   outline-offset: -2px;
 }
 
-/* Global focus-visible — consistent ring on all interactive elements */
+/* Global focus-visible â€” consistent ring on all interactive elements */
 button:focus-visible,
 [role="button"]:focus-visible,
 [role="menuitem"]:focus-visible,
@@ -135,7 +135,7 @@ a:focus-visible {
   border-radius: 4px;
 }
 
-/* ── Custom scrollbar ──────────────────────────────── */
+/* â”€â”€ Custom scrollbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) transparent;
@@ -159,7 +159,7 @@ a:focus-visible {
   border: 3px solid transparent;
 }
 
-/* ── Reduced motion ────────────────────────────────── */
+/* â”€â”€ Reduced motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -168,13 +168,13 @@ a:focus-visible {
   }
 }
 
-/* ── Entry animations ─────────────────────────────── */
+/* â”€â”€ Entry animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Layout ────────────────────────────────────────────── */
+/* â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -185,7 +185,7 @@ a:focus-visible {
   flex-direction: column;
 }
 
-/* ── Header ────────────────────────────────────────────── */
+/* â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 header {
   text-align: center;
   padding: 0;
@@ -221,7 +221,7 @@ header p {
   line-height: 1.55;
 }
 
-/* ── Upload Area ───────────────────────────────────────── */
+/* â”€â”€ Upload Area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 main {
   flex: 1;
   display: flex;
@@ -338,7 +338,7 @@ main.has-results .upload-area::after { display: none; }
   cursor: pointer;
 }
 
-/* ── Template hint ─────────────────────────────────────── */
+/* â”€â”€ Template hint â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .template-hint {
   background: var(--card-bg);
   border: 1px solid rgba(200, 160, 60, 0.2);
@@ -386,7 +386,7 @@ main.has-results .upload-area::after { display: none; }
   color: var(--accent);
 }
 
-/* ── Stats Bar ─────────────────────────────────────────── */
+/* â”€â”€ Stats Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .stats-bar {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -412,7 +412,7 @@ main.has-results .upload-area::after { display: none; }
 .stat-card:nth-child(4) { animation-delay: 0.15s; }
 .stat-card:nth-child(5) { animation-delay: 0.20s; }
 
-/* Top accent stripe — color set per variant below */
+/* Top accent stripe â€” color set per variant below */
 .stat-card::before {
   content: '';
   position: absolute;
@@ -479,7 +479,7 @@ main.has-results .upload-area::after { display: none; }
   margin-top: 0.15rem;
 }
 
-/* ── Toolbar (search + export) ─────────────────────────── */
+/* â”€â”€ Toolbar (search + export) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -515,7 +515,7 @@ main.has-results .upload-area::after { display: none; }
   white-space: nowrap;
 }
 
-/* ── Actions toolbar (second row) ──────────────────────── */
+/* â”€â”€ Actions toolbar (second row) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .toolbar--actions {
   display: flex;
   align-items: center;
@@ -619,7 +619,7 @@ main.has-results .upload-area::after { display: none; }
   transform: translateY(-1px);
 }
 
-/* ── Expand table toggle ───────────────────────────────── */
+/* â”€â”€ Expand table toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .table-expand-toggle {
   display: inline-flex;
   align-items: center;
@@ -644,7 +644,7 @@ main.has-results .upload-area::after { display: none; }
 .table-expand-toggle[aria-expanded="true"] .icon-expand { display: none; }
 .table-expand-toggle[aria-expanded="true"] .icon-collapse { display: inline; }
 
-/* ── Table modal backdrop ───────────────────────────────── */
+/* â”€â”€ Table modal backdrop â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .table-modal-backdrop {
   display: none;
   position: fixed;
@@ -655,7 +655,7 @@ main.has-results .upload-area::after { display: none; }
 }
 .table-modal-backdrop.active { display: block; }
 
-/* ── Table modal ────────────────────────────────────────── */
+/* â”€â”€ Table modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .table-wrapper.expanded {
   position: fixed;
   inset: 1.5rem;
@@ -667,10 +667,10 @@ main.has-results .upload-area::after { display: none; }
 }
 .table-wrapper.expanded .table-scroll { flex: 1; overflow: auto; }
 .table-wrapper.expanded .table-toolbars { flex-shrink: 0; }
-/* In modal the × button already closes; hide the redundant toggle */
+/* In modal the Ã— button already closes; hide the redundant toggle */
 .table-wrapper.expanded .table-expand-toggle { display: none; }
 
-/* ── Table modal header bar ─────────────────────────────── */
+/* â”€â”€ Table modal header bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .table-modal-header {
   display: none;
   align-items: center;
@@ -706,7 +706,7 @@ main.has-results .upload-area::after { display: none; }
   color: #ef4444;
 }
 
-/* ── Column picker ─────────────────────────────────────── */
+/* â”€â”€ Column picker â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .col-picker {
   position: relative;
 }
@@ -766,7 +766,7 @@ main.has-results .upload-area::after { display: none; }
   height: 16px;
 }
 
-/* ── Table ─────────────────────────────────────────────── */
+/* â”€â”€ Table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .table-wrapper {
   position: relative;
   background: var(--card-bg);
@@ -826,7 +826,7 @@ table th:hover {
   color: var(--accent);
 }
 
-/* Active sort column — driven by aria-sort which is set in JS */
+/* Active sort column â€” driven by aria-sort which is set in JS */
 table th[aria-sort="ascending"],
 table th[aria-sort="descending"] {
   color: var(--accent);
@@ -861,7 +861,7 @@ table td, table th {
   font-variant-numeric: tabular-nums;
 }
 
-/* ── Badges ────────────────────────────────────────────── */
+/* â”€â”€ Badges â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .badge {
   display: inline-block;
   padding: 0.2rem 0.65rem;
@@ -890,7 +890,7 @@ table td, table th {
   color: var(--text-faint);
 }
 
-/* ── Type code tag (inline) ────────────────────────────── */
+/* â”€â”€ Type code tag (inline) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .type-tag {
   color: var(--primary);
   font-size: 0.82rem;
@@ -899,13 +899,13 @@ table td, table th {
   border-radius: 4px;
 }
 
-/* ── Muted cell text ───────────────────────────────────── */
+/* â”€â”€ Muted cell text â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .cell-muted {
   color: var(--text-muted);
   font-size: 0.85rem;
 }
 
-/* ── Notes cell ────────────────────────────────────────── */
+/* â”€â”€ Notes cell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .cell-notes {
   color: var(--text-muted);
   font-size: 0.8rem;
@@ -926,7 +926,7 @@ table td, table th {
   opacity: 1;
 }
 
-/* ── Export hint ───────────────────────────────────────── */
+/* â”€â”€ Export hint â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .export-hint {
   font-size: 0.75rem;
   color: var(--text-faintest);
@@ -935,7 +935,7 @@ table td, table th {
   font-style: italic;
 }
 
-/* ── Empty State ───────────────────────────────────────── */
+/* â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .empty-state {
   text-align: center;
   padding: 4rem 2rem;
@@ -949,7 +949,7 @@ table td, table th {
   opacity: 0.4;
 }
 
-/* ── SEO Content Section ────────────────────────────────── */
+/* â”€â”€ SEO Content Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .seo-section {
   margin-top: 3rem;
   padding: 2rem;
@@ -1031,7 +1031,7 @@ table td, table th {
   margin: 0;
 }
 
-/* ── PIX Donation ──────────────────────────────────────── */
+/* â”€â”€ PIX Donation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .pix-donation {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -1183,7 +1183,7 @@ table td, table th {
   background: var(--secondary);
 }
 
-/* ── Footer ────────────────────────────────────────────── */
+/* â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .footer-info {
   text-align: center;
   padding: 0.5rem 0;
@@ -1200,7 +1200,7 @@ table td, table th {
   text-decoration: underline;
 }
 
-/* ── Top bar (language + theme) ─────────────────────────── */
+/* â”€â”€ Top bar (language + theme) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .top-bar {
   display: flex;
   justify-content: flex-end;
@@ -1209,7 +1209,7 @@ table td, table th {
   padding: 0.25rem 0 0;
 }
 
-/* ── Language picker (custom dropdown) ─────────────────── */
+/* â”€â”€ Language picker (custom dropdown) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .lang-picker {
   position: relative;
 }
@@ -1302,7 +1302,7 @@ table td, table th {
   object-fit: cover;
 }
 
-/* ── Theme toggle button ───────────────────────────────── */
+/* â”€â”€ Theme toggle button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .theme-toggle {
   width: 42px;
   height: 42px;
@@ -1337,7 +1337,7 @@ table td, table th {
 :root.light .theme-toggle .icon-sun  { display: none;  }
 :root.light .theme-toggle .icon-moon { display: block; }
 
-/* ── Loading spinner ───────────────────────────────────── */
+/* â”€â”€ Loading spinner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .loading {
   text-align: center;
   padding: 2rem;
@@ -1358,7 +1358,7 @@ table td, table th {
   to { transform: rotate(360deg); }
 }
 
-/* ── Responsive ────────────────────────────────────────── */
+/* â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 768px) {
   .container {
     padding: 0.5rem 0.75rem;
@@ -1536,14 +1536,14 @@ table td, table th {
   }
 }
 
-/* ── RTL support (Arabic) ────────────────────────────── */
+/* â”€â”€ RTL support (Arabic) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 [dir="rtl"] .toolbar { flex-direction: row-reverse; }
 [dir="rtl"] .export-group { margin-left: 0; margin-right: auto; }
 [dir="rtl"] table th { text-align: right; }
 [dir="rtl"] table td { text-align: right; }
 [dir="rtl"] .top-bar { flex-direction: row-reverse; }
 
-/* ── Acessibilidade: Reduzir animações para usuários sensíveis ───────── */
+/* â”€â”€ Acessibilidade: Reduzir animaÃ§Ãµes para usuÃ¡rios sensÃ­veis â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1555,7 +1555,7 @@ table td, table th {
   }
 }
 
-/* ── Suporte a tema escuro do sistema ──────────────────────────────── */
+/* â”€â”€ Suporte a tema escuro do sistema â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (prefers-color-scheme: light) {
-  /* Site já é dark por padrão; preservar consistência visual */
+  /* Site jÃ¡ Ã© dark por padrÃ£o; preservar consistÃªncia visual */
 }
