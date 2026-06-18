@@ -3,7 +3,10 @@
    ========================================================== */
 
 // ── Constants ─────────────────────────────────────────────
-const MAX_FILE_SIZE_BYTES = 100 * 1024 * 1024; // 100 MB
+// Azure Portal exports for a single subscription are typically < 2 MB; this
+// cap blocks accidental uploads of huge unrelated files (and memory-exhaustion
+// attempts) before they reach the XLSX parser.
+const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB
 const SEARCH_DEBOUNCE_MS  = 200;
 const PRINT_IFRAME_TTL_MS = 60000; // safety cleanup if afterprint never fires
 const STORAGE_KEYS = {
@@ -94,14 +97,14 @@ const langFlag   = document.getElementById('langFlag');
 const langLabel  = document.getElementById('langLabel');
 
 const LANG_FLAGS = {
-  'en':    { flag: 'https://flagcdn.com/24x18/us.png', label: 'English' },
-  'pt-BR': { flag: 'https://flagcdn.com/24x18/br.png', label: 'Português' },
-  'zh-CN': { flag: 'https://flagcdn.com/24x18/cn.png', label: '中文' },
-  'es':    { flag: 'https://flagcdn.com/24x18/es.png', label: 'Español' },
-  'fr':    { flag: 'https://flagcdn.com/24x18/fr.png', label: 'Français' },
-  'ar':    { flag: 'https://flagcdn.com/24x18/sa.png', label: 'العربية' },
-  'ru':    { flag: 'https://flagcdn.com/24x18/ru.png', label: 'Русский' },
-  'ja':    { flag: 'https://flagcdn.com/24x18/jp.png', label: '日本語' }
+  'en':    { flag: 'assets/flags/us.png', label: 'English' },
+  'pt-BR': { flag: 'assets/flags/br.png', label: 'Português' },
+  'zh-CN': { flag: 'assets/flags/cn.png', label: '中文' },
+  'es':    { flag: 'assets/flags/es.png', label: 'Español' },
+  'fr':    { flag: 'assets/flags/fr.png', label: 'Français' },
+  'ar':    { flag: 'assets/flags/sa.png', label: 'العربية' },
+  'ru':    { flag: 'assets/flags/ru.png', label: 'Русский' },
+  'ja':    { flag: 'assets/flags/jp.png', label: '日本語' }
 };
 
 function updateLangPicker() {
@@ -162,15 +165,19 @@ langMenu.addEventListener('keydown', e => {
 
 langMenu.querySelectorAll('li[data-lang]').forEach(li => {
   li.addEventListener('click', () => {
-    currentLang = li.dataset.lang;
-    storage.set(STORAGE_KEYS.lang, currentLang);
-    refreshCollator();
-    updateLangPicker();
+    const newLang = li.dataset.lang;
+    storage.set(STORAGE_KEYS.lang, newLang);
     langMenu.classList.add('hidden');
     langPicker.classList.remove('open');
     langToggle.setAttribute('aria-expanded', 'false');
     langToggle.focus();
-    applyLanguage();
+    // Lazy-load the language pack if it hasn't been shipped yet, then switch.
+    ensureI18nLoaded(newLang).then(() => {
+      currentLang = newLang;
+      refreshCollator();
+      updateLangPicker();
+      applyLanguage();
+    }).catch(err => { console.error(err); });
   });
 });
 
@@ -205,10 +212,18 @@ function applyLanguage() {
   }
 }
 
-// Apply on load
+// Apply on load. If the resolved language isn't in I18N yet (root page +
+// non-default saved/detected lang), lazy-load it before the first render.
 refreshCollator();
 updateLangPicker();
-applyLanguage();
+if (typeof I18N !== 'undefined' && I18N[currentLang]) {
+  applyLanguage();
+} else if (typeof ensureI18nLoaded === 'function') {
+  applyLanguage(); // paint with English fallback immediately
+  ensureI18nLoaded(currentLang).then(applyLanguage).catch(err => console.error(err));
+} else {
+  applyLanguage();
+}
 
 // Set canonical URL and OG url (always use the custom domain)
 (function setCanonicalUrl() {
@@ -496,6 +511,15 @@ function processFile(file) {
     );
     return;
   }
+
+  // Extension guard — the parser only knows how to handle these formats.
+  const ext = (file.name.match(/\.([a-z0-9]+)$/i) || [, ''])[1].toLowerCase();
+  const ALLOWED_EXT = new Set(['csv', 'tsv', 'xls', 'xlsx']);
+  if (!ALLOWED_EXT.has(ext)) {
+    showTemplateHint((t('alertError') || 'Error: ') + `unsupported file extension ".${ext}".`);
+    return;
+  }
+
   showFileName(file.name);
 
   // Remove any existing loading overlay
@@ -512,17 +536,35 @@ function processFile(file) {
   uploadArea.parentNode.insertBefore(loadingEl, resultsSection);
 
   const reader = new FileReader();
-  const isCsv  = /\.(csv|tsv)$/i.test(file.name);
+  const isCsv  = (ext === 'csv' || ext === 'tsv');
 
   reader.onload = function (e) {
     // Defer parsing one frame so the spinner paints first
     requestAnimationFrame(() => {
       try {
         let result = e.target.result;
-        // CSV BOM detection — strip UTF-8 BOM if present
-        if (isCsv && typeof result === 'string' && result.charCodeAt(0) === 0xFEFF) {
-          result = result.slice(1);
+
+        // Magic-byte validation — defense in depth against spoofed extensions.
+        // We refuse to hand obviously-wrong content to the XLSX parser.
+        if (!isCsv) {
+          const head = new Uint8Array(result, 0, Math.min(8, result.byteLength));
+          // XLSX/XLSM (zip)          → 50 4B 03 04   or   50 4B 05 06 (empty zip)
+          // XLS  (compound binary)   → D0 CF 11 E0 A1 B1 1A E1
+          const isZip = head[0] === 0x50 && head[1] === 0x4B && (head[2] === 0x03 || head[2] === 0x05);
+          const isCfb = head[0] === 0xD0 && head[1] === 0xCF && head[2] === 0x11 && head[3] === 0xE0;
+          if (!isZip && !isCfb) {
+            throw new Error('file content does not match spreadsheet format (.xls/.xlsx).');
+          }
+        } else if (typeof result === 'string') {
+          // CSV BOM detection — strip UTF-8 BOM if present
+          if (result.charCodeAt(0) === 0xFEFF) result = result.slice(1);
+          // Reject obviously binary content sent as .csv (NUL byte in first 512 chars).
+          const sniff = result.slice(0, 512);
+          if (sniff.indexOf('\u0000') !== -1) {
+            throw new Error('file appears to be binary, not a text CSV.');
+          }
         }
+
         const wb = isCsv
           ? XLSX.read(result, { type: 'string' })
           : XLSX.read(new Uint8Array(result), { type: 'array' });
@@ -585,11 +627,66 @@ const findLocCol   = h => findColumn(h,
 // Resource type extraction & lookup
 // ==========================================================
 
-/** Extract "Microsoft.X/type" from an Azure portal URL */
+/** Extract "Publisher.Namespace/type[/childType...]" from an Azure portal URL.
+ *  Supports both first-party (Microsoft.*) and third-party Marketplace SaaS
+ *  publisher namespaces (e.g. MongoDB.Atlas, Datadog.Observability, Confluent.Confluent).
+ *  Also captures child resource types (e.g. virtualMachines/extensions) by walking
+ *  the /providers/Namespace/type/name[/childType/childName]... segments and keeping
+ *  the type segments (odd-indexed after the namespace). */
 function extractTypeFromUrl(url) {
   if (!url) return null;
-  const m = url.match(/providers\/(Microsoft\.[^/]+\/[^/]+)/i);
-  return m ? m[1] : null;
+  const m = url.match(/providers\/([A-Za-z][A-Za-z0-9]*(?:\.[A-Za-z0-9]+)+(?:\/[^/?#]+)+)/i);
+  if (!m) return null;
+  const parts = m[1].split('/'); // [Namespace, type, name, childType, childName, ...]
+  const result = [parts[0]];
+  // Types are at indices 1, 3, 5, ... (names are at 2, 4, 6, ...)
+  for (let i = 1; i < parts.length; i += 2) {
+    result.push(parts[i]);
+  }
+  return result.join('/');
+}
+
+function choosePreferredResourceType(displayType, resolvedType) {
+  if (!displayType) return resolvedType || '';
+  if (!resolvedType) return displayType;
+
+  const displayDepth = displayType.split('/').length;
+  const resolvedDepth = resolvedType.split('/').length;
+  return displayDepth > resolvedDepth ? displayType : resolvedType;
+}
+
+function resolveResourceTypeInfo(displayType, link) {
+  const resolvedType = link ? extractTypeFromUrl(link) : null;
+  const finalType = choosePreferredResourceType(displayType, resolvedType);
+  const info = lookupResourceType(finalType)
+    || (displayType && displayType !== finalType ? lookupResourceType(displayType) : null)
+    || (resolvedType && resolvedType !== finalType ? lookupResourceType(resolvedType) : null);
+
+  return { resolvedType, finalType, info };
+}
+
+function buildAnalyzedRow(row, columns) {
+  const displayType = columns.typeCol ? String(row[columns.typeCol] || '').trim() : '';
+  const name = columns.nameCol ? String(row[columns.nameCol] || '').trim() : '';
+  const link = columns.linkCol ? String(row[columns.linkCol] || '').trim() : '';
+  const resourceGroup = columns.rgCol ? String(row[columns.rgCol] || '').trim() : '';
+  const location = columns.locCol ? String(row[columns.locCol] || '').trim() : '';
+
+  const { finalType, info } = resolveResourceTypeInfo(displayType, link);
+
+  return {
+    name:          name || '—',
+    type:          finalType || '—',
+    displayType,
+    resourceGroup,
+    location,
+    moveRG:        info ? info.moveRG     : -1,
+    moveSub:       info ? info.moveSub    : -1,
+    moveRegion:    info ? info.moveRegion : -1,
+    status:        getStatus(info),
+    noteKey:       getNoteKeyForType(finalType),
+    docUrl:        getDocUrlForType(finalType)
+  };
 }
 
 /** Look up a resource type in MOVE_DB (case-insensitive, progressive fallback) */
@@ -753,33 +850,9 @@ function analyzeResources(data) {
     showTemplateHint(t('templateMissing') + missing.join(', '));
   }
 
-  state.allResults = data.map(row => {
-    const displayType = typeCol ? String(row[typeCol] || '').trim() : '';
-    const name        = nameCol ? String(row[nameCol] || '').trim() : '';
-    const link        = linkCol ? String(row[linkCol] || '').trim() : '';
-    const rg          = rgCol   ? String(row[rgCol]   || '').trim() : '';
-    const loc         = locCol  ? String(row[locCol]  || '').trim() : '';
+  const columns = { typeCol, nameCol, linkCol, rgCol, locCol };
 
-    const resolvedType = link ? extractTypeFromUrl(link) : null;
-    const finalType    = resolvedType || displayType;
-
-    let info = resolvedType ? lookupResourceType(resolvedType) : null;
-    if (!info && displayType) info = lookupResourceType(displayType);
-
-    return {
-      name:          name || '—',
-      type:          finalType || '—',
-      displayType,
-      resourceGroup: rg,
-      location:      loc,
-      moveRG:        info ? info.moveRG     : -1,
-      moveSub:       info ? info.moveSub    : -1,
-      moveRegion:    info ? info.moveRegion : -1,
-      status:        getStatus(info),
-      noteKey:       getNoteKeyForType(finalType),
-      docUrl:        getDocUrlForType(finalType)
-    };
-  }).filter(r => r.type !== '—');
+  state.allResults = data.map(row => buildAnalyzedRow(row, columns)).filter(r => r.type !== '—');
 
   // Deduplicate (Cost Management exports list same resource for each meter)
   // Only dedup when name and resourceGroup are real values (not missing)
@@ -991,9 +1064,24 @@ function getExportData() {
 // ==========================================================
 // Note cell renderer (text + optional doc link)
 // ==========================================================
+/**
+ * Defense-in-depth: only allow http(s) URLs in anchor hrefs we render.
+ * `getDocUrlForType` already returns a hardcoded https://learn.microsoft.com/…
+ * URL built from a regex-validated provider name, but this extra check ensures
+ * any future code path that ever sets r.docUrl from less-trusted data can
+ * never inject a `javascript:` / `data:` / `vbscript:` URL.
+ */
+function safeHttpUrl(url) {
+  if (typeof url !== 'string') return '';
+  const trimmed = url.trim();
+  if (!/^https?:\/\//i.test(trimmed)) return '';
+  return trimmed;
+}
+
 function renderNoteCell(r) {
-  const docLink = r.docUrl
-    ? `<a href="${escapeHtml(r.docUrl)}" target="_blank" rel="noopener noreferrer" class="doc-link" title="${escapeHtml(t('docLinkTitle'))}">${escapeHtml(t('docLinkText'))}</a>`
+  const safeUrl = safeHttpUrl(r.docUrl);
+  const docLink = safeUrl
+    ? `<a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="doc-link" title="${escapeHtml(t('docLinkTitle'))}">${escapeHtml(t('docLinkText'))}</a>`
     : '';
   if (!r.noteKey) return docLink || '—';
   const noteText = escapeHtml(t(r.noteKey));
@@ -1033,7 +1121,13 @@ function renderTable() {
   }
 
   const cellBuilders = {
-    name:          r => `<td>${escapeHtml(r.name)}</td>`,
+    name:          r => {
+      const iconUrl = (typeof getIconForType === 'function') ? getIconForType(r.type) : '';
+      const iconHtml = iconUrl
+        ? `<img class="resource-icon" src="${escapeHtml(iconUrl)}" alt="" width="20" height="20" loading="lazy" decoding="async">`
+        : '';
+      return `<td><span class="name-cell">${iconHtml}${escapeHtml(r.name)}</span></td>`;
+    },
     type:          r => `<td><code class="type-tag">${escapeHtml(r.type)}</code></td>`,
     friendlyName:  r => `<td>${escapeHtml(getFriendlyName(r.type))}</td>`,
     resourceGroup: r => `<td class="cell-muted">${escapeHtml(r.resourceGroup || '—')}</td>`,
@@ -1046,13 +1140,19 @@ function renderTable() {
   };
 
   const order = getColumnOrder();
-  const fragment = document.createDocumentFragment();
-  for (const r of filtered) {
-    const tr = document.createElement('tr');
-    tr.innerHTML = order.map(col => cellBuilders[col](r)).join('');
-    fragment.appendChild(tr);
+  // Single parse pass — building the full <tr>…</tr> string and assigning it
+  // once is significantly faster than creating each <tr> element individually
+  // (especially noticeable on tables with 1000+ rows).
+  const rowsHtml = new Array(filtered.length);
+  for (let i = 0; i < filtered.length; i++) {
+    const r = filtered[i];
+    let cells = '';
+    for (let j = 0; j < order.length; j++) {
+      cells += cellBuilders[order[j]](r);
+    }
+    rowsHtml[i] = '<tr>' + cells + '</tr>';
   }
-  tableBody.replaceChildren(fragment);
+  tableBody.innerHTML = rowsHtml.join('');
 
   // Reorder header to match (skip if order unchanged since last render)
   const thead = resultsTable.querySelector('thead tr');
@@ -1299,8 +1399,18 @@ exportPdfBtn.addEventListener('click', () => {
 
   // Column definitions for PDF: [key, header, cellFn]
   // Note: Type cell shows ONLY the type code; friendly name has its own column.
+  // Icons use absolute URLs so they render correctly inside the print iframe.
+  const iconAbsUrl = (type) => {
+    const rel = (typeof getIconForType === 'function') ? getIconForType(type) : '';
+    if (!rel) return '';
+    try { return new URL(rel, document.baseURI).href; } catch { return rel; }
+  };
   const allPdfCols = {
-    name:          [t('csvName'),        r => `<td>${escapeHtml(r.name)}</td>`],
+    name: [t('csvName'), r => {
+      const u = iconAbsUrl(r.type);
+      const ico = u ? `<img src="${escapeHtml(u)}" alt="" width="14" height="14" style="vertical-align:middle;margin-right:4px;flex-shrink:0">` : '';
+      return `<td><span style="display:inline-flex;align-items:center;gap:2px">${ico}<span>${escapeHtml(r.name)}</span></span></td>`;
+    }],
     type:          [t('csvType'),        r => `<td><code>${escapeHtml(r.type)}</code></td>`],
     friendlyName:  [t('thFriendlyName'), r => `<td>${escapeHtml(getFriendlyName(r.type))}</td>`],
     resourceGroup: [t('csvRG'),          r => `<td>${escapeHtml(r.resourceGroup || '—')}</td>`],
@@ -1331,7 +1441,7 @@ exportPdfBtn.addEventListener('click', () => {
 
   // Chunk rows into pages of N to guarantee predictable page breaks
   // (avoids long notes splitting awkwardly across pages).
-  const PDF_ROWS_PER_PAGE = 13;
+  const PDF_ROWS_PER_PAGE = 10;
   const buildRow = r => '<tr>' + pdfCols.map(d => d[2](r)).join('') + '</tr>';
   const chunks = [];
   for (let i = 0; i < filtered.length; i += PDF_ROWS_PER_PAGE) {
@@ -1398,6 +1508,7 @@ exportPdfBtn.addEventListener('click', () => {
     body{padding:8px 8px 28mm}
     @page{size:landscape;margin:7mm 7mm 20mm 7mm}
     .print-footer{padding:3mm 0 4mm}
+    img{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
 </style>
 </head>
@@ -1485,11 +1596,22 @@ ${tablesHtml}
       iframe.contentWindow.print();
     };
 
-    if (img && !img.complete) {
-      img.addEventListener('load', triggerPrint);
-      img.addEventListener('error', triggerPrint);
-    } else {
+    // Wait for ALL images (header logo + every resource icon) before printing,
+    // otherwise the PDF gets rendered with missing icons.
+    const allImgs = Array.from(doc.images || []);
+    const pending = allImgs.filter(i => !i.complete);
+    if (pending.length === 0) {
       setTimeout(triggerPrint, 100);
+    } else {
+      let remaining = pending.length;
+      const done = () => { if (--remaining <= 0) setTimeout(triggerPrint, 50); };
+      // Hard cap: don't wait forever if a single icon fails to load.
+      const cap = setTimeout(triggerPrint, 3000);
+      const wrap = () => { clearTimeout(cap); done(); };
+      for (const i of pending) {
+        i.addEventListener('load',  wrap, { once: true });
+        i.addEventListener('error', wrap, { once: true });
+      }
     }
   };
 

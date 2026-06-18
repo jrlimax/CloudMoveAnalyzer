@@ -8,6 +8,7 @@
 import fs   from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { spawnSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -107,6 +108,19 @@ function renderLangPage(template, lang) {
     (m) => `<script>window.__CMA_LANG__=${JSON.stringify(lang.code)};</script>\n  ${m}`
   );
 
+  // Replace the default i18n data pack (en) with this page's language pack
+  // (plus en as a fallback, when different). Same for the matching preload hint.
+  if (lang.code !== 'en') {
+    html = html.replace(
+      /<link rel="preload" as="script" href="js\/i18n\/en\.js\?v=\d+" \/>/,
+      (m) => `${m}\n  <link rel="preload" as="script" href="js/i18n/${lang.code}.js?v=1" />`
+    );
+    html = html.replace(
+      /<script src="js\/i18n\/en\.js\?v=\d+" defer><\/script>/,
+      (m) => `${m}\n  <script src="js/i18n/${lang.code}.js?v=1" defer></script>`
+    );
+  }
+
   html = html.replace(
     /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i,
     `<meta name="description" content="${description}" />`
@@ -186,6 +200,11 @@ ${entries}
 // ---------------------------------------------------------------------------
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
+
+// Regenerate per-language i18n packs from data/i18n-source.js before copying js/
+// (so .cf-dist/js/i18n/<lang>.js is always in sync with the canonical source).
+const split = spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'split-i18n.js')], { stdio: 'inherit' });
+if (split.status !== 0) throw new Error('split-i18n.js failed');
 
 // Root files (sitemap.xml is regenerated below, so skip copying it)
 for (const file of ['index.html', 'robots.txt', '_headers']) {

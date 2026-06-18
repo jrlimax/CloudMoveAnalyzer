@@ -43,6 +43,9 @@ export function loadAppFunctions() {
 
   // Extract specific function definitions via regex
   const functionsToExtract = [
+    'extractTypeFromUrl',
+    'choosePreferredResourceType',
+    'resolveResourceTypeInfo',
     'lookupResourceType',
     'getStatus',
     'getNoteKeyForType',

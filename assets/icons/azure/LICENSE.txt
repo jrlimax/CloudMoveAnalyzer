@@ -1,0 +1,17 @@
+Azure Architecture Icons
+Source: https://learn.microsoft.com/azure/architecture/icons/
+(c) Microsoft Corporation. All rights reserved.
+
+Microsoft permits the use of these icons in architecture diagrams,
+training materials, and documentation. You may copy, distribute, and
+display the icons only for that permitted use, unless granted explicit
+permission by Microsoft. Microsoft reserves all other rights.
+
+Restrictions (do NOT):
+  - Crop, flip, or rotate the icons.
+  - Distort or alter the shape of the icons in any way.
+  - Use Microsoft product icons to represent your product or service.
+
+These icons are bundled with Cloud Move Analyzer purely as visual
+labels next to Azure resource type names. They are not used as the
+project's branding.

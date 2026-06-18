@@ -1,0 +1,4201 @@
+{
+  "$note": "Mapping table reconstructed from publicly-visible Azure Portal metadata. We do NOT redistribute Portal SVGs — only the resourceType → friendly-name index. See scripts/sync-portal-icons.js for refresh instructions.",
+  "sourceUrl": "https://raw.githubusercontent.com/maskati/azure-icons/main/README.md",
+  "sourceProject": "https://github.com/maskati/azure-icons (MIT, auto-extracted from Azure Portal)",
+  "portalVersion": "17.385.5.1",
+  "extractedAt": "2026-06-17",
+  "fetchedAt": "2026-06-18T03:52:00.971Z",
+  "entryCount": 838,
+  "entries": [
+    {
+      "resourceType": "anyscale.platform/clouds",
+      "friendlyName": "Anyscale Cloud",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleClouds.svg"
+    },
+    {
+      "resourceType": "anyscale.platform/clouds/cloudresources",
+      "friendlyName": "Anyscale Cloud Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleCloudResources.svg"
+    },
+    {
+      "resourceType": "anyscale.platform/clouds/computeconfigs",
+      "friendlyName": "Anyscale Compute Config",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleComputeConfigs.svg"
+    },
+    {
+      "resourceType": "anyscale.platform/clouds/containerimages",
+      "friendlyName": "Anyscale Container Image",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleContainerImages.svg"
+    },
+    {
+      "resourceType": "anyscale.platform/clouds/projects",
+      "friendlyName": "Anyscale Project",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleProjects.svg"
+    },
+    {
+      "resourceType": "anyscale.platform/clouds/projects/jobs",
+      "friendlyName": "Anyscale Job",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleJobs.svg"
+    },
+    {
+      "resourceType": "anyscale.platform/clouds/projects/services",
+      "friendlyName": "Anyscale Service",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleServices.svg"
+    },
+    {
+      "resourceType": "anyscale.platform/clouds/projects/workspaces",
+      "friendlyName": "Anyscale Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleWorkspaces.svg"
+    },
+    {
+      "resourceType": "arizeai.observabilityeval/organizations",
+      "friendlyName": "Azure Native Arize AI Cloud Service",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/ArizeAi.svg"
+    },
+    {
+      "resourceType": "astronomer.astro/organizations",
+      "friendlyName": "Astro Organization",
+      "portalSvgPath": "svg/Azure_Marketplace_Astronomer/Astronomer.svg"
+    },
+    {
+      "resourceType": "commvault.contentstore/cloudaccounts",
+      "friendlyName": "Commvault Cloud Account",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/CommvaultCloudAccounts.svg"
+    },
+    {
+      "resourceType": "dell.storage/filesystems",
+      "friendlyName": "Dell PowerScale",
+      "portalSvgPath": "svg/Azure_Marketplace_Dell/Azure_Microsoft_Dell.svg"
+    },
+    {
+      "resourceType": "dynatrace.observability/monitors",
+      "friendlyName": "Dynatrace",
+      "portalSvgPath": "svg/Azure_Marketplace_Dynatrace/Dynatrace.svg"
+    },
+    {
+      "resourceType": "informatica.datamanagement/organizations",
+      "friendlyName": "Informatica Organization",
+      "portalSvgPath": "svg/Azure_Marketplace_Informatica/Informatica.svg"
+    },
+    {
+      "resourceType": "lambdatest.hyperexecute/organizations",
+      "friendlyName": "Azure Native LambdaTest - HyperExecute Cloud Service",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/LambdaTest.svg"
+    },
+    {
+      "resourceType": "liftrbasic.samplerp/organizations",
+      "friendlyName": "Azure Native LiftrLite Sample RP - An Azure Native Sample RP Cloud Service",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/Liftrbasic.svg"
+    },
+    {
+      "resourceType": "microsoft.aad/domainservices",
+      "friendlyName": "Microsoft Entra Domain Services",
+      "portalSvgPath": "svg/Microsoft_AAD_DomainServices/AADDomainService.svg"
+    },
+    {
+      "resourceType": "microsoft.aadiam/privatelinkforazuread",
+      "friendlyName": "Private Link for Microsoft Entra ID",
+      "portalSvgPath": "svg/Microsoft_AAD_IAM/PrivateLinkForAzureAD.svg"
+    },
+    {
+      "resourceType": "microsoft.alertsmanagement/actionrules",
+      "friendlyName": "Alert processing rule",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring_Alerts/AlertProcessingRule.svg"
+    },
+    {
+      "resourceType": "microsoft.alertsmanagement/prometheusrulegroups",
+      "friendlyName": "Prometheus rule group",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring/PrometheusRuleGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.alertsmanagement/smartdetectoralertrules",
+      "friendlyName": "Smart detector alert rule",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring_Alerts/SmartDetectorAlertRule.svg"
+    },
+    {
+      "resourceType": "microsoft.all/arcvirtualmachines",
+      "friendlyName": "Azure Arc virtual machine",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/ArcVirtualMachines.svg"
+    },
+    {
+      "resourceType": "microsoft.all/hcivirtualmachines",
+      "friendlyName": "Azure Local Virtual Machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/HCIVirtualMachines.svg"
+    },
+    {
+      "resourceType": "microsoft.all/virtualmachines",
+      "friendlyName": "Virtual machine",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/AllVirtualMachine.svg"
+    },
+    {
+      "resourceType": "microsoft.analysisservices/servers",
+      "friendlyName": "Analysis Services",
+      "portalSvgPath": "svg/Microsoft_Azure_AnalysisServices/AnalysisServices.svg"
+    },
+    {
+      "resourceType": "microsoft.apicenter/services",
+      "friendlyName": "API Center",
+      "portalSvgPath": "svg/Microsoft_Azure_ApiManagement/Center.svg"
+    },
+    {
+      "resourceType": "microsoft.apicenter/services/workspaces",
+      "friendlyName": "Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_ApiManagement/WorkspaceCatalog.svg"
+    },
+    {
+      "resourceType": "microsoft.apimanagement/gateways",
+      "friendlyName": "Gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_ApiManagement/Gateway.svg"
+    },
+    {
+      "resourceType": "microsoft.apimanagement/service",
+      "friendlyName": "API Management service",
+      "portalSvgPath": "svg/Microsoft_Azure_ApiManagement/Service.svg"
+    },
+    {
+      "resourceType": "microsoft.app/agents",
+      "friendlyName": "Azure SRE Agent",
+      "portalSvgPath": "svg/Microsoft_Azure_PaasServerless/SreAgentResources.svg"
+    },
+    {
+      "resourceType": "microsoft.app/agentspaces",
+      "friendlyName": "SRE Agent Space",
+      "portalSvgPath": "svg/Microsoft_Azure_PaasServerless/SreAgentSpace.svg"
+    },
+    {
+      "resourceType": "microsoft.app/connectedenvironments",
+      "friendlyName": "Container Apps Connected Environment",
+      "portalSvgPath": "svg/WebsitesExtension/ContainerAppConnectedEnvironment.svg"
+    },
+    {
+      "resourceType": "microsoft.app/containerapps",
+      "friendlyName": "Container App",
+      "portalSvgPath": "svg/WebsitesExtension/ContainerApp.svg"
+    },
+    {
+      "resourceType": "microsoft.app/jobs",
+      "friendlyName": "Container App Job",
+      "portalSvgPath": "svg/WebsitesExtension/ContainerAppJobs.svg"
+    },
+    {
+      "resourceType": "microsoft.app/managedenvironments",
+      "friendlyName": "Container Apps Environment",
+      "portalSvgPath": "svg/WebsitesExtension/ContainerAppEnvironment.svg"
+    },
+    {
+      "resourceType": "microsoft.app/sessionpools",
+      "friendlyName": "Container App Session Pool",
+      "portalSvgPath": "svg/WebsitesExtension/ContainerAppSessionPool.svg"
+    },
+    {
+      "resourceType": "microsoft.appconfiguration/configurationstores",
+      "friendlyName": "App Configuration",
+      "portalSvgPath": "svg/Microsoft_Azure_AzConfig/StoreResource.svg"
+    },
+    {
+      "resourceType": "microsoft.appplatform/spring",
+      "friendlyName": "Azure Spring Apps",
+      "portalSvgPath": "svg/AppPlatformExtension/AppPlatformAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.arc/all",
+      "friendlyName": "Azure Arc enabled resource",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcCenterUX/AllArcResources.svg"
+    },
+    {
+      "resourceType": "microsoft.arc/allfairfax",
+      "friendlyName": "Azure Arc enabled resource",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcCenterUX/AllArcResourcesFairfax.svg"
+    },
+    {
+      "resourceType": "microsoft.arc/kubernetesresources",
+      "friendlyName": "Azure Arc Kubernetes cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcClusterUX/ArcK8Resources.svg"
+    },
+    {
+      "resourceType": "microsoft.aszlabhardware/labservers",
+      "friendlyName": "AszLabHardware Lab Server",
+      "portalSvgPath": "svg/Microsoft_AzureStack_LabHardware/LabServers.svg"
+    },
+    {
+      "resourceType": "microsoft.aszlabhardware/reservations",
+      "friendlyName": "AszLabHardware Reservation",
+      "portalSvgPath": "svg/Microsoft_AzureStack_LabHardware/Reservations.svg"
+    },
+    {
+      "resourceType": "microsoft.aszlabhardware/servers",
+      "friendlyName": "AszLabHardware Server",
+      "portalSvgPath": "svg/Microsoft_AzureStack_LabHardware/Servers.svg"
+    },
+    {
+      "resourceType": "microsoft.attestation/attestationproviders",
+      "friendlyName": "Attestation provider",
+      "portalSvgPath": "svg/Microsoft_Azure_Attestation/AttestResource.svg"
+    },
+    {
+      "resourceType": "microsoft.authorization/resourcemanagementprivatelinks",
+      "friendlyName": "Resource management private link",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/ResourceManagementPrivateLink.svg"
+    },
+    {
+      "resourceType": "microsoft.automation/automationaccounts",
+      "friendlyName": "Automation Account",
+      "portalSvgPath": "svg/Microsoft_Azure_Automation/Account.svg"
+    },
+    {
+      "resourceType": "microsoft.avs/privateclouds",
+      "friendlyName": "Azure VMware Solution private cloud",
+      "portalSvgPath": "svg/VMCP/PrivateCloud.svg"
+    },
+    {
+      "resourceType": "microsoft.azureactivedirectory/b2cdirectories",
+      "friendlyName": "B2C Tenant",
+      "portalSvgPath": "svg/Microsoft_AAD_B2CAdmin/B2CTenant.svg"
+    },
+    {
+      "resourceType": "microsoft.azureactivedirectory/ciamdirectories",
+      "friendlyName": "External Configuration Tenant",
+      "portalSvgPath": "svg/Microsoft_AAD_B2CAdmin/CIAMTenant.svg"
+    },
+    {
+      "resourceType": "microsoft.azureactivedirectory/guestusages",
+      "friendlyName": "Guest Usage",
+      "portalSvgPath": "svg/Microsoft_AAD_B2CAdmin/GuestUsages.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/datacontrollers",
+      "friendlyName": "Azure Arc data controller",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/DataController.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/mysqlserver",
+      "friendlyName": "MySql Server - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/MySqlServer.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/postgresinstances",
+      "friendlyName": "PostgreSQL server – Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/PostgresInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/postgressqlserver",
+      "friendlyName": "PostgresSql Server - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/PostgresSqlServer.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/sqlmanagedinstances",
+      "friendlyName": "SQL managed instance - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/SqlManagedInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/sqlserveresulicenses",
+      "friendlyName": "SQL Server ESU license",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/SqlServerEsuLicense.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/sqlserverinstances",
+      "friendlyName": "SQL Server instance",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/SqlServerInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/sqlserverinstances/databases",
+      "friendlyName": "SQL Server database",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/SqlServerInstancesDatabases.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/sqlserverinstancesunified",
+      "friendlyName": "SQL Server instance",
+      "portalSvgPath": "svg/SqlAzureExtension/SqlServerInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.azurearcdata/sqlserverlicenses",
+      "friendlyName": "SQL Server License",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridData_Platform/SqlServerLicense.svg"
+    },
+    {
+      "resourceType": "microsoft.azuredatatransfer/connections",
+      "friendlyName": "Connection",
+      "portalSvgPath": "svg/Microsoft_Azure_CtsExtension/CloudTransferConnection.svg"
+    },
+    {
+      "resourceType": "microsoft.azuredatatransfer/connections/flows",
+      "friendlyName": "Flow",
+      "portalSvgPath": "svg/Microsoft_Azure_CtsExtension/CloudTransferFlow.svg"
+    },
+    {
+      "resourceType": "microsoft.azuredatatransfer/pipelines",
+      "friendlyName": "Pipeline",
+      "portalSvgPath": "svg/Microsoft_Azure_CtsExtension/CloudTransferPipeline.svg"
+    },
+    {
+      "resourceType": "microsoft.azuredatatransfer/pipelines/flowprofiles",
+      "friendlyName": "Flow Profile",
+      "portalSvgPath": "svg/Microsoft_Azure_CtsExtension/CloudTransferFlowProfile.svg"
+    },
+    {
+      "resourceType": "microsoft.azurefleet/fleets",
+      "friendlyName": "Compute Fleet",
+      "portalSvgPath": "svg/Microsoft_Azure_AzFleet/AzureFleet.svg"
+    },
+    {
+      "resourceType": "microsoft.azurelargeinstance/azurelargeinstances",
+      "friendlyName": "Azure Large Instance",
+      "portalSvgPath": "svg/Microsoft_Azure_SapHanaInstances/AzureLargeInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.azureplaywrightservice/accounts",
+      "friendlyName": "Playwright Testing (Classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_PlaywrightService/PlaywrightService.svg"
+    },
+    {
+      "resourceType": "microsoft.azurescan/scanningaccounts",
+      "friendlyName": "ESRP Scan",
+      "portalSvgPath": "svg/ScanX_Management/ScanXMeter.svg"
+    },
+    {
+      "resourceType": "microsoft.azuresphere/catalogs",
+      "friendlyName": "Azure Sphere Catalog",
+      "portalSvgPath": "svg/Microsoft_Azure_Sphere/AzureSphereArm.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/clusters",
+      "friendlyName": "Azure Local",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureStackHCIResource.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/clusters/updates/updateruns",
+      "friendlyName": "Azure Local",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AszBrowseHistory.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/clusters/updatesummaries",
+      "friendlyName": "Azure Local",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AszBrowseUpdates.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/devicepools",
+      "friendlyName": "Azure Stack Preview",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureEdgeNodePool.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/edgemachines",
+      "friendlyName": "Provisioned Machine",
+      "portalSvgPath": "svg/Microsoft_Azure_EdgeOrder/EdgeMachine.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/galleryimages",
+      "friendlyName": "Azure Local Gallery image",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureStackHCIGalleryImage.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/logicalnetworks",
+      "friendlyName": "Azure Local Logical network",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureStackHCILogicalNetwork.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/marketplacegalleryimages",
+      "friendlyName": "Azure Local Marketplace Gallery image",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureStackHCIMarketplaceGalleryImage.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/networkinterfaces",
+      "friendlyName": "Azure Local VM Network Interface",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureStackHCINetworkInterface.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/networksecuritygroups",
+      "friendlyName": "Azure Local Network Security Group",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureStackHCINetworkSecurityGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/storagecontainers",
+      "friendlyName": "Azure Local Storage path",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureStackHCIStoragePath.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/virtualharddisks",
+      "friendlyName": "Azure Local Disk - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/AzureLocalDisk.svg"
+    },
+    {
+      "resourceType": "microsoft.azurestackhci/virtualmachines",
+      "friendlyName": "Azure Local virtual machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/AzureStackHci.svg"
+    },
+    {
+      "resourceType": "microsoft.baremetalinfrastructure/baremetalinstances",
+      "friendlyName": "BareMetal Instance",
+      "portalSvgPath": "svg/Microsoft_Azure_SapHanaInstances/BareMetalInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.batch/batchaccounts",
+      "friendlyName": "Batch account",
+      "portalSvgPath": "svg/Microsoft_Azure_Batch/BatchAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.billing/billingaccounts/incentiveschedules",
+      "friendlyName": "Incentive Schedule",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/ContingencyBillingAdminAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billing/billingaccounts/incentiveschedules/milestones",
+      "friendlyName": "Milestone",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/MilestoneBillingAdminAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billing/billingaccounts/savingsplanorders",
+      "friendlyName": "Savings plan order",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/SavingsPlanOrderAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billing/billingaccounts/savingsplanorders/savingsplans",
+      "friendlyName": "Savings plan",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/SavingsPlanItemAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/allresources",
+      "friendlyName": "Billing Benefits Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/BillingBenefitsAllResources.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/conditionalcredits",
+      "friendlyName": "Conditional Credit",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/ConditionalCreditBrowseAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/credits",
+      "friendlyName": "Credit",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/CreditBrowseAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/discounts",
+      "friendlyName": "Discount",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/DiscountBrowseAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/incentiveschedules",
+      "friendlyName": "Incentive Schedule",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/ContingencyServiceAdminAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/incentiveschedules/milestones",
+      "friendlyName": "Milestone",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/MilestoneServiceAdminAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/maccs",
+      "friendlyName": "Microsoft Azure Consumption Commitment",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/MaccBrowseAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/savingsplanorders",
+      "friendlyName": "Savings plan order",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/SavingsPlanOrderServiceAdminAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.billingbenefits/savingsplanorders/savingsplans",
+      "friendlyName": "Savings plan",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/SavingsPlanItemServiceAdminAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.bing/accounts",
+      "friendlyName": "Bing Resource",
+      "portalSvgPath": "svg/Microsoft_Bing_Api/BingAPIAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.botservice/botservices",
+      "friendlyName": "Bot Service",
+      "portalSvgPath": "svg/Microsoft_Azure_BotService/BotService.svg"
+    },
+    {
+      "resourceType": "microsoft.cache/redis",
+      "friendlyName": "Azure Cache for Redis",
+      "portalSvgPath": "svg/AzureCacheExtension/CacheAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.cache/redisenterprise",
+      "friendlyName": "Azure Managed Redis",
+      "portalSvgPath": "svg/AzureCacheExtension/RedisEnterpriseAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.cache/redisenterprise/databases",
+      "friendlyName": "Redis Enterprise database",
+      "portalSvgPath": "svg/AzureCacheExtension/RedisEnterpriseDatabaseAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.capacity/reservationorders",
+      "friendlyName": "Reservation order",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/ReservationOrderAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.capacity/reservationorders/reservations",
+      "friendlyName": "Reservation",
+      "portalSvgPath": "svg/Microsoft_Azure_Reservations/ReservationAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.cdn/cdnwebapplicationfirewallpolicies",
+      "friendlyName": "Content Delivery Network WAF policy",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/ContentDeliveryNetworkWafPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.cdn/edgeactions",
+      "friendlyName": "Edge Action",
+      "portalSvgPath": "svg/Microsoft_Azure_EdgeAction/EdgeAction.svg"
+    },
+    {
+      "resourceType": "microsoft.cdn/profiles",
+      "friendlyName": "Front Door",
+      "portalSvgPath": "svg/Microsoft_Azure_AFDX/FrontdoorProfile.svg"
+    },
+    {
+      "resourceType": "microsoft.cdn/profiles/endpoints",
+      "friendlyName": "Endpoint",
+      "portalSvgPath": "svg/Microsoft_Azure_Cdn/Endpoint.svg"
+    },
+    {
+      "resourceType": "microsoft.cdn/profiles/endpoints/customdomains",
+      "friendlyName": "Custom domain",
+      "portalSvgPath": "svg/Microsoft_Azure_Cdn/CustomDomain.svg"
+    },
+    {
+      "resourceType": "microsoft.cdn/profiles/endpoints/origins",
+      "friendlyName": "Origin",
+      "portalSvgPath": "svg/Microsoft_Azure_Cdn/Origin.svg"
+    },
+    {
+      "resourceType": "microsoft.cdn/webagents",
+      "friendlyName": "Agentic Web App",
+      "portalSvgPath": "svg/Microsoft_Azure_AfdAgenticWebApp/AfdAgenticWebApp.svg"
+    },
+    {
+      "resourceType": "microsoft.certificateregistration/certificateorders",
+      "friendlyName": "App Service Certificate",
+      "portalSvgPath": "svg/WebsitesExtension/SslCertificate.svg"
+    },
+    {
+      "resourceType": "microsoft.changesafety/changestates",
+      "friendlyName": "Change record",
+      "portalSvgPath": "svg/Microsoft_Azure_ChangeSafety/changesafety_changestates.svg"
+    },
+    {
+      "resourceType": "microsoft.changesafety/changestates/stageprogressions",
+      "friendlyName": "Stage progression",
+      "portalSvgPath": "svg/Microsoft_Azure_ChangeSafety/changesafety_changestates_stageprogressions.svg"
+    },
+    {
+      "resourceType": "microsoft.changesafety/stagemaps",
+      "friendlyName": "Stage map",
+      "portalSvgPath": "svg/Microsoft_Azure_ChangeSafety/changesafety_stagemaps.svg"
+    },
+    {
+      "resourceType": "microsoft.changesafety/validations",
+      "friendlyName": "Validation",
+      "portalSvgPath": "svg/Microsoft_Azure_ChangeSafety/changesafety_validations.svg"
+    },
+    {
+      "resourceType": "microsoft.chaos/experiments",
+      "friendlyName": "Chaos Experiment",
+      "portalSvgPath": "svg/Microsoft_Azure_Chaos/chaosExperimentResource.svg"
+    },
+    {
+      "resourceType": "microsoft.chaos/privateaccesses",
+      "friendlyName": "Agent Private Access",
+      "portalSvgPath": "svg/Microsoft_Azure_Chaos/privateAccess.svg"
+    },
+    {
+      "resourceType": "microsoft.chaos/workspaces",
+      "friendlyName": "Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_Chaos/workspace.svg"
+    },
+    {
+      "resourceType": "microsoft.classiccompute/domainnames",
+      "friendlyName": "Cloud service (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudServices/CloudService.svg"
+    },
+    {
+      "resourceType": "microsoft.classiccompute/domainnames/slots/roles",
+      "friendlyName": "Cloud service role (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudServices/Role.svg"
+    },
+    {
+      "resourceType": "microsoft.classiccompute/virtualmachines",
+      "friendlyName": "Virtual machine (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_Classic_Compute/VirtualMachine.svg"
+    },
+    {
+      "resourceType": "microsoft.classicstorage/storageaccounts",
+      "friendlyName": "Storage account (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_Storage/ClassicStorageAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.classicstorage/storageaccounts/disks",
+      "friendlyName": "Disk (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_Classic_Compute/Disks.svg"
+    },
+    {
+      "resourceType": "microsoft.classicstorage/storageaccounts/osimages",
+      "friendlyName": "OS image (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_Classic_Compute/OsUserImages.svg"
+    },
+    {
+      "resourceType": "microsoft.classicstorage/storageaccounts/vmimages",
+      "friendlyName": "VM image (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_Classic_Compute/VmUserImages.svg"
+    },
+    {
+      "resourceType": "microsoft.cloudhealth/healthmodels",
+      "friendlyName": "Health model",
+      "portalSvgPath": "svg/Microsoft_CloudHealth_HealthModels/AzureHealthModel.svg"
+    },
+    {
+      "resourceType": "microsoft.cloudtest/accounts",
+      "friendlyName": "CloudTest Account",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudTest/CloudTestAccounts.svg"
+    },
+    {
+      "resourceType": "microsoft.cloudtest/buildcaches",
+      "friendlyName": "1ES Build Cache",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudTest/CloudTestBuildCache.svg"
+    },
+    {
+      "resourceType": "microsoft.cloudtest/hostedpools",
+      "friendlyName": "1ES Hosted Pool",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudTest/HostedPools.svg"
+    },
+    {
+      "resourceType": "microsoft.cloudtest/images",
+      "friendlyName": "1ES Image",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudTest/CloudTestImages.svg"
+    },
+    {
+      "resourceType": "microsoft.cloudtest/pools",
+      "friendlyName": "CloudTest Pool",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudTest/CloudTestPools.svg"
+    },
+    {
+      "resourceType": "microsoft.codesigning/codesigningaccounts",
+      "friendlyName": "Artifact Signing Account",
+      "portalSvgPath": "svg/Microsoft_Azure_CodeSigning/CodeSigningAccounts.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/accounts",
+      "friendlyName": "Foundry",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/CognitiveServicesAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/accounts/projects",
+      "friendlyName": "Foundry project",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/AIFoundryProject.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseaifoundry",
+      "friendlyName": "Microsoft Foundry",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/AIFoundry.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseaiservices",
+      "friendlyName": "Azure AI services",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/AIServices.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseallinone",
+      "friendlyName": "Azure AI services multi-service account",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/AllInOne.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseallservices",
+      "friendlyName": "All Resources",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/AllServices.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseanomalydetector",
+      "friendlyName": "Anomaly detector",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/AnomalyDetector.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsecomputervision",
+      "friendlyName": "Computer vision",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/ComputerVision.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsecontentmoderator",
+      "friendlyName": "Content moderator",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/ContentModerator.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsecontentsafety",
+      "friendlyName": "Content safety",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/ContentSafety.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsecustomvision",
+      "friendlyName": "Custom vision",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/CustomVision.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseface",
+      "friendlyName": "Face API",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/Face.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseformrecognizer",
+      "friendlyName": "Document intelligence",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/FormRecognizer.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsehealthdecisionsupport",
+      "friendlyName": "Health decision support",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/HealthDecisionSupport.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsehealthinsights",
+      "friendlyName": "Health Insights",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/HealthInsights.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseimmersivereader",
+      "friendlyName": "Immersive reader",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/ImmersiveReader.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseluis",
+      "friendlyName": "Language understanding",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/LUIS.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsemetricsadvisor",
+      "friendlyName": "Metrics advisor",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/MetricsAdvisor.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseopenai",
+      "friendlyName": "Azure OpenAI",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/OpenAI.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsepersonalizer",
+      "friendlyName": "Personalizer",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/Personalizer.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browseqnamaker",
+      "friendlyName": "QnA maker",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/QnAMaker.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsespeechservices",
+      "friendlyName": "Speech service",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/SpeechServices.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsetextanalytics",
+      "friendlyName": "Language",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/TextAnalytics.svg"
+    },
+    {
+      "resourceType": "microsoft.cognitiveservices/browsetexttranslation",
+      "friendlyName": "Translator",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectOxford/TextTranslation.svg"
+    },
+    {
+      "resourceType": "microsoft.communication/communicationservices",
+      "friendlyName": "Communication Service",
+      "portalSvgPath": "svg/Microsoft_Azure_CommunicationServices/Communication.svg"
+    },
+    {
+      "resourceType": "microsoft.communication/emailservices",
+      "friendlyName": "Email Communication Service",
+      "portalSvgPath": "svg/Microsoft_Azure_EmailCommunicationServices/EmailCommunicationService.svg"
+    },
+    {
+      "resourceType": "microsoft.communication/emailservices/domains",
+      "friendlyName": "Email Communication Services Domain",
+      "portalSvgPath": "svg/Microsoft_Azure_EmailCommunicationServices/EmailCommunicationServicesDomain.svg"
+    },
+    {
+      "resourceType": "microsoft.community/communitytrainings",
+      "friendlyName": "Community Training",
+      "portalSvgPath": "svg/Microsoft_Azure_CommunityTraining/CommunityTraining.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/availabilitysets",
+      "friendlyName": "Availability set",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/AvailabilitySet.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/capacityreservationgroups",
+      "friendlyName": "Capacity Reservation Group",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/CapacityReservationGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/cloudservices",
+      "friendlyName": "Cloud service (extended support)",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudServices_Arm/CloudServicesArm.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/computefleetinstances",
+      "friendlyName": "Instance",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/ComputeFleetInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/computefleetscalesets",
+      "friendlyName": "Virtual machine scale set",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/ComputeFleetScaleSet.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/diskaccesses",
+      "friendlyName": "Disk Access",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/DiskAccess.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/diskencryptionsets",
+      "friendlyName": "Disk Encryption Set",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/DiskEncryptionSet.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/disks",
+      "friendlyName": "Disk",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/Disk.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/galleries",
+      "friendlyName": "Azure compute gallery",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/SharedImageGallery.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/galleries/applications",
+      "friendlyName": "VM application definition",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/GalleryApplication.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/galleries/applications/versions",
+      "friendlyName": "VM application version",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/GalleryApplicationVersion.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/galleries/images",
+      "friendlyName": "VM image definition",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/ImageDefinition.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/galleries/images/versions",
+      "friendlyName": "VM image version",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/ImageVersion.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/hostgroups",
+      "friendlyName": "Host group",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/DedicatedHostGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/hostgroups/hosts",
+      "friendlyName": "Host",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/DedicatedHost.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/images",
+      "friendlyName": "Image",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/Image.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/locations/communitygalleries/images",
+      "friendlyName": "Community image",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/CommunityImage.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/proximityplacementgroups",
+      "friendlyName": "Proximity placement group",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/ProximityPlacementGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/restorepointcollections",
+      "friendlyName": "Restore Point Collection",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/RestorePointCollection.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/restorepointcollections/restorepoints",
+      "friendlyName": "Restore Point",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/RestorePoint.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/snapshots",
+      "friendlyName": "Snapshot",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/Snapshot.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/sshpublickeys",
+      "friendlyName": "SSH key",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/SshKey.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/standbypoolinstance",
+      "friendlyName": "Standby pool",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/StandbyPoolInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/virtualmachineflexinstances",
+      "friendlyName": "Instance",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/VirtualMachineFlexInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/virtualmachines",
+      "friendlyName": "Virtual machine",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/VirtualMachine.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/virtualmachines/providers/guestconfigurationassignments",
+      "friendlyName": "Guest Assignment",
+      "portalSvgPath": "svg/Microsoft_Azure_Automation/GuestAssignment.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/virtualmachinescalesets",
+      "friendlyName": "Virtual machine scale set",
+      "portalSvgPath": "svg/Microsoft_Azure_Compute/VirtualMachineScaleSet.svg"
+    },
+    {
+      "resourceType": "microsoft.compute/virtualmachinescalesets/providers/guestconfigurationassignments",
+      "friendlyName": "Guest Assignment",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/VMSSGuestAssignment.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/advisorcost",
+      "friendlyName": "Recommendations",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/AdvisorCost.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/advisoroperationalexcellence",
+      "friendlyName": "Recommendations",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/AdvisorOperationalExcellence.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/advisorperformance",
+      "friendlyName": "Recommendations",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/AdvisorPerformance.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/advisorreliability",
+      "friendlyName": "Recommendations",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/AdvisorReliability.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/advisorsecurity",
+      "friendlyName": "Recommendations",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/AdvisorSecurity.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/all",
+      "friendlyName": "All resources",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/AllResources.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/backup",
+      "friendlyName": "Backup job",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/Backup.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/computehubmain",
+      "friendlyName": "Compute infrastructure",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/ComputeHub.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/healthevents",
+      "friendlyName": "Health events",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/HealthEvents.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/linuxostype",
+      "friendlyName": "Linux OS",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/LinuxOSType.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/microsoftdefenderfreetrialsubscription",
+      "friendlyName": "Microsoft defender",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/MicrosoftDefenderFreeTrialSubscription.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/microsoftdefenderstandardsubscription",
+      "friendlyName": "Microsoft defender",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/MicrosoftDefenderStandardSubscription.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/outages",
+      "friendlyName": "Outages",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/Outages.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/powerstatedeallocated",
+      "friendlyName": "Power states",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/PowerStateDeallocated.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/powerstaterunning",
+      "friendlyName": "Power states",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/PowerStateRunning.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/powerstatestopped",
+      "friendlyName": "Power states",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/PowerStateStopped.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/provisioningstatefailedresources",
+      "friendlyName": "Provisioning states",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/ProvisioningStateFailedResources.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/provisioningstatesucceededresources",
+      "friendlyName": "Provisioning states",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/ProvisioningStateSucceededResources.svg"
+    },
+    {
+      "resourceType": "microsoft.computehub/windowsostype",
+      "friendlyName": "Windows OS",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/WindowsOSType.svg"
+    },
+    {
+      "resourceType": "microsoft.computeschedule/scheduledactions",
+      "friendlyName": "Scheduled Action (Preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_Maintenance/ScheduledAction.svg"
+    },
+    {
+      "resourceType": "microsoft.confidentialledger/ledgers",
+      "friendlyName": "Confidential Ledger",
+      "portalSvgPath": "svg/Microsoft_Azure_ConfidentialLedger/ConfidentialLedger.svg"
+    },
+    {
+      "resourceType": "microsoft.confidentialledger/managedccfs",
+      "friendlyName": "Managed CCF App",
+      "portalSvgPath": "svg/Microsoft_Azure_ConfidentialLedger/ManagedCCF.svg"
+    },
+    {
+      "resourceType": "microsoft.confluent/organizations",
+      "friendlyName": "Confluent organization",
+      "portalSvgPath": "svg/Azure_Marketplace_Confluent/Confluent.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedcache/enterprisemcccustomers",
+      "friendlyName": "Connected Cache for Enterprise & Education",
+      "portalSvgPath": "svg/Microsoft_ConnectedCache_Enterprise/MccEnterpriseResource.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedcache/enterprisemcccustomers/enterprisemcccachenodes",
+      "friendlyName": "MCC CacheNode for Enterprise",
+      "portalSvgPath": "svg/Microsoft_ConnectedCache_Enterprise/MccEnterpriseCacheNodeResource.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedcache/ispcustomers",
+      "friendlyName": "Connected Cache for ISP",
+      "portalSvgPath": "svg/Microsoft_ConnectedCache_ISP/MCCIspResource.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/clusters",
+      "friendlyName": "VMware cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/VCenterClusters.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/datastores",
+      "friendlyName": "VMware datastore",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/VCenterDatastores.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/hosts",
+      "friendlyName": "VMware host",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/VCenterHosts.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/resourcepools",
+      "friendlyName": "VMware resource pool",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/VCenterResourcepools.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/vcenters",
+      "friendlyName": "VMware vCenter",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/VMwarevCenter.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/vcenters/inventoryitems",
+      "friendlyName": "VMware vCenter inventory item",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/VCenterInventoryItems.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/vcenters/inventoryitems_virtualmachines",
+      "friendlyName": "VMware virtual machine",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/VCenterVirtualMachines.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/virtualmachines",
+      "friendlyName": "VMware + AVS virtual machine",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/VMwareVm.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/virtualmachines/providers/guestconfigurationassignments",
+      "friendlyName": "Guest Assignment",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/VMWareGuestAssignment.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/virtualmachinetemplates",
+      "friendlyName": "VMware virtual machine template",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/VCenterTemplates.svg"
+    },
+    {
+      "resourceType": "microsoft.connectedvmwarevsphere/virtualnetworks",
+      "friendlyName": "VMware virtual network",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/VCenterNetworks.svg"
+    },
+    {
+      "resourceType": "microsoft.containerinstance/containergroupprofiles",
+      "friendlyName": "Container group profile",
+      "portalSvgPath": "svg/Microsoft_Azure_KubernetesFleet/ContainerGroupProfiles.svg"
+    },
+    {
+      "resourceType": "microsoft.containerinstance/containergroups",
+      "friendlyName": "Container instances",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/ContainerGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.containerregistry/registries",
+      "friendlyName": "Container registry",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerRegistries/RegistryResource.svg"
+    },
+    {
+      "resourceType": "microsoft.containerregistry/registries/replications",
+      "friendlyName": "Container registry replication",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerRegistries/ReplicationResource.svg"
+    },
+    {
+      "resourceType": "microsoft.containerregistry/registries/scopemaps",
+      "friendlyName": "Container registry scope map",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerRegistries/ScopeMapResource.svg"
+    },
+    {
+      "resourceType": "microsoft.containerregistry/registries/tokens",
+      "friendlyName": "Container registry token",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerRegistries/TokenResource.svg"
+    },
+    {
+      "resourceType": "microsoft.containerregistry/registries/webhooks",
+      "friendlyName": "Container registry webhook",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerRegistries/WebhookResource.svg"
+    },
+    {
+      "resourceType": "microsoft.containerservice/fleets",
+      "friendlyName": "Kubernetes fleet manager",
+      "portalSvgPath": "svg/Microsoft_Azure_KubernetesFleet/Fleets.svg"
+    },
+    {
+      "resourceType": "microsoft.containerservice/fleets/managednamespaces",
+      "friendlyName": "Managed Fleet Namespace (preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_KubernetesFleet/ManagedFleetNamespaces.svg"
+    },
+    {
+      "resourceType": "microsoft.containerservice/managedclusters",
+      "friendlyName": "Kubernetes service",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/ManagedClusters.svg"
+    },
+    {
+      "resourceType": "microsoft.containerservice/managedclusters/managednamespaces",
+      "friendlyName": "Managed Kubernetes Namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/ManagedNamespaces.svg"
+    },
+    {
+      "resourceType": "microsoft.containerservice/managedclusters/microsoft.kubernetesconfiguration/extensions",
+      "friendlyName": "Kubernetes service extension",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/KubernetesClusterExtensionsChild.svg"
+    },
+    {
+      "resourceType": "microsoft.containerservice/managedclusters/microsoft.kubernetesconfiguration/fluxconfigurations",
+      "friendlyName": "GitOps configuration",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/ManagedClustersGitOpsConfiguration.svg"
+    },
+    {
+      "resourceType": "microsoft.containerservice/managedclusters/microsoft.kubernetesconfiguration/namespaces",
+      "friendlyName": "Kubernetes Namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/ManagedClusterNamespaces.svg"
+    },
+    {
+      "resourceType": "microsoft.containerservice/managedclustersupgradeenablelts",
+      "friendlyName": "enableLTS on out-of-support cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_KubernetesFleet/managedClustersUpgradeEnableLts.svg"
+    },
+    {
+      "resourceType": "microsoft.containerstorage/pools",
+      "friendlyName": "Container storage",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerStorage/ContainerStorage.svg"
+    },
+    {
+      "resourceType": "microsoft.cosmic/namespaces",
+      "friendlyName": "COSMIC Namespace",
+      "portalSvgPath": "svg/Microsoft_Exchange_Cosmic/CosmicNamespace.svg"
+    },
+    {
+      "resourceType": "microsoft.cosmic/namespaces/environments",
+      "friendlyName": "COSMIC Environment",
+      "portalSvgPath": "svg/Microsoft_Exchange_Cosmic/CosmicEnvironment.svg"
+    },
+    {
+      "resourceType": "microsoft.dashboard/dashboards",
+      "friendlyName": "Azure Monitor dashboards with Grafana",
+      "portalSvgPath": "svg/Microsoft_Azure_MonitorDashboard/MonitorDashboard.svg"
+    },
+    {
+      "resourceType": "microsoft.dashboard/grafana",
+      "friendlyName": "Azure Managed Grafana",
+      "portalSvgPath": "svg/Microsoft_Azure_Dashboard/AzureDashboardGrafanaResource.svg"
+    },
+    {
+      "resourceType": "microsoft.databasewatcher/watchers",
+      "friendlyName": "Database watcher",
+      "portalSvgPath": "svg/Microsoft_Azure_DatabaseInsights/DatabaseWatcher.svg"
+    },
+    {
+      "resourceType": "microsoft.databox/jobs",
+      "friendlyName": "Azure Data Box",
+      "portalSvgPath": "svg/Microsoft_Azure_ExpressPod/DataBox.svg"
+    },
+    {
+      "resourceType": "microsoft.databoxedge/databoxedgedevices",
+      "friendlyName": "Azure Stack Edge / Data Box Gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_EdgeGateway/EdgeGateway.svg"
+    },
+    {
+      "resourceType": "microsoft.databricks/accessconnectors",
+      "friendlyName": "Access Connector for Azure Databricks",
+      "portalSvgPath": "svg/Microsoft_Azure_Databricks/AccessConnector.svg"
+    },
+    {
+      "resourceType": "microsoft.databricks/workspaces",
+      "friendlyName": "Azure Databricks Service",
+      "portalSvgPath": "svg/Microsoft_Azure_Databricks/Workspace.svg"
+    },
+    {
+      "resourceType": "microsoft.datadog/monitors",
+      "friendlyName": "Datadog",
+      "portalSvgPath": "svg/Azure_Marketplace_Datadog/Datadog.svg"
+    },
+    {
+      "resourceType": "microsoft.datafactory/datafactories",
+      "friendlyName": "Data factory",
+      "portalSvgPath": "svg/Microsoft_Azure_DataFactory/DataFactory.svg"
+    },
+    {
+      "resourceType": "microsoft.datafactory/factories",
+      "friendlyName": "Data factory (V2)",
+      "portalSvgPath": "svg/Microsoft_Azure_DataFactory/DataFactoryv2.svg"
+    },
+    {
+      "resourceType": "microsoft.datalakeanalytics/accounts",
+      "friendlyName": "Data Lake Analytics",
+      "portalSvgPath": "svg/Microsoft_Azure_DataLakeAnalytics/KonaAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.datalakestore/accounts",
+      "friendlyName": "Data Lake Storage Gen1",
+      "portalSvgPath": "svg/Microsoft_Azure_DataLakeStore/CaboAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.datamigration/all",
+      "friendlyName": "Azure Database Migration Service resource",
+      "portalSvgPath": "svg/Microsoft_Azure_DMS/AllDmsResources.svg"
+    },
+    {
+      "resourceType": "microsoft.datamigration/dmscentermain",
+      "friendlyName": "Azure Database Migration Service",
+      "portalSvgPath": "svg/Microsoft_Azure_DMS/DmsCenter.svg"
+    },
+    {
+      "resourceType": "microsoft.datamigration/services",
+      "friendlyName": "Azure Database Migration Service (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_DMS/Dms.svg"
+    },
+    {
+      "resourceType": "microsoft.datamigration/services/projects",
+      "friendlyName": "Azure Database Migration Project",
+      "portalSvgPath": "svg/Microsoft_Azure_DMS/DmsProject.svg"
+    },
+    {
+      "resourceType": "microsoft.datamigration/sqlmigrationservices",
+      "friendlyName": "Azure Database Migration Service",
+      "portalSvgPath": "svg/Microsoft_Azure_DMS/DmsV2.svg"
+    },
+    {
+      "resourceType": "microsoft.dataprotection/backupvaults",
+      "friendlyName": "Backup vault",
+      "portalSvgPath": "svg/Microsoft_Azure_DataProtection/DataProtectionResource.svg"
+    },
+    {
+      "resourceType": "microsoft.dataprotection/resourceguards",
+      "friendlyName": "Resource Guard",
+      "portalSvgPath": "svg/Microsoft_Azure_DataProtection/ResourceGuardResource.svg"
+    },
+    {
+      "resourceType": "microsoft.datareplication/replicationvaults",
+      "friendlyName": "Data replication vault",
+      "portalSvgPath": "svg/Microsoft_Azure_Stack_Migrate/ASRV2ReplicationVaultResource.svg"
+    },
+    {
+      "resourceType": "microsoft.datashare/accounts",
+      "friendlyName": "Data Share",
+      "portalSvgPath": "svg/Microsoft_Azure_DataShare/DataShare.svg"
+    },
+    {
+      "resourceType": "microsoft.dbformariadb/servers",
+      "friendlyName": "Azure Database for MariaDB server",
+      "portalSvgPath": "svg/SqlAzureExtension/MariaDBServer.svg"
+    },
+    {
+      "resourceType": "microsoft.dbformysql/flexibleservers",
+      "friendlyName": "Azure Database for MySQL flexible server",
+      "portalSvgPath": "svg/Microsoft_Azure_OSSDatabases/MySqlFlexibleServer.svg"
+    },
+    {
+      "resourceType": "microsoft.dbformysql/servers",
+      "friendlyName": "Azure Database for MySQL single server",
+      "portalSvgPath": "svg/SqlAzureExtension/MySqlServer.svg"
+    },
+    {
+      "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+      "friendlyName": "Azure Database for PostgreSQL flexible server",
+      "portalSvgPath": "svg/Microsoft_Azure_OSSDatabases/PostgreSqlFlexibleServer.svg"
+    },
+    {
+      "resourceType": "microsoft.dbforpostgresql/servergroupsv2",
+      "friendlyName": "Azure Cosmos DB for PostgreSQL Cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_DocumentDB/PostgreSqlServerGroupV2.svg"
+    },
+    {
+      "resourceType": "microsoft.dbforpostgresql/servers",
+      "friendlyName": "Azure Database for PostgreSQL single server",
+      "portalSvgPath": "svg/SqlAzureExtension/PostgreSqlServer.svg"
+    },
+    {
+      "resourceType": "microsoft.deploymentmanager/rollouts",
+      "friendlyName": "Rollout",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/Rollout.svg"
+    },
+    {
+      "resourceType": "microsoft.desktopvirtualization/appattachpackages",
+      "friendlyName": "App attach package",
+      "portalSvgPath": "svg/Microsoft_Azure_WVD/AppAttach.svg"
+    },
+    {
+      "resourceType": "microsoft.desktopvirtualization/applicationgroups",
+      "friendlyName": "Application group",
+      "portalSvgPath": "svg/Microsoft_Azure_WVD/ApplicationGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.desktopvirtualization/hostpools",
+      "friendlyName": "Host pool",
+      "portalSvgPath": "svg/Microsoft_Azure_WVD/Hostpool.svg"
+    },
+    {
+      "resourceType": "microsoft.desktopvirtualization/scalingplans",
+      "friendlyName": "Scaling plan",
+      "portalSvgPath": "svg/Microsoft_Azure_WVD/ScalingPlan.svg"
+    },
+    {
+      "resourceType": "microsoft.desktopvirtualization/workspaces",
+      "friendlyName": "Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_WVD/Workspace.svg"
+    },
+    {
+      "resourceType": "microsoft.devcenter/devcenters",
+      "friendlyName": "Dev center",
+      "portalSvgPath": "svg/Microsoft_Azure_DevCenter/DevCenter.svg"
+    },
+    {
+      "resourceType": "microsoft.devcenter/devcenters/devboxdefinitions",
+      "friendlyName": "Dev Box definition",
+      "portalSvgPath": "svg/Microsoft_Azure_DevCenter/DevBoxDefinitions.svg"
+    },
+    {
+      "resourceType": "microsoft.devcenter/networkconnections",
+      "friendlyName": "Network connection",
+      "portalSvgPath": "svg/Microsoft_Azure_DevCenter/NetworkConnection.svg"
+    },
+    {
+      "resourceType": "microsoft.devcenter/projects",
+      "friendlyName": "Project",
+      "portalSvgPath": "svg/Microsoft_Azure_DevCenter/Project.svg"
+    },
+    {
+      "resourceType": "microsoft.devcenter/projects/pools",
+      "friendlyName": "Pool",
+      "portalSvgPath": "svg/Microsoft_Azure_DevCenter/Pools.svg"
+    },
+    {
+      "resourceType": "microsoft.devhub/iacprofiles",
+      "friendlyName": "Infrastructure as Code Automation",
+      "portalSvgPath": "svg/Microsoft_Azure_IacAutomation/ArcIacAutomation.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/assetendpointprofiles",
+      "friendlyName": "ADR Asset Endpoint Profile",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/assetEndpointProfiles.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/assets",
+      "friendlyName": "ADR Asset (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/assets.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/convergedassets",
+      "friendlyName": "ADR Asset",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/convergedAssets.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/devices",
+      "friendlyName": "ADR Device",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/devices.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/namespaces",
+      "friendlyName": "ADR Namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/namespaces.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/namespaces/assets",
+      "friendlyName": "ADR Asset",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/namespaceAssets.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/namespaces/credentials",
+      "friendlyName": "ADR Credential Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/namespaceCredentialResources.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/namespaces/credentials/policies",
+      "friendlyName": "ADR Credential Policy",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/namespacePolicies.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/namespaces/devices",
+      "friendlyName": "ADR Device",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/namespaceDevices.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceregistry/schemaregistries",
+      "friendlyName": "ADR Schema Registry",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceRegistry/schemaRegistries.svg"
+    },
+    {
+      "resourceType": "microsoft.devices/iothubs",
+      "friendlyName": "IoT Hub",
+      "portalSvgPath": "svg/Microsoft_Azure_IotHub/IotHubs.svg"
+    },
+    {
+      "resourceType": "microsoft.devices/provisioningservices",
+      "friendlyName": "Azure IoT Hub Device Provisioning Service (DPS)",
+      "portalSvgPath": "svg/Microsoft_Azure_IotHub/DeviceProvisioning.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceupdate/accounts",
+      "friendlyName": "Device Update for IoT Hub",
+      "portalSvgPath": "svg/Microsoft_Azure_ADU/IotDUResource.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceupdate/updateaccounts",
+      "friendlyName": "Device Update Account",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceUpdate/updateAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceupdate/updateaccounts/activedeployments",
+      "friendlyName": "Device Update Active Deployment",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceUpdate/activeDeployment.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceupdate/updateaccounts/agents",
+      "friendlyName": "Device Update Agent",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceUpdate/agent.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceupdate/updateaccounts/deployments",
+      "friendlyName": "Device Update Deployment",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceUpdate/deployment.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceupdate/updateaccounts/deviceclasses",
+      "friendlyName": "Device Update Device Class",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceUpdate/deviceClass.svg"
+    },
+    {
+      "resourceType": "microsoft.deviceupdate/updateaccounts/updates",
+      "friendlyName": "Device Update",
+      "portalSvgPath": "svg/Microsoft_Azure_DeviceUpdate/update.svg"
+    },
+    {
+      "resourceType": "microsoft.devopsinfrastructure/pools",
+      "friendlyName": "Managed DevOps Pool",
+      "portalSvgPath": "svg/Microsoft_Azure_DevOpsInfrastructure/ManagedDevOpsPools.svg"
+    },
+    {
+      "resourceType": "microsoft.devtestlab/labs",
+      "friendlyName": "DevTest Lab",
+      "portalSvgPath": "svg/Microsoft_Azure_DevTestLab/DevTestLab.svg"
+    },
+    {
+      "resourceType": "microsoft.devtestlab/labs/virtualmachines",
+      "friendlyName": "DevTest Labs virtual machine",
+      "portalSvgPath": "svg/Microsoft_Azure_DevTestLab/MyLabVms.svg"
+    },
+    {
+      "resourceType": "microsoft.devtunnels/tunnelplans",
+      "friendlyName": "Dev Tunnels Domain",
+      "portalSvgPath": "svg/Microsoft_Azure_DevTunnels/devtunnels.svg"
+    },
+    {
+      "resourceType": "microsoft.digitaltwins/digitaltwinsinstances",
+      "friendlyName": "Azure Digital Twins",
+      "portalSvgPath": "svg/Microsoft_Azure_DigitalTwins/digitaltwinsInstances.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/bookshelves",
+      "friendlyName": "Microsoft Discovery Bookshelf",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/BookshelfResource.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/storagecontainers",
+      "friendlyName": "Microsoft Discovery Storage Container",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/StorageContainerResource.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/storagecontainers/storageassets",
+      "friendlyName": "Storage asset",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/StorageAssetResource.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/supercomputers",
+      "friendlyName": "Microsoft Discovery Supercomputer",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/SupercomputerResource.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/supercomputers/nodepools",
+      "friendlyName": "Nodepool",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/NodepoolResource.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/tools",
+      "friendlyName": "Microsoft Discovery Tool",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/ToolResource.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/workspaces",
+      "friendlyName": "Microsoft Discovery Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/WorkspaceResource.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/workspaces/chatmodeldeployments",
+      "friendlyName": "Chat Model Deployment",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/ChatModelResource.svg"
+    },
+    {
+      "resourceType": "microsoft.discovery/workspaces/projects",
+      "friendlyName": "Microsoft Discovery Project",
+      "portalSvgPath": "svg/Microsoft_Azure_Discovery/ProjectResource.svg"
+    },
+    {
+      "resourceType": "microsoft.documentdb/cassandraclusters",
+      "friendlyName": "Azure Managed Instance for Apache Cassandra",
+      "portalSvgPath": "svg/Microsoft_Azure_DocumentDB/DocumentDBCassandraClusters.svg"
+    },
+    {
+      "resourceType": "microsoft.documentdb/databaseaccounts",
+      "friendlyName": "Azure Cosmos DB account",
+      "portalSvgPath": "svg/Microsoft_Azure_DocumentDB/DocumentDBDatabaseAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.documentdb/fleets",
+      "friendlyName": "Azure Cosmos DB Fleet",
+      "portalSvgPath": "svg/Microsoft_Azure_DocumentDB/CosmosDBFleet.svg"
+    },
+    {
+      "resourceType": "microsoft.documentdb/fleetspacepotentialdatabaseaccounts",
+      "friendlyName": "Potential Azure Cosmos DB account",
+      "portalSvgPath": "svg/Microsoft_Azure_DocumentDB/CosmosDBFleetspacePotentialDatabaseAccounts.svg"
+    },
+    {
+      "resourceType": "microsoft.documentdb/garnetclusters",
+      "friendlyName": "Azure Cosmos DB Garnet Cache",
+      "portalSvgPath": "svg/Microsoft_Azure_DocumentDB/GarnetCache.svg"
+    },
+    {
+      "resourceType": "microsoft.documentdb/mongoclusters",
+      "friendlyName": "Azure DocumentDB (with MongoDB compatibility)",
+      "portalSvgPath": "svg/Microsoft_Azure_DocumentDB/MongoCluster.svg"
+    },
+    {
+      "resourceType": "microsoft.domainregistration/domains",
+      "friendlyName": "App Service Domain",
+      "portalSvgPath": "svg/WebsitesExtension/AppServiceDomain.svg"
+    },
+    {
+      "resourceType": "microsoft.durabletask/schedulers",
+      "friendlyName": "Durable Task Scheduler",
+      "portalSvgPath": "svg/Microsoft_Azure_PaasServerless/DurableTaskScheduler.svg"
+    },
+    {
+      "resourceType": "microsoft.durabletask/schedulers/taskhubs",
+      "friendlyName": "Task Hub",
+      "portalSvgPath": "svg/Microsoft_Azure_PaasServerless/TaskHub.svg"
+    },
+    {
+      "resourceType": "microsoft.easm/workspaces",
+      "friendlyName": "Microsoft Defender EASM",
+      "portalSvgPath": "svg/Microsoft_Azure_EASM/EasmWorkspace.svg"
+    },
+    {
+      "resourceType": "microsoft.edge/configurations",
+      "friendlyName": "Site configuration",
+      "portalSvgPath": "svg/Microsoft_Azure_SiteManager/SiteConfig.svg"
+    },
+    {
+      "resourceType": "microsoft.edge/disconnectedoperations",
+      "friendlyName": "Azure Local - disconnected operations",
+      "portalSvgPath": "svg/Microsoft_AzureStackHCI_PortalExtension/Winfields.svg"
+    },
+    {
+      "resourceType": "microsoft.edge/sites",
+      "friendlyName": "Site manager - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_SiteManager/SiteManager.svg"
+    },
+    {
+      "resourceType": "microsoft.edgeorder/addresses",
+      "friendlyName": "Azure Edge Hardware Center Address",
+      "portalSvgPath": "svg/Microsoft_Azure_EdgeOrder/AllAddressResources.svg"
+    },
+    {
+      "resourceType": "microsoft.edgeorder/bootstrapconfigurations",
+      "friendlyName": "Site Key",
+      "portalSvgPath": "svg/Microsoft_Azure_EdgeOrder/AllBootstrapConfigurationResources.svg"
+    },
+    {
+      "resourceType": "microsoft.edgeorder/orderitems",
+      "friendlyName": "Azure Edge Hardware Center",
+      "portalSvgPath": "svg/Microsoft_Azure_EdgeOrder/AllOrderResources.svg"
+    },
+    {
+      "resourceType": "microsoft.edgeorder/virtual_orderitems",
+      "friendlyName": "Device",
+      "portalSvgPath": "svg/Microsoft_Azure_EdgeOrder/AllZtpOrderItemResources.svg"
+    },
+    {
+      "resourceType": "microsoft.elastic/monitors",
+      "friendlyName": "Elastic Cloud Resource",
+      "portalSvgPath": "svg/Azure_Marketplace_Elastic/Elastic.svg"
+    },
+    {
+      "resourceType": "microsoft.elasticsan/elasticsans",
+      "friendlyName": "Elastic SAN",
+      "portalSvgPath": "svg/Microsoft_Azure_ElasticSan/ElasticSan.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/domains",
+      "friendlyName": "Event Grid Domain",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/EventDomain.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/domains/topics",
+      "friendlyName": "Event Grid Domain Topic",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/EventDomainTopic.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/namespaces",
+      "friendlyName": "Event Grid Namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/PubSubNamespace.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/namespaces/topics",
+      "friendlyName": "Event Grid Namespace Topic",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/NamespaceTopic.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/namespaces/topics/eventsubscriptions",
+      "friendlyName": "Event Subscription",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/QueueSubscription.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/namespaces/topicspaces",
+      "friendlyName": "Event Grid Topic Space",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/TopicSpace.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/partnerconfigurations",
+      "friendlyName": "Event Grid Partner Configuration",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/PartnerConfiguration.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/partnerdestinations",
+      "friendlyName": "Event Grid Partner Destination",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/PartnerDestination.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/partnernamespaces",
+      "friendlyName": "Event Grid Partner Namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/PartnerNamespace.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/partnernamespaces/channels",
+      "friendlyName": "Event Grid Channel",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/Channel.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/partnerregistrations",
+      "friendlyName": "Event Grid Partner Registration",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/PartnerRegistration.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/partnertopics",
+      "friendlyName": "Event Grid Partner Topic",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/PartnerTopic.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/systemtopics",
+      "friendlyName": "Event Grid System Topic",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/SystemTopic.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/systemtopics/eventsubscriptions",
+      "friendlyName": "Event Grid Subscriptions",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/SystemTopicEventSubscription.svg"
+    },
+    {
+      "resourceType": "microsoft.eventgrid/topics",
+      "friendlyName": "Event Grid Topic",
+      "portalSvgPath": "svg/Microsoft_Azure_EventGrid/Topic.svg"
+    },
+    {
+      "resourceType": "microsoft.eventhub/clusters",
+      "friendlyName": "Event Hubs Cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_EventHub/EventHubCluster.svg"
+    },
+    {
+      "resourceType": "microsoft.eventhub/namespaces",
+      "friendlyName": "Event Hubs Namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_EventHub/EventHub.svg"
+    },
+    {
+      "resourceType": "microsoft.eventhub/namespaces/disasterrecoveryconfigs",
+      "friendlyName": "Event Hubs Geo-DR Alias",
+      "portalSvgPath": "svg/Microsoft_Azure_EventHub/ServiceBusDrConfig.svg"
+    },
+    {
+      "resourceType": "microsoft.eventhub/namespaces/eventhubs",
+      "friendlyName": "Event Hubs Instance",
+      "portalSvgPath": "svg/Microsoft_Azure_EventHub/EventHubSelect.svg"
+    },
+    {
+      "resourceType": "microsoft.eventhub/namespaces/providers/diagnosticsettings",
+      "friendlyName": "Diagnostic settings",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring/AzureMonitoringDiagnosticsDetail.svg"
+    },
+    {
+      "resourceType": "microsoft.eventhub/namespaces/schemagroups",
+      "friendlyName": "Schema Group",
+      "portalSvgPath": "svg/Microsoft_Azure_EventHub/SchemaGroupSelect.svg"
+    },
+    {
+      "resourceType": "microsoft.experimentation/experimentworkspaces",
+      "friendlyName": "Experiment Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_Experimentation/Browse.svg"
+    },
+    {
+      "resourceType": "microsoft.extendedlocation/customlocations",
+      "friendlyName": "Custom location",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/CustomLocation.svg"
+    },
+    {
+      "resourceType": "microsoft.fabric/capacities",
+      "friendlyName": "Fabric Capacity",
+      "portalSvgPath": "svg/Microsoft_Azure_Analytics/REDIDCILDCBJNGCP.svg"
+    },
+    {
+      "resourceType": "microsoft.features/featureprovidernamespaces/featureconfigurations",
+      "friendlyName": "Preview features",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/PreviewFeaturesArg.svg"
+    },
+    {
+      "resourceType": "microsoft.fileshares/fileshares",
+      "friendlyName": "File share",
+      "portalSvgPath": "svg/Microsoft_Azure_FileShare/FileShares.svg"
+    },
+    {
+      "resourceType": "microsoft.fluidrelay/fluidrelayservers",
+      "friendlyName": "Fluid Relay",
+      "portalSvgPath": "svg/Microsoft_Azure_FluidRelay/FrsResource.svg"
+    },
+    {
+      "resourceType": "microsoft.genome/accounts",
+      "friendlyName": "My Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_Genome/GenomeAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.hanaonazure/hanainstances",
+      "friendlyName": "SAP HANA on Azure",
+      "portalSvgPath": "svg/Microsoft_Azure_SapHanaInstances/HanaInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.hardwaresecuritymodules/cloudhsmclusters",
+      "friendlyName": "Azure Cloud HSM",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudHSM/CloudHSM.svg"
+    },
+    {
+      "resourceType": "microsoft.hdinsight/clusters",
+      "friendlyName": "HDInsight cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_HDInsight/HDInsightCluster.svg"
+    },
+    {
+      "resourceType": "microsoft.healthbot/healthbots",
+      "friendlyName": "Healthcare agent service",
+      "portalSvgPath": "svg/Microsoft_Azure_HealthBot/HealthBot.svg"
+    },
+    {
+      "resourceType": "microsoft.healthcareapis/services",
+      "friendlyName": "Azure API for FHIR",
+      "portalSvgPath": "svg/Microsoft_Healthcare_APIs/FhirService.svg"
+    },
+    {
+      "resourceType": "microsoft.healthcareapis/workspaces",
+      "friendlyName": "Health Data Services workspace",
+      "portalSvgPath": "svg/Microsoft_Healthcare_APIs/HealthcareApisService.svg"
+    },
+    {
+      "resourceType": "microsoft.healthcareapis/workspaces/dicomservices",
+      "friendlyName": "DICOM service",
+      "portalSvgPath": "svg/Microsoft_Healthcare_APIs/DicomService.svg"
+    },
+    {
+      "resourceType": "microsoft.healthcareapis/workspaces/fhirservices",
+      "friendlyName": "FHIR service",
+      "portalSvgPath": "svg/Microsoft_Healthcare_APIs/JupiterFhirService.svg"
+    },
+    {
+      "resourceType": "microsoft.healthcareapis/workspaces/iotconnectors",
+      "friendlyName": "MedTech service",
+      "portalSvgPath": "svg/Microsoft_Healthcare_APIs/IotConnector.svg"
+    },
+    {
+      "resourceType": "microsoft.healthdataaiservices/deidservices",
+      "friendlyName": "De-identification Service",
+      "portalSvgPath": "svg/Microsoft_Azure_HealthDataDeidentification/DeidService.svg"
+    },
+    {
+      "resourceType": "microsoft.healthmodel/healthmodels",
+      "friendlyName": "Health Model (preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_HealthModels/AzureHealthModel.svg"
+    },
+    {
+      "resourceType": "microsoft.horizondb/clusters",
+      "friendlyName": "Azure HorizonDB (Preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_OSSDatabases/PostgreSqlHorizonDB.svg"
+    },
+    {
+      "resourceType": "microsoft.horizondb/parametergroups",
+      "friendlyName": "Azure HorizonDB (Preview) parameter group",
+      "portalSvgPath": "svg/Microsoft_Azure_OSSDatabases/PostgreSqlHorizonDBParameterGroups.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/arcgatewayassociatedresources",
+      "friendlyName": "Arc gateway associated resource",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/ArcGatewayAssociatedResources.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/arcserverwithwac",
+      "friendlyName": "Machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/ArcServerWithWac.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/customlocationdeployedresources",
+      "friendlyName": "List of deployed resources on the custom location",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/CustomLocationDeployedResources.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/esulicense2016linkedresources",
+      "friendlyName": "Extended Security Updates - Windows Server 2016",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/EsuLicense2016LinkedResources.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/gateways",
+      "friendlyName": "Azure Arc gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/ArcGateway.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/licenses",
+      "friendlyName": "Extended Security Updates",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/EsuLicense.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/licenses2016",
+      "friendlyName": "Extended Security Updates - Windows Server 2016",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/EsuLicense2016.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/machines",
+      "friendlyName": "Machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/HybridCompute.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/machines/microsoft.connectedvmwarevsphere/virtualmachineinstances",
+      "friendlyName": "VMware + AVS virtual machine",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/VMwareVmV2.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/machines/providers/guestconfigurationassignments",
+      "friendlyName": "Guest Assignment",
+      "portalSvgPath": "svg/Microsoft_Azure_Automation/NonAzureGuestAssignment.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/machinesesu",
+      "friendlyName": "Machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/HybridComputeEsu.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/machinesesu2016",
+      "friendlyName": "Machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/HybridComputeEsu2016.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/machinespaygo",
+      "friendlyName": "Machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/PayGoEligible.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/machinessoftwareassurance",
+      "friendlyName": "Machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/SoftwareAssurance.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/machinessovereign",
+      "friendlyName": "Machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/HybridComputeSovereign.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/privatelinkscopes",
+      "friendlyName": "Azure Arc private link scope",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/AzureArcPrivateLinkScope.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridcompute/serviceprincipals",
+      "friendlyName": "Service principal",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/ServicePrincipalBrowse.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridconnectivity/publiccloudconnectors",
+      "friendlyName": "Multicloud connector",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/MultiCloudConnector.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridconnectivity/publiccloudconnectors/awssyncedresources",
+      "friendlyName": "Multicloud synced resource",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/AwsSyncedResources.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridconnectivity/publiccloudconnectors/gcpsyncedresources",
+      "friendlyName": "Multicloud synced resource",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/GcpSyncedResources.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/configurationgroupvalues",
+      "friendlyName": "Configuration Group Value",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmCgv.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/devices",
+      "friendlyName": "Azure Network Function Manager – Device",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/VnfManagerDevices.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/networkfunctions",
+      "friendlyName": "Azure Network Function Manager – Network Function",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/VnfManagerVnfs.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/publishers",
+      "friendlyName": "Publisher",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmPublisher.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/publishers/artifactstores",
+      "friendlyName": "Publisher Artifact Store",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmPublisherArtifactStore.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/publishers/artifactstores/artifactmanifests",
+      "friendlyName": "Publisher Artifact Manifest",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmPublisherArtifactManifest.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/publishers/configurationgroupschemas",
+      "friendlyName": "Configuration Group Schema",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmConfigSchema.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/publishers/networkfunctiondefinitiongroups",
+      "friendlyName": "Network Function Definition",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmNfdGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/publishers/networkfunctiondefinitiongroups/networkfunctiondefinitionversions",
+      "friendlyName": "Network Function Definition Version",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmNfdVersion.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/publishers/networkservicedesigngroups",
+      "friendlyName": "Network Service Design",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmNsdGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/publishers/networkservicedesigngroups/networkservicedesignversions",
+      "friendlyName": "Network Service Design Version",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmNsdVersion.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/sitenetworkservices",
+      "friendlyName": "Site Network Service",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmSns.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/sites",
+      "friendlyName": "Site",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/AosmSite.svg"
+    },
+    {
+      "resourceType": "microsoft.hybridnetwork/vendors",
+      "friendlyName": "Azure Network Function Manager – vendor",
+      "portalSvgPath": "svg/Microsoft_Azure_VnfManager/VnfManagerVendors.svg"
+    },
+    {
+      "resourceType": "microsoft.impact/connectors",
+      "friendlyName": "Impact Reporting Connector",
+      "portalSvgPath": "svg/Microsoft_Azure_ECE/microsoft_impact_connectors_2025_01_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/actiongroups",
+      "friendlyName": "Action group",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring_Alerts/ActionGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/activitylogalerts",
+      "friendlyName": "Activity log alert rule",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring_Alerts/ActivityLogAlertRule.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/components",
+      "friendlyName": "Application Insights",
+      "portalSvgPath": "svg/AppInsightsExtension/ApplicationInsights.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/datacollectionendpoints",
+      "friendlyName": "Data collection endpoint",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring/DataCollectionEndpoints.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/datacollectionrules",
+      "friendlyName": "Data collection rule",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring/DataCollectionRules.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/datacollectionrulesresources",
+      "friendlyName": "Data collection rule associated resource",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring/DataCollectionRulesResources.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/dcrctibladeresource",
+      "friendlyName": "Change Tracking and Inventory",
+      "portalSvgPath": "svg/Microsoft_Azure_Automation/DcrCTIasset.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/diagnosticsettings",
+      "friendlyName": "Diagnostic settings",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring/AzureMonitoringSubscriptionalLevelDiagnosticsDetail.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/metricalerts",
+      "friendlyName": "Metric alert rule",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring_Alerts/MetricAlertRule.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/privatelinkscopes",
+      "friendlyName": "Azure Monitor Private Link Scope",
+      "portalSvgPath": "svg/AppInsightsExtension/PrivateLinkScope.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/scheduledqueryrules",
+      "friendlyName": "Log search alert rule",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring_Alerts/LogSearchAlertRule.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/webtests",
+      "friendlyName": "Availability test",
+      "portalSvgPath": "svg/AppInsightsExtension/WebTest.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/workbooks",
+      "friendlyName": "Azure Workbook",
+      "portalSvgPath": "svg/AppInsightsExtension/Workbooks.svg"
+    },
+    {
+      "resourceType": "microsoft.insights/workbooktemplates",
+      "friendlyName": "Azure Workbook Template",
+      "portalSvgPath": "svg/AppInsightsExtension/WorkbookTemplates.svg"
+    },
+    {
+      "resourceType": "microsoft.integrationspaces/spaces",
+      "friendlyName": "Integration Environment",
+      "portalSvgPath": "svg/Microsoft_Azure_PaasServerless/IntegrationSpace.svg"
+    },
+    {
+      "resourceType": "microsoft.iotcentral/iotapps",
+      "friendlyName": "IoT Central Application",
+      "portalSvgPath": "svg/Microsoft_Azure_IoTCentral/IoTApps.svg"
+    },
+    {
+      "resourceType": "microsoft.iotfirmwaredefense/workspaces",
+      "friendlyName": "Firmware analysis workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_FIST/FirmwareAnalysisWorkspace.svg"
+    },
+    {
+      "resourceType": "microsoft.iotoperations/instances",
+      "friendlyName": "Azure IoT Operations",
+      "portalSvgPath": "svg/Microsoft_Azure_IoTOperations/IoTOperations.svg"
+    },
+    {
+      "resourceType": "microsoft.keyvault/managedhsms",
+      "friendlyName": "Azure Key Vault Managed HSM",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedHSM/ManagedHSM.svg"
+    },
+    {
+      "resourceType": "microsoft.keyvault/vaults",
+      "friendlyName": "Key vault",
+      "portalSvgPath": "svg/Microsoft_Azure_KeyVault/KeyVault.svg"
+    },
+    {
+      "resourceType": "microsoft.kubernetes/connectedclusters",
+      "friendlyName": "Kubernetes - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcClusterUX/ConnectedClusters.svg"
+    },
+    {
+      "resourceType": "microsoft.kubernetes/connectedclusters/microsoft.kubernetesconfiguration/extensions",
+      "friendlyName": "Kubernetes - Azure Arc extension",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcClusterUX/ConnectedClusterExtension.svg"
+    },
+    {
+      "resourceType": "microsoft.kubernetes/connectedclusters/microsoft.kubernetesconfiguration/fluxconfigurations",
+      "friendlyName": "GitOps configuration",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/ConnectedClustersGitOpsConfiguration.svg"
+    },
+    {
+      "resourceType": "microsoft.kubernetes/connectedclusters/microsoft.kubernetesconfiguration/namespaces",
+      "friendlyName": "Kubernetes - Azure Arc namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/ConnectedClusterNamespaces.svg"
+    },
+    {
+      "resourceType": "microsoft.kubernetesconfiguration/extensions",
+      "friendlyName": "Kubernetes service extension",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/KubernetesClusterExtensions.svg"
+    },
+    {
+      "resourceType": "microsoft.kubernetesruntime/loadbalancers",
+      "friendlyName": "Arc Load Balancer",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcNetworking/ArcNetworking.svg"
+    },
+    {
+      "resourceType": "microsoft.kusto/clusters",
+      "friendlyName": "Azure Data Explorer Cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_Kusto/KustoCluster.svg"
+    },
+    {
+      "resourceType": "microsoft.kusto/clusters/databases",
+      "friendlyName": "Azure Data Explorer Database",
+      "portalSvgPath": "svg/Microsoft_Azure_Kusto/KustoClusterDatabase.svg"
+    },
+    {
+      "resourceType": "microsoft.labservices/labaccounts",
+      "friendlyName": "Lab account",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedLab/LabAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.labservices/labaccounts/labs",
+      "friendlyName": "Lab",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedLab/LegacyLab.svg"
+    },
+    {
+      "resourceType": "microsoft.labservices/labplans",
+      "friendlyName": "Lab plan",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedLab/LabPlan.svg"
+    },
+    {
+      "resourceType": "microsoft.labservices/labs",
+      "friendlyName": "Lab",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedLab/Lab.svg"
+    },
+    {
+      "resourceType": "microsoft.liftrpilot/organizations",
+      "friendlyName": "Azure Pilot",
+      "portalSvgPath": "svg/Azure_Marketplace_Pilot/Pilot.svg"
+    },
+    {
+      "resourceType": "microsoft.loadtestservice/allservices",
+      "friendlyName": "All Resources",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudNativeTesting/AllResources.svg"
+    },
+    {
+      "resourceType": "microsoft.loadtestservice/allservicesfairfax",
+      "friendlyName": "All Resources",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudNativeTesting/AllResourcesFairfax.svg"
+    },
+    {
+      "resourceType": "microsoft.loadtestservice/loadtests",
+      "friendlyName": "Azure Load Testing",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudNativeTesting/CloudNativeTesting.svg"
+    },
+    {
+      "resourceType": "microsoft.loadtestservice/playwrightworkspaces",
+      "friendlyName": "Playwright Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudNativeTesting/PlaywrightWorkspace.svg"
+    },
+    {
+      "resourceType": "microsoft.loadtestservice/supportedresourcetypes",
+      "friendlyName": "Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudNativeTesting/AppComponentsSupportedResources.svg"
+    },
+    {
+      "resourceType": "microsoft.logic/automationprojects",
+      "friendlyName": "Automation Project",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/AutomationProject.svg"
+    },
+    {
+      "resourceType": "microsoft.logic/businessprocesses",
+      "friendlyName": "Business Process",
+      "portalSvgPath": "svg/Microsoft_Azure_PaasServerless/BusinessProcessTracking.svg"
+    },
+    {
+      "resourceType": "microsoft.logic/integrationaccounts",
+      "friendlyName": "Integration account",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/IntegrationAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.logic/integrationserviceenvironments/managedapis",
+      "friendlyName": "Managed Connector",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/ManagedConnector.svg"
+    },
+    {
+      "resourceType": "microsoft.logic/templates",
+      "friendlyName": "Logic Apps Template",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/LogicAppsTemplate.svg"
+    },
+    {
+      "resourceType": "microsoft.logic/workflows",
+      "friendlyName": "Logic app",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/Workflow.svg"
+    },
+    {
+      "resourceType": "microsoft.machineconfiguration/baselinesettingsassignments",
+      "friendlyName": "Baseline settings assignment",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/BaselineSettingsAssignments.svg"
+    },
+    {
+      "resourceType": "microsoft.machinelearningservices/aistudio",
+      "friendlyName": "Azure AI Foundry",
+      "portalSvgPath": "svg/Microsoft_Azure_MLTeamAccounts/AIStudio.svg"
+    },
+    {
+      "resourceType": "microsoft.machinelearningservices/aistudiocreate",
+      "friendlyName": "Azure AI Foundry",
+      "portalSvgPath": "svg/Microsoft_Azure_MLTeamAccounts/AIStudioCreate.svg"
+    },
+    {
+      "resourceType": "microsoft.machinelearningservices/registries",
+      "friendlyName": "Azure Machine Learning registry",
+      "portalSvgPath": "svg/Microsoft_Azure_MLTeamAccounts/Registry.svg"
+    },
+    {
+      "resourceType": "microsoft.machinelearningservices/workspaces",
+      "friendlyName": "Azure Machine Learning workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_MLTeamAccounts/MachineLearningServices.svg"
+    },
+    {
+      "resourceType": "microsoft.machinelearningservices/workspaces/onlineendpoints",
+      "friendlyName": "Machine learning online endpoint",
+      "portalSvgPath": "svg/Microsoft_Azure_MLTeamAccounts/OnlineEndpoint.svg"
+    },
+    {
+      "resourceType": "microsoft.machinelearningservices/workspaces/onlineendpoints/deployments",
+      "friendlyName": "Machine learning online deployment",
+      "portalSvgPath": "svg/Microsoft_Azure_MLTeamAccounts/OnlineEndpointDeployment.svg"
+    },
+    {
+      "resourceType": "microsoft.machinelearningservices/workspacescreate",
+      "friendlyName": "Azure Machine Learning workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_MLTeamAccounts/MachineLearningServicesCreate.svg"
+    },
+    {
+      "resourceType": "microsoft.maintenance/maintenanceconfigurations",
+      "friendlyName": "Maintenance Configuration",
+      "portalSvgPath": "svg/Microsoft_Azure_Maintenance/MaintenanceConfiguration.svg"
+    },
+    {
+      "resourceType": "microsoft.maintenance/maintenanceconfigurationsaumbladeresource",
+      "friendlyName": "Maintenance configuration",
+      "portalSvgPath": "svg/Microsoft_Azure_Automation/MaintenanceConfigurationAUMasset.svg"
+    },
+    {
+      "resourceType": "microsoft.managedidentity/userassignedidentities",
+      "friendlyName": "Managed Identity",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedServiceIdentity/UserAssignedIdentity.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/accesscontrollists",
+      "friendlyName": "Access Control List (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/AccessControlListsResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/fabricnetworkdevices",
+      "friendlyName": "Network Device (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/FabricNetworkDevicesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/fabricnetworkpacketbrokers",
+      "friendlyName": "Network Packet Broker (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/FabricNetworkPacketBrokersResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/fabricnetworktaps",
+      "friendlyName": "Network Tap (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/FabricNetworkTapResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/fabricresources",
+      "friendlyName": "Network Fabric Resource (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/FabricResources.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/fabricroutepolicies",
+      "friendlyName": "Route Policy (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/FabricRoutePoliciesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/internetgatewayrules",
+      "friendlyName": "Internet Gateway Rule (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/InternetGatewayRulesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/internetgateways",
+      "friendlyName": "Internet Gateway (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/InternetGatewaysResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/ipcommunities",
+      "friendlyName": "IP Community (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/IPCommunitiesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/ipextendedcommunities",
+      "friendlyName": "IP Extended Community (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/IPExtendedCommunitiesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/ipprefixes",
+      "friendlyName": "IP Prefix (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/IPPrefixesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/l2isolationdomains",
+      "friendlyName": "Layer 2 Isolation Domain (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/L2IsolationDomainsResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/l3isolationdomains",
+      "friendlyName": "Layer 3 Isolation Domain (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/L3IsolationDomainsResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/l3isolationdomains/externalnetworks",
+      "friendlyName": "External Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ExternalNetworkResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/l3isolationdomains/internalnetworks",
+      "friendlyName": "Internal Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/InternalNetworkResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/neighborgroups",
+      "friendlyName": "Neighbor Group (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NeighborGroupsResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networkdevices",
+      "friendlyName": "Network Device (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkDevicesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networkdevices/networkinterfaces",
+      "friendlyName": "Network Interface (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkInterfaceResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networkfabriccontrollers",
+      "friendlyName": "Network Fabric Controller (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkFabricControllersResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networkfabrics",
+      "friendlyName": "Network Fabric (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkFabricResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networkfabrics/networktonetworkinterconnects",
+      "friendlyName": "Network to Network Interconnect (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkToNetworkInterconnectResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networkmonitors",
+      "friendlyName": "Network Monitor (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkMonitorsResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networkpacketbrokers",
+      "friendlyName": "Network Packet Broker (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkPacketBrokersResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networkracks",
+      "friendlyName": "Network Rack (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkRacksResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networktaprules",
+      "friendlyName": "Network Tap Rule (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkTapRuleResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/networktaps",
+      "friendlyName": "Network Tap (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NetworkTapResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managednetworkfabric/routepolicies",
+      "friendlyName": "Route Policy (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/RoutePoliciesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.managedops/managedops",
+      "friendlyName": "Managed subscriptions",
+      "portalSvgPath": "svg/Microsoft_Azure_ComputeHub/ManagedOps.svg"
+    },
+    {
+      "resourceType": "microsoft.managedservices/registrationdefinitions",
+      "friendlyName": "Azure Lighthouse",
+      "portalSvgPath": "svg/Microsoft_Azure_CustomerHub/Lighthouse.svg"
+    },
+    {
+      "resourceType": "microsoft.management/managementgroups/microsoft.resources/deploymentstacks",
+      "friendlyName": "Deployment stack",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/StackManagementGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.management/managementgroups/providers/privatelinkassociations",
+      "friendlyName": "Application Gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/PrivateLinkAssociations.svg"
+    },
+    {
+      "resourceType": "microsoft.management/managementgroups/providers/templatespecs",
+      "friendlyName": "Template spec",
+      "portalSvgPath": "svg/Microsoft_Azure_TemplateSpecs/ArmTemplateSpecMG.svg"
+    },
+    {
+      "resourceType": "microsoft.management/servicegroups",
+      "friendlyName": "Service group",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/ServiceGroups.svg"
+    },
+    {
+      "resourceType": "microsoft.maps/accounts",
+      "friendlyName": "Azure Maps Account",
+      "portalSvgPath": "svg/Microsoft_Azure_LocationServices/Maps.svg"
+    },
+    {
+      "resourceType": "microsoft.maps/accounts/creators",
+      "friendlyName": "Azure Maps Creator Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_LocationServices/Creator.svg"
+    },
+    {
+      "resourceType": "microsoft.migrate/migrateprojects",
+      "friendlyName": "Azure Migrate",
+      "portalSvgPath": "svg/Microsoft_Azure_Migrate/MigrateProjectV2.svg"
+    },
+    {
+      "resourceType": "microsoft.migrate/projects",
+      "friendlyName": "Migration project",
+      "portalSvgPath": "svg/Microsoft_Azure_Migrate/MigrationProject.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/approvals",
+      "friendlyName": "Approval",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/Approvals.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/catalogs",
+      "friendlyName": "Catalog",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/Catalog.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/communities",
+      "friendlyName": "Community",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/Community.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/communities/communityendpoints",
+      "friendlyName": "Community endpoint",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/CommunityEndpoint.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/communities/dedicatedhubs",
+      "friendlyName": "Dedicated hub",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/DedicatedHub.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/communities/transithubs",
+      "friendlyName": "Transit hub",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/TransitHub.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/enclaveconnections",
+      "friendlyName": "Enclave connection",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/EnclaveConnection.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/virtualenclaves",
+      "friendlyName": "Enclave",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/Enclave.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/virtualenclaves/enclaveendpoints",
+      "friendlyName": "Enclave endpoint",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/EnclaveEndpoint.svg"
+    },
+    {
+      "resourceType": "microsoft.mission/virtualenclaves/workloads",
+      "friendlyName": "Workload",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualEnclaves/Workload.svg"
+    },
+    {
+      "resourceType": "microsoft.monitor/accounts",
+      "friendlyName": "Azure Monitor workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring/MonitoringAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.monitor/accounts/issues",
+      "friendlyName": "Issue",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring_Alerts/Issue.svg"
+    },
+    {
+      "resourceType": "microsoft.monitor/pipelinegroups",
+      "friendlyName": "Azure Monitor pipeline",
+      "portalSvgPath": "svg/Microsoft_Azure_Monitoring/AzureEdgePipeline.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/activedirectoryconfigs",
+      "friendlyName": "Active directory config",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ActiveDirectoryConfig.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/elasticaccounts",
+      "friendlyName": "NetApp elastic account",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ElasticAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/elasticaccounts/elasticbackuppolicies",
+      "friendlyName": "Elastic backup policy",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ElasticBackupPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/elasticaccounts/elasticbackupvaults",
+      "friendlyName": "Elastic backup vault",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ElasticBackupVault.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/elasticaccounts/elasticcapacitypools",
+      "friendlyName": "Elastic capacity pool",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ElasticCapacityPool.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/elasticaccounts/elasticcapacitypools/elasticvolumes",
+      "friendlyName": "Elastic volume",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ElasticVolume.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/elasticaccounts/elasticcapacitypools/elasticvolumes/elasticbackups",
+      "friendlyName": "Elastic Backup",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ElasticBackups.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/elasticaccounts/elasticcapacitypools/elasticvolumes/elasticsnapshots",
+      "friendlyName": "Elastic snapshot",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ElasticSnapshot.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/elasticaccounts/elasticsnapshotpolicies",
+      "friendlyName": "Elastic snapshot policy",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/ElasticSnapshotPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts",
+      "friendlyName": "NetApp account",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NetAppAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/backuppolicies",
+      "friendlyName": "Backup Policy",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsBackupPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/backupvaults",
+      "friendlyName": "Backup vault",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsBackupVault.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/backupvaults/backups",
+      "friendlyName": "Backup",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsBackups.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/capacitypools",
+      "friendlyName": "Capacity pool",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsPool.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/capacitypools/volumes",
+      "friendlyName": "Volume",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsVolume.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/capacitypools/volumes/snapshots",
+      "friendlyName": "Snapshot",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsSnapshot.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/capacitypools/volumes/volumequotarules",
+      "friendlyName": "User and group quota",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsVolumeQuotaRule.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/snapshotpolicies",
+      "friendlyName": "Snapshot policy",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsSnapshotPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.netapp/netappaccounts/volumegroups",
+      "friendlyName": "VolumeGroup",
+      "portalSvgPath": "svg/Microsoft_Azure_NetApp/NfsVolumeGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.network/applicationgateways",
+      "friendlyName": "Application gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/ApplicationGateway.svg"
+    },
+    {
+      "resourceType": "microsoft.network/applicationgatewaywebapplicationfirewallpolicies",
+      "friendlyName": "Application Gateway WAF policy",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/ApplicationGatewayWafPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.network/applicationsecuritygroups",
+      "friendlyName": "Application security group",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/ApplicationSecurityGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.network/azurefirewalls",
+      "friendlyName": "Firewall",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/CloudNativeFirewall.svg"
+    },
+    {
+      "resourceType": "microsoft.network/bastionhosts",
+      "friendlyName": "Bastion",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/BastionHost.svg"
+    },
+    {
+      "resourceType": "microsoft.network/connections",
+      "friendlyName": "Connection",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/Connection.svg"
+    },
+    {
+      "resourceType": "microsoft.network/customipprefixes",
+      "friendlyName": "Custom IP Prefix",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/CustomIpPrefix.svg"
+    },
+    {
+      "resourceType": "microsoft.network/ddoscustompolicies",
+      "friendlyName": "DDoS custom policy",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/DdosCustomPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.network/ddosprotectionplans",
+      "friendlyName": "DDoS protection plan",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/DdosProtectionPlan.svg"
+    },
+    {
+      "resourceType": "microsoft.network/dnsforwardingrulesets",
+      "friendlyName": "DNS forwarding ruleset",
+      "portalSvgPath": "svg/Microsoft_Azure_DNSManagedResolver/DnsForwardingRulesets.svg"
+    },
+    {
+      "resourceType": "microsoft.network/dnsresolverdomainlists",
+      "friendlyName": "DNS Domain List",
+      "portalSvgPath": "svg/Microsoft_Azure_DnsSecurityPolicy/DnsDomainList.svg"
+    },
+    {
+      "resourceType": "microsoft.network/dnsresolverpolicies",
+      "friendlyName": "DNS Security Policy",
+      "portalSvgPath": "svg/Microsoft_Azure_DnsSecurityPolicy/DnsSecurityPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.network/dnsresolvers",
+      "friendlyName": "DNS private resolver",
+      "portalSvgPath": "svg/Microsoft_Azure_DNSManagedResolver/DnsManagedResolver.svg"
+    },
+    {
+      "resourceType": "microsoft.network/dnszones",
+      "friendlyName": "DNS zone",
+      "portalSvgPath": "svg/Microsoft_Azure_DNS/DnsZone.svg"
+    },
+    {
+      "resourceType": "microsoft.network/expressroutecircuits",
+      "friendlyName": "ExpressRoute circuit",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/ExpressRoute.svg"
+    },
+    {
+      "resourceType": "microsoft.network/expressroutegateways/expressrouteconnections",
+      "friendlyName": "Microsoft.Network express route gateways express route connection",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/Microsoft_Network_expressRouteGateways_expressRouteConnections_2022_01_01.svg"
+    },
+    {
+      "resourceType": "microsoft.network/expressroutelags",
+      "friendlyName": "ExpressRoute Link Group",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/ExpressRouteLag.svg"
+    },
+    {
+      "resourceType": "microsoft.network/expressrouteports",
+      "friendlyName": "ExpressRoute Direct",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/ExpressRouteDirect.svg"
+    },
+    {
+      "resourceType": "microsoft.network/firewallpolicies",
+      "friendlyName": "Firewall Policy",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/FirewallPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.network/frontdoors",
+      "friendlyName": "Front Door",
+      "portalSvgPath": "svg/Microsoft_Azure_Frontdoor/AzureFrontdoor.svg"
+    },
+    {
+      "resourceType": "microsoft.network/frontdoorwebapplicationfirewallpolicies",
+      "friendlyName": "Front Door WAF policy",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/FrontdoorWafPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.network/ipgroups",
+      "friendlyName": "IP Group",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/IpGroups.svg"
+    },
+    {
+      "resourceType": "microsoft.network/loadbalancers",
+      "friendlyName": "Load balancer",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/LoadBalancer.svg"
+    },
+    {
+      "resourceType": "microsoft.network/localnetworkgateways",
+      "friendlyName": "Local network gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/LocalNetworkGateway.svg"
+    },
+    {
+      "resourceType": "microsoft.network/natgateways",
+      "friendlyName": "NAT gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/NatGateway.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkinterfaces",
+      "friendlyName": "Network interface",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/NetworkInterface.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkmanagers",
+      "friendlyName": "Network manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedNetwork/NetworkManager.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkmanagers/connectivityconfigurations",
+      "friendlyName": "Network manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedNetwork/ConnectivityConfigurationOverview.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkmanagers/ipampools",
+      "friendlyName": "IP address pool",
+      "portalSvgPath": "svg/Microsoft_Azure_IPAddressManager/IPAMPools.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkmanagers/networkgroups",
+      "friendlyName": "Network manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedNetwork/NetworkGroupOverview.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkmanagers/routingconfigurations",
+      "friendlyName": "Network manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedNetwork/UserDefinedRoutingConfiguration.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkmanagers/securityadminconfigurations",
+      "friendlyName": "Network manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedNetwork/SecurityAdminConfigurationOverview.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkmanagers/securityuserconfigurations",
+      "friendlyName": "Network manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ManagedNetwork/SecurityUserConfigurationOverview.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkmanagers/verifierworkspaces",
+      "friendlyName": "Verifier Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_ANMVerifier/verifierWorkspace.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networksecuritygroups",
+      "friendlyName": "Network security group",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/NetworkSecurityGroup.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networksecurityperimeters",
+      "friendlyName": "Network Security Perimeter",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkSecurityPerimeter/NetworkSecurityPerimeter.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networksecurityperimeters/profiles",
+      "friendlyName": "Profile",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkSecurityPerimeter/Profile.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkvirtualappliances",
+      "friendlyName": "Microsoft.Network network virtual appliance",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/microsoft_network_networkvirtualappliances_2020_03_01.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkwatchers",
+      "friendlyName": "Network Watcher",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/NetworkWatcherResource.svg"
+    },
+    {
+      "resourceType": "microsoft.network/networkwatchers/flowlogs",
+      "friendlyName": "Flow log",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/NSGFlowLog.svg"
+    },
+    {
+      "resourceType": "microsoft.network/neuroshields",
+      "friendlyName": "Neuro Shield",
+      "portalSvgPath": "svg/Microsoft_Azure_NeuroShield/NeuroShield.svg"
+    },
+    {
+      "resourceType": "microsoft.network/privatednszones",
+      "friendlyName": "Private DNS zone",
+      "portalSvgPath": "svg/Microsoft_Azure_PrivateDNS/PrivateDnsZone.svg"
+    },
+    {
+      "resourceType": "microsoft.network/privatednszones/virtualnetworklinks",
+      "friendlyName": "Virtual network link",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/VirtualNetworkLink.svg"
+    },
+    {
+      "resourceType": "microsoft.network/privateendpoints",
+      "friendlyName": "Private endpoint",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/PrivateEndpoint.svg"
+    },
+    {
+      "resourceType": "microsoft.network/privatelinkservices",
+      "friendlyName": "Private link service",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/PrivateLinkService.svg"
+    },
+    {
+      "resourceType": "microsoft.network/publicipaddresses",
+      "friendlyName": "Public IP address",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/PublicIpAddress.svg"
+    },
+    {
+      "resourceType": "microsoft.network/publicipprefixes",
+      "friendlyName": "Public IP Prefix",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/PublicIpPrefix.svg"
+    },
+    {
+      "resourceType": "microsoft.network/routefilters",
+      "friendlyName": "Route filter",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/RouteFilter.svg"
+    },
+    {
+      "resourceType": "microsoft.network/routetables",
+      "friendlyName": "Route table",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/RouteTable.svg"
+    },
+    {
+      "resourceType": "microsoft.network/segmentationmanagers",
+      "friendlyName": "Segmentation Manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ZeroTrustSegmentation/SegmentationManagers.svg"
+    },
+    {
+      "resourceType": "microsoft.network/serviceendpointpolicies",
+      "friendlyName": "Service endpoint policy",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/ServiceEndpointPolicy.svg"
+    },
+    {
+      "resourceType": "microsoft.network/trafficmanagerprofiles",
+      "friendlyName": "Traffic Manager profile",
+      "portalSvgPath": "svg/Microsoft_Azure_DNS/TrafficManager.svg"
+    },
+    {
+      "resourceType": "microsoft.network/virtualhubs",
+      "friendlyName": "Microsoft.Network/virtualHub",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/VirtualRouter.svg"
+    },
+    {
+      "resourceType": "microsoft.network/virtualnetworkappliances",
+      "friendlyName": "Azure Virtual Network routing appliance",
+      "portalSvgPath": "svg/Microsoft_Azure_VirtualNetworkAppliance/VirtualNetworkAppliance.svg"
+    },
+    {
+      "resourceType": "microsoft.network/virtualnetworkgateways",
+      "friendlyName": "Virtual network gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/VirtualNetworkGateway.svg"
+    },
+    {
+      "resourceType": "microsoft.network/virtualnetworks",
+      "friendlyName": "Virtual network",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/VirtualNetwork.svg"
+    },
+    {
+      "resourceType": "microsoft.network/virtualnetworktaps",
+      "friendlyName": "Virtual network terminal access point",
+      "portalSvgPath": "svg/Microsoft_Azure_Network/VirtualNetworkTAP.svg"
+    },
+    {
+      "resourceType": "microsoft.network/virtualwans",
+      "friendlyName": "Virtual WAN",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/VirtualWan.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/baremetalmachines",
+      "friendlyName": "Bare Metal Machine (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/BareMetalMachineResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/cloudservicesnetworks",
+      "friendlyName": "Cloud Services Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/CloudServicesNet.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clustercloudservicesnetworks",
+      "friendlyName": "Cloud Services Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterCloudServicesNet.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusterl2networks",
+      "friendlyName": "Layer 2 Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterLayer2NetworksResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusterl3networks",
+      "friendlyName": "Layer 3 Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterLayer3NetworksResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clustermanagers",
+      "friendlyName": "Cluster Manager (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterMgrResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusternetworks",
+      "friendlyName": "Cluster Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterNetworks.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusterresources",
+      "friendlyName": "Cluster Resource (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterResources.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusters",
+      "friendlyName": "Cluster (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusters/baremetalmachinekeysets",
+      "friendlyName": "Cluster Bare Metal Machine Key Set (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterBmmKeysetResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusters/bmckeysets",
+      "friendlyName": "Cluster Baseboard Management Controller Key Set (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterBmcKeysetResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusters/metricsconfigurations",
+      "friendlyName": "Cluster Metrics Configuration (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterMetricConfigResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clusterstorageappliances",
+      "friendlyName": "Storage Appliance (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterStorageApplianceResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clustertrunkednetworks",
+      "friendlyName": "Trunked Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterTrunkedNetworksResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/clustervolumes",
+      "friendlyName": "Volume (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ClusterVolumeResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/kubernetesclusters",
+      "friendlyName": "Kubernetes Cluster (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/NexusAksClusterResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/kubernetesclusters/agentpools",
+      "friendlyName": "Agent Pool (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/AgentPoolResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/kubernetesclusters/features",
+      "friendlyName": "Kubernetes Cluster Feature (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/FeatureResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/l2networks",
+      "friendlyName": "Layer 2 Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/Layer2NetworksResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/l3networks",
+      "friendlyName": "Layer 3 Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/Layer3NetworksResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/racks",
+      "friendlyName": "Compute Rack (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ComputeRackResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/storageappliances",
+      "friendlyName": "Storage Appliance (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/StorageApplianceResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/trunkednetworks",
+      "friendlyName": "Trunked Network (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/TrunkedNetworksResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/virtualmachines",
+      "friendlyName": "Virtual Machine (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/VirtualMachineResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/virtualmachines/consoles",
+      "friendlyName": "Virtual Machine Console (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/ConsoleResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkcloud/volumes",
+      "friendlyName": "Volume (Operator Nexus)",
+      "portalSvgPath": "svg/Microsoft_Azure_NetworkCloud/VolumeResource.svg"
+    },
+    {
+      "resourceType": "microsoft.networkfunction/azuretrafficcollectors",
+      "friendlyName": "ExpressRoute traffic collector",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/ExpressRouteTrafficCollector.svg"
+    },
+    {
+      "resourceType": "microsoft.networkfunction/meshvpns",
+      "friendlyName": "Mesh VPN",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/MeshVpn.svg"
+    },
+    {
+      "resourceType": "microsoft.notificationhubs/namespaces",
+      "friendlyName": "Notification Hub Namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_NotificationHubs/Namespace.svg"
+    },
+    {
+      "resourceType": "microsoft.notificationhubs/namespaces/notificationhubs",
+      "friendlyName": "Notification Hub",
+      "portalSvgPath": "svg/Microsoft_Azure_NotificationHubs/NotificationHub.svg"
+    },
+    {
+      "resourceType": "microsoft.onlineexperimentation/workspaces",
+      "friendlyName": "Online Experimentation Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_OnlineExperimentation/OnlineExperimentationWorkspace.svg"
+    },
+    {
+      "resourceType": "microsoft.openenergyplatform/energyservices",
+      "friendlyName": "Azure Data Manager for Energy",
+      "portalSvgPath": "svg/Microsoft_Azure_OpenEnergyPlatform/OpenEnergyResource.svg"
+    },
+    {
+      "resourceType": "microsoft.operationalinsights/clusters",
+      "friendlyName": "Log Analytics dedicated cluster",
+      "portalSvgPath": "svg/Microsoft_OperationsManagementSuite_Workspace/cluster.svg"
+    },
+    {
+      "resourceType": "microsoft.operationalinsights/querypacks",
+      "friendlyName": "Log Analytics query pack",
+      "portalSvgPath": "svg/Microsoft_OperationsManagementSuite_Workspace/QueryPack.svg"
+    },
+    {
+      "resourceType": "microsoft.operationalinsights/workspaces",
+      "friendlyName": "Log Analytics workspace",
+      "portalSvgPath": "svg/Microsoft_OperationsManagementSuite_Workspace/Workspace.svg"
+    },
+    {
+      "resourceType": "microsoft.operationsmanagement/solutions",
+      "friendlyName": "Solution",
+      "portalSvgPath": "svg/Microsoft_OperationsManagementSuite_Workspace/Solution.svg"
+    },
+    {
+      "resourceType": "microsoft.orbital/edgesites",
+      "friendlyName": "Edge Site",
+      "portalSvgPath": "svg/Microsoft_Azure_Orbital/EdgeSites.svg"
+    },
+    {
+      "resourceType": "microsoft.orbital/geocatalogs",
+      "friendlyName": "GeoCatalog",
+      "portalSvgPath": "svg/Microsoft_Azure_Orbital/geoCatalogs.svg"
+    },
+    {
+      "resourceType": "microsoft.orbital/groundstations",
+      "friendlyName": "Ground Station",
+      "portalSvgPath": "svg/Microsoft_Azure_Orbital/GroundStations.svg"
+    },
+    {
+      "resourceType": "microsoft.orbital/l2connections",
+      "friendlyName": "L2 Connection",
+      "portalSvgPath": "svg/Microsoft_Azure_Orbital/L2Connections.svg"
+    },
+    {
+      "resourceType": "microsoft.oriondb/clusters",
+      "friendlyName": "Azure HorizonDB (Preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_OSSDatabases/PostgreSqlOrionDB.svg"
+    },
+    {
+      "resourceType": "microsoft.peering/peerings",
+      "friendlyName": "Peering",
+      "portalSvgPath": "svg/Microsoft_Azure_Peering/AzurePeering.svg"
+    },
+    {
+      "resourceType": "microsoft.peering/peerings/registeredasns",
+      "friendlyName": "Registered ASN",
+      "portalSvgPath": "svg/Microsoft_Azure_Peering/RegisteredAsn.svg"
+    },
+    {
+      "resourceType": "microsoft.peering/peerings/registeredprefixes",
+      "friendlyName": "Registered prefix",
+      "portalSvgPath": "svg/Microsoft_Azure_Peering/RegisteredPrefix.svg"
+    },
+    {
+      "resourceType": "microsoft.peering/peeringservices",
+      "friendlyName": "Peering Service",
+      "portalSvgPath": "svg/Microsoft_Azure_Peering/MicrosoftPeeringService.svg"
+    },
+    {
+      "resourceType": "microsoft.peering/peeringservices/prefixes",
+      "friendlyName": "Peering Service Prefix",
+      "portalSvgPath": "svg/Microsoft_Azure_Peering/MicrosoftPeeringServicePrefix.svg"
+    },
+    {
+      "resourceType": "microsoft.portal/dashboards",
+      "friendlyName": "Shared dashboard",
+      "portalSvgPath": "svg/HubsExtension/Dashboards.svg"
+    },
+    {
+      "resourceType": "microsoft.portal/virtual-privatedashboards",
+      "friendlyName": "Private dashboard",
+      "portalSvgPath": "svg/HubsExtension/PrivateDashboards.svg"
+    },
+    {
+      "resourceType": "microsoft.portalservices/copilots",
+      "friendlyName": "Copilot",
+      "portalSvgPath": "svg/Microsoft_Azure_Copilot/Copilot.svg"
+    },
+    {
+      "resourceType": "microsoft.portalservices/extensions",
+      "friendlyName": "Portal Extension",
+      "portalSvgPath": "svg/Microsoft_Azure_CreateUIDef/PortalExtensions.svg"
+    },
+    {
+      "resourceType": "microsoft.portalservices/extensions/deployments",
+      "friendlyName": "Extension Deployment",
+      "portalSvgPath": "svg/Microsoft_Azure_CreateUIDef/PortalExtensionDeployments.svg"
+    },
+    {
+      "resourceType": "microsoft.portalservices/extensions/slots",
+      "friendlyName": "Extension Slot",
+      "portalSvgPath": "svg/Microsoft_Azure_CreateUIDef/PortalExtensionSlots.svg"
+    },
+    {
+      "resourceType": "microsoft.portalservices/extensions/versions",
+      "friendlyName": "Extension Version",
+      "portalSvgPath": "svg/Microsoft_Azure_CreateUIDef/PortalExtensionVersions.svg"
+    },
+    {
+      "resourceType": "microsoft.powerbidedicated/capacities",
+      "friendlyName": "Power BI Embedded",
+      "portalSvgPath": "svg/Microsoft_Azure_PowerBIDedicated/PowerBIDedicated.svg"
+    },
+    {
+      "resourceType": "microsoft.premonition/libraries",
+      "friendlyName": "Library",
+      "portalSvgPath": "svg/Microsoft_Premonition/Library.svg"
+    },
+    {
+      "resourceType": "microsoft.premonition/libraries/analyses",
+      "friendlyName": "Analysis",
+      "portalSvgPath": "svg/Microsoft_Premonition/Analysis.svg"
+    },
+    {
+      "resourceType": "microsoft.premonition/libraries/samples",
+      "friendlyName": "Sample",
+      "portalSvgPath": "svg/Microsoft_Premonition/Sample.svg"
+    },
+    {
+      "resourceType": "microsoft.professionalservice/resources",
+      "friendlyName": "Professional Service",
+      "portalSvgPath": "svg/Microsoft_Azure_MarketplaceTransact/ProfessionalService.svg"
+    },
+    {
+      "resourceType": "microsoft.providerhub/providerregistrations",
+      "friendlyName": "Resource Provider as a Service",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceHub/RPaaS_ResourceProvider.svg"
+    },
+    {
+      "resourceType": "microsoft.providerhub/providerregistrations/customrollouts",
+      "friendlyName": "Rollout",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceHub/RPaaS_CustomRollout.svg"
+    },
+    {
+      "resourceType": "microsoft.providerhub/providerregistrations/defaultrollouts",
+      "friendlyName": "Rollout",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceHub/RPaaS_Rollout.svg"
+    },
+    {
+      "resourceType": "microsoft.providerhub/providerregistrations/resourcetyperegistrations",
+      "friendlyName": "Resource Type",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceHub/RPaaS_ResourceType.svg"
+    },
+    {
+      "resourceType": "microsoft.providerhub/providerregistrations/resourcetyperegistrations/resourcetyperegistrations",
+      "friendlyName": "Resource Type",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceHub/RPaaS_ResourceTypeNestedOne.svg"
+    },
+    {
+      "resourceType": "microsoft.purview/accounts",
+      "friendlyName": "Microsoft Purview account",
+      "portalSvgPath": "svg/Microsoft_Azure_ProjectBabylon/PurviewAccountResource.svg"
+    },
+    {
+      "resourceType": "microsoft.quantum/provideraccounts",
+      "friendlyName": "Quantum Provider Account",
+      "portalSvgPath": "svg/Microsoft_Azure_Quantum/QuantumProviderAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.quantum/workspaces",
+      "friendlyName": "Quantum Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_Quantum/QuantumWorkspace.svg"
+    },
+    {
+      "resourceType": "microsoft.recoveryservices/vaults",
+      "friendlyName": "Recovery Services vault",
+      "portalSvgPath": "svg/Microsoft_Azure_RecoveryServices/RecoveryServicesResource.svg"
+    },
+    {
+      "resourceType": "microsoft.recoveryservices/vaults/backupfabrics/protectioncontainers/protecteditems",
+      "friendlyName": "Backup Item",
+      "portalSvgPath": "svg/Microsoft_Azure_RecoveryServices/BackupItem.svg"
+    },
+    {
+      "resourceType": "microsoft.redhatopenshift/openshiftclusters",
+      "friendlyName": "Azure Red Hat OpenShift cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AroClusters.svg"
+    },
+    {
+      "resourceType": "microsoft.relationships/dependencyof",
+      "friendlyName": "Dependency Relationship",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/DependencyRelationships.svg"
+    },
+    {
+      "resourceType": "microsoft.relationships/servicegroupmember",
+      "friendlyName": "Service group member relationship",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/ServiceGroupMembersRelationships.svg"
+    },
+    {
+      "resourceType": "microsoft.relationships/servicegroupmembernojoin",
+      "friendlyName": "Service group member relationship",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/ServiceGroupMembersRelationshipsNoJoin.svg"
+    },
+    {
+      "resourceType": "microsoft.relationships/servicegrouprelationships",
+      "friendlyName": "Connected Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/ServiceGroupRelationships.svg"
+    },
+    {
+      "resourceType": "microsoft.relay/namespaces",
+      "friendlyName": "Relay",
+      "portalSvgPath": "svg/Microsoft_Azure_Relay/Relay.svg"
+    },
+    {
+      "resourceType": "microsoft.relay/namespaces/hybridconnections",
+      "friendlyName": "Hybrid Connection",
+      "portalSvgPath": "svg/Microsoft_Azure_Relay/HybridConnection.svg"
+    },
+    {
+      "resourceType": "microsoft.relay/namespaces/wcfrelays",
+      "friendlyName": "WCF Relay",
+      "portalSvgPath": "svg/Microsoft_Azure_Relay/WcfRelay.svg"
+    },
+    {
+      "resourceType": "microsoft.resourceconnector/appliances",
+      "friendlyName": "Resource bridge",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/ResourceBridge.svg"
+    },
+    {
+      "resourceType": "microsoft.resourcegraph/queries",
+      "friendlyName": "Resource Graph query",
+      "portalSvgPath": "svg/HubsExtension/ARGSharedQueries.svg"
+    },
+    {
+      "resourceType": "microsoft.resourcemover/moveprojects",
+      "friendlyName": "Move Project",
+      "portalSvgPath": "svg/Microsoft_Azure_ResourceMoveV2/MoveProject.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/builtintemplatespecs",
+      "friendlyName": "Built-in template spec",
+      "portalSvgPath": "svg/Microsoft_Azure_TemplateSpecs/ArmBuiltInTemplateSpec.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/deletedresources",
+      "friendlyName": "Recycle bin",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/DeletedResources.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/deploymentscripts",
+      "friendlyName": "Deployment Script",
+      "portalSvgPath": "svg/Microsoft_Azure_TemplateSpecs/DeploymentScriptHub.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/deploymentstacks",
+      "friendlyName": "Deployment stack",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/Stack.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/resourcechange",
+      "friendlyName": "Change Analysis",
+      "portalSvgPath": "svg/Microsoft_Azure_OneInventory/ResourceChange.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/resourcechanges",
+      "friendlyName": "Resource change",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/ResourceChanges.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/resourcegraphvisualizer",
+      "friendlyName": "Resource Graph Visualizer",
+      "portalSvgPath": "svg/Microsoft_Azure_OneInventory/ResourceGraphVisualizer.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/subscriptions",
+      "friendlyName": "Subscription",
+      "portalSvgPath": "svg/Microsoft_Azure_Billing/Subscription.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/subscriptions/resourcegroups",
+      "friendlyName": "Resource group",
+      "portalSvgPath": "svg/HubsExtension/ResourceGroups.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/templatespecs",
+      "friendlyName": "Template spec",
+      "portalSvgPath": "svg/Microsoft_Azure_TemplateSpecs/ArmTemplateSpec.svg"
+    },
+    {
+      "resourceType": "microsoft.resources/virtualsubscriptionsforresourcepicker",
+      "friendlyName": "Subscription",
+      "portalSvgPath": "svg/Microsoft_Azure_Resources/ResExtVirtualSubscriptions.svg"
+    },
+    {
+      "resourceType": "microsoft.saas/applications",
+      "friendlyName": "Software as a Service (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_Marketplace/SaasClassic.svg"
+    },
+    {
+      "resourceType": "microsoft.saas/resources",
+      "friendlyName": "SaaS",
+      "portalSvgPath": "svg/Microsoft_Azure_Marketplace/SaasSubscriptionLevel.svg"
+    },
+    {
+      "resourceType": "microsoft.saas/saasresources",
+      "friendlyName": "SaaS (classic)",
+      "portalSvgPath": "svg/Microsoft_Azure_Marketplace/Saas.svg"
+    },
+    {
+      "resourceType": "microsoft.saashub/cloudservices/hidden",
+      "friendlyName": "Microsoft SaaS (Preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_SaasHub/SaaSHub.svg"
+    },
+    {
+      "resourceType": "microsoft.scom/managedinstances",
+      "friendlyName": "SCOM managed instance",
+      "portalSvgPath": "svg/Microsoft_Azure_OperationsMgr/AquilaExtensionResource.svg"
+    },
+    {
+      "resourceType": "microsoft.scvmm/clouds",
+      "friendlyName": "SCVMM cloud",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/ScVmmClouds.svg"
+    },
+    {
+      "resourceType": "microsoft.scvmm/virtualmachines",
+      "friendlyName": "SCVMM virtual machine - Azure Arc",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/ArcVmScVmm.svg"
+    },
+    {
+      "resourceType": "microsoft.scvmm/virtualmachinetemplates",
+      "friendlyName": "SCVMM virtual machine template",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/ScVmmTemplates.svg"
+    },
+    {
+      "resourceType": "microsoft.scvmm/virtualnetworks",
+      "friendlyName": "SCVMM virtual network",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/ScVmmNetworks.svg"
+    },
+    {
+      "resourceType": "microsoft.scvmm/vmmservers",
+      "friendlyName": "SCVMM management server",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridCompute/ScVmmManagementServer.svg"
+    },
+    {
+      "resourceType": "microsoft.scvmm/vmmservers/inventoryitems",
+      "friendlyName": "SCVMM management server inventory item",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/ScVmmInventoryItems.svg"
+    },
+    {
+      "resourceType": "microsoft.scvmm/vmmservers/inventoryitems_virtualmachines",
+      "friendlyName": "SCVMM virtual machine",
+      "portalSvgPath": "svg/Microsoft_Azure_ArcPrivateCloudUX/ScVmmVirtualMachines.svg"
+    },
+    {
+      "resourceType": "microsoft.search/searchservices",
+      "friendlyName": "Search service (Foundry IQ)",
+      "portalSvgPath": "svg/Microsoft_Azure_Search/SearchService.svg"
+    },
+    {
+      "resourceType": "microsoft.security/locations/alerts",
+      "friendlyName": "Security Alert",
+      "portalSvgPath": "svg/Microsoft_Azure_Security/SecurityAlerts.svg"
+    },
+    {
+      "resourceType": "microsoft.security/privatelinks",
+      "friendlyName": "Security Private Link",
+      "portalSvgPath": "svg/Microsoft_Azure_Security_CloudNativeCompute/PrivateLinkResource.svg"
+    },
+    {
+      "resourceType": "microsoft.securitycopilot/capacities",
+      "friendlyName": "Microsoft Security compute capacity",
+      "portalSvgPath": "svg/Microsoft_Security_Copilot/SecurityCopilotResource.svg"
+    },
+    {
+      "resourceType": "microsoft.securitydetonation/chambers",
+      "friendlyName": "Security Detonation Chamber",
+      "portalSvgPath": "svg/Microsoft_Azure_DetonationService/DetonationChamber.svg"
+    },
+    {
+      "resourceType": "microsoft.securityinsightsarg/sentinel",
+      "friendlyName": "Microsoft Sentinel",
+      "portalSvgPath": "svg/Microsoft_Azure_Security_Insights/SecurityInsightsDashboard.svg"
+    },
+    {
+      "resourceType": "microsoft.servicebus/namespaces",
+      "friendlyName": "Service Bus Namespace",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceBus/ServiceBus.svg"
+    },
+    {
+      "resourceType": "microsoft.servicebus/namespaces/disasterrecoveryconfigs",
+      "friendlyName": "Service Bus Geo-DR Alias",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceBus/ServiceBusDrConfig.svg"
+    },
+    {
+      "resourceType": "microsoft.servicebus/namespaces/queues",
+      "friendlyName": "Service Bus Queue",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceBus/ServiceBusQueue.svg"
+    },
+    {
+      "resourceType": "microsoft.servicebus/namespaces/topics",
+      "friendlyName": "Service Bus Topic",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceBus/ServiceBusTopic.svg"
+    },
+    {
+      "resourceType": "microsoft.servicebus/namespaces/topics/subscriptions",
+      "friendlyName": "Service Bus Subscription",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceBus/ServiceBusSubscription.svg"
+    },
+    {
+      "resourceType": "microsoft.servicefabric/clusters",
+      "friendlyName": "Service Fabric cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceFabric/ServiceFabricCluster.svg"
+    },
+    {
+      "resourceType": "microsoft.servicefabric/managedclusters",
+      "friendlyName": "Service Fabric managed cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_ServiceFabric/ManagedServiceFabricCluster.svg"
+    },
+    {
+      "resourceType": "microsoft.servicenetworking/trafficcontrollers",
+      "friendlyName": "Application Gateway for Containers",
+      "portalSvgPath": "svg/Microsoft_Azure_HybridNetworking/AppGwForContainers.svg"
+    },
+    {
+      "resourceType": "microsoft.serviceshub/connectors",
+      "friendlyName": "Engage Center Connector",
+      "portalSvgPath": "svg/Microsoft_ServicesHub_Extension/Connector.svg"
+    },
+    {
+      "resourceType": "microsoft.signalrservice/signalr",
+      "friendlyName": "SignalR",
+      "portalSvgPath": "svg/Microsoft_Azure_SignalR/SignalR.svg"
+    },
+    {
+      "resourceType": "microsoft.signalrservice/signalr/replicas",
+      "friendlyName": "SignalR Replica",
+      "portalSvgPath": "svg/Microsoft_Azure_SignalR/SignalRReplica.svg"
+    },
+    {
+      "resourceType": "microsoft.signalrservice/webpubsub",
+      "friendlyName": "Web PubSub Service",
+      "portalSvgPath": "svg/Microsoft_Azure_SignalR/WebPubSub.svg"
+    },
+    {
+      "resourceType": "microsoft.signalrservice/webpubsub/replicas",
+      "friendlyName": "Web PubSub Service Replica",
+      "portalSvgPath": "svg/Microsoft_Azure_SignalR/WebPubSubReplica.svg"
+    },
+    {
+      "resourceType": "microsoft.solutions/applicationdefinitions",
+      "friendlyName": "Service catalog managed application definition",
+      "portalSvgPath": "svg/Microsoft_Azure_Appliance/ApplianceDefinition.svg"
+    },
+    {
+      "resourceType": "microsoft.solutions/applications",
+      "friendlyName": "Managed application",
+      "portalSvgPath": "svg/Microsoft_Azure_Appliance/ArmAppliance.svg"
+    },
+    {
+      "resourceType": "microsoft.sovereign/landingzoneaccounts",
+      "friendlyName": "Landing zone account",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudforSovereignty/LandingZoneAccountsAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
+      "friendlyName": "Landing Zone Configuration",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudforSovereignty/LZConfigurationsAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.sovereign/landingzoneaccounts/landingzoneregistrations",
+      "friendlyName": "Landing Zone Registration",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudforSovereignty/LZRegistrationsAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.sovereign/sovereignviews",
+      "friendlyName": "Sovereign view",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudforSovereignty/SovereignView.svg"
+    },
+    {
+      "resourceType": "microsoft.sovereign/transparencylogs",
+      "friendlyName": "Transparency log",
+      "portalSvgPath": "svg/Microsoft_Azure_CloudforSovereignty/TransparencyLogsAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/azuresql",
+      "friendlyName": "Azure SQL resource",
+      "portalSvgPath": "svg/SqlAzureExtension/AzureSQL.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/azuresqlallresources",
+      "friendlyName": "Azure SQL resource",
+      "portalSvgPath": "svg/SqlAzureExtension/AzureSQLAllResources.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/instancepools",
+      "friendlyName": "Instance pool",
+      "portalSvgPath": "svg/SqlAzureExtension/InstancePool.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/managedinstances",
+      "friendlyName": "SQL managed instance",
+      "portalSvgPath": "svg/SqlAzureExtension/ManagedInstance.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/managedinstances/databases",
+      "friendlyName": "Managed database",
+      "portalSvgPath": "svg/SqlAzureExtension/ManagedDatabase.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/servers",
+      "friendlyName": "SQL server",
+      "portalSvgPath": "svg/SqlAzureExtension/Server.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/servers/databases",
+      "friendlyName": "SQL database",
+      "portalSvgPath": "svg/SqlAzureExtension/Database.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/servers/elasticpools",
+      "friendlyName": "SQL elastic pool",
+      "portalSvgPath": "svg/SqlAzureExtension/ElasticPool.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/servers/jobagents",
+      "friendlyName": "Elastic Job agent",
+      "portalSvgPath": "svg/SqlAzureExtension/JobAgent.svg"
+    },
+    {
+      "resourceType": "microsoft.sql/virtualclusters",
+      "friendlyName": "Virtual cluster",
+      "portalSvgPath": "svg/SqlAzureExtension/VirtualCluster.svg"
+    },
+    {
+      "resourceType": "microsoft.sqlvirtualmachine/sqlvirtualmachines",
+      "friendlyName": "SQL virtual machine",
+      "portalSvgPath": "svg/SqlAzureExtension/SqlVirtualMachine.svg"
+    },
+    {
+      "resourceType": "microsoft.standbypool/standbycontainergrouppools",
+      "friendlyName": "Container Instances Standby Pool",
+      "portalSvgPath": "svg/Microsoft_Azure_KubernetesFleet/StandbyContainerGroupPools.svg"
+    },
+    {
+      "resourceType": "microsoft.storage/storageaccounts",
+      "friendlyName": "Storage account",
+      "portalSvgPath": "svg/Microsoft_Azure_Storage/StorageAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.storageactions/storagetasks",
+      "friendlyName": "Azure Storage Actions",
+      "portalSvgPath": "svg/Microsoft_Azure_StorageTasks/StorageTasks.svg"
+    },
+    {
+      "resourceType": "microsoft.storagecache/amlfilesystems",
+      "friendlyName": "Azure Managed Lustre",
+      "portalSvgPath": "svg/Microsoft_Azure_StorageCache/AmlFileSystems.svg"
+    },
+    {
+      "resourceType": "microsoft.storagecache/caches",
+      "friendlyName": "HPC cache",
+      "portalSvgPath": "svg/Microsoft_Azure_StorageCache/StorageCache.svg"
+    },
+    {
+      "resourceType": "microsoft.storagediscovery/storagediscoveryworkspaces",
+      "friendlyName": "Storage Discovery workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_StorageDiscovery/StorageDiscovery.svg"
+    },
+    {
+      "resourceType": "microsoft.storagehub/all",
+      "friendlyName": "All resources",
+      "portalSvgPath": "svg/Microsoft_Azure_StorageHub/AllResources.svg"
+    },
+    {
+      "resourceType": "microsoft.storagehub/policycomplianceresources",
+      "friendlyName": "Policy compliance",
+      "portalSvgPath": "svg/Microsoft_Azure_StorageHub/PolicyComplianceResources.svg"
+    },
+    {
+      "resourceType": "microsoft.storagemover/storagemovers",
+      "friendlyName": "Storage mover",
+      "portalSvgPath": "svg/Microsoft_Azure_StorageMover/StorageMover.svg"
+    },
+    {
+      "resourceType": "microsoft.storagesync/storagesyncservices",
+      "friendlyName": "Storage Sync Service",
+      "portalSvgPath": "svg/Microsoft_Azure_Kailani/SyncServiceAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.streamanalytics/clusters",
+      "friendlyName": "Stream Analytics cluster",
+      "portalSvgPath": "svg/Microsoft_Azure_StreamAnalytics/StreamAnalyticsCluster.svg"
+    },
+    {
+      "resourceType": "microsoft.streamanalytics/streamingjobs",
+      "friendlyName": "Stream Analytics job",
+      "portalSvgPath": "svg/Microsoft_Azure_StreamAnalytics/StreamAnalyticsJob.svg"
+    },
+    {
+      "resourceType": "microsoft.support/supporttickets",
+      "friendlyName": "Support Request",
+      "portalSvgPath": "svg/Microsoft_Azure_Support/SupportRequest.svg"
+    },
+    {
+      "resourceType": "microsoft.synapse/privatelinkhubs",
+      "friendlyName": "Synapse private link hub",
+      "portalSvgPath": "svg/Microsoft_Azure_Synapse/SynapsePrivateLinkHub.svg"
+    },
+    {
+      "resourceType": "microsoft.synapse/workspaces",
+      "friendlyName": "Synapse workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_Synapse/SynapseWorkspace.svg"
+    },
+    {
+      "resourceType": "microsoft.synapse/workspaces/bigdatapools",
+      "friendlyName": "Apache Spark pool",
+      "portalSvgPath": "svg/Microsoft_Azure_Synapse/SparkPool.svg"
+    },
+    {
+      "resourceType": "microsoft.synapse/workspaces/kustopools",
+      "friendlyName": "Data Explorer pool (preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_Kusto/kustoSynapsePool.svg"
+    },
+    {
+      "resourceType": "microsoft.synapse/workspaces/kustopools/databases",
+      "friendlyName": "Data Explorer Database",
+      "portalSvgPath": "svg/Microsoft_Azure_Kusto/kustoSynapsePoolDatabase.svg"
+    },
+    {
+      "resourceType": "microsoft.synapse/workspaces/scopepools",
+      "friendlyName": "SCOPE pool",
+      "portalSvgPath": "svg/Microsoft_Azure_Synapse/ScopePool.svg"
+    },
+    {
+      "resourceType": "microsoft.synapse/workspaces/sqlpools",
+      "friendlyName": "Dedicated SQL pool",
+      "portalSvgPath": "svg/Microsoft_Azure_Synapse/SynapseSqlPool.svg"
+    },
+    {
+      "resourceType": "microsoft.test/healthdataaiservices",
+      "friendlyName": "Azure Health Data and AI Services",
+      "portalSvgPath": "svg/Microsoft_Healthcare_APIs/HealthDataAIServices.svg"
+    },
+    {
+      "resourceType": "microsoft.updatemanager/updaterules",
+      "friendlyName": "Update Rule",
+      "portalSvgPath": "svg/Microsoft_Azure_Automation/UpdateRule.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts",
+      "friendlyName": "Microsoft.UsageBilling account",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/dataexports",
+      "friendlyName": "Microsoft.UsageBilling accounts data export",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_dataexports_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/inputs",
+      "friendlyName": "Microsoft.UsageBilling accounts input",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_inputs_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/metricexports",
+      "friendlyName": "Microsoft.UsageBilling accounts metric export",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_metricexports_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/pav2outputs",
+      "friendlyName": "Microsoft.UsageBilling accounts pav2output",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_pav2outputs_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/pipelines",
+      "friendlyName": "Microsoft.UsageBilling accounts pipeline",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_pipelines_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/pipelines/outputselectors",
+      "friendlyName": "Microsoft.UsageBilling accounts pipelines output selector",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_pipelines_outputselectors_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/streamoutputs",
+      "friendlyName": "Microsoft.UsageBilling accounts stream output",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_streamoutputs_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/validationworkspaces",
+      "friendlyName": "Microsoft.UsageBilling accounts validation workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_validationworkspaces_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.usagebilling/accounts/validationworkspaces/signoffs",
+      "friendlyName": "Microsoft.UsageBilling accounts validation workspaces sign off",
+      "portalSvgPath": "svg/Microsoft_Azure_UsageBilling/microsoft_usagebilling_accounts_validationworkspaces_signoffs_2025_12_01_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.videoindexer/accounts",
+      "friendlyName": "Azure AI Video Indexer",
+      "portalSvgPath": "svg/Microsoft_VideoIndexer/VideoIndexerAccount.svg"
+    },
+    {
+      "resourceType": "microsoft.virtualmachineimages/imagetemplates",
+      "friendlyName": "Image template",
+      "portalSvgPath": "svg/Microsoft_Azure_DiskMgmt/ImageTemplate.svg"
+    },
+    {
+      "resourceType": "microsoft.visualstudio/account",
+      "friendlyName": "Azure DevOps organization",
+      "portalSvgPath": "svg/AzureTfsExtension/Organization.svg"
+    },
+    {
+      "resourceType": "microsoft.vsonline/plans",
+      "friendlyName": "Visual Studio Online Plan",
+      "portalSvgPath": "svg/Microsoft_Azure_Appliance/MicrosoftVSOnlinePlans.svg"
+    },
+    {
+      "resourceType": "microsoft.web/connectiongateways",
+      "friendlyName": "On-premises data gateway",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/Gateway.svg"
+    },
+    {
+      "resourceType": "microsoft.web/connections",
+      "friendlyName": "API Connection",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/ApiConnection.svg"
+    },
+    {
+      "resourceType": "microsoft.web/connectorgateways",
+      "friendlyName": "Connector Namespace (preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/ConnectorGatewayResources.svg"
+    },
+    {
+      "resourceType": "microsoft.web/customapis",
+      "friendlyName": "Logic apps custom connector",
+      "portalSvgPath": "svg/Microsoft_Azure_EMA/CustomConnector.svg"
+    },
+    {
+      "resourceType": "microsoft.web/hostingenvironments",
+      "friendlyName": "App Service Environment",
+      "portalSvgPath": "svg/WebsitesExtension/AppServiceEnvironment.svg"
+    },
+    {
+      "resourceType": "microsoft.web/kubeenvironments",
+      "friendlyName": "App Service Kubernetes Environment",
+      "portalSvgPath": "svg/WebsitesExtension/AppServiceKubernetesEnvironment.svg"
+    },
+    {
+      "resourceType": "microsoft.web/serverfarms",
+      "friendlyName": "App Service plan",
+      "portalSvgPath": "svg/WebsitesExtension/WebHostingPlan.svg"
+    },
+    {
+      "resourceType": "microsoft.web/sites",
+      "friendlyName": "App Service",
+      "portalSvgPath": "svg/WebsitesExtension/Website.svg"
+    },
+    {
+      "resourceType": "microsoft.web/sites/slots",
+      "friendlyName": "App Service (Slot)",
+      "portalSvgPath": "svg/WebsitesExtension/WebsiteSlot.svg"
+    },
+    {
+      "resourceType": "microsoft.web/staticsites",
+      "friendlyName": "Static Web App",
+      "portalSvgPath": "svg/WebsitesExtension/StaticSite.svg"
+    },
+    {
+      "resourceType": "microsoft.weightsandbiases/instances",
+      "friendlyName": "Azure Native Weights & Biases Cloud Service",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/WeightsAndBiases.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/configurationcheckstemplates",
+      "friendlyName": "Configuration Template",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadHub/configurationChecksTemplates.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/configurationvalidationresults",
+      "friendlyName": "Workloads Hub",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadHub/CheckResultAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/configurationvalidationresults/checkname",
+      "friendlyName": "Workloads Hub",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadHub/VICheckResultsAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/insights",
+      "friendlyName": "Microsoft.Workloads insight",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadInsight/microsoft_workloads_insights_2022_10_15_preview.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/monitors",
+      "friendlyName": "Azure Monitor for SAP solutions",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadMonitor/SapMonitorV2.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/sapvirtualinstances",
+      "friendlyName": "Virtual Instance for SAP solutions",
+      "portalSvgPath": "svg/Microsoft_Azure_SAPManagement/SapVirtualInstanceAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/sapvirtualinstances/applicationinstances",
+      "friendlyName": "App server instance for SAP solutions",
+      "portalSvgPath": "svg/Microsoft_Azure_SAPManagement/SAP_App_Server_instance.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/sapvirtualinstances/centralinstances",
+      "friendlyName": "Central service instance for SAP solutions",
+      "portalSvgPath": "svg/Microsoft_Azure_SAPManagement/SAP_Central_Server_instance.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/sapvirtualinstances/databaseinstances",
+      "friendlyName": "Database for SAP solutions",
+      "portalSvgPath": "svg/Microsoft_Azure_SAPManagement/SAP_DB_Server_instance.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/virtualinstances",
+      "friendlyName": "Workload Virtual Instance",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadHub/VirtualInstanceAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/virtualinstances/components",
+      "friendlyName": "Workload Component",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadHub/WorkloadComponentAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/virtualinstances/microsoft.workloads/configurationcheckstemplates",
+      "friendlyName": "Configuration Template",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadHub/VIConfigurationChecksTemplates.svg"
+    },
+    {
+      "resourceType": "microsoft.workloads/virtualinstancess",
+      "friendlyName": "Workload Virtual Instance",
+      "portalSvgPath": "svg/Microsoft_Azure_WorkloadHub/RelatedVIAsset.svg"
+    },
+    {
+      "resourceType": "microsoft.zerotrustsegmentation/segmentationmanagers",
+      "friendlyName": "Segmentation Manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ZeroTrustSegmentation/PrivatePreviewSegmentationManagers.svg"
+    },
+    {
+      "resourceType": "mongodb.atlas/organizations",
+      "friendlyName": "MongoDB Atlas Organization",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/MongoDB.svg"
+    },
+    {
+      "resourceType": "mongodb.atlas/organizations_v1",
+      "friendlyName": "MongoDB Atlas Organization",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/MongoDB_V1.svg"
+    },
+    {
+      "resourceType": "napster.companionapi/organizations",
+      "friendlyName": "Napster Companion API - An Azure Native ISV Service",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/Napster.svg"
+    },
+    {
+      "resourceType": "newrelic.observability/monitors",
+      "friendlyName": "New Relic",
+      "portalSvgPath": "svg/Azure_Marketplace_Liftr_NewRelic/NewRelic.svg"
+    },
+    {
+      "resourceType": "nginx.nginxplus/nginxdeployments",
+      "friendlyName": "NGINXaaS",
+      "portalSvgPath": "svg/Azure_Marketplace_NGINX/Nginx.svg"
+    },
+    {
+      "resourceType": "oracle.database/autonomousdatabases",
+      "friendlyName": "Autonomous AI Database",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracle_adbs.svg"
+    },
+    {
+      "resourceType": "oracle.database/cloudexadatainfrastructures",
+      "friendlyName": "Oracle Exadata Infrastructure",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracle_exadata_infrastructure.svg"
+    },
+    {
+      "resourceType": "oracle.database/cloudvmclusters",
+      "friendlyName": "Oracle Exadata VM Cluster",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracle_exadata_vmcluster.svg"
+    },
+    {
+      "resourceType": "oracle.database/dbsystems",
+      "friendlyName": "Base Database",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracle_basedb.svg"
+    },
+    {
+      "resourceType": "oracle.database/exadbvmclusters",
+      "friendlyName": "Oracle Exascale VM Cluster",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracle_exascale_vmcluster.svg"
+    },
+    {
+      "resourceType": "oracle.database/exascaledbstoragevaults",
+      "friendlyName": "Oracle Exascale DB Storage Vault",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracle_exascale_storage_vaults.svg"
+    },
+    {
+      "resourceType": "oracle.database/networkanchors",
+      "friendlyName": "Network Anchor",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracle_network_anchor.svg"
+    },
+    {
+      "resourceType": "oracle.database/oraclesubscriptions",
+      "friendlyName": "OracleSubscription",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracleSubscription.svg"
+    },
+    {
+      "resourceType": "oracle.database/resourceanchors",
+      "friendlyName": "Resource Anchor",
+      "portalSvgPath": "svg/Oracle_Databases_At_Azure/oracle_resource_anchor.svg"
+    },
+    {
+      "resourceType": "paloaltonetworks.cloudngfw/firewalls",
+      "friendlyName": "Cloud NGFW by Palo Alto Networks",
+      "portalSvgPath": "svg/Azure_Marketplace_PaloAltoNetworks_Cloudngfw/PaloAltoNetworksCloudNGFW.svg"
+    },
+    {
+      "resourceType": "paloaltonetworks.cloudngfw/globalrulestacks",
+      "friendlyName": "Global Rulestack",
+      "portalSvgPath": "svg/Azure_Marketplace_PaloAltoNetworks_Cloudngfw/PaloAltoNetworksGlobalRulestack.svg"
+    },
+    {
+      "resourceType": "paloaltonetworks.cloudngfw/localrulestacks",
+      "friendlyName": "Local Rulestack for Cloud NGFW by Palo Alto Networks",
+      "portalSvgPath": "svg/Azure_Marketplace_PaloAltoNetworks_Cloudngfw/PaloAltoNetworksLocalRulestack.svg"
+    },
+    {
+      "resourceType": "pinecone.vectordb/organizations",
+      "friendlyName": "Azure Native Pinecone Cloud Service",
+      "portalSvgPath": "svg/Azure_MarketPlace_NativeISVService/Pinecone.svg"
+    },
+    {
+      "resourceType": "private.anyscaledev/clouds",
+      "friendlyName": "Anyscale Cloud",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleCloudsDev.svg"
+    },
+    {
+      "resourceType": "private.anyscaledev/clouds/cloudresources",
+      "friendlyName": "Anyscale Cloud Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleCloudResourcesDev.svg"
+    },
+    {
+      "resourceType": "private.anyscaledev/clouds/computeconfigs",
+      "friendlyName": "Anyscale Compute Config",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleComputeConfigsDev.svg"
+    },
+    {
+      "resourceType": "private.anyscaledev/clouds/containerimages",
+      "friendlyName": "Anyscale Container Image",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleContainerImagesDev.svg"
+    },
+    {
+      "resourceType": "private.anyscaledev/clouds/projects",
+      "friendlyName": "Anyscale Project",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleProjectsDev.svg"
+    },
+    {
+      "resourceType": "private.anyscaledev/clouds/projects/jobs",
+      "friendlyName": "Anyscale Job",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleJobsDev.svg"
+    },
+    {
+      "resourceType": "private.anyscaledev/clouds/projects/services",
+      "friendlyName": "Anyscale Service",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleServicesDev.svg"
+    },
+    {
+      "resourceType": "private.anyscaledev/clouds/projects/workspaces",
+      "friendlyName": "Anyscale Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleWorkspacesDev.svg"
+    },
+    {
+      "resourceType": "private.anyscalestaging/clouds",
+      "friendlyName": "Anyscale Cloud",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleCloudsStaging.svg"
+    },
+    {
+      "resourceType": "private.anyscalestaging/clouds/cloudresources",
+      "friendlyName": "Anyscale Cloud Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleCloudResourcesStaging.svg"
+    },
+    {
+      "resourceType": "private.anyscalestaging/clouds/computeconfigs",
+      "friendlyName": "Anyscale Compute Config",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleComputeConfigsStaging.svg"
+    },
+    {
+      "resourceType": "private.anyscalestaging/clouds/containerimages",
+      "friendlyName": "Anyscale Container Image",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleContainerImagesStaging.svg"
+    },
+    {
+      "resourceType": "private.anyscalestaging/clouds/projects",
+      "friendlyName": "Anyscale Project",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleProjectsStaging.svg"
+    },
+    {
+      "resourceType": "private.anyscalestaging/clouds/projects/jobs",
+      "friendlyName": "Anyscale Job",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleJobsStaging.svg"
+    },
+    {
+      "resourceType": "private.anyscalestaging/clouds/projects/services",
+      "friendlyName": "Anyscale Service",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleServicesStaging.svg"
+    },
+    {
+      "resourceType": "private.anyscalestaging/clouds/projects/workspaces",
+      "friendlyName": "Anyscale Workspace",
+      "portalSvgPath": "svg/Microsoft_Azure_ContainerService/AnyscaleWorkspacesStaging.svg"
+    },
+    {
+      "resourceType": "private.easm/workspaces",
+      "friendlyName": "Microsoft Defender EASM (Preview)",
+      "portalSvgPath": "svg/Microsoft_Azure_EASM/PrivateEasmWorkspace.svg"
+    },
+    {
+      "resourceType": "private.healthbottest/healthbots",
+      "friendlyName": "Private Healthcare agent services",
+      "portalSvgPath": "svg/Microsoft_Azure_HealthBot/PrivateHealthBot.svg"
+    },
+    {
+      "resourceType": "private.monitorgrafana/dashboards",
+      "friendlyName": "Azure Monitor dashboards with Grafana (PrivateRP)",
+      "portalSvgPath": "svg/Microsoft_Azure_MonitorDashboard/PrivateMonitorDashboard.svg"
+    },
+    {
+      "resourceType": "private.serviceshubdev/connectors",
+      "friendlyName": "Private Engage Center Connector",
+      "portalSvgPath": "svg/Microsoft_ServicesHub_Extension/PrivateConnector.svg"
+    },
+    {
+      "resourceType": "private.zerotrustsegmentation/segmentationmanagers",
+      "friendlyName": "Private Segmentation Manager",
+      "portalSvgPath": "svg/Microsoft_Azure_ZeroTrustSegmentation/PrivateSegmentationManagers.svg"
+    },
+    {
+      "resourceType": "providers.test/statefulibizaengines",
+      "friendlyName": "My Resource",
+      "portalSvgPath": "svg/Microsoft_Azure_EdgeAIExtension/MyResource.svg"
+    },
+    {
+      "resourceType": "purestorage.block/reservations",
+      "friendlyName": "Azure Native Pure Storage Cloud Service",
+      "portalSvgPath": "svg/Azure_Marketplace_PureStorage/purestorage_block_reservations.svg"
+    },
+    {
+      "resourceType": "purestorage.block/storagepools",
+      "friendlyName": "Storage pool",
+      "portalSvgPath": "svg/Azure_Marketplace_PureStorage/purestorage_block_storagepools.svg"
+    },
+    {
+      "resourceType": "purestorage.block/storagepools/avsstoragecontainers",
+      "friendlyName": "PureStorage.Block storage pools avs storage container",
+      "portalSvgPath": "svg/Azure_Marketplace_PureStorage/purestorage_block_storagepools_avsstoragecontainers.svg"
+    },
+    {
+      "resourceType": "qumulo.storage/filesystems",
+      "friendlyName": "Azure Native Qumulo Scalable File Service",
+      "portalSvgPath": "svg/Azure_Marketplace_Qumulo/MyResource.svg"
+    }
+  ]
+}

@@ -27,6 +27,7 @@ dist/
 *.bak
 *.tmp
 .commit-msg.tmp
+assets/_originals/
 
 # Logs
 *.log

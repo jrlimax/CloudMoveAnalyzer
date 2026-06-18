@@ -2,12 +2,59 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { loadAppFunctions } from '../helpers/load-source.js';
 
 describe('Move Support Engine', () => {
+  let extractTypeFromUrl;
+  let choosePreferredResourceType;
+  let resolveResourceTypeInfo;
   let lookupResourceType;
   let getStatus;
   let getDocUrlForType;
 
   beforeAll(() => {
-    ({ lookupResourceType, getStatus, getDocUrlForType } = loadAppFunctions());
+    ({
+      extractTypeFromUrl,
+      choosePreferredResourceType,
+      resolveResourceTypeInfo,
+      lookupResourceType,
+      getStatus,
+      getDocUrlForType
+    } = loadAppFunctions());
+  });
+
+  describe('extractTypeFromUrl()', () => {
+    it('extracts child resource types from Azure portal URLs', () => {
+      const type = extractTypeFromUrl(
+        'https://portal.azure.com/#resource/subscriptions/x/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm01/extensions/MicrosoftMonitoringAgent'
+      );
+      expect(type).toBe('Microsoft.Compute/virtualMachines/extensions');
+    });
+
+    it('extracts third-party provider namespaces from portal URLs', () => {
+      const type = extractTypeFromUrl(
+        'https://portal.azure.com/#resource/subscriptions/x/resourceGroups/rg/providers/MongoDB.Atlas/organizations/org01'
+      );
+      expect(type).toBe('MongoDB.Atlas/organizations');
+    });
+  });
+
+  describe('resolveResourceTypeInfo()', () => {
+    it('prefers the more specific display type when it is deeper than the URL type', () => {
+      expect(
+        choosePreferredResourceType(
+          'Microsoft.Compute/virtualMachines/extensions',
+          'Microsoft.Compute/virtualMachines'
+        )
+      ).toBe('Microsoft.Compute/virtualMachines/extensions');
+    });
+
+    it('keeps the child resource type and resolves move info for VM extensions', () => {
+      const result = resolveResourceTypeInfo(
+        'Microsoft.Compute/virtualMachines/extensions',
+        'https://portal.azure.com/#resource/subscriptions/x/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm01/extensions/MicrosoftMonitoringAgent'
+      );
+
+      expect(result.finalType).toBe('Microsoft.Compute/virtualMachines/extensions');
+      expect(result.info).toBeTruthy();
+    });
   });
 
   describe('lookupResourceType()', () => {

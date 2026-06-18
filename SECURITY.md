@@ -29,6 +29,38 @@ Out of scope:
 - Self-XSS that requires the user to paste content into DevTools
 - Findings that require a compromised user device
 
+## Hardening summary
+
+What we currently do (defense-in-depth):
+
+- **No server, no telemetry, no user data leaves the browser.** Uploads are
+  parsed in-memory via `FileReader`; no `fetch`/`XMLHttpRequest` ever sends
+  user data to any origin.
+- **HTTP response headers** (see `_headers`): HSTS preload, X-Content-Type-Options,
+  Referrer-Policy, Permissions-Policy (camera/mic/geo/FLoC denied), X-Frame-Options,
+  COOP `same-origin`, CORP `same-origin`, COEP `credentialless`, and a strict
+  Content-Security-Policy (currently in `Report-Only` mode while we collect
+  real-world telemetry; promoted to enforce after a settle-in period).
+- **Upload validation** before parsing: extension allow-list (csv/tsv/xls/xlsx),
+  size cap (10 MB), and magic-byte sniffing (`PK\x03\x04` for zip-based xlsx,
+  `D0 CF 11 E0` for legacy xls) to refuse mis-typed binaries.
+- **HTML escaping** on every dynamic insertion (`escapeHtml()` is mandatory for
+  every value rendered via template literals into `innerHTML`).
+- **Anchor href hardening**: `safeHttpUrl()` only allows `http(s)://` schemes
+  before any URL is placed in a rendered `href`, defeating `javascript:`/`data:`
+  injection paths.
+- **External link hygiene**: every `target="_blank"` carries
+  `rel="noopener noreferrer"`.
+- **Subresource Integrity** on the pinned SheetJS bundle
+  (`sha384-…`, version-locked to `xlsx-0.20.0`). Other third-party scripts
+  (Google AdSense, ko-fi badge, flag CDN) are deliberately not SRI-pinned
+  because the provider rotates their content; they are sandboxed via the CSP
+  origin allow-list instead.
+- **No `eval`, `new Function`, `document.write`, or `setTimeout(string,…)`** in
+  application code.
+- **Dependencies kept minimal**: only SheetJS at runtime; Vitest + happy-dom for
+  tests. No build-time bundler, no transitive npm supply chain at runtime.
+
 ## Supported Versions
 
 Only the latest version (deployed at `cloudmoveanalyzer.com`) is supported.
