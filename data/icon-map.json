@@ -9,7 +9,7 @@
       "microsoft.compute/disks": "disks",
       "microsoft.compute/snapshots": "disks-snapshots",
       "microsoft.compute/availabilitysets": "availability-sets",
-      "microsoft.compute/images": "images",
+      "microsoft.compute/images": "image",
       "microsoft.compute/galleries": "azure-compute-galleries",
       "microsoft.compute/galleries/images": "image-definitions",
       "microsoft.compute/galleries/images/versions": "image-versions",
@@ -23,8 +23,8 @@
       "microsoft.web/serverfarms": "app-service-plans",
       "microsoft.web/certificates": "app-service-certificates",
       "microsoft.web/staticsites": "static-apps",
-      "microsoft.web/customapis": "app-services",
-      "microsoft.web/connections": "app-services"
+      "microsoft.web/customapis": "logic-apps-custom-connector",
+      "microsoft.web/connections": "connections"
     },
     "Networking": {
       "microsoft.network/virtualnetworks": "virtual-networks",
@@ -65,7 +65,7 @@
       "microsoft.netapp/netappaccounts": "azure-netapp-files"
     },
     "Databases": {
-      "microsoft.sql/servers": "azure-sql",
+      "microsoft.sql/servers": "sql-server",
       "microsoft.sql/servers/databases": "sql-database",
       "microsoft.sql/servers/elasticpools": "sql-elastic-pools",
       "microsoft.sql/managedinstances": "sql-managed-instance",
@@ -105,14 +105,14 @@
     },
     "Monitor / Insights": {
       "microsoft.insights/components": "application-insights",
-      "microsoft.insights/actiongroups": "alerts",
-      "microsoft.insights/activitylogalerts": "activity-log",
+      "microsoft.insights/actiongroups": "action-group",
+      "microsoft.insights/activitylogalerts": "activity-log-alert-rule",
       "microsoft.insights/metricalerts": "metrics",
       "microsoft.insights/scheduledqueryrules": "log-analytics-workspaces",
       "microsoft.insights/workbooks": "workbooks",
       "microsoft.insights/datacollectionrules": "data-collection-rules",
       "microsoft.insights/datacollectionendpoints": "data-collection-rules",
-      "microsoft.operationalinsights/workspaces": "log-analytics-workspaces",
+      "microsoft.operationalinsights/workspaces": "workspaces",
       "microsoft.alertsmanagement/smartdetectoralertrules": "alerts",
       "microsoft.monitor/accounts": "monitor"
     },
@@ -145,7 +145,7 @@
     },
     "AI  ML": {
       "microsoft.cognitiveservices/accounts": "cognitive-services",
-      "microsoft.machinelearningservices/workspaces": "machine-learning",
+      "microsoft.machinelearningservices/workspaces": "workspaces",
       "microsoft.search/searchservices": "cognitive-search",
       "microsoft.botservice/botservices": "bot-services"
     },
@@ -155,9 +155,9 @@
       "microsoft.maintenance/maintenanceconfigurations": "maintenance-configuration"
     },
     "Analytics": {
-      "microsoft.databricks/workspaces": "azure-databricks",
+      "microsoft.databricks/workspaces": "workspaces",
       "microsoft.datafactory/factories": "data-factories",
-      "microsoft.synapse/workspaces": "azure-synapse-analytics",
+      "microsoft.synapse/workspaces": "workspaces",
       "microsoft.hdinsight/clusters": "hd-insight-clusters",
       "microsoft.streamanalytics/streamingjobs": "stream-analytics-jobs",
       "microsoft.kusto/clusters": "azure-data-explorer-clusters"
@@ -402,8 +402,8 @@
     },
     "Desktop Virtualization": {
       "microsoft.desktopvirtualization/hostpools": "azure-virtual-desktop",
-      "microsoft.desktopvirtualization/applicationgroups": "azure-virtual-desktop",
-      "microsoft.desktopvirtualization/workspaces": "azure-virtual-desktop",
+      "microsoft.desktopvirtualization/applicationgroups": "application-group",
+      "microsoft.desktopvirtualization/workspaces": "workspaces",
       "microsoft.desktopvirtualization/scalingplans": "azure-virtual-desktop"
     },
     "Insights extras": {

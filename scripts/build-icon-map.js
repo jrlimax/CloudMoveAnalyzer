@@ -30,6 +30,10 @@ const ICON_JSON     = path.join(REPO_ROOT, 'data', 'icon-map.json');
 const MOVE_DB_PATH  = path.join(REPO_ROOT, 'js', 'move-database.js');
 const ICON_MAP_PATH = path.join(REPO_ROOT, 'js', 'icon-map.js');
 const OUT_ICONS_DIR = path.join(REPO_ROOT, 'assets', 'icons', 'azure');
+// Portal-only SVGs that are not in the official Microsoft architecture pack
+// (see assets/icons/azure-extras/README.md). Merged into the SVG index AFTER
+// the source pack so they take precedence on slug collisions.
+const EXTRAS_DIR = path.join(REPO_ROOT, 'assets', 'icons', 'azure-extras');
 
 const VERBOSE    = process.argv.includes('--verbose');
 const CHECK_ONLY = process.argv.includes('--check-only');
@@ -141,6 +145,18 @@ for (const f of svgFiles) {
   }
 }
 console.log(`Indexed ${svgFiles.length} SVG files (${svgIndex.size} unique slugs) from ${SRC_ICONS_DIR}`);
+
+// Merge portal-only extras (override on slug collision so we can patch the pack).
+let extraCount = 0;
+if (fs.existsSync(EXTRAS_DIR)) {
+  for (const f of walk(EXTRAS_DIR)) {
+    const slug = svgSlug(f);
+    svgIndex.set(slug, f);
+    svgTokens.set(slug, tokenSet(slug));
+    extraCount++;
+  }
+  if (extraCount) console.log(`Merged ${extraCount} portal-only SVGs from assets/icons/azure-extras/`);
+}
 
 // ---------------------------------------------------------------------------
 // 4. Validate: every slug in JSON must exist on disk
