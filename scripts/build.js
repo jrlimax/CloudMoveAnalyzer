@@ -207,7 +207,7 @@ const split = spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'split-i18
 if (split.status !== 0) throw new Error('split-i18n.js failed');
 
 // Root files (sitemap.xml is regenerated below, so skip copying it)
-for (const file of ['index.html', 'robots.txt', '_headers']) {
+for (const file of ['index.html', 'robots.txt', '_headers', 'ads.txt']) {
   const src = path.join(ROOT, file);
   if (fs.existsSync(src)) copy(src, path.join(DIST, file));
 }
