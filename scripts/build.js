@@ -100,12 +100,11 @@ function renderLangPage(template, lang) {
   const description = escapeHtml(lang.description);
   let html = template;
 
-  html = html.replace(/<html\s+lang="[^"]*"[^>]*>/i, `<html lang="${lang.code}" dir="${lang.dir}">`);
-
-  // Inject pre-render language marker BEFORE set-lang.js so first paint matches the URL locale.
+  // Mark the pre-rendered locale on <html data-cma-lang="…">. set-lang.js and
+  // i18n.js read this attribute (CSP-safe — no inline <script> required).
   html = html.replace(
-    /<script src="js\/set-lang\.js[^"]*"><\/script>/,
-    (m) => `<script>window.__CMA_LANG__=${JSON.stringify(lang.code)};</script>\n  ${m}`
+    /<html\s+lang="[^"]*"[^>]*>/i,
+    `<html lang="${lang.code}" dir="${lang.dir}" data-cma-lang="${lang.code}">`
   );
 
   // Replace the default i18n data pack (en) with this page's language pack
@@ -207,7 +206,7 @@ const split = spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'split-i18
 if (split.status !== 0) throw new Error('split-i18n.js failed');
 
 // Root files (sitemap.xml is regenerated below, so skip copying it)
-for (const file of ['index.html', 'robots.txt', '_headers', 'ads.txt']) {
+for (const file of ['index.html', 'robots.txt', '_headers']) {
   const src = path.join(ROOT, file);
   if (fs.existsSync(src)) copy(src, path.join(DIST, file));
 }

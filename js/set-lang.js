@@ -25,9 +25,11 @@
   }
 
   try {
-    // Pre-rendered per-language pages set window.__CMA_LANG__ before this script.
-    // It takes precedence over localStorage so crawlers and first paint match the URL locale.
-    var forced = (typeof window !== 'undefined' && window.__CMA_LANG__) ? window.__CMA_LANG__ : null;
+    // Pre-rendered per-language pages set <html data-cma-lang="…">. It takes
+    // precedence over localStorage so crawlers and first paint match the URL locale.
+    var forced = (document.documentElement && document.documentElement.dataset)
+      ? document.documentElement.dataset.cmaLang
+      : null;
     var saved = localStorage.getItem('azure-move-lang');
     var nav = (navigator.language || 'en');
     var lang = resolveLang(forced || saved || nav);

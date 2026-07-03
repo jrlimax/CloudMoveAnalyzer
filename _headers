@@ -10,18 +10,13 @@
   X-Frame-Options: SAMEORIGIN
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
-  # COEP: require-corp is the strictest mode, but it would break cross-origin
-  # subresources that don't return CORP/CORS headers (ads, flag CDN images).
-  # `credentialless` allows those without sending credentials, which is what we want.
+  # COEP: require-corp would break cross-origin flag images from the CDN.
+  # `credentialless` allows those without sending credentials.
   Cross-Origin-Embedder-Policy: credentialless
-  # CSP — starts in Report-Only so any unintended block surfaces in DevTools/reports
-  # without breaking the page. After ~1 week of zero reports, rename the header to
-  # `Content-Security-Policy` to enforce.
-  # 'unsafe-inline' is required because:
-  #   - Per-language pages inject <script>window.__CMA_LANG__=…</script>
-  #   - index.html has 1 inline <script> (ads idle-loader) and 1 inline style (noscript fallback)
-  # Everything else is locked down: object/base/form-action denied, frame-ancestors self.
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.sheetjs.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.google.com https://*.doubleclick.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.googlesyndication.com https://*.google.com https://*.doubleclick.net https://*.gstatic.com; font-src 'self' data:; connect-src 'self' https://pagead2.googlesyndication.com https://*.google.com https://*.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://*.googlesyndication.com; child-src https://googleads.g.doubleclick.net https://*.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+  # CSP — enforced. No inline scripts on the page (per-language marker lives on
+  # <html data-cma-lang="…">). 'unsafe-inline' kept only for style-src because
+  # inline SVG stroke attributes and dynamic style updates use it.
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.sheetjs.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
 
 # --- HTML: short cache, must revalidate so updates roll out fast ---
 /

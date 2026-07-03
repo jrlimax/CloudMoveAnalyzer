@@ -42,6 +42,50 @@ const PREFERS_REDUCED_MOTION =
   window.matchMedia &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// ── i18n HTML sanitizer ───────────────────────────────────
+// data-i18n-html strings only need to render safe inline links. Strip everything
+// else (scripts, event handlers, javascript: URLs, unknown tags/attrs) so a
+// compromised translation string can't become an XSS vector.
+const _I18N_ALLOWED_TAGS  = new Set(['A', 'B', 'STRONG', 'I', 'EM', 'BR', 'SPAN', 'CODE']);
+const _I18N_ALLOWED_ATTRS = { A: new Set(['href', 'target', 'rel']) };
+function sanitizeI18nHtml(dirty) {
+  const tpl = document.createElement('template');
+  tpl.innerHTML = String(dirty == null ? '' : dirty);
+  const walk = (node) => {
+    const children = Array.from(node.childNodes);
+    for (const child of children) {
+      if (child.nodeType === Node.ELEMENT_NODE) {
+        const tag = child.tagName;
+        if (!_I18N_ALLOWED_TAGS.has(tag)) {
+          const parent = child.parentNode;
+          while (child.firstChild) parent.insertBefore(child.firstChild, child);
+          parent.removeChild(child);
+          continue;
+        }
+        const allowed = _I18N_ALLOWED_ATTRS[tag] || new Set();
+        for (const attr of Array.from(child.attributes)) {
+          if (!allowed.has(attr.name.toLowerCase())) {
+            child.removeAttribute(attr.name);
+          } else if (attr.name.toLowerCase() === 'href') {
+            const v = attr.value.trim().toLowerCase();
+            if (v.startsWith('javascript:') || v.startsWith('data:') || v.startsWith('vbscript:')) {
+              child.removeAttribute('href');
+            }
+          }
+        }
+        if (tag === 'A' && child.getAttribute('target') === '_blank' && !child.getAttribute('rel')) {
+          child.setAttribute('rel', 'noopener noreferrer');
+        }
+        walk(child);
+      } else if (child.nodeType !== Node.TEXT_NODE) {
+        child.parentNode.removeChild(child);
+      }
+    }
+  };
+  walk(tpl.content);
+  return tpl.innerHTML;
+}
+
 // ── State ─────────────────────────────────────────────────
 // Estado mutável central. Toda escrita passa por `state.X = ...` em pontos
 // explícitos. Funções puras (apply*, getViewData, getExportData) recebem o
@@ -191,9 +235,9 @@ function applyLanguage() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     el.textContent = t(el.dataset.i18n);
   });
-  // Update data-i18n-html elements (allow safe HTML like links)
+  // Update data-i18n-html elements — sanitized allowlist (only <a> with safe attrs).
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    el.innerHTML = t(el.dataset.i18nHtml);
+    el.innerHTML = sanitizeI18nHtml(t(el.dataset.i18nHtml));
   });
   // Update placeholders
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
@@ -896,17 +940,37 @@ function analyzeResources(data) {
 }
 
 // ==========================================================
-// Stats
+// Summary computation (shared: stats card + CSV/PDF exports)
 // ==========================================================
-function updateStats() {
-  let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
-  for (const r of state.allResults) {
+/**
+ * Conta status e calcula percentuais de uma lista de linhas analisadas.
+ * Função pura — elimina os três loops de contagem duplicados que existiam
+ * em updateStats(), no export CSV e no export PDF.
+ */
+function computeSummary(rows) {
+  let movable = 0, partial = 0, notMovable = 0, unknown = 0;
+  for (const r of rows) {
     if (r.status === 'movable') movable++;
     else if (r.status === 'partial') partial++;
     else if (r.status === 'not-movable') notMovable++;
-    else unknownCount++;
+    else unknown++;
   }
-  const total = state.allResults.length;
+  const total = rows.length;
+  const pct = n => total ? Math.round((n / total) * 100) : 0;
+  return {
+    total, movable, partial, notMovable, unknown,
+    movablePct: pct(movable),
+    partialPct: pct(partial),
+    notMovPct:  pct(notMovable)
+  };
+}
+
+// ==========================================================
+// Stats
+// ==========================================================
+function updateStats() {
+  const { total, movable, partial, notMovable, unknown: unknownCount } =
+    computeSummary(state.allResults);
 
   document.getElementById('statTotal').textContent = total;
   document.getElementById('statMovable').textContent = movable;
@@ -1291,16 +1355,8 @@ exportBtn.addEventListener('click', () => {
   if (cols['notes']) colDefs.push(['notes', t('csvDocUrl'), r => r.docUrl || '']);
 
   // Summary counts and percentages
-  let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
-  for (const r of filtered) {
-    if (r.status === 'movable') movable++;
-    else if (r.status === 'partial') partial++;
-    else if (r.status === 'not-movable') notMovable++;
-    else unknownCount++;
-  }
-  const movablePct = Math.round((movable / filtered.length) * 100);
-  const partialPct = Math.round((partial / filtered.length) * 100);
-  const notMovPct  = Math.round((notMovable / filtered.length) * 100);
+  const { movable, partial, notMovable, unknown: unknownCount,
+          movablePct, partialPct, notMovPct } = computeSummary(filtered);
   // ISO date format (YYYY-MM-DD) for better CSV compatibility
   const date = new Date().toISOString().split('T')[0];
 
@@ -1384,14 +1440,9 @@ exportPdfBtn.addEventListener('click', () => {
   const yesNo = v => v === 1 ? '✅ ' + t('csvYes') : v === 0 ? '❌ ' + t('csvNo') : '—';
   const statusColor = s => s === 'movable' ? '#22c55e' : s === 'partial' ? '#eab308' : s === 'not-movable' ? '#ef4444' : '#6b7280';
 
-  // Summary counts
-  let movable = 0, partial = 0, notMovable = 0, unknownCount = 0;
-  for (const r of filtered) {
-    if (r.status === 'movable') movable++;
-    else if (r.status === 'partial') partial++;
-    else if (r.status === 'not-movable') notMovable++;
-    else unknownCount++;
-  }
+  // Summary counts and percentages
+  const { movable, partial, notMovable, unknown: unknownCount,
+          movablePct, partialPct, notMovPct } = computeSummary(filtered);
 
   const date = new Date().toLocaleDateString(currentLang || 'en', {
     year: 'numeric', month: 'long', day: 'numeric'
@@ -1459,10 +1510,6 @@ exportPdfBtn.addEventListener('click', () => {
 </table>`;
   }).join('\n');
 
-  const movablePct = Math.round((movable / filtered.length) * 100);
-  const partialPct = Math.round((partial / filtered.length) * 100);
-  const notMovPct  = Math.round((notMovable / filtered.length) * 100);
-
   const html = `<!DOCTYPE html>
 <html lang="${currentLang || 'en'}">
 <head>
@@ -1487,15 +1534,9 @@ exportPdfBtn.addEventListener('click', () => {
   .exec-summary h2{font-size:13px;font-weight:700;color:#1e40af;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e2e8f0}
   .exec-summary p{font-size:12px;line-height:1.7;color:#334155;margin-bottom:10px}
   .exec-summary .recommendation{background:#f0f9ff;border:1px solid #bae6fd;padding:8px 12px;border-radius:4px;font-size:11.5px;color:#0369a1;line-height:1.6}
-  table{width:100%;border-collapse:collapse;margin-bottom:12px;table-layout:fixed}
-  th,td{border:1px solid #cbd5e1;padding:3px 5px;text-align:left;font-size:10px;line-height:1.35;vertical-align:top;word-break:break-word;overflow-wrap:anywhere;hyphens:auto}
-  th{background:#f1f5f9;font-weight:600;font-size:10px;word-break:normal;overflow-wrap:break-word}
-  tr:nth-child(even){background:#f8fafc}
   thead{display:table-header-group} /* repeat header on each printed page */
   /* Each chunked table represents one page worth of rows; force a break after */
   .table-page{page-break-after:always;break-after:page}
-  /* Rows can break naturally if a single note is huge; chunks keep this rare */
-  tr{page-break-inside:auto;break-inside:auto}
   code{background:#f1f5f9;padding:1px 3px;border-radius:3px;font-size:9px;font-family:Consolas,'Courier New',monospace;word-break:break-all;overflow-wrap:anywhere;line-height:1.3}
   .page-break{page-break-after:always;break-after:page}
   .data-table{width:100%;border-collapse:collapse;margin-bottom:12px;table-layout:fixed}
@@ -1637,13 +1678,38 @@ const tableBackdrop    = document.createElement('div');
 tableBackdrop.className = 'table-modal-backdrop';
 document.body.appendChild(tableBackdrop);
 
+// Focus trap state — remember the element that opened the modal so we can
+// restore focus on close, and confine Tab navigation to modal contents.
+let _tableModalReturnFocus = null;
+const _FOCUSABLE_SEL = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+function _tableModalFocusables() {
+  return Array.from(tableWrapper.querySelectorAll(_FOCUSABLE_SEL))
+    .filter(el => el.offsetParent !== null || el === document.activeElement);
+}
+function _tableModalKeydown(e) {
+  if (!tableWrapper.classList.contains('expanded')) return;
+  if (e.key === 'Escape') { collapseTable(); return; }
+  if (e.key !== 'Tab') return;
+  const items = _tableModalFocusables();
+  if (!items.length) return;
+  const first = items[0];
+  const last  = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault(); last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault(); first.focus();
+  }
+}
+
 function expandTable() {
+  _tableModalReturnFocus = document.activeElement;
   tableWrapper.classList.add('expanded');
   tableBackdrop.classList.add('active');
   document.body.style.overflow = 'hidden';
   const span = tableExpandBtn.querySelector('span');
   if (span) span.textContent = t('collapseTable') || 'Collapse table';
   tableExpandBtn.setAttribute('aria-expanded', 'true');
+  document.addEventListener('keydown', _tableModalKeydown);
   tableCollapseBtn.focus();
 }
 
@@ -1654,7 +1720,12 @@ function collapseTable() {
   const span = tableExpandBtn.querySelector('span');
   if (span) span.textContent = t('expandTable') || 'Expand table';
   tableExpandBtn.setAttribute('aria-expanded', 'false');
-  tableExpandBtn.focus();
+  document.removeEventListener('keydown', _tableModalKeydown);
+  const restore = _tableModalReturnFocus && document.contains(_tableModalReturnFocus)
+    ? _tableModalReturnFocus
+    : tableExpandBtn;
+  _tableModalReturnFocus = null;
+  restore.focus();
 }
 
 tableExpandBtn.addEventListener('click', () => {
@@ -1662,6 +1733,3 @@ tableExpandBtn.addEventListener('click', () => {
 });
 tableCollapseBtn.addEventListener('click', collapseTable);
 tableBackdrop.addEventListener('click', collapseTable);
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && tableWrapper.classList.contains('expanded')) collapseTable();
-});

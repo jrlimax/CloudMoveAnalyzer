@@ -1246,12 +1246,13 @@ const I18N = {
 };
 
 // Current language & helper
-// Resolution order: window.__CMA_LANG__ (pre-rendered page marker) > localStorage > 'en'.
+// Resolution order: <html data-cma-lang="…"> (pre-rendered page marker) > localStorage > 'en'.
 let currentLang = (() => {
   try {
-    if (typeof window !== 'undefined' && window.__CMA_LANG__ && I18N[window.__CMA_LANG__]) {
-      return window.__CMA_LANG__;
-    }
+    const forced = document.documentElement && document.documentElement.dataset
+      ? document.documentElement.dataset.cmaLang
+      : null;
+    if (forced && I18N[forced]) return forced;
     return localStorage.getItem('azure-move-lang');
   } catch (e) { return null; }
 })() || 'en';

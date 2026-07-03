@@ -123,3 +123,51 @@ export function loadPipelineFunctions() {
   // eslint-disable-next-line no-new-func
   return new Function(sandbox)();
 }
+
+/**
+ * Loads the render/export helper functions used to build table cells,
+ * anchor hrefs and export summaries:
+ *   - escapeHtml(str)   → HTML-escapes dynamic text (XSS defense)
+ *   - safeHttpUrl(url)  → allows only http(s) URLs, rejects javascript:/data:
+ *   - computeSummary()  → status counts + percentages for stats/exports
+ *
+ * escapeHtml depends on the ESC_MAP constant, so it is pulled in too.
+ */
+export function loadExportHelpers() {
+  const source = readFileSync(resolve(ROOT, 'js', 'app.js'), 'utf8');
+
+  const escMap = source.match(/const ESC_MAP = \{[^}]*\};/);
+  if (!escMap) {
+    throw new Error('ESC_MAP not found in app.js');
+  }
+
+  const functionsToExtract = [
+    'escapeHtml',
+    'safeHttpUrl',
+    'computeSummary',
+  ];
+
+  const extracted = {};
+  for (const name of functionsToExtract) {
+    const pattern = new RegExp(
+      `function\\s+${name}\\s*\\([^)]*\\)\\s*\\{[\\s\\S]*?\\n\\}`,
+      'm'
+    );
+    const match = source.match(pattern);
+    if (!match) {
+      throw new Error(`Function ${name} not found in app.js`);
+    }
+    extracted[name] = match[0];
+  }
+
+  const sandbox = `
+    ${escMap[0]}
+    ${Object.values(extracted).join('\n\n')}
+    return {
+      ${functionsToExtract.join(', ')}
+    };
+  `;
+
+  // eslint-disable-next-line no-new-func
+  return new Function(sandbox)();
+}

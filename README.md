@@ -91,10 +91,11 @@ cloudmoveanalyzer/
 | Database Unit Tests | Vitest | [tests/unit/database.test.js](tests/unit/database.test.js) | ✅ |
 | Move Engine Tests | Vitest | [tests/unit/move-engine.test.js](tests/unit/move-engine.test.js) | ✅ |
 | Data Pipeline Tests | Vitest | [tests/unit/data-pipeline.test.js](tests/unit/data-pipeline.test.js) | ✅ |
+| Export & Render Helpers | Vitest | [tests/unit/export-helpers.test.js](tests/unit/export-helpers.test.js) | ✅ |
 | Icon Map Tests | Vitest | [tests/unit/icon-map.test.js](tests/unit/icon-map.test.js) | ✅ |
 | index.html structure | Vitest | [tests/unit/index-html.test.js](tests/unit/index-html.test.js) | ✅ |
 
-77 tests total. CI runs automatically on every push and pull request via
+98 tests total. CI runs automatically on every push and pull request via
 [GitHub Actions](.github/workflows/ci.yml).
 
 ## 🔧 Tech Stack

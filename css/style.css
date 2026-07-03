@@ -159,13 +159,13 @@ a:focus-visible {
   border: 3px solid transparent;
 }
 
-/* â”€â”€ Reduced motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
+/* Noscript fallback panel (kept out of inline HTML for strict CSP) */
+.noscript-panel {
+  text-align: center;
+  padding: 2rem;
+  font-family: sans-serif;
+  color: #F3EEFF;
+  background: #0D0B1E;
 }
 
 /* â”€â”€ Entry animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
