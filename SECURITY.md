@@ -39,8 +39,8 @@ What we currently do (defense-in-depth):
 - **HTTP response headers** (see `_headers`): HSTS preload, X-Content-Type-Options,
   Referrer-Policy, Permissions-Policy (camera/mic/geo/FLoC denied), X-Frame-Options,
   COOP `same-origin`, CORP `same-origin`, COEP `credentialless`, and a strict
-  Content-Security-Policy (currently in `Report-Only` mode while we collect
-  real-world telemetry; promoted to enforce after a settle-in period).
+  **Content-Security-Policy** (enforced; `unsafe-inline` removed from `script-src`).
+  All inline scripts eliminated via `<html data-cma-lang>` attribute.
 - **Upload validation** before parsing: extension allow-list (csv/tsv/xls/xlsx),
   size cap (10 MB), and magic-byte sniffing (`PK\x03\x04` for zip-based xlsx,
   `D0 CF 11 E0` for legacy xls) to refuse mis-typed binaries.
@@ -52,10 +52,10 @@ What we currently do (defense-in-depth):
 - **External link hygiene**: every `target="_blank"` carries
   `rel="noopener noreferrer"`.
 - **Subresource Integrity** on the pinned SheetJS bundle
-  (`sha384-…`, version-locked to `xlsx-0.20.0`). Other third-party scripts
-  (Google AdSense, ko-fi badge, flag CDN) are deliberately not SRI-pinned
-  because the provider rotates their content; they are sandboxed via the CSP
-  origin allow-list instead.
+  (`sha384-…`, version-locked to `xlsx-0.20.0`).
+- **i18n HTML sanitizer** (`sanitizeI18nHtml()`) — allowlist-based tag/attribute
+  filter for translated strings injected via `data-i18n-html`; blocks
+  `javascript:`/`data:`/`vbscript:` URLs and unknown elements.
 - **No `eval`, `new Function`, `document.write`, or `setTimeout(string,…)`** in
   application code.
 - **Dependencies kept minimal**: only SheetJS at runtime; Vitest + happy-dom for

@@ -279,7 +279,7 @@ const out = `/* eslint-disable */
  *
  * Icons are (c) Microsoft. See assets/icons/azure/LICENSE.txt
  */
-const ICON_BASE = 'assets/icons/azure/';
+const ICON_BASE = '/assets/icons/azure/';
 
 const ICON_MAP = {
 ${sortedKeys.map(k => `  ${JSON.stringify(k)}: ${JSON.stringify(mapping[k])}`).join(',\n')}
@@ -294,12 +294,12 @@ ${sortedNs.map(k => `  ${JSON.stringify(k)}: ${JSON.stringify(namespaceFallback[
  *  An explicit 'null' in ICON_MAP marks a type as "uncertain" — we know about
  *  it but won't pretend to know the icon, so we fall through to the app logo. */
 function getIconForType(rawType) {
-  if (!rawType) return 'assets/logo.png';
+  if (!rawType) return '/assets/logo.png';
   const clean = String(rawType).toLowerCase().trim().replace(/^\\//, '');
 
   if (Object.prototype.hasOwnProperty.call(ICON_MAP, clean)) {
     const v = ICON_MAP[clean];
-    return v ? ICON_BASE + v + '.svg' : 'assets/logo.png';
+    return v ? ICON_BASE + v + '.svg' : '/assets/logo.png';
   }
 
   const parts = clean.split('/');
@@ -307,16 +307,16 @@ function getIconForType(rawType) {
     const attempt = parts.slice(0, len).join('/');
     if (Object.prototype.hasOwnProperty.call(ICON_MAP, attempt)) {
       const v = ICON_MAP[attempt];
-      return v ? ICON_BASE + v + '.svg' : 'assets/logo.png';
+      return v ? ICON_BASE + v + '.svg' : '/assets/logo.png';
     }
   }
 
   const ns = parts[0];
   if (Object.prototype.hasOwnProperty.call(ICON_NAMESPACE_FALLBACK, ns)) {
     const v = ICON_NAMESPACE_FALLBACK[ns];
-    return v ? ICON_BASE + v + '.svg' : 'assets/logo.png';
+    return v ? ICON_BASE + v + '.svg' : '/assets/logo.png';
   }
-  return 'assets/logo.png';
+  return '/assets/logo.png';
 }
 `;
 fs.writeFileSync(ICON_MAP_PATH, out);

@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-07-03
+
+### Added — Security
+- **Content-Security-Policy enforced** — promoted from `Report-Only` to full
+  enforcement. `unsafe-inline` removed from `script-src`.
+- **i18n HTML sanitizer** (`sanitizeI18nHtml()`) — allowlist-based sanitizer for
+  `data-i18n-html` elements strips unknown tags/attributes and blocks
+  `javascript:`/`data:`/`vbscript:` URLs in translated strings.
+- **Focus trap** on the expanded table modal — Tab/Shift+Tab cycle confined to
+  modal contents; focus restored to trigger element on close.
+
+### Changed — Security
+- **Pre-render language marker** migrated from inline `<script>window.__CMA_LANG__=…</script>`
+  to `<html data-cma-lang="…">` attribute — eliminates all inline scripts,
+  allowing removal of `unsafe-inline` from CSP `script-src`.
+- **Noscript fallback** moved from inline `style` attribute to `.noscript-panel`
+  CSS class — no more inline styles in HTML.
+- **CSP `script-src`** stripped of all Google Ads domains
+  (`pagead2.googlesyndication.com`, `*.doubleclick.net`, etc.).
+
+### Changed — Performance
+- **Preload hints** trimmed: `move-database.js` and `icon-map.js` removed from
+  `<link rel="preload">` — they still load via `defer` but no longer compete
+  with boot-critical scripts for bandwidth.
+
+### Changed — Icons
+- **Asset URLs absolutized** in `js/icon-map.js` and `js/app.js` (`/assets/…`
+  instead of `assets/…`) — fixes 404s on pre-rendered `/<lang>/` pages.
+- **`arc-postgresql .svg`** renamed to `arc-postgresql.svg` (trailing space removed).
+- **`scripts/build-icon-map.js`** template updated with absolute paths so future
+  regenerations stay consistent.
+
+### Removed
+- **Google AdSense** integration: inline ad loader script, `ads.txt`,
+  all `googlesyndication`/`doubleclick`/`gstatic` CSP allowlist entries.
+- **Open Graph** and **Twitter Card** meta tags.
+- **JSON-LD structured data** (WebApplication, FAQPage, HowTo, BreadcrumbList).
+- **Duplicate `prefers-reduced-motion`** CSS block consolidated into one.
+
+### Fixed
+- **Export hint** fallback text aligned to actual behavior ("status filters
+  do not apply" instead of "currently filtered results").
+
 ## [1.6.0] - 2026-06-18
 
 ### Added — Security hardening

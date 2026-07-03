@@ -113,13 +113,15 @@ Defense-in-depth posture (see [SECURITY.md](SECURITY.md) for the full summary):
 - **Headers** (Cloudflare edge): HSTS preload, X-Content-Type-Options,
   Referrer-Policy, Permissions-Policy (camera/mic/geo/FLoC denied),
   X-Frame-Options, COOP `same-origin`, CORP `same-origin`,
-  COEP `credentialless`, and a strict **Content-Security-Policy**.
+  COEP `credentialless`, and a strict **Content-Security-Policy** (enforced,
+  no `unsafe-inline` in `script-src`).
 - **Upload validation**: extension allow-list, 10 MB size cap, magic-byte
   sniffing (rejects spoofed files before they reach the XLSX parser).
 - **XSS hardening**: `escapeHtml()` on every dynamic insertion; `safeHttpUrl()`
-  on every rendered anchor href; no `eval`/`new Function`/`document.write`.
-- **Supply chain**: SheetJS pinned with SRI hash; runtime CDN dependencies on
-  `flagcdn.com` and `storage.ko-fi.com` eliminated (self-hosted assets).
+  on every rendered anchor href; `sanitizeI18nHtml()` allowlist on translated
+  HTML; no `eval`/`new Function`/`document.write`.
+- **Supply chain**: SheetJS pinned with SRI hash; all assets self-hosted
+  (flags, ko-fi badge). No third-party CDN dependencies at runtime.
 - **Zero data egress**: uploads parsed in-memory via `FileReader`; no
   `fetch`/`XMLHttpRequest` sends user data anywhere.
 

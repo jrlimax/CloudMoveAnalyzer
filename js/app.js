@@ -141,14 +141,14 @@ const langFlag   = document.getElementById('langFlag');
 const langLabel  = document.getElementById('langLabel');
 
 const LANG_FLAGS = {
-  'en':    { flag: 'assets/flags/us.png', label: 'English' },
-  'pt-BR': { flag: 'assets/flags/br.png', label: 'Português' },
-  'zh-CN': { flag: 'assets/flags/cn.png', label: '中文' },
-  'es':    { flag: 'assets/flags/es.png', label: 'Español' },
-  'fr':    { flag: 'assets/flags/fr.png', label: 'Français' },
-  'ar':    { flag: 'assets/flags/sa.png', label: 'العربية' },
-  'ru':    { flag: 'assets/flags/ru.png', label: 'Русский' },
-  'ja':    { flag: 'assets/flags/jp.png', label: '日本語' }
+  'en':    { flag: '/assets/flags/us.png', label: 'English' },
+  'pt-BR': { flag: '/assets/flags/br.png', label: 'Português' },
+  'zh-CN': { flag: '/assets/flags/cn.png', label: '中文' },
+  'es':    { flag: '/assets/flags/es.png', label: 'Español' },
+  'fr':    { flag: '/assets/flags/fr.png', label: 'Français' },
+  'ar':    { flag: '/assets/flags/sa.png', label: 'العربية' },
+  'ru':    { flag: '/assets/flags/ru.png', label: 'Русский' },
+  'ja':    { flag: '/assets/flags/jp.png', label: '日本語' }
 };
 
 function updateLangPicker() {
