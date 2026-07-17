@@ -16,7 +16,7 @@
   # CSP — enforced. No inline scripts on the page (per-language marker lives on
   # <html data-cma-lang="…">). 'unsafe-inline' kept only for style-src because
   # inline SVG stroke attributes and dynamic style updates use it.
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.sheetjs.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.sheetjs.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
 
 # --- HTML: short cache, must revalidate so updates roll out fast ---
 /
