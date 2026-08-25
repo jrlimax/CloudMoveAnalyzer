@@ -171,3 +171,43 @@ export function loadExportHelpers() {
   // eslint-disable-next-line no-new-func
   return new Function(sandbox)();
 }
+
+/**
+ * Loads the upload-parsing functions from app.js:
+ *   - detectSpreadsheetFormat(head) → 'zip' | 'cfb' | 'text' from magic bytes
+ *   - readWorkbook(buf)             → routes ArrayBuffer to the right XLSX.read mode
+ *
+ * XLSX is injected as a spy so tests can assert the routing decision
+ * (type: 'array' vs type: 'string') without pulling in the real SheetJS.
+ */
+export function loadUploadFunctions() {
+  const source = readFileSync(resolve(ROOT, 'js', 'app.js'), 'utf8');
+
+  const functionsToExtract = ['detectSpreadsheetFormat', 'readWorkbook'];
+
+  const extracted = {};
+  for (const name of functionsToExtract) {
+    const pattern = new RegExp(
+      `function\\s+${name}\\s*\\([^)]*\\)\\s*\\{[\\s\\S]*?\\n\\}`,
+      'm'
+    );
+    const match = source.match(pattern);
+    if (!match) {
+      throw new Error(`Function ${name} not found in app.js`);
+    }
+    extracted[name] = match[0];
+  }
+
+  const sandbox = `
+    const XLSX = {
+      read: (data, opts) => ({ __mock: true, data, opts })
+    };
+    ${Object.values(extracted).join('\n\n')}
+    return {
+      ${functionsToExtract.join(', ')}
+    };
+  `;
+
+  // eslint-disable-next-line no-new-func
+  return new Function(sandbox)();
+}

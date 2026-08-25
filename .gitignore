@@ -22,6 +22,8 @@ dist/
 .cf-dist/
 *.min.css
 *.min.js
+# Self-hosted third-party libs are source, not build output
+!js/vendor/*.min.js
 
 # Backups e temporarios
 *.bak

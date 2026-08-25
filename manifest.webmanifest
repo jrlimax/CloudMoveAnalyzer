@@ -1,0 +1,14 @@
+{
+  "name": "Cloud Move Analyzer",
+  "short_name": "CloudMove",
+  "description": "Free tool to check Azure resource move support between subscriptions, resource groups, and regions.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B1220",
+  "theme_color": "#8B5CF6",
+  "icons": [
+    { "src": "/assets/favicon.png", "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/logo.png", "sizes": "420x420", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

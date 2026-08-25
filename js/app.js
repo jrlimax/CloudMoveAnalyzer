@@ -580,39 +580,12 @@ function processFile(file) {
   uploadArea.parentNode.insertBefore(loadingEl, resultsSection);
 
   const reader = new FileReader();
-  const isCsv  = (ext === 'csv' || ext === 'tsv');
 
   reader.onload = function (e) {
     // Defer parsing one frame so the spinner paints first
     requestAnimationFrame(() => {
       try {
-        let result = e.target.result;
-
-        // Magic-byte validation — defense in depth against spoofed extensions.
-        // We refuse to hand obviously-wrong content to the XLSX parser.
-        if (!isCsv) {
-          const head = new Uint8Array(result, 0, Math.min(8, result.byteLength));
-          // XLSX/XLSM (zip)          → 50 4B 03 04   or   50 4B 05 06 (empty zip)
-          // XLS  (compound binary)   → D0 CF 11 E0 A1 B1 1A E1
-          const isZip = head[0] === 0x50 && head[1] === 0x4B && (head[2] === 0x03 || head[2] === 0x05);
-          const isCfb = head[0] === 0xD0 && head[1] === 0xCF && head[2] === 0x11 && head[3] === 0xE0;
-          if (!isZip && !isCfb) {
-            throw new Error('file content does not match spreadsheet format (.xls/.xlsx).');
-          }
-        } else if (typeof result === 'string') {
-          // CSV BOM detection — strip UTF-8 BOM if present
-          if (result.charCodeAt(0) === 0xFEFF) result = result.slice(1);
-          // Reject obviously binary content sent as .csv (NUL byte in first 512 chars).
-          const sniff = result.slice(0, 512);
-          if (sniff.indexOf('\u0000') !== -1) {
-            throw new Error('file appears to be binary, not a text CSV.');
-          }
-        }
-
-        const wb = isCsv
-          ? XLSX.read(result, { type: 'string' })
-          : XLSX.read(new Uint8Array(result), { type: 'array' });
-
+        const wb   = readWorkbook(e.target.result);
         const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: '' });
         analyzeResources(data);
       } catch (err) {
@@ -628,7 +601,38 @@ function processFile(file) {
     showTemplateHint(t('alertError') + reader.error);
   };
 
-  isCsv ? reader.readAsText(file, 'UTF-8') : reader.readAsArrayBuffer(file);
+  reader.readAsArrayBuffer(file);
+}
+
+// Magic-byte sniffing decides the parse mode — extensions lie (an Azure
+// Portal .xlsx export renamed to .csv is still a zip inside).
+// XLSX/XLSM (zip)        → 50 4B 03 04   or   50 4B 05 06 (empty zip)
+// XLS (compound binary)  → D0 CF 11 E0 A1 B1 1A E1
+// Anything else          → treated as text (CSV/TSV)
+function detectSpreadsheetFormat(head) {
+  if (head[0] === 0x50 && head[1] === 0x4B && (head[2] === 0x03 || head[2] === 0x05)) return 'zip';
+  if (head[0] === 0xD0 && head[1] === 0xCF && head[2] === 0x11 && head[3] === 0xE0)   return 'cfb';
+  return 'text';
+}
+
+// Parses an uploaded ArrayBuffer into a SheetJS workbook based on content,
+// not file extension. Throws on obviously-binary non-spreadsheet content.
+function readWorkbook(buf) {
+  const head   = new Uint8Array(buf, 0, Math.min(8, buf.byteLength));
+  const format = detectSpreadsheetFormat(head);
+
+  if (format === 'zip' || format === 'cfb') {
+    return XLSX.read(new Uint8Array(buf), { type: 'array' });
+  }
+
+  let text = new TextDecoder('utf-8').decode(buf);
+  // Strip UTF-8 BOM if present
+  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+  // Reject obviously binary content (NUL byte in first 512 chars).
+  if (text.slice(0, 512).indexOf('\u0000') !== -1) {
+    throw new Error('file appears to be binary, not a text CSV.');
+  }
+  return XLSX.read(text, { type: 'string' });
 }
 
 // ==========================================================
@@ -1733,3 +1737,12 @@ tableExpandBtn.addEventListener('click', () => {
 });
 tableCollapseBtn.addEventListener('click', collapseTable);
 tableBackdrop.addEventListener('click', collapseTable);
+
+// ── Service worker (offline support) ─────────────────────
+// Registered after load so it never competes with first paint. Absolute path
+// keeps the scope at the site root even on pre-rendered /<lang>/ pages.
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => { /* offline support is best-effort */ });
+  });
+}
