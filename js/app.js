@@ -570,13 +570,14 @@ function processFile(file) {
   const existing = document.getElementById('loadingOverlay');
   if (existing) existing.remove();
 
-  // Show loading indicator
+  // Show loading indicator (names the file so long parses feel responsive)
   const loadingEl = document.createElement('div');
   loadingEl.id = 'loadingOverlay';
   loadingEl.className = 'loading';
-  loadingEl.innerHTML = `<div class="spinner"></div><p>${t('loadingText')}</p>`;
+  loadingEl.innerHTML = `<div class="spinner"></div><p>${t('loadingText')}<br><strong>${escapeHtml(file.name)}</strong></p>`;
   resultsSection.classList.add('hidden');
   mainEl.classList.remove('has-results');
+  mainEl.classList.add('is-loading');
   uploadArea.parentNode.insertBefore(loadingEl, resultsSection);
 
   const reader = new FileReader();
@@ -592,12 +593,14 @@ function processFile(file) {
         showTemplateHint(t('alertError') + err.message);
       } finally {
         loadingEl.remove();
+        mainEl.classList.remove('is-loading');
       }
     });
   };
 
   reader.onerror = function () {
     loadingEl.remove();
+    mainEl.classList.remove('is-loading');
     showTemplateHint(t('alertError') + reader.error);
   };
 
@@ -1201,7 +1204,8 @@ function renderTable() {
       const iconHtml = iconUrl
         ? `<img class="resource-icon" src="${escapeHtml(iconUrl)}" alt="" width="20" height="20" loading="lazy" decoding="async">`
         : '';
-      return `<td><span class="name-cell">${iconHtml}${escapeHtml(r.name)}</span></td>`;
+      const safeName = escapeHtml(r.name);
+      return `<td><span class="name-cell" title="${safeName}">${iconHtml}<span class="name-text">${safeName}</span></span></td>`;
     },
     type:          r => `<td><code class="type-tag">${escapeHtml(r.type)}</code></td>`,
     friendlyName:  r => `<td>${escapeHtml(getFriendlyName(r.type))}</td>`,
@@ -1245,6 +1249,32 @@ function renderTable() {
       resultsTable.dataset.lastOrder = orderKey;
     }
   }
+
+  updateTableScrollCues();
+}
+
+// ==========================================================
+// Horizontal scroll cues — fade on the right edge while columns
+// are hidden off-screen; shadow on the sticky first column after
+// scrolling starts. Keeps the 10-column table discoverable.
+// ==========================================================
+const tableScrollEl = document.querySelector('.table-scroll');
+
+function updateTableScrollCues() {
+  if (!tableScrollEl) return;
+  const wrapper = tableScrollEl.closest('.table-wrapper');
+  const maxScroll = tableScrollEl.scrollWidth - tableScrollEl.clientWidth;
+  const x = Math.abs(tableScrollEl.scrollLeft);
+  tableScrollEl.classList.toggle('scrolled-x', x > 4);
+  if (wrapper) {
+    wrapper.classList.toggle('more-cols', maxScroll - x > 4);
+    wrapper.style.setProperty('--table-scroll-h', tableScrollEl.clientHeight + 'px');
+  }
+}
+
+if (tableScrollEl) {
+  tableScrollEl.addEventListener('scroll', updateTableScrollCues, { passive: true });
+  window.addEventListener('resize', updateTableScrollCues);
 }
 
 // ==========================================================

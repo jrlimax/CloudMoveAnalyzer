@@ -18,6 +18,7 @@
   --text-faint: #8885A0;
   --text-faintest: #7B7796;
   --card-bg: #16132B;
+  --card-bg-alt: #1B1834;
   --border: #2A2545;
   --hover-bg: #1A1735;
   --thead-bg: #1E1A38;
@@ -25,6 +26,20 @@
   --shadow-upload: rgba(139, 92, 246, 0.15);
   --scrollbar-thumb: rgba(139, 92, 246, 0.55);
   --scrollbar-thumb-hover: rgba(139, 92, 246, 0.85);
+  /* Semantic status tokens — WCAG AA against card/thead backgrounds */
+  --success: #22D68F;
+  --success-bg: rgba(34, 214, 143, 0.15);
+  --warning: #F5A623;
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  --danger: #F87171;
+  --danger-bg: rgba(239, 68, 68, 0.15);
+  --neutral: #8885A0;
+  --neutral-bg: rgba(136, 133, 160, 0.15);
+  /* Primary tuned for small text on themed backgrounds */
+  --primary-text: #A78BFA;
+  --primary-alpha-10: rgba(139, 92, 246, 0.08);
+  --primary-alpha-15: rgba(139, 92, 246, 0.14);
+  --focus-ring: rgba(139, 92, 246, 0.35);
 }
 
 /* â”€â”€ Light theme â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -38,6 +53,7 @@
   --text-faint: #7A7590;
   --text-faintest: #6E6987;
   --card-bg: #FFFFFF;
+  --card-bg-alt: #F6F4FB;
   --border: #E2DFF0;
   --hover-bg: #EDE9FE;
   --thead-bg: #F0ECFC;
@@ -45,6 +61,19 @@
   --shadow-upload: rgba(124, 58, 237, 0.1);
   --scrollbar-thumb: rgba(124, 58, 237, 0.45);
   --scrollbar-thumb-hover: rgba(124, 58, 237, 0.75);
+  /* Darker status tones to keep AA contrast on white cards */
+  --success: #0E7A52;
+  --success-bg: rgba(14, 122, 82, 0.12);
+  --warning: #92400E;
+  --warning-bg: rgba(180, 83, 9, 0.13);
+  --danger: #B91C1C;
+  --danger-bg: rgba(185, 28, 28, 0.10);
+  --neutral: #6E6987;
+  --neutral-bg: rgba(110, 105, 135, 0.12);
+  --primary-text: #7C3AED;
+  --primary-alpha-10: rgba(124, 58, 237, 0.08);
+  --primary-alpha-15: rgba(124, 58, 237, 0.14);
+  --focus-ring: rgba(124, 58, 237, 0.30);
 }
 
 /* â”€â”€ Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -59,6 +88,7 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  line-height: 1.5;
   transition: background 0.3s, color 0.3s;
   position: relative;
   overflow-x: hidden;
@@ -193,9 +223,9 @@ header {
 }
 
 .site-logo {
-  width: 320px;
-  height: 320px;
-  margin-bottom: -3.5rem;
+  width: 180px;
+  height: 180px;
+  margin-bottom: -2rem;
   object-fit: contain;
   filter: drop-shadow(0 8px 28px rgba(139, 92, 246, 0.45));
   position: relative;
@@ -203,7 +233,7 @@ header {
 }
 
 header h1 {
-  font-size: 2.6rem;
+  font-size: 2.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -288,6 +318,17 @@ main.has-results .upload-area span {
   animation: uploadPulse 2.2s ease-in-out infinite;
 }
 main.has-results .upload-area::after { display: none; }
+/* Pause the idle pulse while a file is being parsed */
+main.is-loading .upload-area::after {
+  animation: none;
+  box-shadow: none;
+}
+
+/* Keyboard affordance: ring when the hidden file input is focused */
+.upload-area:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
 
 @keyframes uploadPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.0); }
@@ -447,6 +488,25 @@ main.has-results .upload-area::after { display: none; }
   outline-offset: 2px;
 }
 
+/* Funnel glyph — signals that cards act as table filters (language-neutral) */
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 13px;
+  height: 13px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 4h18l-7 8v6l-4 2v-8L3 4z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 4h18l-7 8v6l-4 2v-8L3 4z'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+.stat-card:hover::after,
+.stat-card.active::after {
+  opacity: 0.9;
+}
+
 .stat-card .number {
   font-size: 2.1rem;
   font-weight: 700;
@@ -464,17 +524,17 @@ main.has-results .upload-area::after { display: none; }
    then re-apply explicit color on the number for stronger contrast. */
 .stat-card.total          { color: var(--primary); }
 .stat-card.total .number  { color: var(--text); }
-.stat-card.movable        { color: var(--accent); }
-.stat-card.movable .number { color: var(--accent); }
-.stat-card.partial        { color: #F59E0B; }
-.stat-card.partial .number { color: #F59E0B; }
-.stat-card.not-movable    { color: #EF4444; }
-.stat-card.not-movable .number { color: #EF4444; }
-.stat-card.unknown        { color: var(--text-faint); }
-.stat-card.unknown .number { color: var(--text-faint); }
+.stat-card.movable        { color: var(--success); }
+.stat-card.movable .number { color: var(--success); }
+.stat-card.partial        { color: var(--warning); }
+.stat-card.partial .number { color: var(--warning); }
+.stat-card.not-movable    { color: var(--danger); }
+.stat-card.not-movable .number { color: var(--danger); }
+.stat-card.unknown        { color: var(--neutral); }
+.stat-card.unknown .number { color: var(--neutral); }
 
 .stat-card .hint {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-faintest);
   margin-top: 0.15rem;
 }
@@ -503,6 +563,7 @@ main.has-results .upload-area::after { display: none; }
 
 .search-input:focus {
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .search-input::placeholder {
@@ -557,7 +618,7 @@ main.has-results .upload-area::after { display: none; }
 .action-btn--cols:hover {
   border-color: var(--primary);
   color: var(--primary);
-  background: rgba(139, 92, 246, 0.06);
+  background: var(--primary-alpha-10);
 }
 
 .action-btn--cols svg {
@@ -593,28 +654,28 @@ main.has-results .upload-area::after { display: none; }
 }
 
 .export-pill--csv {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: linear-gradient(135deg, #15803d, #166534);
 }
 .export-pill--csv:hover {
-  background: linear-gradient(135deg, #16a34a, #15803d);
+  background: linear-gradient(135deg, #166534, #14532d);
   box-shadow: 0 2px 8px rgba(22, 163, 74, 0.35);
   transform: translateY(-1px);
 }
 
 .export-pill--pdf {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
 }
 .export-pill--pdf:hover {
-  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  background: linear-gradient(135deg, #b91c1c, #991b1b);
   box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
   transform: translateY(-1px);
 }
 
 .export-pill--md {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
 }
 .export-pill--md:hover {
-  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  background: linear-gradient(135deg, #6d28d9, #5b21b6);
   box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
   transform: translateY(-1px);
 }
@@ -638,7 +699,7 @@ main.has-results .upload-area::after { display: none; }
 .table-expand-toggle:hover {
   border-color: var(--primary);
   color: var(--primary);
-  background: rgba(139,92,246,0.06);
+  background: var(--primary-alpha-10);
 }
 .table-expand-toggle .icon-collapse { display: none; }
 .table-expand-toggle[aria-expanded="true"] .icon-expand { display: none; }
@@ -775,6 +836,29 @@ main.has-results .upload-area::after { display: none; }
   transition: background 0.3s, border-color 0.3s;
 }
 
+/* Fade cue on the right edge while more columns are hidden off-screen.
+   Height is synced to the scroll area via --table-scroll-h (set in JS). */
+.table-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 42px;
+  height: var(--table-scroll-h, 0px);
+  pointer-events: none;
+  border-bottom-right-radius: 12px;
+  background: linear-gradient(to left, rgba(13, 11, 30, 0.55), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 4;
+}
+:root.light .table-wrapper::after {
+  background: linear-gradient(to left, rgba(30, 27, 46, 0.16), transparent);
+}
+.table-wrapper.more-cols::after {
+  opacity: 1;
+}
+
 /* Toolbars area inside the card, above the table */
 .table-toolbars {
   padding: 0.9rem 1rem 0.4rem;
@@ -792,9 +876,14 @@ main.has-results .upload-area::after { display: none; }
 }
 
 .table-scroll {
-  overflow-x: auto;
+  overflow: auto;
+  /* Cap height so thead's sticky positioning actually engages on long lists */
+  max-height: 70vh;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
+}
+.table-wrapper.expanded .table-scroll {
+  max-height: none;
 }
 
 table {
@@ -814,7 +903,7 @@ table th {
   padding: 0.85rem 1rem;
   text-align: left;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--primary-text);
   border-bottom: 2px solid var(--border);
   white-space: nowrap;
   cursor: pointer;
@@ -846,14 +935,38 @@ table tbody tr {
 
 /* Subtle zebra striping for readability on long lists */
 table tbody tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.015);
-}
-:root.light table tbody tr:nth-child(even) {
-  background: rgba(0, 0, 0, 0.015);
+  background: var(--card-bg-alt);
 }
 
 table tbody tr:hover {
   background: var(--hover-bg);
+}
+
+/* Sticky first column — keeps the resource name visible while the
+   10-column table scrolls horizontally. Cells need solid backgrounds. */
+table th:first-child,
+table td:first-child {
+  position: sticky;
+  left: 0;
+  background: var(--card-bg);
+}
+table td:first-child {
+  z-index: 1;
+}
+table th:first-child {
+  z-index: 3;
+  background: var(--thead-bg);
+}
+table tbody tr:nth-child(even) td:first-child {
+  background: var(--card-bg-alt);
+}
+table tbody tr:hover td:first-child {
+  background: var(--hover-bg);
+}
+/* Shadow cue on the floating column once content scrolls underneath */
+.table-scroll.scrolled-x td:first-child,
+.table-scroll.scrolled-x th:first-child {
+  box-shadow: 10px 0 14px -8px rgba(0, 0, 0, 0.5);
 }
 
 /* Tabular numerals make counts/IDs align cleanly */
@@ -871,28 +984,28 @@ table td, table th {
 }
 
 .badge.yes {
-  background: rgba(34, 214, 143, 0.15);
-  color: var(--accent);
+  background: var(--success-bg);
+  color: var(--success);
 }
 
 .badge.no {
-  background: rgba(239, 68, 68, 0.15);
-  color: #EF4444;
+  background: var(--danger-bg);
+  color: var(--danger);
 }
 
 .badge.partial {
-  background: rgba(245, 158, 11, 0.15);
-  color: #F59E0B;
+  background: var(--warning-bg);
+  color: var(--warning);
 }
 
 .badge.unknown {
-  background: rgba(136, 133, 160, 0.15);
-  color: var(--text-faint);
+  background: var(--neutral-bg);
+  color: var(--neutral);
 }
 
 /* â”€â”€ Type code tag (inline) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .type-tag {
-  color: var(--primary);
+  color: var(--primary-text);
   font-size: 0.82rem;
   background: var(--code-bg);
   padding: 0.15rem 0.4rem;
@@ -910,6 +1023,12 @@ table td, table th {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  max-width: 300px;
+}
+.name-cell .name-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .resource-icon {
   flex: 0 0 auto;
@@ -930,7 +1049,7 @@ table td, table th {
 }
 
 .doc-link {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--accent);
   text-decoration: underline;
   white-space: nowrap;
@@ -1007,7 +1126,7 @@ table td, table th {
   padding: 0;
   margin-bottom: 0.6rem;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(139, 92, 246, 0.08), transparent);
+  background: linear-gradient(180deg, var(--primary-alpha-10), transparent);
   transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 
@@ -1019,7 +1138,7 @@ table td, table th {
 
 .seo-section details[open] {
   border-color: var(--primary);
-  background: linear-gradient(180deg, rgba(139, 92, 246, 0.14), transparent);
+  background: linear-gradient(180deg, var(--primary-alpha-15), transparent);
   box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
 }
 
@@ -1430,7 +1549,7 @@ table td, table th {
   }
 
   .stat-card .hint {
-    font-size: 0.62rem;
+    font-size: 0.75rem;
   }
 
   .toolbar {
@@ -1463,6 +1582,18 @@ table td, table th {
     flex: 1;
     justify-content: center;
     min-width: 70px;
+    min-height: 44px;
+  }
+
+  /* Comfortable touch targets (44px guideline) */
+  .table-expand-toggle,
+  .action-btn--cols {
+    min-height: 44px;
+  }
+
+  .table-modal-close {
+    width: 40px;
+    height: 40px;
   }
 
   .col-picker {
@@ -1509,13 +1640,13 @@ table td, table th {
   }
 
   .theme-toggle {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
   }
 
   .lang-current {
-    padding: 0.3rem 0.5rem;
-    height: 36px;
+    padding: 0.3rem 0.65rem;
+    height: 44px;
     font-size: 0.78rem;
     border-radius: 10px;
   }
@@ -1526,7 +1657,7 @@ table td, table th {
   }
 
   .footer-info {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     padding: 1.5rem 0.5rem;
   }
 }
@@ -1556,6 +1687,15 @@ table td, table th {
 [dir="rtl"] table th { text-align: right; }
 [dir="rtl"] table td { text-align: right; }
 [dir="rtl"] .top-bar { flex-direction: row-reverse; }
+[dir="rtl"] table th:first-child,
+[dir="rtl"] table td:first-child { left: auto; right: 0; }
+[dir="rtl"] .table-wrapper::after {
+  right: auto;
+  left: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 12px;
+  background: linear-gradient(to right, rgba(13, 11, 30, 0.55), transparent);
+}
 
 /* â”€â”€ Acessibilidade: Reduzir animaÃ§Ãµes para usuÃ¡rios sensÃ­veis â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (prefers-reduced-motion: reduce) {
