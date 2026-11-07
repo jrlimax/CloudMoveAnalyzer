@@ -95,7 +95,8 @@ const state = {
   currentFilter: 'all',
   currentSearch: '',
   sortCol:       '',
-  sortAsc:       true
+  sortAsc:       true,
+  sourceFileName: ''
 };
 
 // ── Theme toggle ──────────────────────────────────────────
@@ -565,6 +566,7 @@ function processFile(file) {
   }
 
   showFileName(file.name);
+  state.sourceFileName = file.name;
 
   // Remove any existing loading overlay
   const existing = document.getElementById('loadingOverlay');
@@ -1474,12 +1476,27 @@ exportPdfBtn.addEventListener('click', () => {
   if (!filtered.length) return;
   const cols = getExportCols();
 
+  // Decision-serving default order for the appendix: blocked first, then
+  // partial, unknown and movable, grouped by type within each status. An
+  // explicit user sort (column click) always takes precedence.
+  const PDF_SEVERITY = { 'not-movable': 0, 'partial': 1, 'unknown': 2, 'movable': 3 };
+  const pdfRows = state.sortCol ? filtered : filtered.slice().sort((a, b) =>
+    (PDF_SEVERITY[a.status] ?? 9) - (PDF_SEVERITY[b.status] ?? 9) ||
+    a.type.localeCompare(b.type) ||
+    a.name.localeCompare(b.name));
+
   const statusLabel = {
     'movable': t('csvMovable'), 'partial': t('csvPartial'),
     'not-movable': t('csvNotMovable'), 'unknown': t('csvNotFound')
   };
-  const yesNo = v => v === 1 ? '✅ ' + t('csvYes') : v === 0 ? '❌ ' + t('csvNo') : '—';
-  const statusColor = s => s === 'movable' ? '#22c55e' : s === 'partial' ? '#eab308' : s === 'not-movable' ? '#ef4444' : '#6b7280';
+  const yesNo = v => v === 1
+    ? '<span style="color:#15803d;font-weight:700">&#10003; ' + t('csvYes') + '</span>'
+    : v === 0
+      ? '<span style="color:#b91c1c;font-weight:700">&#10007; ' + t('csvNo') + '</span>'
+      : '—';
+  // Darker tones than the screen palette — print on white needs more contrast
+  const statusColor = s => s === 'movable' ? '#15803d' : s === 'partial' ? '#a16207' : s === 'not-movable' ? '#b91c1c' : '#475569';
+  const statusBg    = s => s === 'movable' ? '#dcfce7' : s === 'partial' ? '#fef9c3' : s === 'not-movable' ? '#fee2e2' : '#f1f5f9';
 
   // Summary counts and percentages
   const { movable, partial, notMovable, unknown: unknownCount,
@@ -1488,6 +1505,12 @@ exportPdfBtn.addEventListener('click', () => {
   const date = new Date().toLocaleDateString(currentLang || 'en', {
     year: 'numeric', month: 'long', day: 'numeric'
   });
+  // ISO date in the document title → becomes the suggested PDF filename
+  const isoDate = new Date().toISOString().slice(0, 10);
+  const logoUrl = (() => {
+    try { return new URL('assets/logo.png', document.baseURI).href; }
+    catch { return 'assets/logo.png'; }
+  })();
 
   // Column definitions for PDF: [key, header, cellFn]
   // Note: Type cell shows ONLY the type code; friendly name has its own column.
@@ -1510,13 +1533,15 @@ exportPdfBtn.addEventListener('click', () => {
     moveRG:        [t('csvMoveRG'),      r => `<td style="text-align:center">${yesNo(r.moveRG)}</td>`],
     moveSub:       [t('csvMoveSub'),     r => `<td style="text-align:center">${yesNo(r.moveSub)}</td>`],
     moveRegion:    [t('csvMoveRegion'),  r => `<td style="text-align:center">${yesNo(r.moveRegion)}</td>`],
-    status:        [t('csvStatus'),      r => `<td><span style="color:${statusColor(r.status)};font-weight:600">${escapeHtml(statusLabel[r.status])}</span></td>`],
+    status:        [t('csvStatus'),      r => `<td><span class="pill" style="color:${statusColor(r.status)};background:${statusBg(r.status)}">${escapeHtml(statusLabel[r.status])}</span></td>`],
     notes:         [t('csvNotes'),       r => `<td style="font-size:11px">${r.noteKey ? escapeHtml(t(r.noteKey)) : '—'}</td>`]
   };
   // Relative weights for proportional column widths (normalized below).
+  // Move columns need extra room: pt-BR/fr headers like "Mover Grupo de
+  // Recursos" are long and must wrap on word boundaries, not hyphenate.
   const PDF_COL_WEIGHTS = {
-    name: 13, type: 14, friendlyName: 10, resourceGroup: 10, location: 7,
-    moveRG: 5, moveSub: 6, moveRegion: 6, status: 7, notes: 22
+    name: 13, type: 13, friendlyName: 9, resourceGroup: 9, location: 7,
+    moveRG: 7, moveSub: 7, moveRegion: 7, status: 7, notes: 21
   };
   const pdfCols = getColumnOrder()
     .filter(k => cols[k])
@@ -1531,84 +1556,132 @@ exportPdfBtn.addEventListener('click', () => {
 
   const thHtml = pdfCols.map(d => `<th>${escapeHtml(d[1])}</th>`).join('\n  ');
 
-  // Chunk rows into pages of N to guarantee predictable page breaks
-  // (avoids long notes splitting awkwardly across pages).
-  const PDF_ROWS_PER_PAGE = 10;
-  const buildRow = r => '<tr>' + pdfCols.map(d => d[2](r)).join('') + '</tr>';
-  const chunks = [];
-  for (let i = 0; i < filtered.length; i += PDF_ROWS_PER_PAGE) {
-    chunks.push(filtered.slice(i, i + PDF_ROWS_PER_PAGE));
-  }
-  const tablesHtml = chunks.map((chunk, idx) => {
-    const body = chunk.map(buildRow).join('');
-    const breakClass = idx < chunks.length - 1 ? ' table-page' : '';
-    return `<table class="data-table${breakClass}">
-<colgroup>${colgroupHtml}</colgroup>
-<thead><tr>
-  ${thHtml}
-</tr></thead>
-<tbody>${body}</tbody>
+  // Natural pagination: one continuous table per section. The browser fills
+  // each printed page and `break-inside: avoid` on <tr> pushes any row that
+  // doesn't fit to the next page as a whole — no clipped rows, no half-empty
+  // pages (the problem with fixed N-rows-per-page chunks). The repeated thead
+  // comes free via `thead { display: table-header-group }`.
+  // NOTE: body padding-bottom only protects the LAST page. For every other
+  // page the fixed footer overlays the bottom slice of the content area, so
+  // each table carries a <tfoot> spacer — tfoot repeats at the bottom of
+  // every printed page (table-footer-group) and reserves the footer's space.
+  const sectionTable = (rowsHtmlList, colgroup, theadCells) => {
+    const nCols = (colgroup.match(/<col/g) || []).length || 1;
+    return `<table class="data-table">
+<colgroup>${colgroup}</colgroup>
+<thead><tr>${theadCells}</tr></thead>
+<tbody>${rowsHtmlList.join('')}</tbody>
+<tfoot class="tfoot-space"><tr><td colspan="${nCols}"></td></tr></tfoot>
 </table>`;
-  }).join('\n');
+  };
+
+  const buildRow = r => '<tr>' + pdfCols.map(d => d[2](r)).join('') + '</tr>';
+  const tablesHtml = sectionTable(pdfRows.map(buildRow), colgroupHtml, thHtml);
 
   const html = `<!DOCTYPE html>
 <html lang="${currentLang || 'en'}">
 <head>
 <meta charset="UTF-8"/>
-<title>Cloud Move Analyzer — Report</title>
+<title>Cloud-Move-Analyzer-Report-${isoDate}</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:auto}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:20px 20px 40px;color:#1e293b;font-size:12px}
-  .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-  .header img{width:96px;height:96px}
-  h1{font-size:18px}
-  .meta{color:#64748b;margin-bottom:12px;font-size:12px}
-  .summary{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap}
-  .summary span{padding:4px 10px;border-radius:6px;font-weight:600;font-size:12px}
-  .s-total{background:#e2e8f0}
-  .s-mov{background:#dcfce7;color:#166534}
-  .s-par{background:#fef9c3;color:#854d0e}
-  .s-not{background:#fee2e2;color:#991b1b}
-  .s-unk{background:#f1f5f9;color:#475569}
-  .exec-summary{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #2563eb;border-radius:0 6px 6px 0;padding:14px 18px;margin-bottom:16px}
-  .exec-summary h2{font-size:13px;font-weight:700;color:#1e40af;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e2e8f0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:0 20px 40px;color:#1e293b;font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  /* ── Brand header: clean white, thin purple rule ────────── */
+  .header{display:flex;align-items:center;justify-content:space-between;background:#fff;padding:14px 2px 12px;margin:10px 0 0;border-bottom:3px solid #5B2D8E}
+  .header-text h1{font-size:21px;font-weight:700;letter-spacing:-0.01em;color:#1e293b}
+  .header-text .subtitle{font-size:10.5px;color:#64748b;margin-top:3px;letter-spacing:0.04em}
+  .header img{width:52px;height:52px}
+  .meta{color:#64748b;margin:8px 2px 14px;font-size:11px;display:flex;justify-content:space-between}
+
+  /* ── Summary cards ──────────────────────────────────────── */
+  .summary{display:flex;gap:10px;margin-bottom:12px}
+  .summary .card{flex:1;border:1px solid #e2e8f0;border-top:3px solid #94a3b8;border-radius:8px;padding:8px 12px;text-align:center;background:#fff}
+  .summary .card .num{font-size:22px;font-weight:700;line-height:1.2}
+  .summary .card .lbl{font-size:10px;color:#64748b;margin-top:1px;text-transform:uppercase;letter-spacing:0.05em}
+  .summary .card .pct{font-size:9px;font-weight:600;color:#94a3b8;margin-top:2px}
+  .summary .card .hint{font-size:8px;color:#94a3b8;margin-top:1px;line-height:1.3}
+  .card.c-total{border-top-color:#7C3AED}.card.c-total .num{color:#1e293b}
+  .card.c-mov{border-top-color:#16a34a;background:#f6fdf8}.card.c-mov .num{color:#15803d}
+  .card.c-par{border-top-color:#d97706;background:#fffdf4}.card.c-par .num{color:#a16207}
+  .card.c-not{border-top-color:#dc2626;background:#fef7f7}.card.c-not .num{color:#b91c1c}
+  .card.c-unk{border-top-color:#94a3b8;background:#f8fafc}.card.c-unk .num{color:#475569}
+
+  /* ── Distribution bar ───────────────────────────────────── */
+  .dist{display:flex;height:14px;border-radius:7px;overflow:hidden;margin-bottom:4px;border:1px solid #e2e8f0}
+  .dist div{height:100%}
+  .d-mov{background:#22c55e}.d-par{background:#eab308}.d-not{background:#ef4444}.d-unk{background:#cbd5e1}
+  .dist-legend{display:flex;gap:14px;font-size:9.5px;color:#64748b;margin-bottom:14px}
+  .dist-legend .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px;vertical-align:baseline}
+
+  /* ── Executive summary ──────────────────────────────────── */
+  .exec-summary{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #7C3AED;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:16px}
+  .exec-summary h2{font-size:13px;font-weight:700;color:#5B2D8E;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #ede9fe}
   .exec-summary p{font-size:12px;line-height:1.7;color:#334155;margin-bottom:10px}
-  .exec-summary .recommendation{background:#f0f9ff;border:1px solid #bae6fd;padding:8px 12px;border-radius:4px;font-size:11.5px;color:#0369a1;line-height:1.6}
+  .exec-summary .recommendation{background:#f5f3ff;border:1px solid #ddd6fe;padding:8px 12px;border-radius:6px;font-size:11.5px;color:#5b21b6;line-height:1.6}
+  /* Critical section uses the amber "attention" accent (same semantics as Partial) */
+  .exec-summary.critical{border-left-color:#d97706}
+  .exec-summary.critical h2{color:#92400e;border-bottom-color:#fde68a}
+
+  /* ── Appendix title ──────────────────────────────────────── */
+  .appendix-title{font-size:13px;font-weight:700;color:#5B2D8E;margin:4px 2px 8px}
+  .appendix-title.amber{color:#b45309}
+  .appendix-title .appendix-count{font-weight:400;color:#64748b;font-size:10.5px}
+  .section-intro{font-size:12px;color:#334155;line-height:1.6;margin:0 2px 8px}
+
+  /* ── Data table ─────────────────────────────────────────── */
   thead{display:table-header-group} /* repeat header on each printed page */
-  /* Each chunked table represents one page worth of rows; force a break after */
-  .table-page{page-break-after:always;break-after:page}
   code{background:#f1f5f9;padding:1px 3px;border-radius:3px;font-size:9px;font-family:Consolas,'Courier New',monospace;word-break:break-all;overflow-wrap:anywhere;line-height:1.3}
+  .pill{display:inline-block;padding:1px 8px;border-radius:999px;font-weight:700;font-size:9px;white-space:nowrap}
   .page-break{page-break-after:always;break-after:page}
   .data-table{width:100%;border-collapse:collapse;margin-bottom:12px;table-layout:fixed}
-  .data-table th,.data-table td{border:1px solid #cbd5e1;padding:3px 5px;text-align:left;font-size:10px;line-height:1.35;vertical-align:top;word-break:break-word;overflow-wrap:anywhere;hyphens:auto}
-  .data-table th{background:#f1f5f9;font-weight:600;font-size:10px;word-break:normal;overflow-wrap:break-word}
-  .data-table tr:nth-child(even){background:#f8fafc}
-  .data-table tr{page-break-inside:auto;break-inside:auto}
-  .print-footer{position:fixed;bottom:0;left:0;right:0;text-align:center;color:#94a3b8;font-size:9px;font-family:inherit;background:#fff;padding:4px 0 6px;border-top:1px solid #e2e8f0;z-index:9999}
+  .data-table th,.data-table td{padding:4px 6px;text-align:left;font-size:10px;line-height:1.35;vertical-align:top;word-break:break-word;overflow-wrap:anywhere;hyphens:auto}
+  .data-table th{background:#f4f1fa;color:#3b2a63;font-weight:700;font-size:9.5px;word-break:normal;overflow-wrap:break-word;hyphens:none;border:none;border-bottom:2px solid #5B2D8E;vertical-align:bottom}
+  .data-table td{border-bottom:1px solid #e2e8f0}
+  .data-table tr:nth-child(even) td{background:#f8f7fc}
+  /* Rows flow naturally across pages but never split mid-row */
+  .data-table tr{page-break-inside:avoid;break-inside:avoid}
+  /* tfoot spacer: repeats at the bottom of every printed page, reserving
+     room so the fixed .print-footer never overlaps the last row */
+  .data-table tfoot{display:table-footer-group}
+  .data-table .tfoot-space td{border:0;padding:0;height:9mm;background:transparent}
+  .print-footer{position:fixed;bottom:0;left:0;right:0;text-align:center;color:#94a3b8;font-size:8px;line-height:1.3;font-family:inherit;background:#fff;padding:3px 0 4px;border-top:1px solid #e2e8f0;z-index:9999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   @media print{
-    body{padding:8px 8px 28mm}
-    @page{size:landscape;margin:7mm 7mm 20mm 7mm}
-    .print-footer{padding:3mm 0 4mm}
+    body{padding:0 8px 16mm}
+    @page{size:landscape;margin:7mm 7mm 12mm 7mm}
+    .header{margin-top:4px}
+    .print-footer{padding:1.5mm 0 2mm}
     img{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>Cloud Move Analyzer</h1>
-  <img src="https://cloudmoveanalyzer.com/assets/logo.png" alt="Cloud Move Analyzer" />
+  <div class="header-text">
+    <h1>Cloud Move Analyzer</h1>
+    <div class="subtitle">Azure Resource Move Support Report — cloudmoveanalyzer.com</div>
+  </div>
+  <img src="${escapeHtml(logoUrl)}" alt="Cloud Move Analyzer" />
 </div>
-<p class="meta">${date}</p>
+<p class="meta"><span>${date}</span>${state.sourceFileName ? `<span>${escapeHtml(state.sourceFileName)}</span>` : ''}</p>
 <div class="summary">
-  <span class="s-total">${t('statTotal')}: ${filtered.length}</span>
-  <span class="s-mov">🟢 ${t('statMovable')}: ${movable}</span>
-  <span class="s-par">🟡 ${t('statPartial')}: ${partial}</span>
-  <span class="s-not">🔴 ${t('statNotMovable')}: ${notMovable}</span>
-  ${unknownCount ? `<span class="s-unk">⚫ ${t('statUnknown')}: ${unknownCount}</span>` : ''}
+  <div class="card c-total"><div class="num">${filtered.length}</div><div class="lbl">${t('statTotal')}</div><div class="pct">&nbsp;</div></div>
+  <div class="card c-mov"><div class="num">${movable}</div><div class="lbl">${t('statMovable')}</div><div class="pct">${movablePct}%</div><div class="hint">${escapeHtml(t('statMovableHint'))}</div></div>
+  <div class="card c-par"><div class="num">${partial}</div><div class="lbl">${t('statPartial')}</div><div class="pct">${partialPct}%</div><div class="hint">${escapeHtml(t('statPartialHint'))}</div></div>
+  <div class="card c-not"><div class="num">${notMovable}</div><div class="lbl">${t('statNotMovable')}</div><div class="pct">${notMovPct}%</div></div>
+  ${unknownCount ? `<div class="card c-unk"><div class="num">${unknownCount}</div><div class="lbl">${t('statUnknown')}</div><div class="pct">${filtered.length ? Math.round(unknownCount / filtered.length * 100) : 0}%</div></div>` : ''}
 </div>
+${(() => {
+  const total = filtered.length || 1;
+  const pct = n => (n / total * 100).toFixed(2);
+  const seg = (cls, n) => n ? `<div class="${cls}" style="width:${pct(n)}%"></div>` : '';
+  const leg = (cls, label, n) => n ? `<span><span class="dot ${cls}"></span>${label}: ${(n / total * 100).toFixed(0)}%</span>` : '';
+  return `<div class="dist">${seg('d-mov', movable)}${seg('d-par', partial)}${seg('d-not', notMovable)}${seg('d-unk', unknownCount)}</div>
+<div class="dist-legend">${leg('d-mov', t('statMovable'), movable)}${leg('d-par', t('statPartial'), partial)}${leg('d-not', t('statNotMovable'), notMovable)}${leg('d-unk', t('statUnknown'), unknownCount)}</div>`;
+})()}
 <div class="exec-summary">
-  <h2>📋 ${t('execSummaryTitle')}</h2>
+  <h2>${t('execSummaryTitle')}</h2>
   <p>${t('execSummaryIntro').replace('{total}', filtered.length).replace('{movable}', movable).replace('{movablePct}', movablePct).replace('{partial}', partial).replace('{notMovable}', notMovable)}</p>
   <div class="recommendation">${movablePct >= 70
     ? t('execRecHigh').replace('{pct}', movablePct)
@@ -1616,32 +1689,85 @@ exportPdfBtn.addEventListener('click', () => {
       ? t('execRecMedium').replace('{pct}', movablePct).replace('{partialPct}', partialPct)
       : t('execRecLow').replace('{pct}', notMovPct)}</div>
 </div>
-${(() => {
-  // Critical resources: those with migration notes
-  const critical = filtered.filter(r => r.noteKey);
-  if (!critical.length) return '';
-  // Deduplicate by type
-  const seen = new Set();
-  const unique = [];
-  for (const r of critical) {
-    const key = r.type.toLowerCase();
-    if (!seen.has(key)) { seen.add(key); unique.push(r); }
-  }
-  let html = '<div class="page-break"></div><div class="exec-summary" style="margin-top:12px">';
-  html += '<h2>⚠️ ' + t('execCriticalTitle') + '</h2>';
-  html += '<p style="margin-bottom:8px">' + t('execCriticalIntro') + '</p>';
-  html += '<table class="data-table" style="margin:0"><thead><tr><th>' + t('csvType') + '</th><th>' + t('thFriendlyName') + '</th><th>' + t('csvNotes') + '</th></tr></thead><tbody>';
-  for (const r of unique) {
-    html += '<tr><td><code>' + escapeHtml(r.type) + '</code></td>';
-    html += '<td>' + escapeHtml(getFriendlyName(r.type)) + '</td>';
-    html += '<td style="font-size:11px">' + escapeHtml(t(r.noteKey)) + '</td></tr>';
-  }
-  html += '</tbody></table></div>';
-  return html;
-})()}
 <div class="page-break"></div>
+${(() => {
+  // Migration-wave view: per-resource-group status breakdown, worst first.
+  // Tells the reader WHICH resource groups concentrate risk — natural
+  // candidates for later migration waves.
+  const groups = new Map();
+  for (const r of filtered) {
+    const rg = (r.resourceGroup || '').trim();
+    if (!rg) continue;
+    if (!groups.has(rg)) groups.set(rg, { total: 0, movable: 0, partial: 0, notMovable: 0, unknown: 0 });
+    const g = groups.get(rg);
+    g.total++;
+    if (r.status === 'movable') g.movable++;
+    else if (r.status === 'partial') g.partial++;
+    else if (r.status === 'not-movable') g.notMovable++;
+    else g.unknown++;
+  }
+  if (groups.size < 2) return '';
+  const rows = [...groups.entries()].sort((a, b) =>
+    b[1].notMovable - a[1].notMovable || b[1].partial - a[1].partial || b[1].total - a[1].total);
+  const anyUnknown = rows.some(e => e[1].unknown > 0);
+  const numCell = (n, color) => `<td style="text-align:right;${n ? 'font-weight:700;color:' + color : 'color:#94a3b8'}">${n}</td>`;
+  const nCols = anyUnknown ? 5 : 4;
+  const numColgroup = `<col style="width:35%">` + `<col style="width:${(65 / nCols).toFixed(2)}%">`.repeat(nCols);
+  const theadCells = '<th>' + t('csvRG') + '</th>'
+     + '<th style="text-align:right">' + t('statTotal') + '</th>'
+     + '<th style="text-align:right">' + t('statMovable') + '</th>'
+     + '<th style="text-align:right">' + t('statPartial') + '</th>'
+     + '<th style="text-align:right">' + t('statNotMovable') + '</th>'
+     + (anyUnknown ? '<th style="text-align:right">' + t('statUnknown') + '</th>' : '');
+  const rowsHtml = rows.map(([rg, g]) => {
+    const movPct = g.total ? Math.round(g.movable / g.total * 100) : 0;
+    return '<tr><td>' + escapeHtml(rg) + '</td>'
+       + '<td style="text-align:right">' + g.total + '</td>'
+       + '<td style="text-align:right;color:#15803d">' + g.movable + ' (' + movPct + '%)</td>'
+       + numCell(g.partial, '#a16207')
+       + numCell(g.notMovable, '#b91c1c')
+       + (anyUnknown ? numCell(g.unknown, '#475569') : '')
+       + '</tr>';
+  });
+  // Single-line rows flow naturally; trailing break ends this section's page.
+  return '<h2 class="appendix-title">' + t('thRG') + '</h2>'
+       + sectionTable(rowsHtml, numColgroup, theadCells)
+       + '<div class="page-break"></div>';
+})()}
+${(() => {
+  // Attention map: every type that is blocked or carries a migration note,
+  // grouped with per-type counts — shows WHERE the problem concentrates,
+  // not just how many resources are affected.
+  const groups = new Map();
+  for (const r of filtered) {
+    if (!r.noteKey && r.status !== 'not-movable') continue;
+    const key = r.type.toLowerCase();
+    if (!groups.has(key)) groups.set(key, { type: r.type, status: r.status, noteKey: r.noteKey, count: 0 });
+    groups.get(key).count++;
+  }
+  if (!groups.size) return '';
+  const rows = [...groups.values()].sort((a, b) =>
+    (PDF_SEVERITY[a.status] ?? 9) - (PDF_SEVERITY[b.status] ?? 9) || b.count - a.count);
+  const colgroup = '<col style="width:10%"><col style="width:22%"><col style="width:16%"><col style="width:7%"><col style="width:45%">';
+  const theadCells = '<th>' + t('csvStatus') + '</th><th>' + t('csvType') + '</th><th>' + t('thFriendlyName') + '</th>'
+       + '<th style="text-align:right">' + t('statTotal') + '</th><th>' + t('csvNotes') + '</th>';
+  const rowsHtml = rows.map(g => {
+    const note = g.noteKey ? t(g.noteKey) : (g.status === 'not-movable' ? t('tooltipNotMovable') : '—');
+    return '<tr><td><span class="pill" style="color:' + statusColor(g.status) + ';background:' + statusBg(g.status) + '">' + escapeHtml(statusLabel[g.status]) + '</span></td>'
+      + '<td><code>' + escapeHtml(g.type) + '</code></td>'
+      + '<td>' + escapeHtml(getFriendlyName(g.type)) + '</td>'
+      + '<td style="text-align:right;font-weight:700">' + g.count + '</td>'
+      + '<td style="font-size:11px">' + escapeHtml(note) + '</td></tr>';
+  });
+  // Rows flow naturally across pages; break-inside:avoid keeps each whole.
+  return '<h2 class="appendix-title amber"><span style="color:#d97706">&#9650;</span> ' + t('execCriticalTitle') + '</h2>'
+       + '<p class="section-intro">' + t('execCriticalIntro') + '</p>'
+       + sectionTable(rowsHtml, colgroup, theadCells)
+       + '<div class="page-break"></div>';
+})()}
+<h2 class="appendix-title">${t('resultsTitle')} <span class="appendix-count">— ${escapeHtml(t('resultsCount').replace('{filtered}', filtered.length).replace('{total}', state.allResults.length))}</span></h2>
 ${tablesHtml}
-<div class="print-footer">Generated by Cloud Move Analyzer — cloudmoveanalyzer.com</div>
+<div class="print-footer">Generated by Cloud Move Analyzer — cloudmoveanalyzer.com · ${isoDate} · ${escapeHtml(t('footerText'))} learn.microsoft.com</div>
 </body>
 </html>`;
 
