@@ -173,6 +173,52 @@ export function loadExportHelpers() {
 }
 
 /**
+ * Loads the column-detection helpers from app.js:
+ *   - normalizeHeader(h) → lowercased, Unicode-space-normalized header
+ *   - findColumn / findTypeCol / findNameCol / findLinkCol / findRGCol / findLocCol
+ */
+export function loadColumnFunctions() {
+  const source = readFileSync(resolve(ROOT, 'js', 'app.js'), 'utf8');
+
+  const fnNames = ['normalizeHeader', 'findColumn'];
+  const extracted = [];
+  for (const name of fnNames) {
+    const pattern = new RegExp(
+      `function\\s+${name}\\s*\\([^)]*\\)\\s*\\{[\\s\\S]*?\\n\\}`,
+      'm'
+    );
+    const match = source.match(pattern);
+    if (!match) {
+      throw new Error(`Function ${name} not found in app.js`);
+    }
+    extracted.push(match[0]);
+  }
+
+  const finderNames = ['findTypeCol', 'findNameCol', 'findLinkCol', 'findRGCol', 'findLocCol'];
+  for (const name of finderNames) {
+    const pattern = new RegExp(
+      `const\\s+${name}\\s*=\\s*h\\s*=>\\s*findColumn\\([\\s\\S]*?\\);`,
+      'm'
+    );
+    const match = source.match(pattern);
+    if (!match) {
+      throw new Error(`Constant ${name} not found in app.js`);
+    }
+    extracted.push(match[0]);
+  }
+
+  const sandbox = `
+    ${extracted.join('\n\n')}
+    return {
+      normalizeHeader, findColumn, ${finderNames.join(', ')}
+    };
+  `;
+
+  // eslint-disable-next-line no-new-func
+  return new Function(sandbox)();
+}
+
+/**
  * Loads the upload-parsing functions from app.js:
  *   - detectSpreadsheetFormat(head) → 'zip' | 'cfb' | 'text' from magic bytes
  *   - readWorkbook(buf)             → routes ArrayBuffer to the right XLSX.read mode

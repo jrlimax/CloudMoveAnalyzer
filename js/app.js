@@ -638,12 +638,19 @@ function readWorkbook(buf) {
 // ==========================================================
 // Column detection helpers
 // ==========================================================
+// Azure Portal exports (notably pt-BR) can contain non-breaking spaces
+// (U+00A0) inside headers like "GRUPO DE RECURSOS", so Unicode spaces
+// must be normalized to plain spaces before any comparison.
+function normalizeHeader(h) {
+  return String(h ?? '').toLowerCase().replace(/\s+/gu, ' ').trim();
+}
+
 function findColumn(headers, exact, partial, exclude) {
   for (const h of headers) {
-    if (exact.includes(String(h ?? '').toLowerCase().trim())) return h;
+    if (exact.includes(normalizeHeader(h))) return h;
   }
   for (const h of headers) {
-    const low = String(h ?? '').toLowerCase();
+    const low = normalizeHeader(h);
     if (exclude && exclude.some(e => low.includes(e))) continue;
     if (partial.some(p => low.includes(p))) return h;
   }
@@ -668,7 +675,7 @@ const findRGCol    = h => findColumn(h,
   ['resource group','grupo de recursos','grupo recursos','resourcegroup']);
 
 const findLocCol   = h => findColumn(h,
-  ['location','localização','localizacao','região','regiao','region'],
+  ['location','local','localização','localizacao','região','regiao','region'],
   ['location','localiza']);
 
 // ==========================================================
