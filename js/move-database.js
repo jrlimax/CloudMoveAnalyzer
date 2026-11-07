@@ -685,7 +685,7 @@ microsoft.sql/servers/jobaccounts,1,1,0
 microsoft.sql/servers/jobagents,1,1,0
 microsoft.sql/virtualclusters,0,0,0
 microsoft.sqlvirtualmachine/sqlvirtualmachinegroups,0,0,0
-microsoft.sqlvirtualmachine/sqlvirtualmachines,0,0,0
+microsoft.sqlvirtualmachine/sqlvirtualmachines,1,1,0
 microsoft.storage/storageaccounts,1,1,0
 microsoft.storagecache/caches,0,0,0
 microsoft.storagesync/storagesyncservices,1,1,0
